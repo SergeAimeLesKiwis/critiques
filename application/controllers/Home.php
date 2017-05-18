@@ -9,7 +9,19 @@
 
 		public function index()
 		{
-			$this->load->view('welcome_message');
+			// HEADER
+			$header['title'] = "Le Club des Critiques";
+			$header['links'] = array();
+			$this->load->view('structure/header', $header);
+
+			// CONTENT
+			$this->load->model('ParameterService');
+			$content['concept'] = $this->ParameterService->getHomeConcept();
+			$content['highlights'] = $this->ParameterService->getHomeHighlights();
+			$this->load->view('home/index', $content);
+
+			// FOOTER
+			$this->load->view('structure/footer');
 		}
 	}
 ?>

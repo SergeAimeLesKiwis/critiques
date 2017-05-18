@@ -11,6 +11,7 @@ CREATE TABLE `user_status` (
 );
 
 CREATE TABLE `users` (
+	`id` INT NOT NULL AUTO_INCREMENT,
 	`email` VARCHAR(150) NOT NULL,
 	`password` VARCHAR(50) NOT NULL,
 	`firstName` VARCHAR(100) NOT NULL,
@@ -20,7 +21,7 @@ CREATE TABLE `users` (
 	`subscriptionDate` DATETIME NOT NULL,
 	`lastConnexion` DATETIME NULL,
 	`status` INT NOT NULL,
-	PRIMARY KEY (`email`),
+	PRIMARY KEY (`id`),
 	FOREIGN KEY (`status`) REFERENCES `user_status`(`id`)
 );
 
@@ -46,14 +47,14 @@ CREATE TABLE `items` (
 	`imagePath` VARCHAR(150) NOT NULL,
 	`category` INT NOT NULL,
 	`description` VARCHAR(500) NOT NULL,
-	`createdBy` VARCHAR(150) NOT NULL,
+	`createdBy` INT NOT NULL,
 	`createdAt` DATETIME NOT NULL,
-	`updatedBy` VARCHAR(150) NOT NULL,
+	`updatedBy` INT NOT NULL,
 	`updatedAt` DATETIME NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`category`) REFERENCES `categories`(`id`),
-	FOREIGN KEY (`createdBy`) REFERENCES `users`(`email`),
-	FOREIGN KEY (`updatedBy`) REFERENCES `users`(`email`)
+	FOREIGN KEY (`createdBy`) REFERENCES `users`(`id`),
+	FOREIGN KEY (`updatedBy`) REFERENCES `users`(`id`)
 );
 
 CREATE TABLE `genres` (
@@ -71,11 +72,11 @@ CREATE TABLE `item_genres` (
 );
 
 CREATE TABLE `grades` (
-	`user` VARCHAR(150) NOT NULL,
+	`user` INT NOT NULL,
 	`item` INT NOT NULL,
 	`value` INT NOT NULL,
 	PRIMARY KEY (`user`,`item`),
-	FOREIGN KEY (`user`) REFERENCES `users`(`email`),
+	FOREIGN KEY (`user`) REFERENCES `users`(`id`),
 	FOREIGN KEY (`item`) REFERENCES `items`(`id`)
 );
 
@@ -87,11 +88,11 @@ CREATE TABLE `loan_status` (
 
 CREATE TABLE `loans` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`user` VARCHAR(150) NOT NULL,
+	`user` INT NOT NULL,
 	`item` INT NOT NULL,
 	`status` INT NOT NULL,
 	PRIMARY KEY (`user`,`item`),
-	FOREIGN KEY (`user`) REFERENCES `users`(`email`),
+	FOREIGN KEY (`user`) REFERENCES `users`(`id`),
 	FOREIGN KEY (`item`) REFERENCES `items`(`id`),
 	FOREIGN KEY (`status`) REFERENCES `loan_status`(`id`)
 );
@@ -99,24 +100,30 @@ CREATE TABLE `loans` (
 CREATE TABLE `Rooms` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NOT NULL,
-	`admin` VARCHAR(150) NOT NULL,
+	`admin` INT NOT NULL,
 	`item` INT NOT NULL,
 	`startDate` DATETIME NOT NULL,
 	`endDate` DATETIME NOT NULL,
 	PRIMARY KEY (`id`),
-	FOREIGN KEY (`admin`) REFERENCES `users`(`email`),
+	FOREIGN KEY (`admin`) REFERENCES `users`(`id`),
 	FOREIGN KEY (`item`) REFERENCES `items`(`id`)	
 );
 
 CREATE TABLE `messages` (
 	`id` INT NOT NULL AUTO_INCREMENT,
+	`user` INT NOT NULL,
 	`room` INT NOT NULL,
-	`user` VARCHAR(150) NOT NULL,
 	`date` DATETIME NOT NULL,
 	`content` VARCHAR(500) NOT NULL,
 	PRIMARY KEY (`id`),
-	FOREIGN KEY (`room`) REFERENCES `rooms`(`id`),
-	FOREIGN KEY (`user`) REFERENCES `users`(`email`)
+	FOREIGN KEY (`user`) REFERENCES `users`(`id`),
+	FOREIGN KEY (`room`) REFERENCES `rooms`(`id`)
+);	
+
+CREATE TABLE `parameters` (
+	`key` VARCHAR(50) NOT NULL,
+	`value` VARCHAR(2000) NOT NULL,
+	PRIMARY KEY (`key`)
 );
 
 -- INSERT
@@ -147,7 +154,7 @@ INSERT INTO `categories` (`name`, `type`) VALUES
 ('Console de salon', 5);
 
 INSERT INTO `items` (`title`, `author`, `publishDate`, `imagePath`, `category`, `description`, `createdBy`, `createdAt`, `updatedBy`, `updatedAt`) VALUES 
-('Harry Potter et la Coupe de Feu', 'J.K. Rowling', '2000-11-29', 'IMAGEPATH', 1, '4ème volet de la saga Harry Potter.', 'admin@club-des-critiques.com', '2017-05-17', 'admin@club-des-critiques.com', '2017-05-17');
+('Harry Potter et la Coupe de Feu', 'J.K. Rowling', '2000-11-29', 'IMAGEPATH', 1, '4ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17');
 
 INSERT INTO `genres` (`name`) VALUES 
 ('Fantastique'), ('Science-fiction'), ('Polar'), ('Action'), ('Comédie'), ('Péplum'), ('Rap'), ('Rock'), ('Classique');
@@ -157,3 +164,8 @@ INSERT INTO `item_genres` (`genre`, `item`) VALUES
 
 INSERT INTO `loan_status` (`name`) VALUES 
 ('Disponible'), ('Prété'), ('Je le veux');
+
+
+INSERT INTO `parameters` (`key`, `value`) VALUES 
+('home_concept', 'Lorem Ipsum'),
+('home_highlights', '1|1|1|1|1|1');
