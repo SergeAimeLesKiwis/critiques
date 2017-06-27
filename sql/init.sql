@@ -91,7 +91,7 @@ CREATE TABLE `loans` (
 	`user` INT NOT NULL,
 	`item` INT NOT NULL,
 	`status` INT NOT NULL,
-	PRIMARY KEY (`user`,`item`),
+	PRIMARY KEY (`id`),
 	FOREIGN KEY (`user`) REFERENCES `users`(`id`),
 	FOREIGN KEY (`item`) REFERENCES `items`(`id`),
 	FOREIGN KEY (`status`) REFERENCES `loan_status`(`id`)

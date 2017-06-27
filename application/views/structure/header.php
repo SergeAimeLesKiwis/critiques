@@ -9,7 +9,7 @@
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 		
 <!-- SITE -->
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style/site.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles/site.css" />
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/site.js"></script>
 
 <!-- SPECIFIC -->
@@ -31,15 +31,17 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
+						<li><?php echo anchor('/', 'Accueil', 'title="Accueil"'); ?></li>
 						<li><?php echo anchor('/item/index', 'Contenus', 'title="Voir les différentes oeuvres"'); ?></li>
 						<li><?php echo anchor('/room/index', 'Salons', 'title="Voir les différents salons"'); ?></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">	
-						<?php 
+						<li><?php 
 							if ($this->session->user) { 
 								echo '<li>'.anchor('/backend/index', 'Administration', 'title="Administrer l\'application"').'</li>';
 							}
-						?>
+						?></li>
+						<li><?php echo anchor('/profil/index', 'Mon compte / Se connecter', 'title="Mon compte"'); ?></li>
 					</ul>
 				</div>
 			</div>
