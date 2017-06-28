@@ -217,5 +217,90 @@
 
 <!-- Administration des salons -->
 <div class="collapse" id="collapseSalon">
-	
+	<div id="choice_status">
+		<label>Statut :</label>
+		<select>
+			<option>-- Sélectionner un statut --</option>
+			<option>Tous</option>
+		</select>
+		<button type="button" class="btn btn-default" aria-label="Add">
+			<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+		</button>
+	</div>
+	<div id="liste_salon">
+		<table>
+			<thead>
+				<tr>
+					<td>Titre (Auteur)</td>
+					<td>Date</td>
+					<td>Nombre de participants</td>
+					<td>Action</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Titre (Auteur 1)</td>
+					<td>16/05/2017</td>
+					<td>6</td>
+					<td><a href="">Modifier</a></td> <!-- Voir si le salon est terminé -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- Si bouton add ou modifier -->
+	<form>
+		<select>
+			<option>-- Sélectionner une catégorie</option>
+			<option>Livre</option>
+		</select>
+		<select>
+			<option>-- Sélectionner un titre --</option>
+			<option>Harry Potter et la coupe de feu</option>
+			<option>Le labyrinthe</option>
+		</select>
+		<select>
+			<option>-- Sélectionner un auteur --</option>
+			<option>J.K. Rowling</option>
+			<option>James Dashner</option>
+		</select>
+		<div id="date_debut">
+			<label>Date de début</label>
+			<input type="text" name="date_debut" class="datepicker">
+		</div>
+		<div id="date_fin">
+			<label>Date de fin</label>
+			<input type="text" name="date_fin" class="datepicker">
+		</div>
+		<input type="submit" name="submit_salon" value="Valider">
+	</form>
+</div>
+
+<!-- Administration des membres -->
+<div class="collapse" id="collapseMembres">
+	<table>
+		<thead>
+			<tr>
+				<td>Nom</td>
+				<td>Date d'insciprion</td>
+				<td>Actions</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>NOM Prénom</td>
+				<td>date</td>
+				<td><a href="">Contacter</a><a href="">Bannir</a></td>
+			</tr>
+			<tr>
+				<td>NOM Prénom</td>
+				<td>date</td>
+				<td><a href="">Contacter</a><a href="">Bannir</a></td>
+			</tr>
+			<tr>
+				<td>NOM Prénom</td>
+				<td>date</td>
+				<td><a href="">Contacter</a><a href="">Bannir</a></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
