@@ -9,7 +9,7 @@
 
 		public function index()
 		{
-			$this->load->view('');
+			$this->load->view('item/index');
 		}
 	}
 ?>

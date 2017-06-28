@@ -7,38 +7,24 @@
 
 		protected $table = "users";
 
-		public $email;
+		public $id;
+		public $ip_address;
+		public $username;
 		public $password;
-		public $firstName;
-		public $lastName;
+		public $salt;
+		public $email;
+		public $activation_code;
+		public $forgotten_password_code;
+		public $forgotten_password_time;
+		public $remember_code;
+		public $created_on;
+		public $last_login;
+		public $active;
+		public $first_name;
+		public $last_name;
+		public $company;
+		public $phone;
 		public $description;
 		public $interests;
-		public $subscriptionDate;
-		public $lastConnexion;
-		public $status;
-
-		public function login($email, $password) {
-			$row = $this->db->select('*')
-					->from($this->table)
-					->where('status IN (1, 3, 4)')
-					->where('email', $email)
-					->where('password', md5($password))
-					->row();
-
-			if (isset($row)) {
-				$user = new User(
-					$row->email,
-					$row->firstName,
-					$row->lastName,
-					$row->description,
-					$row->interests,
-					$row->lastConnexion
-				);
-
-				return $user;
-			}
-
-			return null;
-		}
 	}
 ?>

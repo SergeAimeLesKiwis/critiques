@@ -4,25 +4,63 @@ USE `club_critiques`;
 
 -- INIT
 
-CREATE TABLE `user_status` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(30) NOT NULL,
+CREATE TABLE `ci_sessions` (
+	`id` VARCHAR(40) NOT NULL,
+	`ip_address` VARCHAR(45) NOT NULL,
+	`timestamp` INT(10) unsigned DEFAULT 0 NOT NULL,
+	`data` blob NOT NULL,
+	KEY `ci_sessions_timestamp` (`timestamp`)
+);
+
+CREATE TABLE `groups` (
+	`id` INT(8) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(20) NOT NULL,
+	`description` VARCHAR(100) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `users` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`email` VARCHAR(150) NOT NULL,
-	`password` VARCHAR(50) NOT NULL,
-	`firstName` VARCHAR(100) NOT NULL,
-	`lastName` VARCHAR(100) NOT NULL,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`ip_address` VARCHAR(45) NOT NULL,
+	`username` VARCHAR(100) NULL,
+	`password` VARCHAR(255) NOT NULL,
+	`salt` VARCHAR(255) DEFAULT NULL,
+	`email` VARCHAR(100) NOT NULL,
+	`activation_code` VARCHAR(40) DEFAULT NULL,
+	`forgotten_password_code` VARCHAR(40) DEFAULT NULL,
+	`forgotten_password_time` INT(11) unsigned DEFAULT NULL,
+	`remember_code` VARCHAR(40) DEFAULT NULL,
+	`created_on` INT(11) unsigned NOT NULL,
+	`last_login` INT(11) unsigned DEFAULT NULL,
+	`active` TINYINT(1) unsigned DEFAULT NULL,
+	`first_name` VARCHAR(50) DEFAULT NULL,
+	`last_name` VARCHAR(50) DEFAULT NULL,
+	`company` VARCHAR(100) DEFAULT NULL,
+	`phone` VARCHAR(20) DEFAULT NULL,
 	`description` VARCHAR(500) NULL,
 	`interests` VARCHAR(300) NULL,
-	`subscriptionDate` DATETIME NOT NULL,
-	`lastConnexion` DATETIME NULL,
-	`status` INT NOT NULL,
+	`avatar` VARCHAR(300) NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `users_groups` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL,
+	`group_id` MEDIUMINT(8) NOT NULL,
 	PRIMARY KEY (`id`),
-	FOREIGN KEY (`status`) REFERENCES `user_status`(`id`)
+	KEY `fk_users_groups_users1_idx` (`user_id`),
+	KEY `fk_users_groups_groups1_idx` (`group_id`),
+	CONSTRAINT `uc_users_groups` UNIQUE (`user_id`, `group_id`),
+	CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+	CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+CREATE TABLE `login_attempts` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`ip_address` VARCHAR(15) NOT NULL,
+	`login` VARCHAR(100) NOT NULL,
+	`time` INT(11) unsigned DEFAULT NULL,
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `types` (
@@ -43,18 +81,18 @@ CREATE TABLE `items` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`title` VARCHAR(100) NOT NULL,
 	`author` VARCHAR(200) NOT NULL,
-	`publishDate` DATETIME NOT NULL,
-	`imagePath` VARCHAR(150) NOT NULL,
+	`publish_date` DATETIME NOT NULL,
+	`image_path` VARCHAR(150) NOT NULL,
 	`category` INT NOT NULL,
 	`description` VARCHAR(500) NOT NULL,
-	`createdBy` INT NOT NULL,
-	`createdAt` DATETIME NOT NULL,
-	`updatedBy` INT NOT NULL,
-	`updatedAt` DATETIME NOT NULL,
+	`created_by` INT NOT NULL,
+	`created_at` DATETIME NOT NULL,
+	`updated_by` INT NOT NULL,
+	`updated_at` DATETIME NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`category`) REFERENCES `categories`(`id`),
-	FOREIGN KEY (`createdBy`) REFERENCES `users`(`id`),
-	FOREIGN KEY (`updatedBy`) REFERENCES `users`(`id`)
+	FOREIGN KEY (`created_by`) REFERENCES `users`(`id`),
+	FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`)
 );
 
 CREATE TABLE `genres` (
@@ -102,8 +140,8 @@ CREATE TABLE `Rooms` (
 	`name` VARCHAR(100) NOT NULL,
 	`admin` INT NOT NULL,
 	`item` INT NOT NULL,
-	`startDate` DATETIME NOT NULL,
-	`endDate` DATETIME NOT NULL,
+	`start_date` DATETIME NOT NULL,
+	`end_date` DATETIME NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`admin`) REFERENCES `users`(`id`),
 	FOREIGN KEY (`item`) REFERENCES `items`(`id`)	
@@ -128,11 +166,21 @@ CREATE TABLE `parameters` (
 
 -- INSERT
 
-INSERT INTO `user_status` (`name`) VALUES 
-('Administrateur'), ('En attente'), ('Actif'), ('Averti'), ('Banni');
+INSERT INTO `groups` (`name`, `description`) VALUES
+('admin','Administrateur'),
+('moderator','Modérateur'),
+('member', 'Utilisateur'),
+('warned', 'Averti'),
+('banned', 'Banni');
 
-INSERT INTO `users` (`email`, `password`, `firstName`, `lastName`, `description`, `interests`, `subscriptionDate`, `lastConnexion`, `status`) VALUES 
-('admin@club-des-critiques.com', '21232f297a57a5a743894a0e4a801fc3', 'Administrateur', 'Club des Critiques', 'Administrateur du site "Le Club des Critiques"', NULL, '2017-05-17', NULL, 1);
+
+INSERT INTO `users` (`ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `description`, `interests`) VALUES
+('127.0.0.1', 'Grand Manitou', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 
+'', 'admin@mail.com', '', NULL, '1268889823', '1268889823', '1', 'Jean-Michel', 'L\'Admin', 'Le Club des Critiques', 
+'0836656565', 'Administrateur du site "Le Club des Critiques"', NULL, NULL);
+
+INSERT INTO `users_groups` (`user_id`, `group_id`) VALUES 
+(1, 1);
 
 INSERT INTO `types` (`name`) VALUES 
 ('Livre'), ('Film'), ('Musique'), ('Spectacle'), ('Jeu');
@@ -153,7 +201,7 @@ INSERT INTO `categories` (`name`, `type`) VALUES
 ('Console portable', 5),
 ('Console de salon', 5);
 
-INSERT INTO `items` (`title`, `author`, `publishDate`, `imagePath`, `category`, `description`, `createdBy`, `createdAt`, `updatedBy`, `updatedAt`) VALUES 
+INSERT INTO `items` (`title`, `author`, `publish_date`, `image_path`, `category`, `description`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES 
 ('Harry Potter et la Coupe de Feu', 'J.K. Rowling', '2000-11-29', 'IMAGEPATH', 1, '4ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17');
 
 INSERT INTO `genres` (`name`) VALUES 
@@ -163,8 +211,7 @@ INSERT INTO `item_genres` (`genre`, `item`) VALUES
 (1, 1), (4, 1);
 
 INSERT INTO `loan_status` (`name`) VALUES 
-('Disponible'), ('Prété'), ('Je le veux');
-
+('Disponible'), ('Prêté'), ('Je le veux');
 
 INSERT INTO `parameters` (`key`, `value`) VALUES 
 ('home_concept', 'Lorem Ipsum'),

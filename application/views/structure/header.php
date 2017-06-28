@@ -27,13 +27,12 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Le Club des Critiques</a>
+					<a class="navbar-brand" href="<?= base_url('home') ?>">Le Club des Critiques</a>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><?php echo anchor('/', 'Accueil', 'title="Accueil"'); ?></li>
-						<li><?php echo anchor('/item/index', 'Contenus', 'title="Voir les différentes oeuvres"'); ?></li>
-						<li><?php echo anchor('/room/index', 'Salons', 'title="Voir les différents salons"'); ?></li>
+						<li><a href="<?= base_url('item') ?>">Contenus</a></li>
+						<li><a href="<?= base_url('room') ?>">Salons</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">	
 						<li><?php 

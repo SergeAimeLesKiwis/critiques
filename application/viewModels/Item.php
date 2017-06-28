@@ -1,24 +1,26 @@
 <?php
 
 	class Item {
-		public $email;
-		public $firstName;
-		public $lastName;
+		public $id;
+		public $title;
+		public $author;
+		public $publish_date;
+		public $image_path;
+		public $category;
 		public $description;
-		public $interests;
-		public $lastConnexion;
 
-		public function __construct($email, $firstName, $lastName, $description, $interests, $lastConnexion) {
-			$this->email = $email;
-			$this->firstName = $firstName;
-			$this->lastName = $lastName;
+		public function __construct($id, $title, $author, $publish_date, $image_path, $category, $description) {
+			$this->id = $id;
+			$this->title = $title;
+			$this->author = $author;
+			$this->publish_date = $publish_date;
+			$this->image_path = $image_path;
+			$this->category = $category;
 			$this->description = $description;
-			$this->interests = explode('|', $interest);
-			$this->lastConnexion = $lastConnexion;
 		}
 
-		public function getFullName() {
-			return $this->firstName.' '.$this->lastName;
+		public function getImageTag() {
+			return '<img src="'.$this->image_path.'" alt="'.$this->title.'" />';
 		}
 	}
 

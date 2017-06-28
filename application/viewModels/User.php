@@ -2,23 +2,23 @@
 
 	class User {
 		public $email;
-		public $firstName;
-		public $lastName;
+		public $first_name;
+		public $last_name;
 		public $description;
 		public $interests;
-		public $lastConnexion;
+		public $last_login;
 
-		public function __construct($email, $firstName, $lastName, $description, $interests, $lastConnexion) {
+		public function __construct($email, $first_name, $last_name, $description, $interests, $last_login) {
 			$this->email = $email;
-			$this->firstName = $firstName;
-			$this->lastName = $lastName;
+			$this->first_name = $first_name;
+			$this->last_name = $last_name;
 			$this->description = $description;
 			$this->interests = explode('|', $interest);
-			$this->lastConnexion = $lastConnexion;
+			$this->last_login = $last_login;
 		}
 
 		public function getFullName() {
-			return $this->firstName.' '.$this->lastName;
+			return $this->first_name.' '.$this->last_name;
 		}
 	}
 

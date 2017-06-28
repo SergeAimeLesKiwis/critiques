@@ -3,10 +3,11 @@
 	echo '<br />Highlights :<br />';
 
 	foreach ($highlights as $item) {
-		echo '- '.$item;
+		echo '- '.$item->title;
 		echo '<br />';
 	}
 ?>
+
 <div id="concept">
 	<h1>Le concept</h1>
 	<p>Lorem ipsum</p>
