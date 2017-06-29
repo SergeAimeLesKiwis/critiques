@@ -19,6 +19,28 @@
 		private $updated_by;
 		private $updated_at;
 
+		public function getItems() {
+			$query = $this->db->get($this->table);
+			$result = $query->result();
+
+			$items = array();
+
+			foreach ($result as $row)
+			{
+				$items[] = new Item(
+					$row->id,
+					$row->title,
+					$row->author,
+					$row->publish_date,
+					$row->image_path,
+					$row->category,
+					$row->description
+				);
+			}
+
+			return $items;
+		}
+
 		public function getItem($id) {
 			$query = $this->db->get_where($this->table, 'id = '.$id);
 			$row = $query->row();

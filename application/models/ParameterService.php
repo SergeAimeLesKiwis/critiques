@@ -35,12 +35,5 @@
 
 			$this->db->update($this->table, $this, 'key ='.$this->key);
 		}
-
-		private function getParameter($key) {
-			$query = $this->db->get_where($this->table, 'key ='.$this->key);
-			$row = $query->row();
-
-			return isset($row) ? $row->value : null;
-		}
 	}
 ?>

@@ -9,11 +9,11 @@
 			parent::__construct();
 		}
 
-		public function index()
-		{
+		public function index() {
 			// HEADER
 			$header['title'] = "Le Club des Critiques";
 			$header['links'] = array();
+			
 			$this->load->view('shared/header', $header);
 
 			// CONTENT
@@ -21,6 +21,7 @@
 			$content['concept'] = $this->ParameterService->getHomeConcept();
 			$highlights = $this->ParameterService->getHomeHighlights();
 			$content['highlights'] = $this->getHighlightItems($highlights);
+
 			$this->load->view('home/index', $content);
 
 			// FOOTER

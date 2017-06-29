@@ -7,15 +7,16 @@
 			parent::__construct();
 		}
 
-		public function index()
-		{
+		public function index() {
 			// HEADER
 			$header['title'] = "Contenus";
 			$header['links'] = array();
+
 			$this->load->view('shared/header', $header);
 
 			// CONTENT
 			$content = array();
+
 			$this->load->view('item/index', $content);
 
 			// FOOTER

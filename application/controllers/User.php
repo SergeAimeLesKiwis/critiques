@@ -7,18 +7,15 @@
 			parent::__construct();
 		}
 
-		public function index()
-		{
+		public function index() {
 			$this->load->view('');
 		}
 
-		public function subscribe($email)
-		{
+		public function subscribe($email) {
 			$this->load->view('');
 		}
 
-		public function login()
-		{
+		public function login() {
 			$this->load->view('');
 		}
 	}

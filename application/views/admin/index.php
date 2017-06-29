@@ -1,306 +1,112 @@
-<button type="button" class="btn btn-default" aria-label="Dropdown_accueil" data-toggle="collapse" data-target="#collapseAccueil" aria-expanded="false" aria-controls="collapseAccueil">
-	Page d'accueil
-	<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-</button>
-<button type="button" class="btn btn-default" aria-label="Dropdown_contenus" data-toggle="collapse" data-target="#collapseContenus" aria-expanded="false" aria-controls="collapseContenus">
-	Contenus
-	<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-</button>
-<button type="button" class="btn btn-default" aria-label="Dropdown_statiques" data-toggle="collapse" data-target="#collapseStatiques" aria-expanded="false" aria-controls="collapseStatiques">
-	Pages statiques
-	<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-</button>
-<button type="button" class="btn btn-default" aria-label="Dropdown_salon" data-toggle="collapse" data-target="#collapseSalon" aria-expanded="false" aria-controls="collapseSalon">
-	Salon
-	<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-</button>
-<button type="button" class="btn btn-default" aria-label="Dropdown_membres" data-toggle="collapse" data-target="#collapseMembres" aria-expanded="false" aria-controls="collapseMembres">
-	Membres
-	<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-</button>
+<div class="panel panel-info">
+	<div class="panel-heading toggle-slide" data-slide="#admin-home">
+		<div class="row">
+			<div class="col-sm-11">
+				<h3 class="panel-title">Page d'accueil</h3>
+			</div>
 
-<!-- Administration de l'accueil -->
-<div class="collapse" id="collapseAccueil">
-	<form>
-		<h3>Le concept</h3>
-		<textarea name="admin_concept"></textarea>
-		<h3>A la une</h3>
-		<button type="button" class="btn btn-default" aria-label="Add">
-			<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-		</button>
-		<div class="livres_une">
-			<!-- Image de couverture --><img src="">
-			<h3>Titre</h3>
-			<p>Auteur</p>
+			<div class="col-sm-1">
+				<span class="glyphicon glyphicon-plus slide-toggle-icon" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+			</div>
 		</div>
-		<div class="livres_une">
-			<!-- Image de couverture --><img src="">
-			<h3>Titre</h3>
-			<p>Auteur</p>
-		</div>
-		<input type="submit" name="save_accueil" value="Sauvegarder">
-	</form>
-</div>
-
-<!-- Administration des contenus -->
-<div class="collapse" id="collapseContenus">
-	<button type="button">Ajouter</button>
-	<button type="button">Modifier</button>
-	<!-- Si l'on clique sur le bouton ajouter -->
-	<div id="ajouter" hidden>
-		<form>
-			<input type="radio" name="action" value="Création automatique">
-			<input type="radio" name="action" value="Création manuelle">
-			<div id="select_categorie">
-				<label>Catégorie</label>
-				<select>
-					<option>-- Sélectionner une catégorie --</option>
-					<option>Livre</option>
-				</select>
-			</div>
-			<div id="select_sous_categorie">
-				<label>Sous-catégorie</label>
-				<select>
-					<option>-- Sélectionner une sous-catégorie --</option>
-					<option>Policier</option>
-					<option>Fantastique</option>
-					<option>Science-fiction</option>
-				</select>
-			</div>
-			<!-- Si l'on clique sur la création automatique -->
-			<div id="automatique">
-				<label>Url du produit</label>
-				<input type="url" name="url_produit">
-			</div>
-			<!-- Si l'on clique sur création manuelle -->
-			<div id="manuelle">
-				<div id="titre">
-					<label>Titre</label>
-					<input type="text" name="titre_product">
-				</div>
-				<div id="image">
-					<label>Image de couverture</label>
-					<input type="file" name="image_couverture">
-				</div>
-				<div id="description">
-					<label>Description</label>
-					<textarea name="description_product"></textarea>
-				</div>
-			</div>
-			<input type="submit" name="product" value="Valider">
-		</form>
 	</div>
-	<!-- Si l'on clique sur le bouton modifier -->
-	<div id="modifier" hidden>
-		<div id="liste_contenus">
-			<div id="filtres">
-				<select>
-					<option>-- Sélectionner une catégorie --</option>
-					<option>Livre</option>
-				</select>
-				<select>
-					<option>-- Sélectionner une sous-catégorie --</option>
-					<option>Policier</option>
-					<option>Science-fiction</option>
-					<option>Fantastique</option>
-				</select>
-				<input type="text" name="search">
-			</div>
-			<div id="liste">
-				<div class="livres_liste_admin">
-					<!-- Image de couverture --><img src="">
-					<h3>Titre</h3>
-					<p>Auteur</p>
-					<a href="">Modifier</a>
-				</div>
-				<div class="livres_liste_admin">
-					<!-- Image de couverture --><img src="">
-					<h3>Titre</h3>
-					<p>Auteur</p>
-					<a href="">Modifier</a>
-				</div>
-				<div class="livres_liste_admin">
-					<!-- Image de couverture --><img src="">
-					<h3>Titre</h3>
-					<p>Auteur</p>
-					<a href="">Modifier</a>
-				</div>
-				<div class="livres_liste_admin">
-					<!-- Image de couverture --><img src="">
-					<h3>Titre</h3>
-					<p>Auteur</p>
-					<a href="">Modifier</a>
-				</div>
-			</div>	
-		</div>
+	<div class="panel-body" id="admin-home">
+		<?php
+			$home['concept'] = $concept;
+			$home['highlights'] = $highlights;
+			$home['items'] = $items;
+			$this->load->view('admin/_home', $home); 
+		?>
 	</div>
 </div>
 
-<div id="modification">
-	<form>
-			<input type="radio" name="action" value="Création automatique">
-			<input type="radio" name="action" value="Création manuelle">
-			<div id="select_categorie">
-				<label>Catégorie</label>
-				<select>
-					<option>-- Sélectionner une catégorie --</option>
-					<option>Livre</option>
-				</select>
+<div class="panel panel-info">
+	<div class="panel-heading toggle-slide" data-slide="#admin-add-item">
+		<div class="row">
+			<div class="col-sm-11">
+				<h3 class="panel-title">Ajouter du contenu</h3>
 			</div>
-			<div id="select_sous_categorie">
-				<label>Sous-catégorie</label>
-				<select>
-					<option>-- Sélectionner une sous-catégorie --</option>
-					<option>Policier</option>
-					<option>Fantastique</option>
-					<option>Science-fiction</option>
-				</select>
-			</div>
-			<!-- Si l'on clique sur la création automatique -->
-			<div id="automatique">
-				<label>Url du produit</label>
-				<input type="url" name="url_produit">
-			</div>
-			<!-- Si l'on clique sur création manuelle -->
-			<div id="manuelle">
-				<div id="titre">
-					<label>Titre</label>
-					<input type="text" name="titre_product">
-				</div>
-				<div id="image">
-					<label>Image de couverture</label>
-					<input type="file" name="image_couverture">
-				</div>
-				<div id="description">
-					<label>Description</label>
-					<textarea name="description_product"></textarea>
-				</div>
-			</div>
-			<input type="submit" name="product" value="Valider">
-		</form>
-</div>
 
-<!-- Administration des pages statiques -->
-<div class="collapse" id="collapseStatiques">
-	<input type="radio" name="type" value="Catégorie">
-	<input type="radio" name="type" value="Page">
-	<!-- Si catégorie sélectionné -->
-	<form>
-		<label>Nom</label>
-		<input type="text" name="nom_categorie">
-		<input type="submit" name="submit_categorie" value="Valider">
-	</form>
-	<!-- Si page sélectionné -->
-	<form>
-		<div id="categorie_select">
-			<label>Catégorie :</label>
-			<select>
-				<option>-- Sélectionner une catégorie --</option>
-				<option>Livre</option>
-			</select>
+			<div class="col-sm-1">
+				<span class="glyphicon glyphicon-plus slide-toggle-icon" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+			</div>
 		</div>
-		<div id="titre">
-			<label>Titre :</label>
-			<input type="text" name="titre">
-		</div>
-		<div id="image">
-			<label>Image :</label>
-			<input type="file" name="image">
-		</div>
-		<div id="contenu">
-			<label>Contenu :</label>
-			<textarea name="contenu"></textarea>
-		</div>
-		<input type="submit" name="submit_page">
-	</form>
-</div>
-
-<!-- Administration des salons -->
-<div class="collapse" id="collapseSalon">
-	<div id="choice_status">
-		<label>Statut :</label>
-		<select>
-			<option>-- Sélectionner un statut --</option>
-			<option>Tous</option>
-		</select>
-		<button type="button" class="btn btn-default" aria-label="Add">
-			<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-		</button>
 	</div>
-	<div id="liste_salon">
-		<table>
-			<thead>
-				<tr>
-					<td>Titre (Auteur)</td>
-					<td>Date</td>
-					<td>Nombre de participants</td>
-					<td>Action</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Titre (Auteur 1)</td>
-					<td>16/05/2017</td>
-					<td>6</td>
-					<td><a href="">Modifier</a></td> <!-- Voir si le salon est terminé -->
-				</tr>
-			</tbody>
-		</table>
+	<div class="panel-body" id="admin-add-item">
+		<?php //$this->load->view('admin/_home', array('XXX' => $XXX)); ?>
 	</div>
-	<!-- Si bouton add ou modifier -->
-	<form>
-		<select>
-			<option>-- Sélectionner une catégorie</option>
-			<option>Livre</option>
-		</select>
-		<select>
-			<option>-- Sélectionner un titre --</option>
-			<option>Harry Potter et la coupe de feu</option>
-			<option>Le labyrinthe</option>
-		</select>
-		<select>
-			<option>-- Sélectionner un auteur --</option>
-			<option>J.K. Rowling</option>
-			<option>James Dashner</option>
-		</select>
-		<div id="date_debut">
-			<label>Date de début</label>
-			<input type="text" name="date_debut" class="datepicker">
-		</div>
-		<div id="date_fin">
-			<label>Date de fin</label>
-			<input type="text" name="date_fin" class="datepicker">
-		</div>
-		<input type="submit" name="submit_salon" value="Valider">
-	</form>
 </div>
 
-<!-- Administration des membres -->
-<div class="collapse" id="collapseMembres">
-	<table>
-		<thead>
-			<tr>
-				<td>Nom</td>
-				<td>Date d'insciprion</td>
-				<td>Actions</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>NOM Prénom</td>
-				<td>date</td>
-				<td><a href="">Contacter</a><a href="">Bannir</a></td>
-			</tr>
-			<tr>
-				<td>NOM Prénom</td>
-				<td>date</td>
-				<td><a href="">Contacter</a><a href="">Bannir</a></td>
-			</tr>
-			<tr>
-				<td>NOM Prénom</td>
-				<td>date</td>
-				<td><a href="">Contacter</a><a href="">Bannir</a></td>
-			</tr>
-		</tbody>
-	</table>
+<div class="panel panel-info">
+	<div class="panel-heading toggle-slide" data-slide="#admin-update-item">
+		<div class="row">
+			<div class="col-sm-11">
+				<h3 class="panel-title">Modifier du contenu</h3>
+			</div>
+
+			<div class="col-sm-1">
+				<span class="glyphicon glyphicon-plus slide-toggle-icon" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+			</div>
+		</div>
+	</div>
+	<div class="panel-body" id="admin-update-item">
+		<?php //$this->load->view('admin/_home', array('XXX' => $XXX)); ?>
+	</div>
+</div>
+
+<div class="panel panel-info">
+	<div class="panel-heading toggle-slide" data-slide="#admin-types-categories">
+		<div class="row">
+			<div class="col-sm-11">
+				<h3 class="panel-title">Types / Catégories</h3>
+			</div>
+
+			<div class="col-sm-1">
+				<span class="glyphicon glyphicon-plus slide-toggle-icon" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+			</div>
+		</div>
+	</div>
+	<div class="panel-body" id="admin-types-categories">
+		<?php //$this->load->view('admin/_home', array('XXX' => $XXX)); ?>
+	</div>
+</div>
+
+<div class="panel panel-info">
+	<div class="panel-heading toggle-slide" data-slide="#admin-rooms">
+		<div class="row">
+			<div class="col-sm-11">
+				<h3 class="panel-title">Salons</h3>
+			</div>
+
+			<div class="col-sm-1">
+				<span class="glyphicon glyphicon-plus slide-toggle-icon" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+			</div>
+		</div>
+	</div>
+	<div class="panel-body" id="admin-rooms">
+		<?php //$this->load->view('admin/_home', array('XXX' => $XXX)); ?>
+	</div>
+</div>
+
+<div class="panel panel-info">
+	<div class="panel-heading toggle-slide" data-slide="#admin-users">
+		<div class="row">
+			<div class="col-sm-11">
+				<h3 class="panel-title">Utilisateurs</h3>
+			</div>
+
+			<div class="col-sm-1">
+				<span class="glyphicon glyphicon-plus slide-toggle-icon" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+			</div>
+		</div>
+	</div>
+	<div class="panel-body" id="admin-users">
+		<?php //$this->load->view('admin/_home', array('XXX' => $XXX)); ?>
+	</div>
 </div>
