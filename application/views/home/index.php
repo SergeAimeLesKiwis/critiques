@@ -1,64 +1,44 @@
-<?php
-	echo 'Concept : '.$concept;
-	echo '<br />Highlights :<br />';
+<?php	
+	echo '<div class="row">';
+	echo '<h2> Le concept </h2>'; 
+	echo '<p>' . $concept . '</p>';
+	echo '</div>';
 
+	echo '<div class="row">';
+	echo '<h2> À la une </h2>';
 	foreach ($highlights as $item) {
-		echo '- '.$item->title;
-		echo '<br />';
+		$this->load->view('shared/_item_container', array('item' => $item)); 
 	}
+	echo '</div>';
 ?>
 
-<div id="concept">
-	<h1>Le concept</h1>
-	<p>Lorem ipsum</p>
-</div>
+<form action="inscription.php" method="POST" id="flotting">
+	<div class="col-sm-12">
+		<h4> Inscrivez-vous </h4>
+		<input type="email" id="inscript_email" class="form-control" placeholder="Votre email"/>
+		<input type="submit" class="btn btn-primary" value="S'inscrire"/>
+	</div>		
+</form>
 
-<!-- Menu flottant inscription -->
-<div class="flottant" id="inscription">
-	<h3>Insrivez-vous</h3>
-	<form>
-		<label>Email :</label><input type="email" name="inscription_mail">
-		<input type="submit" name="inscription_submit" value="S'inscrire">
-	</form>
-</div>
+<form action="$_SERVER['PHP_SELF']" method="POST" class="form-horizontal">
+	<legend><h2> Nous contacter </h2></legend>
+	<div class="form-group">
+		<label for="subject" class="col-sm-2 control-label">Sujet :</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control" id="subject" placeholder="Sujet du message">
+	    </div>
+	</div>
+	<div class="form-group">
+		<label for="message-content" class="col-sm-2 control-label">Message :</label>
+	    <div class="col-sm-4">
+	      <textarea class="form-control" id="message-content">
+	      </textarea>
+	    </div>		    
+	</div>
+	<div class="form-group">
+	    <div class="col-sm-12 col-sm-offset-2">
+	      <input type="submit" class="btn btn-success" value="Envoyer"/>
+	    </div>
+	</div>
 
-<!-- Menu flottant prochain salon -->
-<div class="flottant" id="prochain_salon">
-	<h3>Prochain salon</h3>
-	<p>Date</p>-<p>Heure</p>
-	<p>Adresse</p>
-</div>
-
-<!-- Livres à la une -->
-<div id="une">
-	<div class="livres_une">
-		<!-- Image de couverture --><img src="">
-		<h3>Titre</h3>
-		<p>Auteur</p>
-	</div>
-	<div class="livres_une">
-		<!-- Image de couverture --><img src="">
-		<h3>Titre</h3>
-		<p>Auteur</p>
-	</div>
-	<div class="livres_une">
-		<!-- Image de couverture --><img src="">
-		<h3>Titre</h3>
-		<p>Auteur</p>
-	</div>
-	<div class="livres_une">
-		<!-- Image de couverture --><img src="">
-		<h3>Titre</h3>
-		<p>Auteur</p>
-	</div>
-</div>
-
-<!-- Formulaire de contact -->
-<h2>Contactez nous</h2>
-<form>
-	<label>Nom :</label><input type="text" name="contact_nom">
-	<label>Email :</label><input type="text" name="contact_email">
-	<label>Sujet :</label><input type="text" name="contact_sujet">
-	<label>Message :</label><textarea name="contact_message">Votre message</textarea>
-	<input type="submit" name="contact_submit" value="Envoyer">
 </form>

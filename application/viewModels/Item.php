@@ -20,7 +20,7 @@
 		}
 
 		public function getImageTag() {
-			return '<img src="'.$this->image_path.'" alt="'.$this->title.'" />';
+			return '<img src="'.$this->image_path.'" alt="'.$this->title.'" class="img-responsive" />';
 		}
 	}
 
