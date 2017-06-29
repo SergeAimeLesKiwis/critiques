@@ -14,7 +14,7 @@
 			// HEADER
 			$header['title'] = "Le Club des Critiques";
 			$header['links'] = array();
-			$this->load->view('structure/header', $header);
+			$this->load->view('shared/header', $header);
 
 			// CONTENT
 			$this->load->model('ParameterService');
@@ -24,7 +24,7 @@
 			$this->load->view('home/index', $content);
 
 			// FOOTER
-			$this->load->view('structure/footer');
+			$this->load->view('shared/footer');
 		}
 
 		public function contact() {

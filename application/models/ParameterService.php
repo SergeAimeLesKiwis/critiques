@@ -9,21 +9,31 @@
 		private $value;
 
 		public function getHomeConcept() {
-			return $this->getParameter('home_concept');
+			$query = $this->db->get_where($this->table, 'key = \'home_concept\'');
+			$row = $query->row();
+
+			return isset($row) ? $row->value : null;
 		}
 
 		public function setHomeConcept($concept) {
-			return $this->setParameter('home_concept', $concept);
+			$this->key = 'home_concept';
+			$this->value = $concept;
+
+			$this->db->update($this->table, $this, 'key ='.$this->key);
 		}
 
 		public function getHomeHighlights() {
-			$parameter = $this->getParameter('home_highlights')
+			$query = $this->db->get_where($this->table, 'key = \'home_highlights\'');
+			$row = $query->row();
 
-			return $parameter != null ? explode('|', $parameter) : null;
+			return isset($row) ? explode('|', $row->value) : null;
 		}
 
 		public function setHomeHighlights($highlights) {
-			return $this->setParameter('home_highlights', $highlights);
+			$this->key = 'home_highlights';
+			$this->value = $highlights;
+
+			$this->db->update($this->table, $this, 'key ='.$this->key);
 		}
 
 		private function getParameter($key) {
@@ -32,15 +42,5 @@
 
 			return isset($row) ? $row->value : null;
 		}
-
-		private function setParameter($key, $value) {
-			$this->key = $key;
-			$this->value = $value;
-
-			$this->db->update($this->table, $this, 'key ='.$this->key);
-		}
 	}
 ?>
-
-1, 2, 3, 0, 17, 18
-1|2|3|0|17|18

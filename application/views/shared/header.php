@@ -27,19 +27,21 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?= base_url('home') ?>">Le Club des Critiques</a>
+					<a class="navbar-brand" href="<?php echo base_url('home') ?>">Le Club des Critiques</a>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="<?= base_url('item') ?>">Contenus</a></li>
-						<li><a href="<?= base_url('room') ?>">Salons</a></li>
+						<li><a href="<?php echo base_url('item') ?>">Contenus</a></li>
+						<li><a href="<?php echo base_url('room') ?>">Salons</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">	
-						<li><?php 
-							if ($this->session->user) { 
-								echo '<li>'.anchor('/backend/index', 'Administration', 'title="Administrer l\'application"').'</li>';
-							}
-						?></li>
+						<li>
+							<?php 
+								if ($this->session->user) { 
+									echo '<li><a href="'.base_url('admin').'">Adminitration</a></li>';
+								}
+							?>
+						</li>
 						<li><?php echo anchor('/profil/index', 'Mon compte / Se connecter', 'title="Mon compte"'); ?></li>
 					</ul>
 				</div>

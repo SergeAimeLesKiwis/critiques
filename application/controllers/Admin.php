@@ -9,7 +9,17 @@
 
 		public function index()
 		{
-			$this->load->view('admin/index');
+			// HEADER
+			$header['title'] = "Contenus";
+			$header['links'] = array();
+			$this->load->view('shared/header', $header);
+
+			// CONTENT
+			$content = array();
+			$this->load->view('admin/index', $content);
+
+			// FOOTER
+			$this->load->view('shared/footer');
 		}
 	}
 ?>
