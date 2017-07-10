@@ -33,12 +33,10 @@
 #flotting {
   position: fixed;
   right: 0;
-  top: 80%;
-  width: 15em;
+  top: 50%;
+  width: 20em;
   margin-top: -2.5em;
-  border: 1px solid #25283C;
   padding : 10px;
-  background-color: #CEE8DF;
  }
 
  #inscript_email{
@@ -83,15 +81,15 @@
  /* Couleur background */
 
  .bg-blue-color{
- 	background-color : #70BEB1;
+ 	background-color : #CEE8DF!important;
  }
 
  .bg-brown-color{
- 	background-color : #D99E7E;
+ 	background-color : #D99E7E!important;
  }
 
  .bg-green-color{
-	background-color : #70BEB1;
+	background-color : #70BEB1!important;
  }
  
  .bg-darkgrey-color{
@@ -99,7 +97,11 @@
  }
 
   .bg-grey-color{
- 	background-color : #BDBCBA;
+ 	background-color : #BDBCBA!important;
+ }
+
+ .bg-lightblue-color{
+ 	background-color : #e9f2ef!important;
  }
 
 
@@ -118,3 +120,35 @@ h2.darkgrey-color, p.darkgrey-color{
 	max-width: 40%;
 	text-align: left;
 }
+
+h2.blue-color{
+	margin-left: 15%;
+	margin-top: 2%;
+}
+
+.link-card{
+	color : #D99E7E!important;
+}
+
+.link-card:hover{
+	color : #70BEB1!important;
+}
+
+/* container effects */
+
+.spacer{
+	padding: 10px!important;
+	border : 1px solid #BDBCBA;
+}
+
+.form-display{
+	margin-top : 15px;
+	margin-left : 8%;
+	margin-right: 50%!important;
+}
+
+.block-right{
+	margin-left : 0;
+	margin-right : 25%;
+}
+

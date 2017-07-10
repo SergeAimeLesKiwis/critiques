@@ -4,40 +4,93 @@
 	echo '<p class="darkgrey-color">' . $concept . '</p>';
 	echo '</div>';
 
+	
+	echo '<div class="block-right">';
 	echo '<h2 class="blue-color"> À la une </h2>';
+	echo '<div class="row">';
 	foreach ($highlights as $item) {
 		$this->load->view('shared/_item_container', array('item' => $item)); 
 	}
 	echo '</div>';
+	echo '</div>';
 ?>
 
-<form action="inscription.php" method="POST" id="flotting">
-	<div class="col-sm-12">
-		<h4 class="blue-color"> Inscrivez-vous </h4>
-		<input type="email" id="inscript_email" class="form-control" placeholder="Votre email"/>
-		<input type="submit" class="btn btn-primary" value="S'inscrire"/>
-	</div>		
-</form>
+	<form action="inscription.php" method="POST" id="flotting">
+		<div class="col-sm-12">
+			<div class="card">
+			    <div class="card-block">
 
-<form action="$_SERVER['PHP_SELF']" method="POST" class="form-horizontal">
-	<legend><h2> Nous contacter </h2></legend>
-	<div class="form-group">
-		<label for="subject" class="col-sm-2 control-label">Sujet :</label>
-	    <div class="col-sm-4">
-	      <input type="text" class="form-control" id="subject" placeholder="Sujet du message">
-	    </div>
-	</div>
-	<div class="form-group">
-		<label for="message-content" class="col-sm-2 control-label">Message :</label>
-	    <div class="col-sm-4">
-	      <textarea class="form-control" id="message-content">
-	      </textarea>
-	    </div>		    
-	</div>
-	<div class="form-group">
-	    <div class="col-sm-12 col-sm-offset-2">
-	      <input type="submit" class="btn btn-success" value="Envoyer"/>
-	    </div>
-	</div>
+			        <div class="text-center">
+			            <h3><i class="fa fa-pencil"></i> Inscription</h3>
+			            <hr class="mt-2 mb-2">
+			        </div>
 
-</form>
+			        <div class="md-form">
+			            <i class="fa fa-user prefix"></i>
+			            <input type="text" id="form3" class="form-control">
+			            <label for="form3">Votre nom</label>
+			        </div>
+
+			        <div class="md-form">
+			            <i class="fa fa-envelope prefix"></i>
+			            <input type="text" class="form-control" id="inscript_email" />
+			            <label for="inscript_email">Votre email</label>
+			        </div>
+
+			        <div class="text-center">
+			            <button class="btn bg-brown-color">Envoyer</button>
+			        </div>
+			    </div>
+			</div>
+		</div>		
+		
+	</form>
+
+	<div class="bg-lightblue-color">
+		<div class="form-display">
+			<div class="card-block">
+			    <div>
+			        <h3><i class="fa fa-envelope"></i> Nous contacter:</h3>
+			        <hr class="mt-2 mb-2">
+			    </div>
+
+			    <br>
+
+			    <div class="md-form">
+			        <i class="fa fa-user prefix"></i>
+			        <input type="text" id="form3" class="form-control">
+			        <label for="form3">Votre nom</label>
+			    </div>
+
+			    <div class="md-form">
+			        <i class="fa fa-envelope prefix"></i>
+			        <input type="text" id="form2" class="form-control">
+			        <label for="form2">Votre email</label>
+			    </div>
+
+			    <div class="md-form">
+			        <i class="fa fa-tag prefix"></i>
+			        <input type="text" id="form32" class="form-control">
+			        <label for="form34">Sujet</label>
+			    </div>
+
+			    <div class="md-form">
+			        <i class="fa fa-pencil prefix"></i>
+			        <textarea type="text" id="form8" class="md-textarea"></textarea>
+			        <label for="form8">Votre message</label>
+			    </div>
+
+			    <div class="text-center">
+			        <button class="btn btn-default bg-green-color">Envoyer</button>
+
+			        <div class="call">
+			            <br>
+			            <p>Ou par téléphone?
+			                <br>
+			                <span><i class="fa fa-phone"> </i></span> + 01 234 565 280</p>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
