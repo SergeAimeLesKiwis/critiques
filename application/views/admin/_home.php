@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="md-form col-md-10">
 			<textarea type="text" id="concept" name="concept" class="md-textarea"><?php echo $concept; ?></textarea>
-			<label for="concept">Le concept</label>
+			<label for="concept" class="label-form"><strong>Le concept</strong></label>
 		</div>
 		<hr />
 		<div class="md-form col-md-10">
@@ -23,10 +23,10 @@
 				$sixth = $highlights[5];
 			?>
 
-			<h3>A la une</h3>
+			<h3 class="blue-color"><b> À la une </b></h3>
 			<input id="highlights" type="hidden" name="highlights" value="<?php echo $value; ?>" />
 
-			<input id="select-highlight" list="items" name="items">
+			<input id="select-highlight" list="items" name="items" class="input-select" placeholder="Entrer un titre de livre">
 			<datalist id="items">
 				<?php
 					foreach ($items as $item) {
@@ -37,29 +37,29 @@
 			<br />
 
 			<div class="row">
-				<div class="card col-md-4 highlight" id="first">
+				<div class="card col-md-4 highlight spacer" id="first">
 					<?php $this->load->view('admin/_highlight_container', array('item' => $first, 'position' => 'first')); ?>
 				</div>
-				<div class="card col-md-4 highlight" id="second">
+				<div class="card col-md-4 highlight spacer" id="second">
 					<?php $this->load->view('admin/_highlight_container', array('item' => $second, 'position' => 'second')); ?>
 				</div>
-				<div class="card col-md-4 highlight" id="third">
+				<div class="card col-md-4 highlight spacer" id="third">
 					<?php $this->load->view('admin/_highlight_container', array('item' => $third, 'position' => 'third')); ?>
 				</div>
-				<div class="card col-md-4 highlight" id="fourth">
+				<div class="card col-md-4 highlight spacer" id="fourth">
 					<?php $this->load->view('admin/_highlight_container', array('item' => $fourth, 'position' => 'fourth')); ?>
 				</div>
-				<div class="card col-md-4 highlight" id="fifth">
+				<div class="card col-md-4 highlight spacer" id="fifth">
 					<?php $this->load->view('admin/_highlight_container', array('item' => $fifth, 'position' => 'fifth')); ?>
 				</div>
-				<div class="card col-md-4 highlight" id="sixth">
+				<div class="card col-md-4 highlight spacer" id="sixth">
 					<?php $this->load->view('admin/_highlight_container', array('item' => $sixth, 'position' => 'sixth')); ?>
 				</div>
 			</div>
 		</div>
 
 		<div class="md-form col-md-10">
-			<input class="pull-right btn btn-primary" type="submit" value="Enregistrer les modifications" />
+			<input class="pull-left btn bg-green-hover" type="submit" value="Enregistrer les modifications" />
 		</div>
 	</div>
 </form>

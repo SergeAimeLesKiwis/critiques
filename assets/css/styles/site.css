@@ -104,6 +104,24 @@
  	background-color : #e9f2ef!important;
  }
 
+ /* Couleur hover */
+
+ .bg-green-hover{
+ 	background-color : #70BEB1!important;
+ }
+
+ .bg-green-hover:hover{
+ 	background-color : #389a8a!important;
+ }
+
+ .bg-grey-hover{
+ 	background-color : #BDBCBA!important;
+ }
+
+ .bg-grey-hover:hover{
+ 	background-color : #25283C!important;
+ }
+
 
  /* Parralax effect */
 
@@ -116,7 +134,7 @@
 /* Titles effects */
 
 h2.darkgrey-color, p.darkgrey-color{
-	padding: 15px!important;
+	padding: 25px!important;
 	max-width: 40%;
 	text-align: left;
 }
@@ -126,12 +144,21 @@ h2.blue-color{
 	margin-top: 2%;
 }
 
+h2.darkgrey-color{
+	margin-top : 0;
+}
+
 .link-card{
 	color : #D99E7E!important;
 }
 
 .link-card:hover{
 	color : #70BEB1!important;
+}
+
+/* text effects */
+.label-form{
+	font-size: 1.1em!important;
 }
 
 /* container effects */
@@ -150,5 +177,10 @@ h2.blue-color{
 .block-right{
 	margin-left : 0;
 	margin-right : 25%;
+}
+
+.input-select{
+	padding : 2px;
+	margin-bottom : 5px;
 }
 
