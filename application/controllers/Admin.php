@@ -1,17 +1,20 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
+	require_once(dirname(__FILE__).'/Base.php');
 
-	class Admin extends CI_Controller {
+	class Admin extends Base {
 
 		public function __construct() {
 			parent::__construct();
+
+			// if ($this->ion_auth->is_admin () === FALSE) {
+			// 	redirect('home');
+			// }
 		}
 
 		public function index() {
 			// HEADER
-			$header['title'] = 'Administration';
-			$header['styles'] = array('bootstrap-editable', 'toastr.min');
-			$this->load->view('shared/header', $header);
+			$this->loadHeader('Administration', array('bootstrap-editable', 'toastr.min'));
 
 			// CONTENT
 			$this->load->model('ParameterService');
@@ -24,14 +27,15 @@
 			$content['highlights'] = $this->ItemService->getItems($highlights);
 			$content['items'] = $this->ItemService->getAllItems();
 
+			$content['static'] = $this->TypeService->getAllTypes();
+
 			$content['types'] = $this->TypeService->getAllTypes();
 			$content['categories'] = $this->CategoryService->getAllCategories();
 
 			$this->load->view('admin/index', $content);
 
 			// FOOTER
-			$footer['scripts'] = array('bootstrap-editable', 'scripts/admin', 'toastr.min');
-			$this->load->view('shared/footer', $footer);
+			$this->loadFooter(array('bootstrap-editable', 'scripts/admin', 'toastr.min'));
 		}
 // HOME
 		public function refreshHighlight($id, $position) {

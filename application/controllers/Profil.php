@@ -1,7 +1,8 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
+	require_once(dirname(__FILE__).'/Base.php');
 
-	class Profil extends CI_Controller {
+	class Profil extends Bases {
 
 		public function __construct() {
 			parent::__construct();

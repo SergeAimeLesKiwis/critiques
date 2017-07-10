@@ -1,7 +1,8 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
+	require_once(dirname(__FILE__).'/Base.php');
 
-	class Item extends CI_Controller {
+	class Item extends Base {
 
 		public function __construct() {
 			parent::__construct();
@@ -19,8 +20,7 @@
 			$this->load->view('item/index', $content);
 
 			// FOOTER
-			$footer['scripts'] = array();
-			$this->load->view('shared/footer', $footer);
+			$this->loadFooter();
 		}
 	}
 ?>

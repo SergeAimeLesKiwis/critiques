@@ -33,5 +33,17 @@
 							->where('key', 'home_highlights')
 							->update($this->table);
 		}
+
+		public function getStaticInfos($page) {
+			$queryTitle = $this->db->get_where($this->table, 'key = \'static_'.$page.'_title\'');
+			$rowTitle = $queryTitle->row();
+			$title = isset($rowTitle) ? $rowTitle->value : null;
+
+			$queryText = $this->db->get_where($this->table, 'key = \'static_'.$page.'_text\'');
+			$rowText = $queryText->row();
+			$text = isset($rowText) ? $rowText->value : null;
+
+			return array('title' => $title, 'text' => $text);
+		}
 	}
 ?>

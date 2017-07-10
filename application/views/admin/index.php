@@ -11,10 +11,10 @@
 				<a class="nav-link" data-toggle="tab" href="#admin-types-categories" role="tab"><i class="fa fa-user"></i> Types / Catégories</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#admin-add-item" role="tab"><i class="fa fa-user"></i> Ajouter du contenu</a>
+				<a class="nav-link" data-toggle="tab" href="#admin-add-item" role="tab"><i class="fa fa-user"></i> Ajouter une oeuvre</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#admin-update-item" role="tab"><i class="fa fa-user"></i> Modifier du contenu</a>
+				<a class="nav-link" data-toggle="tab" href="#admin-update-item" role="tab"><i class="fa fa-user"></i> Modifier une oeuvre</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" data-toggle="tab" href="#admin-rooms" role="tab"><i class="fa fa-user"></i> Salons</a>
@@ -39,7 +39,12 @@
 			</div>
 			<div class="tab-pane fade" id="admin-static" role="tabpanel">
 				<br />
-				<p>STATIC</p>
+				<p>
+					<?php
+						$static['osef'] = null;
+						$this->load->view('admin/_static', $static); 
+					?>
+				</p>
 			</div>
 			<div class="tab-pane fade" id="admin-types-categories" role="tabpanel">
 				<br />
