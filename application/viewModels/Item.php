@@ -20,7 +20,11 @@
 		}
 
 		public function getImageTag() {
-			return '<img src="'.$this->image_path.'" alt="'.$this->title.'" class="img-responsive" />';
+			return '<img src="'.base_url().'assets/img/cover/'.$this->id.'.png" alt="'.$this->title.'" class="img-fluid" />';
+		}
+
+		public function getLightInfos() {
+			return '<em>Créé par '.$this->author.' - Sorti le '.$this->publish_date.'</em>';
 		}
 	}
 

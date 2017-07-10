@@ -1,7 +1,10 @@
-<div class="col-md-4 portfolio-item">
-	<?php echo $item->getImageTag(); ?>
-	<h3>
-		<a href="<?php echo 'room/'.$item->title;?>" class="text-center"><?php echo $item->title; ?></a>
-	</h3>
-	<p><?php echo $item->author; ?></p>
+<div class="card col-md-4">
+	<div class="view overlay hm-zoom">
+		<?php echo $item->getImageTag(); ?>
+		<a><div class="mask waves-effect waves-light"></div></a>
+	</div>
+	<div class="card-block">
+		<h4 class="card-title"><?php echo $item->title; ?></h4>
+		<p class="card-text"><?php echo $item->getLightInfos(); ?></p>
+	</div>
 </div>

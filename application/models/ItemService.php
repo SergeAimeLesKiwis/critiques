@@ -19,7 +19,39 @@
 		private $updated_by;
 		private $updated_at;
 
-		public function getItems() {
+		public function getItem($id) {
+			$query = $this->db->get_where($this->table, 'id = '.$id);
+			$row = $query->row();
+
+			if (isset($row)) {
+				$item = new Item(
+					$row->id,
+					$row->title,
+					$row->author,
+					date('d/m/Y',strtotime($row->publish_date)),
+					$row->image_path,
+					$row->category,
+					$row->description
+				);
+
+				return $item;
+			}
+
+			return null;
+		}
+
+		public function getItems($ids) {
+			$result = array();
+
+			foreach ($ids as $id) {
+				$item = $id != 0 ? $this->getItem($id) : null;
+				$result[] = $item;
+			}
+
+			return $result;
+		}
+
+		public function getAllItems() {
 			$query = $this->db->get($this->table);
 			$result = $query->result();
 
@@ -39,34 +71,6 @@
 			}
 
 			return $items;
-		}
-
-		public function getItem($id) {
-			$query = $this->db->get_where($this->table, 'id = '.$id);
-			$row = $query->row();
-
-			if (isset($row)) {
-				$item = new Item(
-					$row->id,
-					$row->title,
-					$row->author,
-					$row->publish_date,
-					$row->image_path,
-					$row->category,
-					$row->description
-				);
-
-				return $item;
-			}
-
-			return null;
-		}
-
-		public function getHomeHighlights() {
-			$query = $this->db->get_where($this->table, 'key = \'home_highlights\'');
-			$row = $query->row();
-
-			return isset($row) ? explode('|', $row->value) : null;
 		}
 	}
 ?>

@@ -17,9 +17,11 @@
 
 			// CONTENT
 			$this->load->model('ParameterService');
+			$this->load->model('ItemService');
+
 			$content['concept'] = $this->ParameterService->getHomeConcept();
 			$highlights = $this->ParameterService->getHomeHighlights();
-			$content['highlights'] = $this->getHighlightItems($highlights);
+			$content['highlights'] = $this->ItemService->getItems($highlights);
 
 			$this->load->view('home/index', $content);
 
@@ -39,18 +41,6 @@
 
 
 			$this->maillib->sendMail($fromMail, $fromName, $to, $subject, $message);
-		}
-
-		private function getHighlightItems($highlights) {
-			$this->load->model('ItemService');
-			$result = array();
-
-			foreach ($highlights as $id) {
-				$item = $id != 0 ? $this->ItemService->getItem($id) : null;
-				$result[] = $item;
-			}
-
-			return $result;
 		}
 	}
 ?>

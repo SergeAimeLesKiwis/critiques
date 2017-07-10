@@ -15,11 +15,12 @@
 
 			// CONTENT
 			$this->load->model('ParameterService');
-			$content['concept'] = $this->ParameterService->getHomeConcept();
-			$content['highlights'] = $this->ParameterService->getHomeHighlights();
-
 			$this->load->model('ItemService');
-			$content['items'] = $this->ItemService->getItems();
+
+			$content['concept'] = $this->ParameterService->getHomeConcept();
+			$highlights = $this->ParameterService->getHomeHighlights();
+			$content['highlights'] = $this->ItemService->getItems($highlights);
+			$content['items'] = $this->ItemService->getAllItems();
 
 			$this->load->view('admin/index', $content);
 
