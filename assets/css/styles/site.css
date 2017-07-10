@@ -31,12 +31,12 @@
 #flotting {
   position: fixed;
   right: 0;
-  top: 20%;
+  top: 80%;
   width: 15em;
   margin-top: -2.5em;
   border: 1px solid #25283C;
   padding : 10px;
-  background-color: #BDBCBA;
+  background-color: #CEE8DF;
  }
 
  #inscript_email{
@@ -45,4 +45,31 @@
 
  .img_resize{
  	width: 200px
+ }
+
+ #img_intro{
+ 	background-image:url(../../images/book-store-1866988_1920.jpg);
+ 	max-width: 100%;
+ 	height: 400px;
+ 	text-align: center;
+ }
+
+ .blue-color{
+ 	color : #70BEB1;
+ }
+
+ .brown-color{
+ 	color : #D99E7E;
+ }
+
+ .green-color{
+	color : #70BEB1;
+ }
+ 
+ .darkgrey-color{
+ 	color : #25283C;
+ }
+
+  .grey-color{
+ 	color : #BDBCBA;
  }

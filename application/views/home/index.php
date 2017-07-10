@@ -1,11 +1,11 @@
 <?php	
-	echo '<div class="row">';
-	echo '<h2> Le concept </h2>'; 
-	echo '<p>' . $concept . '</p>';
+	echo '<div id="img_intro" class="row">';
+	echo '<h2 class="brown-color"> Le concept </h2>'; 
+	echo '<p class="brown-color">' . $concept . '</p>';
 	echo '</div>';
 
 	echo '<div class="row">';
-	echo '<h2> À la une </h2>';
+	echo '<h2 class="blue-color"> À la une </h2>';
 	foreach ($highlights as $item) {
 		$this->load->view('shared/_item_container', array('item' => $item)); 
 	}
@@ -14,7 +14,7 @@
 
 <form action="inscription.php" method="POST" id="flotting">
 	<div class="col-sm-12">
-		<h4> Inscrivez-vous </h4>
+		<h4 class="blue-color"> Inscrivez-vous </h4>
 		<input type="email" id="inscript_email" class="form-control" placeholder="Votre email"/>
 		<input type="submit" class="btn btn-primary" value="S'inscrire"/>
 	</div>		
