@@ -23,7 +23,7 @@
 				$sixth = $highlights[5];
 			?>
 
-			<h3 data-test="<?php echo $value; ?>">A la une</h3>
+			<h3>A la une</h3>
 			<input id="highlights" type="hidden" name="highlights" value="<?php echo $value; ?>" />
 
 			<input id="select-highlight" list="items" name="items">

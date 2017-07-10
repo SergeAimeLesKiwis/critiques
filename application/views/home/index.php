@@ -9,7 +9,7 @@
 	echo '<h2 class="blue-color"> À la une </h2>';
 	echo '<div class="row">';
 	foreach ($highlights as $item) {
-		$this->load->view('shared/_item_container', array('item' => $item)); 
+		if ($item != null) $this->load->view('shared/_item_container', array('item' => $item)); 
 	}
 	echo '</div>';
 	echo '</div>';

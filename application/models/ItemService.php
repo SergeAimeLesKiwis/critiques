@@ -23,16 +23,16 @@
 			$row = $query->row();
 
 			if (isset($row)) {
-				$item = new Item(
+				$this->load->model('CategoryService');
+
+				return new Item(
 					$row->id,
 					$row->title,
 					$row->author,
 					date('d/m/Y',strtotime($row->publish_date)),
-					$row->category,
+					$this->CategoryService->getCategory($row->category),
 					$row->description
 				);
-
-				return $item;
 			}
 
 			return null;
@@ -42,7 +42,7 @@
 			$result = array();
 
 			foreach ($ids as $id) {
-				$item = $id != 0 ? $this->getItem($id) : null;
+				$item = $id > 0 ? $this->getItem($id) : null;
 				$result[] = $item;
 			}
 
@@ -55,6 +55,8 @@
 
 			$items = array();
 
+			$this->load->model('CategoryService');
+
 			foreach ($result as $row)
 			{
 				$items[] = new Item(
@@ -62,7 +64,7 @@
 					$row->title,
 					$row->author,
 					$row->publish_date,
-					$row->category,
+					$this->CategoryService->getCategory($row->category),
 					$row->description
 				);
 			}

@@ -16,16 +16,21 @@
 			// CONTENT
 			$this->load->model('ParameterService');
 			$this->load->model('ItemService');
+			$this->load->model('TypeService');
+			$this->load->model('CategoryService');
 
 			$content['concept'] = $this->ParameterService->getHomeConcept();
 			$highlights = $this->ParameterService->getHomeHighlights();
 			$content['highlights'] = $this->ItemService->getItems($highlights);
 			$content['items'] = $this->ItemService->getAllItems();
 
+			$content['types'] = $this->TypeService->getAllTypes();
+			$content['categories'] = $this->CategoryService->getAllCategories();
+
 			$this->load->view('admin/index', $content);
 
 			// FOOTER
-			$footer['scripts'] = array('scripts/admin');
+			$footer['scripts'] = array('scripts/admin', 'jquery.tabledit');
 			$this->load->view('shared/footer', $footer);
 		}
 

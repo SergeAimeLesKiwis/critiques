@@ -43,7 +43,11 @@
 			</div>
 			<div class="tab-pane fade" id="admin-types-categories" role="tabpanel">
 				<br />
-				<p>TYPE CATEGORIES</p>
+				<?php
+						$types_categories['types'] = $types;
+						$types_categories['categories'] = $categories;
+						$this->load->view('admin/_types_categories', $types_categories); 
+					?>
 			</div>
 			<div class="tab-pane fade" id="admin-add-item" role="tabpanel">
 				<br />
