@@ -29,6 +29,13 @@
 			$this->load->view('shared/footer', $footer);
 		}
 
+		public function refreshHighlight($id, $position) {
+			$this->load->model('ItemService');
+			$item = $this->ItemService->getItem($id);
+
+			$this->load->view('admin/_highlight_container', array('item' => $item, 'position' => $position));
+		}
+
 		public function save_home() {
 			$concept = $this->input->post('concept');
 			$highlights = $this->input->post('highlights');

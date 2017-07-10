@@ -82,7 +82,6 @@ CREATE TABLE `items` (
 	`title` VARCHAR(100) NOT NULL,
 	`author` VARCHAR(200) NOT NULL,
 	`publish_date` DATETIME NOT NULL,
-	`image_path` VARCHAR(150) NOT NULL,
 	`category` INT NOT NULL,
 	`description` VARCHAR(500) NOT NULL,
 	`created_by` INT NOT NULL,
@@ -201,18 +200,30 @@ INSERT INTO `categories` (`name`, `type`) VALUES
 ('Console portable', 5),
 ('Console de salon', 5);
 
-INSERT INTO `items` (`title`, `author`, `publish_date`, `image_path`, `category`, `description`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES 
-('Harry Potter et la Coupe de Feu', 'J.K. Rowling', '2000-11-29', 'IMAGEPATH', 1, '4ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17');
+INSERT INTO `items` (`title`, `author`, `publish_date`, `category`, `description`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES 
+('Harry Potter à l\'École des Sorciers', 'J.K. Rowling', '2000-11-29', 1, '1er volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et la Chambre des Secrets', 'J.K. Rowling', '2000-11-29', 1, '2ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et le Prisonnier d\'Azkaban', 'J.K. Rowling', '2000-11-29', 1, '3ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et la Coupe de Feu', 'J.K. Rowling', '2000-11-29', 1, '4ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et l\'Ordre du Phénix', 'J.K. Rowling', '2000-11-29', 1, '5ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et le Prince de Sang Mêlé', 'J.K. Rowling', '2000-11-29', 1, '6ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et les Reliques de la Mort', 'J.K. Rowling', '2000-11-29', 1, '7ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17');
 
 INSERT INTO `genres` (`name`) VALUES 
 ('Fantastique'), ('Science-fiction'), ('Polar'), ('Action'), ('Comédie'), ('Péplum'), ('Rap'), ('Rock'), ('Classique');
 
 INSERT INTO `item_genres` (`genre`, `item`) VALUES 
-(1, 1), (4, 1);
+(1, 1), (4, 1),
+(1, 2), (4, 2),
+(1, 3), (4, 3),
+(1, 4), (4, 4),
+(1, 5), (4, 5),
+(1, 6), (4, 6),
+(1, 7), (4, 7);
 
 INSERT INTO `loan_status` (`name`) VALUES 
 ('Disponible'), ('Prêté'), ('Je le veux');
 
 INSERT INTO `parameters` (`key`, `value`) VALUES 
 ('home_concept', 'Lorem Ipsum'),
-('home_highlights', '1|1|1|1|1|1');
+('home_highlights', '1|0|1|0|0|1');

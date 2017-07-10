@@ -11,7 +11,6 @@
 		private $title;
 		private $author;
 		private $publish_date;
-		private $image_path;
 		private $category;
 		private $description;
 		private $created_by;
@@ -29,7 +28,6 @@
 					$row->title,
 					$row->author,
 					date('d/m/Y',strtotime($row->publish_date)),
-					$row->image_path,
 					$row->category,
 					$row->description
 				);
@@ -64,7 +62,6 @@
 					$row->title,
 					$row->author,
 					$row->publish_date,
-					$row->image_path,
 					$row->category,
 					$row->description
 				);

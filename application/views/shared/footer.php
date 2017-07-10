@@ -9,10 +9,12 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/parallax.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/site.js"></script>
 	
-
+	<script type="text/javascript">
+		var baseUrl = '<?php echo base_url(); ?>';
+	</script>
 
 	<?php foreach ($scripts as $script) { 
-		echo '<script type="text/javascript" src="'.base_url().'assets/js/'.$script.'.js" />';
+		echo '<script type="text/javascript" src="'.base_url().'assets/js/'.$script.'.js" /></script>';
 	} ?>
 
 	<div id="waiting-div" style="display:none">
