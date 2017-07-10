@@ -9,7 +9,7 @@
 
 		public function index() {
 			// HEADER
-			$header['title'] = "Contenus";
+			$header['title'] = "Administration";
 			$header['links'] = array('<script type="text/javascript" src="'.base_url().'assets/js/scripts/admin.js"></script>');
 
 			$this->load->view('shared/header', $header);
