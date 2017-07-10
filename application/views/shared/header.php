@@ -14,35 +14,36 @@
 	</head>
 
 	<body>
-		<!-- Navbar -->
-		<nav class="navbar navbar-inverse">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="<?php echo base_url('home') ?>">Le Club des Critiques</a>
-				</div>
-				<div id="navbar" class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li><a href="<?php echo base_url('item') ?>">Contenus</a></li>
-						<li><a href="<?php echo base_url('room') ?>">Salons</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">	
-						<li>
+		<!--Navbar-->
+		<nav class="navbar navbar-toggleable-md navbar-dark bg-primary bg-darkgrey-color">
+		    <div class="container">
+		        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+		            <span class="navbar-toggler-icon"></span>
+		        </button>
+		        <a class="navbar-brand" href="<?php echo base_url('home') ?>">
+		            <img src="<?php echo base_url(); ?>assets/img/logo_black.svg" alt="logo" height="57"/>
+		        </a>
+		        <div class="collapse navbar-collapse" id="navbarNav1">
+		            <ul class="navbar-nav mr-auto">		            
+		                <li class="nav-item">
+		                    <a class="nav-link" href="<?php echo base_url('item') ?>">Contenus</a>
+		                </li>
+		                <li class="nav-item">
+		                    <a class="nav-link" href="<?php echo base_url('room') ?>">Salons</a>
+		                </li>
+		            </ul>
+		            <ul class="navbar-nav">
+		                <li class="nav-item">
 							<?php 
 								if ($this->session->user) { 
-									echo '<li><a href="'.base_url('admin').'">Adminitration</a></li>';
+									echo '<li class="nav-item"><a href="'.base_url('admin').'" class="nav-link">Adminitration</a></li>';
 								}
 							?>
 						</li>
-						<li><?php echo anchor('/profil/index', 'Mon compte / Se connecter', 'title="Mon compte"'); ?></li>
-					</ul>
-				</div>
-			</div>
+						<li class="nav-item"><?php echo anchor('/profil/index', 'Mon compte / Se connecter', 'title="Mon compte" class="nav-link"'); ?></li>
+		            </ul>
+		        </div>
+		    </div>
 		</nav>
 
 		<div id="body-content">

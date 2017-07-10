@@ -1,10 +1,9 @@
 <?php	
-	echo '<div id="img_intro" class="row">';
-	echo '<h2 class="brown-color"> Le concept </h2>'; 
-	echo '<p class="brown-color">' . $concept . '</p>';
+	echo '<div id="img_intro" class="parallax-window" data-parallax="scroll" data-image-src="'.base_url().'assets/img/home.png">';
+	echo '<h2 class="darkgrey-color"> Le concept </h2>'; 
+	echo '<p class="darkgrey-color">' . $concept . '</p>';
 	echo '</div>';
 
-	echo '<div class="row">';
 	echo '<h2 class="blue-color"> À la une </h2>';
 	foreach ($highlights as $item) {
 		$this->load->view('shared/_item_container', array('item' => $item)); 
