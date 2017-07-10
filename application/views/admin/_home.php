@@ -12,26 +12,18 @@
 				<label for="">A la une</label>
 				<input id="highlights" type="hidden" name="highlights" value="" />
 
-				<input list="browsers" name="browser">
-				<datalist id="browsers">
-					<option value="Internet Explorer">
-					<option value="Firefox">
-					<option value="Chrome">
-					<option value="Opera">
-					<option value="Safari">
-				</datalist>
-
-				<select id="select-highlight">
-					<option value="0">Sélectionner ...</option>
+				<input id="select-highlight" list="contents" name="contents">
+				<datalist id="contents">
 					<?php
 						foreach ($items as $item) {
-							echo '<option value="'.$item->id.'">'.$item->title.'</option>';
+							echo '<option value="'.$item->title.'">'.$item->id.'</option>';
 						}
 					?>
-				</select>
+				</datalist>
 
 				<div class="highlight rounded" role="button">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					<i class="fa fa-plus"></i>
 					<span class="glyphicon glyphicon-minus slide-toggle-icon" aria-hidden="true"></span>
 					<div class="highlight-item">
 						<span id="item-id"></span>

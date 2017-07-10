@@ -7,13 +7,20 @@
 			parent::__construct();
 		}
 
-		public function index()
-		{
+		public function index() {
+			// HEADER
 			$header['title'] = "Le Club des Critiques";
-			$header['links'] = array();
-			$this->load->view('structure/header', $header);
-			$this->load->view('profile');
-			$this->load->view('structure/footer');
+			$header['styles'] = array();
+			$this->load->view('shared/header', $header);
+
+			// CONTENT
+			$content = array();
+
+			$this->load->view('profil/index', $content);
+
+			// FOOTER
+			$footer['scripts'] = array();
+			$this->load->view('shared/footer', $footer);
 		}
 	}
 ?>

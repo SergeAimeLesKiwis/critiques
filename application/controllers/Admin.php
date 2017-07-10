@@ -9,9 +9,8 @@
 
 		public function index() {
 			// HEADER
-			$header['title'] = "Administration";
-			$header['links'] = array('<script type="text/javascript" src="'.base_url().'assets/js/scripts/admin.js"></script>');
-
+			$header['title'] = 'Administration';
+			$header['styles'] = array();
 			$this->load->view('shared/header', $header);
 
 			// CONTENT
@@ -25,7 +24,8 @@
 			$this->load->view('admin/index', $content);
 
 			// FOOTER
-			$this->load->view('shared/footer');
+			$footer['scripts'] = array('scripts/admin');
+			$this->load->view('shared/footer', $footer);
 		}
 
 		public function save_home() {

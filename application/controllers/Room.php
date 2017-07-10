@@ -10,8 +10,7 @@
 		public function index() {
 			// HEADER
 			$header['title'] = "Contenus";
-			$header['links'] = array();
-
+			$header['styles'] = array();
 			$this->load->view('shared/header', $header);
 
 			// CONTENT
@@ -20,7 +19,8 @@
 			$this->load->view('room/index', $content);
 
 			// FOOTER
-			$this->load->view('shared/footer');
+			$footer['scripts'] = array();
+			$this->load->view('shared/footer', $footer);
 		}
 	}
 ?>

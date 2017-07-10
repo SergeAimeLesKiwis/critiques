@@ -5,12 +5,12 @@
 
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/mdb.min.css" />
-		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
-		
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/font-awesome.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles/site.css" />
-		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/site.js"></script>
 
-		<?php foreach ($links as $link) { echo $link; } ?>
+		<?php foreach ($styles as $style) { 
+			echo '<link rel="stylesheet" type="text/css" href="'.base_url().'assets/css/'.$style.'.css" />';
+		} ?>
 	</head>
 
 	<body>
@@ -45,4 +45,4 @@
 			</div>
 		</nav>
 
-		<div class="container">
+		<div id="body-content">
