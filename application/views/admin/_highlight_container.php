@@ -9,7 +9,7 @@
 		$id = 0;
 		$image = '<img src="'.base_url().'assets/img/cover/unknown.png" alt="" class="img-fluid" />';
 		$title = 'Emplacement vide';
-		$text = '<i>Positionner une oeuvre ici</i>';
+		$text = '<em>Positionner une oeuvre ici</em>';
 		$button = '<span class="btn btn-info add-highlight bg-green-hover" data-position="'.$position.'">Ajouter à la une</span>';
 	}
 ?>

@@ -42,27 +42,27 @@ if (typeof jQuery === 'undefined') {
             restoreButton: true,
             buttons: {
                 edit: {
-                    class: 'btn btn-sm btn-default',
-                    html: '<span class="glyphicon glyphicon-pencil"></span>',
+                    class: 'btn btn-sm btn-info',
+                    html: '<i class="fa fa-pencil-square-o"></i>',
                     action: 'edit'
                 },
                 delete: {
-                    class: 'btn btn-sm btn-default',
-                    html: '<span class="glyphicon glyphicon-trash"></span>',
+                    class: 'btn btn-sm btn-danger',
+                    html: '<i class="fa fa-trash"></i>',
                     action: 'delete'
                 },
                 save: {
                     class: 'btn btn-sm btn-success',
-                    html: 'Save'
+                    html: 'Enregistrer'
                 },
                 restore: {
                     class: 'btn btn-sm btn-warning',
-                    html: 'Restore',
+                    html: 'Restaurer',
                     action: 'restore'
                 },
                 confirm: {
-                    class: 'btn btn-sm btn-danger',
-                    html: 'Confirm'
+                    class: 'btn btn-sm btn-warning',
+                    html: 'Confirmer'
                 }
             },
             onDraw: function() { return; },

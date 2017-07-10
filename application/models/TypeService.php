@@ -10,6 +10,12 @@
 		private $id;
 		private $name;
 
+		public function setType($id, $name) {
+			return $this->db->set('name', $name)
+							->where('id', $id)
+							->update($this->table);
+		}
+
 		public function getType($id) {
 			$query = $this->db->get_where($this->table, 'id = '.$id);
 			$row = $query->row();

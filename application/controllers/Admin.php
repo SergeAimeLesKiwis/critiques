@@ -10,7 +10,7 @@
 		public function index() {
 			// HEADER
 			$header['title'] = 'Administration';
-			$header['styles'] = array();
+			$header['styles'] = array('bootstrap-editable', 'toastr.min');
 			$this->load->view('shared/header', $header);
 
 			// CONTENT
@@ -30,10 +30,10 @@
 			$this->load->view('admin/index', $content);
 
 			// FOOTER
-			$footer['scripts'] = array('scripts/admin', 'jquery.tabledit');
+			$footer['scripts'] = array('bootstrap-editable', 'scripts/admin', 'toastr.min');
 			$this->load->view('shared/footer', $footer);
 		}
-
+// HOME
 		public function refreshHighlight($id, $position) {
 			$this->load->model('ItemService');
 			$item = $this->ItemService->getItem($id);
@@ -46,10 +46,26 @@
 			$highlights = $this->input->post('highlights');
 
 			$this->load->model('ParameterService');
-			$this->ParameterService->setHomeConcept($concept);
-			$this->ParameterService->setHomeHighlights($highlights);
+			$updatedConcept = $this->ParameterService->setHomeConcept($concept);
+			$updatedHighlights = $this->ParameterService->setHomeHighlights($highlights);
 
-			redirect('admin/index', 'refresh');
+			return $updatedConcept && $updatedHighlights;
+		}
+
+// STATIC
+
+// TYPES CATEGORIES
+		public function edit_type() {
+			$id = $this->input->post('pk');
+			$name = $this->input->post('value');
+
+			if (!empty($name)) {
+				$this->load->model('TypeService');
+				$this->TypeService->setType($id, $name);
+			} else {
+				header('HTTP/1.0 400 Bad Request', true, 400);
+				echo "This field is required!";
+			}
 		}
 	}
 ?>

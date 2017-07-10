@@ -16,10 +16,9 @@
 		}
 
 		public function setHomeConcept($concept) {
-			$this->key = 'home_concept';
-			$this->value = $concept;
-
-			$this->db->update($this->table, $this, 'key ='.$this->key);
+			return $this->db->set('value', $concept)
+							->where('key', 'home_concept')
+							->update($this->table);
 		}
 
 		public function getHomeHighlights() {
@@ -30,10 +29,9 @@
 		}
 
 		public function setHomeHighlights($highlights) {
-			$this->key = 'home_highlights';
-			$this->value = $highlights;
-
-			$this->db->update($this->table, $this, 'key ='.$this->key);
+			return $this->db->set('value', $highlights)
+							->where('key', 'home_highlights')
+							->update($this->table);
 		}
 	}
 ?>
