@@ -25,7 +25,7 @@
 		<h3 class="blue-color"><b> À la une </b></h3>
 		<input id="highlights" type="hidden" name="highlights" value="<?php echo $value; ?>" />
 
-		<input id="select-highlight" list="items" name="items" class="input-select form-control" placeholder="Entrer un titre de livre">
+		<input id="select-highlight" list="items" name="items" class="input-select form-control bg-white-color" placeholder="Entrer un titre de livre">
 		<datalist id="items">
 			<?php
 				foreach ($items as $item) {
@@ -35,7 +35,7 @@
 		</datalist>
 		<br />
 
-		<div class="row">
+		<div class="row" id="highlights-container">
 			<div class="card col-md-4 highlight spacer" id="first">
 				<?php $this->load->view('admin/home/_highlight_container', array('item' => $first, 'position' => 'first')); ?>
 			</div>
