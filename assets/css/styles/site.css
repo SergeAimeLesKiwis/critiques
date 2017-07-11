@@ -126,6 +126,14 @@
  	background-color : #25283C!important;
  }
 
+ .brown-hover{
+ 	color : #b27250;
+ }
+
+.brown-hover:hover{
+ 	color : #D99E7E;
+ }
+
 
  /* Parralax effect */
 
@@ -194,4 +202,8 @@ h2.darkgrey-color{
 
 #highlights-container{
 	margin-left: 10px;
+}
+
+#admin-menu{
+	padding-right: 0;
 }
