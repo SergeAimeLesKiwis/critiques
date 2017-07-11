@@ -2,29 +2,29 @@
 	<div class="col-md-2">
 		<ul class="nav nav-tabs md-pills pills-primary flex-column" role="tablist">
 			<li class="nav-item">
-				<a class="nav-link active" data-toggle="tab" href="#admin-home" role="tab"><i class="fa fa-user"></i> Page d'accueil</a>
+				<a class="nav-link active" data-toggle="tab" href="#admin-home" role="tab"><i class="fa fa-home"></i> Page d'accueil</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#admin-static" role="tab"><i class="fa fa-user"></i> Pages statiques</a>
+				<a class="nav-link" data-toggle="tab" href="#admin-static" role="tab"><i class="fa fa-address-card-o"></i> Pages statiques</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#admin-types-categories" role="tab"><i class="fa fa-user"></i> Types / Catégories</a>
+				<a class="nav-link" data-toggle="tab" href="#admin-types-categories" role="tab"><i class="fa fa-file-o"></i> Types / Catégories</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#admin-add-item" role="tab"><i class="fa fa-user"></i> Ajouter une oeuvre</a>
+				<a class="nav-link" data-toggle="tab" href="#admin-add-item" role="tab"><i class="fa fa-bookmark-o"></i> Ajouter une oeuvre</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#admin-update-item" role="tab"><i class="fa fa-user"></i> Modifier une oeuvre</a>
+				<a class="nav-link" data-toggle="tab" href="#admin-update-item" role="tab"><i class="fa fa-pencil-square-o"></i> Modifier une oeuvre</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#admin-rooms" role="tab"><i class="fa fa-user"></i> Salons</a>
+				<a class="nav-link" data-toggle="tab" href="#admin-rooms" role="tab"><i class="fa fa-comment-o"></i> Salons</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#admin-users" role="tab"><i class="fa fa-user"></i> Utilisateurs</a>
+				<a class="nav-link" data-toggle="tab" href="#admin-users" role="tab"><i class="fa fa-user-o"></i> Utilisateurs</a>
 			</li>
 		</ul>
 	</div>
-	<div class="col-md-10">
+	<div class="col-md-10 bg-lightblue-color">
 		<div class="tab-content vertical">
 			<div class="tab-pane fade in show active" id="admin-home" role="tabpanel">
 				<br />

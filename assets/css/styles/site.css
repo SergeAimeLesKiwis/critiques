@@ -104,6 +104,10 @@
  	background-color : #e9f2ef!important;
  }
 
+ .bg-white-color{
+ 	background-color : #ffffff!important;
+ }
+
  /* Couleur hover */
 
  .bg-green-hover{
@@ -156,6 +160,10 @@ h2.darkgrey-color{
 	color : #70BEB1!important;
 }
 
+.col-md-10 .label-form{
+	margin-left: 10px;
+}
+
 /* text effects */
 .label-form{
 	font-size: 1.1em!important;
@@ -184,3 +192,6 @@ h2.darkgrey-color{
 	margin-bottom : 5px;
 }
 
+#highlights-container{
+	margin-left: 10px;
+}

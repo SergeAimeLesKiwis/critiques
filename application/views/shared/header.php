@@ -21,7 +21,7 @@
 		            <span class="navbar-toggler-icon"></span>
 		        </button>
 		        <a class="navbar-brand" href="<?php echo base_url('home') ?>">
-		            <img src="<?php echo base_url(); ?>assets/img/logo_black.svg" alt="logo" height="57"/>
+		            <img src="<?php echo base_url(); ?>assets/img/logo_white.png" alt="logo" height="57"/>
 		        </a>
 		        <div class="collapse navbar-collapse" id="navbarNav1">
 		            <ul class="navbar-nav mr-auto">		            
