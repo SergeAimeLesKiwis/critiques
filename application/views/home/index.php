@@ -15,7 +15,7 @@
 	echo '</div>';
 ?>
 
-	<form action="inscription.php" method="POST" id="flotting">
+	<form action="inscription.php" method="post" id="flotting">
 		<div class="col-sm-12">
 			<div class="card">
 			    <div class="card-block">

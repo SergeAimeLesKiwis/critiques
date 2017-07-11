@@ -5,27 +5,24 @@
 
 	class TypeService extends CI_Model {
 
-		protected $table = "types";
-
-		private $id;
-		private $name;
-
 		private function exists($name) {
-			$query = $this->db->where('name', $name)->get($this->table);
-			return $query->num_rows() > 0;
+			return $this->db->where('name', $name)->get('types')->num_rows() > 0;
 		}
 
 		public function addType($name) {
-			return !$this->exists($name) && $this->db->set('name', $name)->insert($this->table);
+			return !$this->exists($name) && $this->db->set('name', $name)->insert('types');
 		}
 
 		public function updateType($id, $name) {
-			return $this->db->set('name', $name)->where('id', $id)->update($this->table);
+			return $this->db->set('name', $name)->where('id', $id)->update('types');
+		}
+
+		public function deleteType($id) {
+			return $this->db->where('id', $id)->delete('types');
 		}
 
 		public function getType($id) {
-			$query = $this->db->where('id', $id)->get($this->table);
-			$row = $query->row();
+			$row = $this->db->where('id', $id)->get('types')->row();
 
 			if (isset($row)) {
 				return new Type(
@@ -37,32 +34,26 @@
 			return null;
 		}
 
-		// public function getTypes($ids) {
-		// 	$result = array();
-
-		// 	foreach ($ids as $id) {
-		// 		$type = $id > 0 ? $this->getType($id) : null;
-		// 		$result[] = $type;
-		// 	}
-
-		// 	return $result;
-		// }
-
 		public function getAllTypes() {
-			$query = $this->db->get($this->table);
-			$result = $query->result();
+			$this->load->model('CategoryService');
 
+			$result = $this->db->get('types')->result();
 			$types = array();
 
 			foreach ($result as $row)
 			{
 				$types[] = new Type(
 					$row->id,
-					$row->name
+					$row->name,
+					$this->CategoryService->getNbItems($row->id)
 				);
 			}
 
 			return $types;
+		}
+		
+		public function getNbCategories($type) {
+			return $this->db->where('type', $type)->get('categories')->num_rows();
 		}
 	}
 ?>

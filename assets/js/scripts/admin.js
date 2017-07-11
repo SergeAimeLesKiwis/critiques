@@ -21,7 +21,7 @@ $(document).ready(function() {
 				toastr['success']('Vos modifications ont été prises en compte', 'Succès');
 			},
 			error: function(xhr, status, error) {
-				toastr['error']('Un problème est survenu lors de l\'enregistrement de vos modifications', 'Attention');
+				toastr['error'](xhr.responseText, 'Attention');
 			}
 		});
 	});
@@ -30,9 +30,8 @@ $(document).ready(function() {
 
 // TYPES CATEGORIES
 	bindModal('#create-type');
-	bindModal('.edit-type');
 	bindModal('#create-category');
-	bindModal('.edit-category');
+	initBindEditRemove();
 });
 
 function initToastr() {
@@ -61,16 +60,20 @@ function bindRemoveHighlight() {
 	$('#admin-home .remove-highlight').click(function () {
 		var position = $(this).data('position');
 		$('#admin-home #' + position).html($('#waiting-div').html());
-		var action = baseUrl + 'admin/refreshHighlight/0/' + position;
+		var action = baseUrl + 'admin/refreshHighlight/';
 
 		$.ajax({
-			type: 'get',
+			type: 'post',
 			url: action,
+			data: { id: 0, position: position },
 			dataType: 'html',
 			success: function (data) {
 				$('#admin-home #' + position).html(data);
 				bindAddHighlight();
 				refresh();
+			},
+			error: function(xhr, status, error) {
+				toastr['error'](xhr.responseText, 'Attention');
 			}
 		});
 	});
@@ -82,16 +85,20 @@ function bindAddHighlight() {
 		if (id != null && id > 0) {
 			var position = $(this).data('position');
 			$('#admin-home #' + position).html($('#waiting-div').html());
-			var action = baseUrl + 'admin/refreshHighlight/' + id + '/' + position;
+			var action = baseUrl + 'admin/refreshHighlight/';
 
 			$.ajax({
-				type: 'get',
+				type: 'post',
 				url: action,
+				data: { id: id, position: position },
 				dataType: 'html',
 				success: function (data) {
 					$('#admin-home #' + position).html(data);
 					bindRemoveHighlight();
 					refresh();
+				},
+				error: function(xhr, status, error) {
+					toastr['error'](xhr.responseText, 'Attention');
 				}
 			});
 		}
@@ -118,22 +125,44 @@ function bindModal(selector) {
 		$('#admin-types-categories #modal').modal();
 		$('#admin-types-categories #modal .modal-content').html($('#waiting-div').html());
 
-		loadModal(baseUrl + 'admin/load_' + $(this).data('action') + '_modal/' + $(this).data('id'));
+		var action = baseUrl + 'admin/load_' + $(this).data('action') + '_modal/';
+		var	id = $(this).data('id');
+
+		$.ajax({
+			type: 'post',
+			url: action,
+			data: { id: id },
+			dataType: 'html',
+			success: function (data) {
+				$('#admin-types-categories #modal .modal-content').html(data);
+				initModal();
+			},
+			error: function(xhr, status, error) {
+				toastr['error'](xhr.responseText, 'Attention');
+			}
+		});
 	});
 }
 
-function loadModal(action) {
-	$.ajax({
-		type: 'get',
-		url: action,
-		dataType: 'html',
-		success: function (data) {
-			$('#admin-types-categories #modal .modal-content').html(data);
-			initModal();
-		},
-		error: function(xhr, status, error) {
-			toastr['error']('DAS IST EINE PROBLEM', 'Attention')
-		}
+function bindDelete(selector, target) {
+	$('#admin-types-categories ' + selector).click(function () {
+		var action = baseUrl + 'admin/delete_' + $(this).data('action') + '/';
+		var id = $(this).data('id');
+
+		$.ajax({
+			type: 'post',
+			url: action,
+			data: { id: id },
+			dataType: 'html',
+			success: function (data) {
+				$(target).html(data);
+				initBindEditRemove();
+				toastr['success']('Vos modifications ont été prises en compte', 'Succès');
+			},
+			error: function(xhr, status, error) {
+				toastr['error'](xhr.responseText, 'Attention');
+			}
+		});
 	});
 }
 
@@ -146,14 +175,20 @@ function sendModalData(action, infos, target) {
 		success: function (data) {
 			$('#admin-types-categories #modal').modal('hide');
 			$(target).html(data);
-			bindModal('.edit-type');
-			bindModal('.edit-category');
+			initBindEditRemove();
 			toastr['success']('Vos modifications ont été prises en compte', 'Succès');
 		},
 		error: function(xhr, status, error) {
 			toastr['error'](xhr.responseText, 'Attention');
 		}
 	});
+}
+
+function initBindEditRemove() {
+	bindModal('.edit-type');
+	bindModal('.edit-category');
+	bindDelete('.remove-type', '#type-list');
+	bindDelete('.remove-category', '#category-list');
 }
 
 function initModal() {
@@ -169,7 +204,7 @@ function initModal() {
 	$('#admin-types-categories #modal #send-type-modal-edit').click(function() {
 		var id = $('#admin-types-categories #modal #type_id').val();
 		var name = $('#admin-types-categories #modal #type_name').val();
-		var target = '#admin-types-categories #type-line-' + id;
+		var target = '#admin-types-categories .editable-type-' + id;
 
 		sendModalData(action, { id: id, name: name }, target);
 	});
@@ -186,7 +221,7 @@ function initModal() {
 		var id = $('#admin-types-categories #modal #category_id').val();
 		var name = $('#admin-types-categories #modal #category_name').val();
 		var type = $('#admin-types-categories #modal #category_type').val();
-		var target = '#admin-types-categories #category-line-' + id;
+		var target = '#admin-types-categories .editable-category-' + id;
 
 		sendModalData(action, { id: id, name: name, type: type }, target);
 	});

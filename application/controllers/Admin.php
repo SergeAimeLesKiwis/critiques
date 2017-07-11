@@ -38,11 +38,16 @@
 			$this->loadFooter(array('scripts/admin', 'toastr.min'));
 		}
 // HOME
-		public function refreshHighlight($id, $position) {
-			$this->load->model('ItemService');
-			$item = $this->ItemService->getItem($id);
+		public function refreshHighlight() {
+			$id = $this->input->post('id');
+			$position = $this->input->post('position');
 
-			$this->load->view('admin/home/_highlight_container', array('item' => $item, 'position' => $position));
+			if (isset($id) && !empty($position)) {
+				$this->load->model('ItemService');
+				$item = $this->ItemService->getItem($id);
+
+				$this->load->view('admin/home/_highlight_container', array('item' => $item, 'position' => $position));
+			}
 		}
 
 		public function save_home() {
@@ -50,8 +55,12 @@
 			$highlights = $this->input->post('highlights');
 
 			$this->load->model('ParameterService');
+
 			$updatedConcept = $this->ParameterService->setHomeConcept($concept);
+			if (!$updatedConcept) $this->error('Un problème est survenu lors de l\'enregistrement du concept');
+
 			$updatedHighlights = $this->ParameterService->setHomeHighlights($highlights);
+			if (!$updatedHighlights) $this->error('Un problème est survenu lors de l\'enregistrement de la une');
 
 			return $updatedConcept && $updatedHighlights;
 		}
@@ -60,20 +69,26 @@
 
 // TYPES CATEGORIES
 
-		public function load_type_modal($id) {
-			if ($id > 0) {
-				$this->load->model('TypeService');
-				$type = $this->TypeService->getType($id);
-				$this->load->view('admin/types_categories/_type_modal_edit', array('type' => $type));
-			} else {
-				$this->load->view('admin/types_categories/_type_modal_new');
+		public function load_type_modal() {
+			$id = $this->input->post('id');
+
+			if (!empty($id)) {
+				if ($id > 0) {
+					$this->load->model('TypeService');
+					$type = $this->TypeService->getType($id);
+					$this->load->view('admin/types_categories/_type_modal_edit', array('type' => $type));
+				} else {
+					$this->load->view('admin/types_categories/_type_modal_new');
+				}
 			}
 		}
 
 		public function add_type() {
 			$name = $this->input->post('name');
 
-			if (!empty($name)) {
+			if (empty($name)) {
+				$this->error('Le label ne peut être vide');
+			} else {
 				$this->load->model('TypeService');
 				$addedType = $this->TypeService->addType($name);
 
@@ -81,10 +96,8 @@
 					$types = $this->TypeService->getAllTypes();
 					$this->load->view('admin/types_categories/_type_list', array('types' => $types));
 				} else {
-					$this->fieldExists();
+					$this->error('Un type portant ce nom existe déjà');
 				}
-			} else {
-				$this->fieldCantBeEmpty();
 			}
 		}
 
@@ -92,29 +105,124 @@
 			$id = $this->input->post('id');
 			$name = $this->input->post('name');
 
-			if (!empty($name)) {
+			if (empty($id)) {
+				$this->error('Veuillez choisir un type');
+			} else if (empty($name)) {
+				$this->error('Le label ne peut être vide');
+			} else {
 				$this->load->model('TypeService');
 				$updatedType = $this->TypeService->updateType($id, $name);
 
 				if ($updatedType) {
 					$type = $this->TypeService->getType($id);
-					$this->load->view('admin/types_categories/_type_line', array('type' => $type));
+					echo $type->name;
 				} else {
-					$this->fieldExists();
+					$this->error('Un type portant ce nom existe déjà');
 				}
-			} else {
-				$this->fieldCantBeEmpty();
 			}
 		}
 
-		private function fieldExists() {
-			$this->output->set_status_header('400');
-			echo "Un type portant ce nom existe déjà !";
+		public function delete_type() {
+			$id = $this->input->post('id');
+
+			if (empty($id)) {
+				$this->error('Veuillez choisir un type');
+			} else {
+				$this->load->model('TypeService');
+				$deletedType = $this->TypeService->deleteType($id);
+
+				if ($deletedType) {
+					$types = $this->TypeService->getAllTypes();
+					$this->load->view('admin/types_categories/_type_list', array('types' => $types));
+				} else {
+					$this->error('Un problème est survenu lors de la suppression');
+				}
+			}
 		}
 
-		private function fieldCantBeEmpty() {
+		public function load_category_modal() {
+			$id = $this->input->post('id');
+
+			if (!empty($id)) {
+				$this->load->model('TypeService');
+				$types = $this->TypeService->getAllTypes();
+
+				if ($id > 0) {
+					$this->load->model('CategoryService');
+					$category = $this->CategoryService->getCategory($id);
+					$this->load->view('admin/types_categories/_category_modal_edit', array('category' => $category, 'types' => $types));
+				} else {
+					$this->load->view('admin/types_categories/_category_modal_new', array('types' => $types));
+				}
+			}
+		}
+
+		public function add_category() {
+			$name = $this->input->post('name');
+			$type = $this->input->post('type');
+
+			if (empty($name)) {
+				$this->error('Le label ne peut être vide');
+			} else if (empty($type)) {
+				$this->error('Le type ne peut être vide');
+			} else {
+				$this->load->model('CategoryService');
+				$addedCategory = $this->CategoryService->addCategory($name, $type);
+
+				if ($addedCategory) {
+					$categories = $this->CategoryService->getAllCategories();
+					$this->load->view('admin/types_categories/_category_list', array('categories' => $categories));
+				} else {
+					$this->error('Une catégorie portant ce nom existe déjà');
+				}
+			}
+		}
+
+		public function update_category() {
+			$id = $this->input->post('id');
+			$name = $this->input->post('name');
+			$type = $this->input->post('type');
+
+			if (empty($id)) {
+				$this->error('Veuillez choisir une catagorie');
+			} else if (empty($name)) {
+				$this->error('Le label ne peut être vide');
+			} else if (empty($type)) {
+				$this->error('Le type ne peut être vide');
+			} else {
+				$this->load->model('CategoryService');
+				$updatedCategory = $this->CategoryService->updateCategory($id, $name, $type);
+
+				if ($updatedCategory) {
+					$category = $this->CategoryService->getCategory($id);
+					echo $category->name;
+				} else {
+					$this->error('Une catégorie portant ce nom et ayant ce type existe déjà');
+				}
+			}
+		}
+
+		public function delete_category() {
+			$id = $this->input->post('id');
+
+			if (empty($id)) {
+				$this->error('Veuillez choisir une catagorie');
+			} else {
+				$this->load->model('CategoryService');
+				$deletedCategory = $this->CategoryService->deleteCategory($id);
+
+				if ($deletedCategory) {
+					$categories = $this->CategoryService->getAllCategories();
+					$this->load->view('admin/types_categories/_category_list', array('categories' => $categories));
+				} else {
+					$this->error('Un problème est survenu lors de la suppression');
+				}
+			}
+		}
+
+		private function error($message) {
 			$this->output->set_status_header('400');
-			echo "Le label ne peut être vide !";
+			echo $message;
 		}
 	}
 ?>

@@ -5,28 +5,24 @@
 
 	class CategoryService extends CI_Model {
 
-		protected $table = "categories";
-
-		private $id;
-		private $name;
-		private $type;
-
-		private function exists($name) {
-			$query = $this->db->where('name', $name)->get($this->table);
-			return $query->num_rows() > 0;
+		private function exists($name, $type) {
+			return $this->db->where('name', $name)->where('type', $type)->get('categories')->num_rows() > 0;
 		}
 
 		public function addCategory($name, $type) {
-			return !$this->exists($name) && $this->db->set('name', $name)->set('type', $type)->insert($this->table);
+			return !$this->exists($name, $type) && $this->db->set('name', $name)->set('type', $type)->insert('categories');
 		}
 
 		public function updateCategory($id, $name, $type) {
-			return $this->db->set('name', $name)->set('type', $type)->where('id', $id)->update($this->table);
+			return $this->db->set('name', $name)->set('type', $type)->where('id', $id)->update('categories');
+		}
+
+		public function deleteCategory($id) {
+			return $this->db->where('id', $id)->delete('categories');
 		}
 
 		public function getCategory($id) {
-			$query = $this->db->where('id', $id)->get($this->table);
-			$row = $query->row();
+			$row = $this->db->where('id', $id)->get('categories')->row();
 
 			if (isset($row)) {
 				$this->load->model('TypeService');
@@ -41,35 +37,27 @@
 			return null;
 		}
 
-		// public function getCategories($ids) {
-		// 	$result = array();
-
-		// 	foreach ($ids as $id) {
-		// 		$type = $id > 0 ? $this->getType($id) : null;
-		// 		$result[] = $type;
-		// 	}
-
-		// 	return $result;
-		// }
-
 		public function getAllCategories() {
-			$query = $this->db->get($this->table);
-			$result = $query->result();
-
-			$types = array();
-
 			$this->load->model('TypeService');
+
+			$result = $this->db->get('categories')->result();
+			$types = array();
 
 			foreach ($result as $row)
 			{
 				$types[] = new Category(
 					$row->id,
 					$row->name,
-					$this->TypeService->getType($row->type)
+					$this->TypeService->getType($row->type),
+					$this->getNbItems($row->id)
 				);
 			}
 
 			return $types;
+		}
+
+		public function getNbItems($category) {
+			return $this->db->where('category', $category)->get('items')->num_rows();
 		}
 	}
 ?>

@@ -3,40 +3,31 @@
 
 	class ParameterService extends CI_Model {
 
-		protected $table = "parameters";
-
-		private $key;
-		private $value;
-
 		public function getHomeConcept() {
-			$query = $this->db->where('key', 'home_concept')->get($this->table);
-			$row = $query->row();
+			$row = $this->db->where('key', 'home_concept')->get('parameters')->row();
 
 			return isset($row) ? $row->value : null;
 		}
 
 		public function setHomeConcept($concept) {
-			return $this->db->set('value', $concept)->where('key', 'home_concept')->update($this->table);
+			return $this->db->set('value', $concept)->where('key', 'home_concept')->update('parameters');
 		}
 
 		public function getHomeHighlights() {
-			$query = $this->db->where('key', 'home_highlights')->get($this->table);
-			$row = $query->row();
+			$row = $this->db->where('key', 'home_highlights')->get('parameters')->row();
 
 			return isset($row) ? explode('|', $row->value) : null;
 		}
 
 		public function setHomeHighlights($highlights) {
-			return $this->db->set('value', $highlights)>where('key', 'home_highlights')->update($this->table);
+			return $this->db->set('value', $highlights)->where('key', 'home_highlights')->update('parameters');
 		}
 
 		public function getStaticInfos($page) {
-			$queryTitle = $this->db->where('key', 'static_'.$page.'_title')->get($this->table);
-			$rowTitle = $queryTitle->row();
+			$rowTitle = $this->db->where('key', 'static_'.$page.'_title')->get('parameters')->row();
 			$title = isset($rowTitle) ? $rowTitle->value : null;
 
-			$queryText = $this->db->where('key', 'static_'.$page.'_text')->get($this->table);
-			$rowText = $queryText->row();
+			$rowText = $this->db->where('key', 'static_'.$page.'_text')->get('parameters')->row();
 			$text = isset($rowText) ? $rowText->value : null;
 
 			return array('title' => $title, 'text' => $text);

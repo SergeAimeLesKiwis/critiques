@@ -1,5 +1,5 @@
 <div class="modal-header light-blue darken-3 white-text">
-	<h4 class="title"><i class="fa fa-pencil"></i> Ajout d'un type</h4>
+	<h4 class="title"><i class="fa fa-pencil"></i> Ajout</h4>
 </div>
 <div class="modal-body mb-0">
 	<input id="action" type="hidden" value="admin/add_type" />

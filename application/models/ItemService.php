@@ -19,8 +19,7 @@
 		private $updated_at;
 
 		public function getItem($id) {
-			$query = $this->db->where('id', $id)->get($this->table);
-			$row = $query->row();
+			$row = $this->db->where('id', $id)->get($this->table)->row();
 
 			if (isset($row)) {
 				$this->load->model('CategoryService');
@@ -50,12 +49,10 @@
 		}
 
 		public function getAllItems() {
-			$query = $this->db->get($this->table);
-			$result = $query->result();
-
-			$items = array();
-
 			$this->load->model('CategoryService');
+
+			$result = $this->db->get($this->table)->result();
+			$items = array();
 
 			foreach ($result as $row)
 			{
@@ -71,5 +68,7 @@
 
 			return $items;
 		}
+
+		
 	}
 ?>
