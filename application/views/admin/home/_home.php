@@ -37,22 +37,22 @@
 
 		<div class="row">
 			<div class="card col-md-4 highlight spacer" id="first">
-				<?php $this->load->view('admin/_highlight_container', array('item' => $first, 'position' => 'first')); ?>
+				<?php $this->load->view('admin/home/_highlight_container', array('item' => $first, 'position' => 'first')); ?>
 			</div>
 			<div class="card col-md-4 highlight spacer" id="second">
-				<?php $this->load->view('admin/_highlight_container', array('item' => $second, 'position' => 'second')); ?>
+				<?php $this->load->view('admin/home/_highlight_container', array('item' => $second, 'position' => 'second')); ?>
 			</div>
 			<div class="card col-md-4 highlight spacer" id="third">
-				<?php $this->load->view('admin/_highlight_container', array('item' => $third, 'position' => 'third')); ?>
+				<?php $this->load->view('admin/home/_highlight_container', array('item' => $third, 'position' => 'third')); ?>
 			</div>
 			<div class="card col-md-4 highlight spacer" id="fourth">
-				<?php $this->load->view('admin/_highlight_container', array('item' => $fourth, 'position' => 'fourth')); ?>
+				<?php $this->load->view('admin/home/_highlight_container', array('item' => $fourth, 'position' => 'fourth')); ?>
 			</div>
 			<div class="card col-md-4 highlight spacer" id="fifth">
-				<?php $this->load->view('admin/_highlight_container', array('item' => $fifth, 'position' => 'fifth')); ?>
+				<?php $this->load->view('admin/home/_highlight_container', array('item' => $fifth, 'position' => 'fifth')); ?>
 			</div>
 			<div class="card col-md-4 highlight spacer" id="sixth">
-				<?php $this->load->view('admin/_highlight_container', array('item' => $sixth, 'position' => 'sixth')); ?>
+				<?php $this->load->view('admin/home/_highlight_container', array('item' => $sixth, 'position' => 'sixth')); ?>
 			</div>
 		</div>
 	</div>

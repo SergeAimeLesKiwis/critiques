@@ -33,7 +33,7 @@
 						$home['concept'] = $concept;
 						$home['highlights'] = $highlights;
 						$home['items'] = $items;
-						$this->load->view('admin/_home', $home); 
+						$this->load->view('admin/home/_home', $home); 
 					?>
 				</p>
 			</div>
@@ -52,7 +52,7 @@
 					<?php
 						$types_categories['types'] = $types;
 						$types_categories['categories'] = $categories;
-						$this->load->view('admin/_types_categories', $types_categories); 
+						$this->load->view('admin/types_categories/_types_categories', $types_categories); 
 					?>
 				</p>
 			</div>

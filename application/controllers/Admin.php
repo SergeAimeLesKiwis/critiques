@@ -42,7 +42,7 @@
 			$this->load->model('ItemService');
 			$item = $this->ItemService->getItem($id);
 
-			$this->load->view('admin/_highlight_container', array('item' => $item, 'position' => $position));
+			$this->load->view('admin/home/_highlight_container', array('item' => $item, 'position' => $position));
 		}
 
 		public function save_home() {
@@ -59,17 +59,37 @@
 // STATIC
 
 // TYPES CATEGORIES
-		public function edit_type() {
-			$id = $this->input->post('pk');
-			$name = $this->input->post('value');
+		public function add_type() {
+			$name = $this->input->post('type_name');
 
 			if (!empty($name)) {
 				$this->load->model('TypeService');
-				$this->TypeService->setType($id, $name);
-			} else {
-				header('HTTP/1.0 400 Bad Request', true, 400);
-				echo "This field is required!";
+				$addedType = $this->TypeService->addType($name);
+
+				if ($addedType) {
+					$types = $this->TypeService->getAllTypes();
+					$this->load->view('admin/types_categories/_type_list', array('types' => $types));
+				}
 			}
+
+			//TODO: add failed or name empty
+		}
+
+		public function update_type() {
+			$id = $this->input->post('type_id');
+			$name = $this->input->post('type_name');
+
+			if (!empty($name)) {
+				$this->load->model('TypeService');
+				$updatedType = $this->TypeService->updateType($id, $name);
+
+				if ($updatedType) {
+					$type = $this->TypeService->getType($id);
+					$this->load->view('admin/types_categories/_type_line', array('type' => $type));
+				}
+			}
+
+			//TODO: add failed or name empty
 		}
 	}
 ?>

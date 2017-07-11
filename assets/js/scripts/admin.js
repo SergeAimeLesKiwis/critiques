@@ -29,18 +29,6 @@ $(document).ready(function() {
 // STATIC
 
 // TYPES CATEGORIES
-	$.fn.editable.defaults.mode = 'inline'
-	$('.editable').editable({
-		type: 'text',
-		name: 'name',
-		pk: $(this).data('key'),
-		url: baseUrl + 'admin/edit_type',
-		title: 'Nouveau label ?',
-		emptytext: '',
-		success: function(response, newValue) {
-			alert("OK");
-		}
-	});
 });
 
 function initToastr() {
