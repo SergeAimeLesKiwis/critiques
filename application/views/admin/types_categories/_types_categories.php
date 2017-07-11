@@ -2,7 +2,7 @@
 	<div class="col-md-4">
 		<h3>
 			<span>Types</span>
-			<button id="create-type" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+			<button id="create-type" class="btn btn-sm btn-primary" data-action="type" data-id="0"><i class="fa fa-plus"></i></button>
 		</h3>
 		<table class="table table-sm">
 			<tbody id="type-list">
@@ -36,22 +36,6 @@
 <div id="modal" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-sm cascading-modal" role="document">
 		<div class="modal-content">
-			<div class="modal-header light-blue darken-3 white-text">
-				<button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="title"><i class="fa fa-pencil"></i> Édition d'un type</h4>
-			</div>
-			<div class="modal-body mb-0">
-				<div class="md-form form-sm">
-					<i class="fa fa-envelope prefix"></i>
-					<input type="text" id="form19" class="form-control" />
-					<label for="form19">Your name</label>
-				</div>
-				<div class="text-center mt-1-half">
-					<button class="btn btn-info mb-2">Valider <i class="fa fa-check ml-1"></i></button>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>

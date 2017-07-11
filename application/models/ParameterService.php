@@ -9,37 +9,33 @@
 		private $value;
 
 		public function getHomeConcept() {
-			$query = $this->db->get_where($this->table, 'key = \'home_concept\'');
+			$query = $this->db->where('key', 'home_concept')->get($this->table);
 			$row = $query->row();
 
 			return isset($row) ? $row->value : null;
 		}
 
 		public function setHomeConcept($concept) {
-			return $this->db->set('value', $concept)
-							->where('key', 'home_concept')
-							->update($this->table);
+			return $this->db->set('value', $concept)->where('key', 'home_concept')->update($this->table);
 		}
 
 		public function getHomeHighlights() {
-			$query = $this->db->get_where($this->table, 'key = \'home_highlights\'');
+			$query = $this->db->where('key', 'home_highlights')->get($this->table);
 			$row = $query->row();
 
 			return isset($row) ? explode('|', $row->value) : null;
 		}
 
 		public function setHomeHighlights($highlights) {
-			return $this->db->set('value', $highlights)
-							->where('key', 'home_highlights')
-							->update($this->table);
+			return $this->db->set('value', $highlights)>where('key', 'home_highlights')->update($this->table);
 		}
 
 		public function getStaticInfos($page) {
-			$queryTitle = $this->db->get_where($this->table, 'key = \'static_'.$page.'_title\'');
+			$queryTitle = $this->db->where('key', 'static_'.$page.'_title')->get($this->table);
 			$rowTitle = $queryTitle->row();
 			$title = isset($rowTitle) ? $rowTitle->value : null;
 
-			$queryText = $this->db->get_where($this->table, 'key = \'static_'.$page.'_text\'');
+			$queryText = $this->db->where('key', 'static_'.$page.'_text')->get($this->table);
 			$rowText = $queryText->row();
 			$text = isset($rowText) ? $rowText->value : null;
 

@@ -10,14 +10,21 @@
 		private $id;
 		private $name;
 
-		public function setType($id, $name) {
-			return $this->db->set('name', $name)
-							->where('id', $id)
-							->update($this->table);
+		private function exists($name) {
+			$query = $this->db->where('name', $name)->get($this->table);
+			return $query->num_rows() > 0;
+		}
+
+		public function addType($name) {
+			return !$this->exists($name) && $this->db->set('name', $name)->insert($this->table);
+		}
+
+		public function updateType($id, $name) {
+			return $this->db->set('name', $name)->where('id', $id)->update($this->table);
 		}
 
 		public function getType($id) {
-			$query = $this->db->get_where($this->table, 'id = '.$id);
+			$query = $this->db->where('id', $id)->get($this->table);
 			$row = $query->row();
 
 			if (isset($row)) {

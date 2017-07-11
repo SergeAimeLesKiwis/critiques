@@ -19,7 +19,7 @@
 		private $updated_at;
 
 		public function getItem($id) {
-			$query = $this->db->get_where($this->table, 'id = '.$id);
+			$query = $this->db->where('id', $id)->get($this->table);
 			$row = $query->row();
 
 			if (isset($row)) {

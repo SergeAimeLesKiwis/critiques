@@ -11,8 +11,21 @@
 		private $name;
 		private $type;
 
+		private function exists($name) {
+			$query = $this->db->where('name', $name)->get($this->table);
+			return $query->num_rows() > 0;
+		}
+
+		public function addCategory($name, $type) {
+			return !$this->exists($name) && $this->db->set('name', $name)->set('type', $type)->insert($this->table);
+		}
+
+		public function updateCategory($id, $name, $type) {
+			return $this->db->set('name', $name)->set('type', $type)->where('id', $id)->update($this->table);
+		}
+
 		public function getCategory($id) {
-			$query = $this->db->get_where($this->table, 'id = '.$id);
+			$query = $this->db->where('id', $id)->get($this->table);
 			$row = $query->row();
 
 			if (isset($row)) {

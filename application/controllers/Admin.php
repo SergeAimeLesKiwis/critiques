@@ -35,7 +35,7 @@
 			$this->load->view('admin/index', $content);
 
 			// FOOTER
-			$this->loadFooter(array('bootstrap-editable', 'scripts/admin', 'toastr.min'));
+			$this->loadFooter(array('scripts/admin', 'toastr.min'));
 		}
 // HOME
 		public function refreshHighlight($id, $position) {
@@ -59,8 +59,19 @@
 // STATIC
 
 // TYPES CATEGORIES
+
+		public function load_type_modal($id) {
+			if ($id > 0) {
+				$this->load->model('TypeService');
+				$type = $this->TypeService->getType($id);
+				$this->load->view('admin/types_categories/_type_modal_edit', array('type' => $type));
+			} else {
+				$this->load->view('admin/types_categories/_type_modal_new');
+			}
+		}
+
 		public function add_type() {
-			$name = $this->input->post('type_name');
+			$name = $this->input->post('name');
 
 			if (!empty($name)) {
 				$this->load->model('TypeService');
@@ -69,15 +80,17 @@
 				if ($addedType) {
 					$types = $this->TypeService->getAllTypes();
 					$this->load->view('admin/types_categories/_type_list', array('types' => $types));
+				} else {
+					$this->fieldExists();
 				}
+			} else {
+				$this->fieldCantBeEmpty();
 			}
-
-			//TODO: add failed or name empty
 		}
 
 		public function update_type() {
-			$id = $this->input->post('type_id');
-			$name = $this->input->post('type_name');
+			$id = $this->input->post('id');
+			$name = $this->input->post('name');
 
 			if (!empty($name)) {
 				$this->load->model('TypeService');
@@ -86,10 +99,22 @@
 				if ($updatedType) {
 					$type = $this->TypeService->getType($id);
 					$this->load->view('admin/types_categories/_type_line', array('type' => $type));
+				} else {
+					$this->fieldExists();
 				}
+			} else {
+				$this->fieldCantBeEmpty();
 			}
+		}
 
-			//TODO: add failed or name empty
+		private function fieldExists() {
+			$this->output->set_status_header('400');
+			echo "Un type portant ce nom existe déjà !";
+		}
+
+		private function fieldCantBeEmpty() {
+			$this->output->set_status_header('400');
+			echo "Le label ne peut être vide !";
 		}
 	}
 ?>
