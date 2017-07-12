@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/mdb.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/toastr.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles/site.css" />
 
 		<?php foreach ($styles as $style) { 

@@ -14,7 +14,7 @@
 
 		public function index() {
 			// HEADER
-			$this->loadHeader('Administration', array('bootstrap-editable', 'toastr.min'));
+			$this->loadHeader('Administration', array('bootstrap-editable'));
 
 			// CONTENT
 			$this->load->model('ParameterService');
@@ -35,7 +35,7 @@
 			$this->load->view('admin/index', $content);
 
 			// FOOTER
-			$this->loadFooter(array('scripts/admin', 'toastr.min'));
+			$this->loadFooter(array('scripts/admin'));
 		}
 
 // HOME
