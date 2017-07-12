@@ -59,7 +59,6 @@
 			$subject = ""/* GET MSG SUBJECT */;
 			$message = ""/* GET MSG CONTENT */;
 
-
 			$this->maillib->sendMail($fromMail, $fromName, $to, $subject, $message);
 		}
 	}

@@ -10,8 +10,6 @@ $(document).ready(function() {
 		var concept = $('#admin-home #concept').val();
 		var highlights = $('#admin-home #highlights').val();
 
-		$('#admin-home #result-message').html($('#waiting-div').html());
-
 		$.ajax({
 			type: 'post',
 			data: { concept: concept, highlights: highlights },
@@ -29,8 +27,9 @@ $(document).ready(function() {
 // STATIC
 
 // TYPES CATEGORIES
-	bindModal('#create-type');
-	bindModal('#create-category');
+	var callback = function () { initModal(); };
+	loadModalOnClick('#admin-types-categories #create-type', '#modal-sm', { controller: 'admin', action: 'type', key: '0' }, callback);
+	loadModalOnClick('#admin-types-categories #create-category', '#modal-sm', { controller: 'admin', action: 'category', key: '0' }, callback);
 	initBindEditRemove();
 });
 
@@ -120,34 +119,10 @@ function refresh() {
 
 // TYPES CATEGORIES
 
-function bindModal(selector) {
-	$('#admin-types-categories ' + selector).click(function () {
-		$('#modal-sm').modal();
-		$('#modal-sm .modal-content').html($('#waiting-div').html());
-
-		var action = baseUrl + 'admin/load_' + $(this).data('action') + '_modal/';
-		var	id = $(this).data('id');
-
-		$.ajax({
-			type: 'post',
-			url: action,
-			data: { id: id },
-			dataType: 'html',
-			success: function (data) {
-				$('#modal-sm .modal-content').html(data);
-				initModal();
-			},
-			error: function(xhr, status, error) {
-				toastr['error'](xhr.responseText, 'Attention');
-			}
-		});
-	});
-}
-
 function bindDelete(selector, target) {
 	$('#admin-types-categories ' + selector).click(function () {
 		var action = baseUrl + 'admin/delete_' + $(this).data('action') + '/';
-		var id = $(this).data('id');
+		var id = $(this).data('key');
 
 		$.ajax({
 			type: 'post',
@@ -166,39 +141,23 @@ function bindDelete(selector, target) {
 	});
 }
 
-function sendModalData(action, infos, target) {
-	$.ajax({
-		type: 'post',
-		data: infos,
-		url: action,
-		dataType: 'html',
-		success: function (data) {
-			$('#modal-sm').modal('hide');
-			$(target).html(data);
-			initBindEditRemove();
-			toastr['success']('Vos modifications ont été prises en compte', 'Succès');
-		},
-		error: function(xhr, status, error) {
-			toastr['error'](xhr.responseText, 'Attention');
-		}
-	});
-}
-
 function initBindEditRemove() {
-	bindModal('.edit-type');
-	bindModal('.edit-category');
+	var callback = function () { initModal(); };
+	loadModalOnClick('#admin-types-categories .edit-type', '#modal-sm', { controller: 'admin', action: 'type' }, callback);
+	loadModalOnClick('#admin-types-categories .edit-category', '#modal-sm', { controller: 'admin', action: 'category' }, callback);
 	bindDelete('.remove-type', '#type-list');
 	bindDelete('.remove-category', '#category-list');
 }
 
 function initModal() {
-	var action = $('#modal-sm #action').val();
+	var url = $('#modal-sm #send-infos-url').val();
+	var callback = function () { initBindEditRemove(); };
 
 	$('#modal-sm #send-type-modal-new').click(function() {
 		var name = $('#modal-sm #type_name').val();
 		var target = '#admin-types-categories #type-list';
 
-		sendModalData(action, { name: name }, target);
+		sendModalInfos(url, { name: name }, target, callback);
 	});
 
 	$('#modal-sm #send-type-modal-edit').click(function() {
@@ -206,7 +165,7 @@ function initModal() {
 		var name = $('#modal-sm #type_name').val();
 		var target = '#admin-types-categories .editable-type-' + id;
 
-		sendModalData(action, { id: id, name: name }, target);
+		sendModalInfos(url, { id: id, name: name }, target, callback);
 	});
 
 	$('#modal-sm #send-category-modal-new').click(function() {
@@ -214,7 +173,7 @@ function initModal() {
 		var type = $('#modal-sm #category_type').val();
 		var target = '#admin-types-categories #category-list';
 
-		sendModalData(action, { name: name, type: type }, target);
+		sendModalInfos(url, { name: name, type: type }, target, callback);
 	});
 
 	$('#modal-sm #send-category-modal-edit').click(function() {
@@ -223,6 +182,6 @@ function initModal() {
 		var type = $('#modal-sm #category_type').val();
 		var target = '#admin-types-categories .editable-category-' + id;
 
-		sendModalData(action, { id: id, name: name, type: type }, target);
+		sendModalInfos(url, { id: id, name: name, type: type }, target, callback);
 	});
 }

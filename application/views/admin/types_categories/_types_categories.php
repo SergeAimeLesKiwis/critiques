@@ -2,7 +2,7 @@
 	<div class="col-md-4">
 		<h3>
 			<span>Types</span>
-			<button id="create-type" class="btn btn-sm bg-darkgrey-color" data-action="type" data-id="0"><i class="fa fa-plus"></i></button>
+			<button id="create-type" class="btn btn-sm bg-darkgrey-color"><i class="fa fa-plus"></i></button>
 		</h3>
 		<table class="table table-sm">
 			<tbody id="type-list">
@@ -14,7 +14,7 @@
 	<div class="col-md-5">
 		<h3>
 			<span>Catégories</span>
-			<button id="create-category" class="btn btn-sm bg-darkgrey-color" data-action="category" data-id="0"><i class="fa fa-plus"></i></button>
+			<button id="create-category" class="btn btn-sm bg-darkgrey-color"><i class="fa fa-plus"></i></button>
 		</h3>
 		<table class="table table-sm">
 			<tbody id="category-list">

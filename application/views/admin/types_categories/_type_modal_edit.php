@@ -2,7 +2,7 @@
 	<h4 class="title"><i class="fa fa-pencil"></i> Édition</h4>
 </div>
 <div class="modal-body mb-0">
-	<input id="action" type="hidden" value="admin/update_type" />
+	<input id="send-infos-url" type="hidden" value="admin/update_type" />
 	<div class="md-form form-sm">
 		<i class="fa fa-envelope prefix"></i>
 		<input type="hidden" id="type_id" class="form-control" value="<?php echo $type->id; ?>" />
