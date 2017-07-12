@@ -28,33 +28,27 @@
 		<div class="tab-content vertical">
 			<div class="tab-pane fade in show active" id="admin-home" role="tabpanel">
 				<br />
-				<p>
-					<?php
-						$home['concept'] = $concept;
-						$home['highlights'] = $highlights;
-						$home['items'] = $items;
-						$this->load->view('admin/home/_home', $home); 
-					?>
-				</p>
+				<?php
+					$home['concept'] = $concept;
+					$home['highlights'] = $highlights;
+					$home['items'] = $items;
+					$this->load->view('admin/home/_home', $home); 
+				?>
 			</div>
 			<div class="tab-pane fade" id="admin-static" role="tabpanel">
 				<br />
-				<p>
-					<?php
-						$static['osef'] = null;
-						$this->load->view('admin/_static', $static); 
-					?>
-				</p>
+				<?php
+					$static['osef'] = null;
+					$this->load->view('admin/_static', $static); 
+				?>
 			</div>
 			<div class="tab-pane fade" id="admin-types-categories" role="tabpanel">
 				<br />
-				<p>
-					<?php
-						$types_categories['types'] = $types;
-						$types_categories['categories'] = $categories;
-						$this->load->view('admin/types_categories/_types_categories', $types_categories); 
-					?>
-				</p>
+				<?php
+					$types_categories['types'] = $types;
+					$types_categories['categories'] = $categories;
+					$this->load->view('admin/types_categories/_types_categories', $types_categories); 
+				?>
 			</div>
 			<div class="tab-pane fade" id="admin-add-item" role="tabpanel">
 				<br />

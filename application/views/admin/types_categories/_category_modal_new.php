@@ -8,7 +8,7 @@
 		<input type="text" id="category_name" class="form-control" placeholder="Label" />
 	</div>
 	<div class="md-form form-sm">
-		<select id="category_type" class="mdb-select">
+		<select id="category_type" class="form-control">
 			<option value="">Choisir un type ...</option>
 			<?php foreach ($types as $type) { ?>
 				<option value="<?php echo $type->id; ?>"><?php echo $type->name; ?></option>

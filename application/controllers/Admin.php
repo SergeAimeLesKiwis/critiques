@@ -37,7 +37,9 @@
 			// FOOTER
 			$this->loadFooter(array('scripts/admin', 'toastr.min'));
 		}
+
 // HOME
+
 		public function refreshHighlight() {
 			$id = $this->input->post('id');
 			$position = $this->input->post('position');
@@ -72,7 +74,7 @@
 		public function load_type_modal() {
 			$id = $this->input->post('id');
 
-			if (!empty($id)) {
+			if (isset($id)) {
 				if ($id > 0) {
 					$this->load->model('TypeService');
 					$type = $this->TypeService->getType($id);
@@ -143,7 +145,7 @@
 		public function load_category_modal() {
 			$id = $this->input->post('id');
 
-			if (!empty($id)) {
+			if (isset($id)) {
 				$this->load->model('TypeService');
 				$types = $this->TypeService->getAllTypes();
 
@@ -218,11 +220,6 @@
 					$this->error('Un problème est survenu lors de la suppression');
 				}
 			}
-		}
-
-		private function error($message) {
-			$this->output->set_status_header('400');
-			echo $message;
 		}
 	}
 ?>

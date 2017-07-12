@@ -21,6 +21,6 @@
 </div>
 <div class="card-block">
 	<h4 class="card-title brown-color"><b><?php echo $title; ?></b></h4>
-	<p class="card-text"><?php echo $text; ?></p>
+	<p class="card-text"><em><?php echo $text; ?></em></p>
 	<?php echo $button; ?>
 </div>

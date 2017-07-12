@@ -1,37 +1,25 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
-	require_once(dirname(__FILE__).'/../viewModels/Item.php');
+	require_once(dirname(__FILE__).'/../viewModels/Item_VM.php');
 
 	class ItemService extends CI_Model {
 
-		protected $table = "items";
-
-		private $id;
-		private $title;
-		private $author;
-		private $publish_date;
-		private $category;
-		private $description;
-		private $created_by;
-		private $created_at;
-		private $updated_by;
-		private $updated_at;
-
 		public function getItem($id) {
-			$row = $this->db->where('id', $id)->get($this->table)->row();
+			$row = $this->db->where('id', $id)->get('items')->row();
 
 			if (isset($row)) {
 				$this->load->model('CategoryService');
 
-				return new Item(
-					$row->id,
-					$row->title,
-					$row->author,
-					date('d/m/Y',strtotime($row->publish_date)),
-					$this->CategoryService->getCategory($row->category),
-					$row->description
-				);
+				$item = new Item_VM();
+				$item->id = $row->id;
+				$item->title = $row->title;
+				$item->author = $row->author;
+				$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
+				$item->category = $this->CategoryService->getCategory($row->category);
+				$item->description = $row->description;
+
+				return $item;
 			}
 
 			return null;
@@ -51,24 +39,53 @@
 		public function getAllItems() {
 			$this->load->model('CategoryService');
 
-			$result = $this->db->get($this->table)->result();
+			$result = $this->db->get('items')->result();
 			$items = array();
 
 			foreach ($result as $row)
 			{
-				$items[] = new Item(
-					$row->id,
-					$row->title,
-					$row->author,
-					$row->publish_date,
-					$this->CategoryService->getCategory($row->category),
-					$row->description
-				);
+				$item = new Item_VM();
+				$item->id = $row->id;
+				$item->title = $row->title;
+				$item->author = $row->author;
+				$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
+				$item->category = $this->CategoryService->getCategory($row->category);
+				$item->description = $row->description;
+
+				$items[] = $item;
 			}
 
 			return $items;
 		}
 
-		
+		public function getFilteredItems($title, $author, $type, $category) {
+			$this->load->model('CategoryService');
+
+			$result = $this->db->select('i.id, i.title, i.author, i.publish_date, c.id AS itemCategory')
+								->from('items i')
+								->join('categories c', 'c.id = i.category', 'inner');
+
+			if (!empty($title)) $result = $result->like('i.title', $title);
+			if (!empty($author)) $result = $result->like('i.author', $author);
+			if (!empty($type)) $result = $result->where('c.type', $type);
+			if (!empty($category)) $result = $result->where('i.category', $category);
+
+			$result = $result->get()->result();
+			$items = array();
+
+			foreach ($result as $row)
+			{
+				$item = new Item_VM();
+				$item->id = $row->id;
+				$item->title = $row->title;
+				$item->author = $row->author;
+				$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
+				$item->category = $this->CategoryService->getCategory($row->itemCategory);
+
+				$items[] = $item;
+			}
+
+			return $items;
+		}
 	}
 ?>

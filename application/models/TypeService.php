@@ -1,7 +1,7 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
-	require_once(dirname(__FILE__).'/../viewModels/Type.php');
+	require_once(dirname(__FILE__).'/../viewModels/Type_VM.php');
 
 	class TypeService extends CI_Model {
 
@@ -25,28 +25,28 @@
 			$row = $this->db->where('id', $id)->get('types')->row();
 
 			if (isset($row)) {
-				return new Type(
-					$row->id,
-					$row->name
-				);
+				$type = new Type_VM();
+				$type->id = $row->id;
+				$type->name = $row->name;
+
+				return $type;
 			}
 
 			return null;
 		}
 
 		public function getAllTypes() {
-			$this->load->model('CategoryService');
-
 			$result = $this->db->get('types')->result();
 			$types = array();
 
 			foreach ($result as $row)
 			{
-				$types[] = new Type(
-					$row->id,
-					$row->name,
-					$this->CategoryService->getNbItems($row->id)
-				);
+				$type = new Type_VM();
+				$type->id = $row->id;
+				$type->name = $row->name;
+				$type->nbCategories = $this->getNbCategories($row->id);
+
+				$types[] = $type;
 			}
 
 			return $types;

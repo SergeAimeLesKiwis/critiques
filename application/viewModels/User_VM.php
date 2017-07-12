@@ -1,6 +1,6 @@
 <?php
 
-	class User {
+	class User_VM {
 		public $email;
 		public $first_name;
 		public $last_name;

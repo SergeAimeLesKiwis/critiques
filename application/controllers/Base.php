@@ -20,5 +20,10 @@
 			$footer['scripts'] = $scripts;
 			$this->load->view('shared/footer', $footer);
 		}
+
+		protected function error($message) {
+			$this->output->set_status_header('400');
+			echo $message;
+		}
 	}
 ?>

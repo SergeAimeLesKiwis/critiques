@@ -122,8 +122,8 @@ function refresh() {
 
 function bindModal(selector) {
 	$('#admin-types-categories ' + selector).click(function () {
-		$('#admin-types-categories #modal').modal();
-		$('#admin-types-categories #modal .modal-content').html($('#waiting-div').html());
+		$('#modal-sm').modal();
+		$('#modal-sm .modal-content').html($('#waiting-div').html());
 
 		var action = baseUrl + 'admin/load_' + $(this).data('action') + '_modal/';
 		var	id = $(this).data('id');
@@ -134,7 +134,7 @@ function bindModal(selector) {
 			data: { id: id },
 			dataType: 'html',
 			success: function (data) {
-				$('#admin-types-categories #modal .modal-content').html(data);
+				$('#modal-sm .modal-content').html(data);
 				initModal();
 			},
 			error: function(xhr, status, error) {
@@ -173,7 +173,7 @@ function sendModalData(action, infos, target) {
 		url: action,
 		dataType: 'html',
 		success: function (data) {
-			$('#admin-types-categories #modal').modal('hide');
+			$('#modal-sm').modal('hide');
 			$(target).html(data);
 			initBindEditRemove();
 			toastr['success']('Vos modifications ont été prises en compte', 'Succès');
@@ -192,35 +192,35 @@ function initBindEditRemove() {
 }
 
 function initModal() {
-	var action = $('#admin-types-categories #modal #action').val();
+	var action = $('#modal-sm #action').val();
 
-	$('#admin-types-categories #modal #send-type-modal-new').click(function() {
-		var name = $('#admin-types-categories #modal #type_name').val();
+	$('#modal-sm #send-type-modal-new').click(function() {
+		var name = $('#modal-sm #type_name').val();
 		var target = '#admin-types-categories #type-list';
 
 		sendModalData(action, { name: name }, target);
 	});
 
-	$('#admin-types-categories #modal #send-type-modal-edit').click(function() {
-		var id = $('#admin-types-categories #modal #type_id').val();
-		var name = $('#admin-types-categories #modal #type_name').val();
+	$('#modal-sm #send-type-modal-edit').click(function() {
+		var id = $('#modal-sm #type_id').val();
+		var name = $('#modal-sm #type_name').val();
 		var target = '#admin-types-categories .editable-type-' + id;
 
 		sendModalData(action, { id: id, name: name }, target);
 	});
 
-	$('#admin-types-categories #modal #send-category-modal-new').click(function() {
-		var name = $('#admin-types-categories #modal #category_name').val();
-		var type = $('#admin-types-categories #modal #category_type').val();
+	$('#modal-sm #send-category-modal-new').click(function() {
+		var name = $('#modal-sm #category_name').val();
+		var type = $('#modal-sm #category_type').val();
 		var target = '#admin-types-categories #category-list';
 
 		sendModalData(action, { name: name, type: type }, target);
 	});
 
-	$('#admin-types-categories #modal #send-category-modal-edit').click(function() {
-		var id = $('#admin-types-categories #modal #category_id').val();
-		var name = $('#admin-types-categories #modal #category_name').val();
-		var type = $('#admin-types-categories #modal #category_type').val();
+	$('#modal-sm #send-category-modal-edit').click(function() {
+		var id = $('#modal-sm #category_id').val();
+		var name = $('#modal-sm #category_name').val();
+		var type = $('#modal-sm #category_type').val();
 		var target = '#admin-types-categories .editable-category-' + id;
 
 		sendModalData(action, { id: id, name: name, type: type }, target);

@@ -2,6 +2,27 @@
 	
 	<footer></footer>
 
+	<div id="modal-sm" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-sm cascading-modal" role="document">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog cascading-modal" role="document">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+
+	<div id="modal-lg" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg cascading-modal" role="document">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+
 	<div id="waiting-div" style="display:none">
 		<div class="text-center">
 			<i class="fa fa-spinner fa-spin"></i> Chargement en cours ...

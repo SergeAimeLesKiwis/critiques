@@ -1,67 +1,67 @@
-<div id="contenu">
-	<h1>Contenus</h1>
-	<div id="select_categorie">
-		<label>Catégories</label>
-		<select>
-			<option>-- Sélectionner une catégorie --</option>
-			<option>Livre</option>
-		</select>
-	</div>
-	<div id="select_sous_categorie">
-		<label>Sous-catégorie</label>
-		<select>
-			<option>-- Sélectionner une sous-catégorie --</option>
-			<option>Policier</option>
-			<option>Science-fiction</option>
-			<option>Fantastique</option>
-		</select>
-	</div>
-	<div class="liste_livres">
-		<div class="livres_contenus">
-			<!-- Image de couverture --><a href=""><img src=""></a>
-			<h3>Titre</h3>
-			<p>Auteur</p>
-		</div>
-		<div class="livres_contenus">
-			<!-- Image de couverture --><a href=""><img src=""></a>
-			<h3>Titre</h3>
-			<p>Auteur</p>
-		</div>
-		<div class="livres_contenus">
-			<!-- Image de couverture --><a href=""><img src=""></a>
-			<h3>Titre</h3>
-			<p>Auteur</p>
-		</div>
-		<div class="livres_contenus">
-			<!-- Image de couverture --><a href=""><img src=""></a>
-			<h3>Titre</h3>
-			<p>Auteur</p>
-		</div>
-	</div>
-</div>
+<div class="container card-block">
+	<h3 class="blue-color text-center"><i class="fa fa-eercast"></i> Contenus</h3>
 
-<div class="modal" id="details_livre">
-	<div class="modal-content">
-		<span class="close">&times;</span>
-		<div class="details">
-			<!-- Image de couverture --><img src="">
-			<h2>Titre</h2>
-			<h3>Auteur</h3>
-			<h4>Description</h4>
-			<p>Lorem ipsum</p>
-		</div>
-		<div class="suggestions">
-			<h2>Autres suggestions</h2>
-			<div class="livres_suggestions">
-				<!-- Image de couverture --><a href=""><img src=""></a>
-				<h3>Titre</h3>
-				<p>Auteur</p>
-			</div>
-			<div class="livres_suggestions">
-				<!-- Image de couverture --><a href=""><img src=""></a>
-				<h3>Titre</h3>
-				<p>Auteur</p>
+	<form method="post" action="">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="md-form">
+					<input type="text" id="searchTitle" list="items" name="searchTitle" class="input-select form-control bg-white-color" value="<?php echo $searchTitle; ?>" />
+					<label for="searchTitle">Titre de l'oeuvre</label>
+					<datalist id="items">
+						<?php foreach ($allItems as $item) { ?>
+							<option value="<?php echo $item->title; ?>" data-item="<?php echo $item->id; ?>"><?php echo $item->getClassification(); ?></option>
+						<?php } ?>
+					</datalist>
+				</div>
 			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="md-form">
+					<input type="text" id="searchAuthor" name="searchAuthor" class="form-control" value="<?php echo $searchAuthor; ?>" />
+					<label for="searchAuthor">Auteur</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="md-form">
+					<select id="searchType" class="form-control" name="searchType">
+						<option value="">Choisir un type ...</option>
+						<?php foreach ($types as $type) { ?>
+							<option value="t-<?php echo $type->id; ?>" <?php if ($type->id == $searchType) echo 'selected'; ?>><?php echo $type->name; ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="md-form">
+					<select id="searchCategory" class="form-control" name="searchCategory">
+						<option value="">Choisir une catégorie ...</option>
+						<?php foreach ($categories as $category) { ?>
+							<option value="c-<?php echo $category->id; ?>" data-chained="t-<?php echo $category->type->id; ?>" <?php if ($category->id == $searchCategory) echo 'selected'; ?>><?php echo $category->name; ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="md-form">
+					<button type="submit" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-search"></i> &nbsp;Filtrer</button>
+				</div>
+			</div>
+		</div>
+		
+	</form>
+
+	<hr class="mb-2">
+
+	<?php
+		if (!empty($items)) {
+			echo '<div class="row">';
+				foreach ($items as $item) {
+					$this->load->view('shared/_item_container', array('item' => $item)); 
+				}
+			echo '</div>';
+		} else {
+			echo '<div><em>Veuillez sélectionner des critères ...</em></div>';
+		}
+	?>
 </div>

@@ -1,7 +1,7 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
-	require_once(dirname(__FILE__).'/../viewModels/Category.php');
+	require_once(dirname(__FILE__).'/../viewModels/Category_VM.php');
 
 	class CategoryService extends CI_Model {
 
@@ -27,11 +27,12 @@
 			if (isset($row)) {
 				$this->load->model('TypeService');
 
-				return new Category(
-					$row->id,
-					$row->name,
-					$this->TypeService->getType($row->type)
-				);
+				$category = new Category_VM();
+				$category->id = $row->id;
+				$category->name = $row->name;
+				$category->type = $this->TypeService->getType($row->type);
+
+				return $category;
 			}
 
 			return null;
@@ -45,12 +46,13 @@
 
 			foreach ($result as $row)
 			{
-				$types[] = new Category(
-					$row->id,
-					$row->name,
-					$this->TypeService->getType($row->type),
-					$this->getNbItems($row->id)
-				);
+				$category = new Category_VM();
+				$category->id = $row->id;
+				$category->name = $row->name;
+				$category->type = $this->TypeService->getType($row->type);
+				$category->nbItems = $this->getNbItems($row->id);
+
+				$types[] = $category;
 			}
 
 			return $types;
