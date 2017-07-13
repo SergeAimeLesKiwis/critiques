@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+require_once(dirname(__FILE__).'/Base.php');
 
-class Auth extends CI_Controller {
+class Auth extends Base {
 
 	public function __construct()
 	{
@@ -47,7 +48,7 @@ class Auth extends CI_Controller {
 	// log the user in
 	public function login()
 	{
-		$this->data['title'] = $this->lang->line('login_heading');
+		$this->loadHeader('Connexion');
 
 		//validate form input
 		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
@@ -83,15 +84,19 @@ class Auth extends CI_Controller {
 			$this->data['identity'] = array('name' => 'identity',
 				'id'    => 'identity',
 				'type'  => 'text',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('identity'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id'   => 'password',
 				'type' => 'password',
+				'class' => 'form-control',
 			);
 
-			$this->_render_page('auth/login', $this->data);
+			$this->load->view('auth/login', $this->data);
 		}
+
+		$this->loadFooter();
 	}
 
 	// log the user out
@@ -412,7 +417,8 @@ class Auth extends CI_Controller {
 	// create a new user
 	public function create_user()
     {
-        $this->data['title'] = $this->lang->line('create_user_heading');
+    	$this->loadHeader('Créer un utilisateur');
+        //$this->data['title'] = $this->lang->line('create_user_heading');
 
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
         {
@@ -516,7 +522,8 @@ class Auth extends CI_Controller {
             );
 
             $this->_render_page('auth/create_user', $this->data);
-        }
+            $this->loadFooter();
+        }        
     }
 
 	// edit a user

@@ -28,17 +28,6 @@
 	to { -moz-transform: rotate(360deg);}
 }
 
-/* menu flottant */
-
-#flotting {
-  position: fixed;
-  right: 0;
-  top: 50%;
-  width: 20em;
-  margin-top: -2.5em;
-  padding : 10px;
- }
-
  #inscript_email{
  	margin-bottom: 5px;
  }
@@ -152,7 +141,7 @@ h2.darkgrey-color, p.darkgrey-color{
 }
 
 h2.blue-color{
-	margin-left: 15%;
+	margin-left: 3%;
 	margin-top: 2%;
 }
 
@@ -189,11 +178,6 @@ h2.darkgrey-color{
 	margin-top : 15px;
 	margin-left : 8%;
 	margin-right: 50%!important;
-}
-
-.block-right{
-	margin-left : 0;
-	margin-right : 25%;
 }
 
 .input-select{

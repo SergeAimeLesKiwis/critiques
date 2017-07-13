@@ -14,32 +14,6 @@
 	</div>
 </div>
 
-<form action="inscription.php" method="post" id="flotting">
-	<div class="col-sm-12">
-		<div class="card">
-			<div class="card-block">
-				<div class="text-center">
-					<h3><i class="fa fa-pencil"></i> Inscription</h3>
-					<hr class="mt-2 mb-2" />
-				</div>
-				<div class="md-form">
-					<i class="fa fa-user prefix"></i>
-					<input type="text" id="form3" class="form-control" />
-					<label for="form3">Votre nom</label>
-				</div>
-				<div class="md-form">
-					<i class="fa fa-envelope prefix"></i>
-					<input type="text" class="form-control" id="inscript_email" />
-					<label for="inscript_email">Votre email</label>
-				</div>
-				<div class="text-center">
-					<button class="btn bg-brown-color">Envoyer</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-
 <div class="bg-lightblue-color">
 	<div class="form-display">
 		<div class="card-block">
