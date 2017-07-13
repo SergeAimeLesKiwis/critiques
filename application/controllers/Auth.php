@@ -420,7 +420,7 @@ class Auth extends Base {
     	$this->loadHeader('Créer un utilisateur');
         //$this->data['title'] = $this->lang->line('create_user_heading');
 
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+        if ($this->ion_auth->logged_in())
         {
             redirect('auth', 'refresh');
         }

@@ -34,15 +34,17 @@
 		                </li>
 		            </ul>
 		            <ul class="navbar-nav">
-		                <li class="nav-item">
-							<?php 
-								if ($this->session->user) { 
-									echo '<li class="nav-item"><a href="'.base_url('admin').'" class="nav-link">Adminitration</a></li>';
-								}
-							?>
-						</li>
-						<li class="nav-item"><?php echo anchor('/profil/index', 'Mon compte / Se connecter', 'title="Mon compte" class="nav-link"'); ?></li>
-		            </ul>
+						<?php if ($isAdmin) { ?>
+							<li class="nav-item"><a href="<?php echo base_url('admin'); ?>" class="nav-link">Adminitration</a></li>
+						<?php } ?>
+
+						<?php if ($isLogged) { ?>
+							<li class="nav-item"><a href="<?php echo base_url('/'); ?>" class="nav-link">Mon compte</a></li>
+						<?php } else { ?>
+								echo '<li class="nav-item"><a href="<?php echo base_url('/'); ?>" class="nav-link">Mon compte</a></li>
+						<?php } ?>
+						?>
+					</ul>
 		        </div>
 		    </div>
 		</nav>

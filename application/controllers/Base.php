@@ -10,6 +10,8 @@
 		protected function loadHeader($title, $styles = array()) {
 			$header['title'] = $title;
 			$header['styles'] = $styles;
+			$header['isLogged'] = $this->ion_auth->logged_in();
+			$header['isAdmin'] = $this->ion_auth->is_admin();
 
 			//TODO: get static pages
 			
