@@ -8,16 +8,18 @@
 			parent::__construct();
 		}
 
-		public function index() {
-			$this->load->view('');
-		}
+		public function profile($id) {
+			// HEADER
+			$this->loadHeader('Utilisateur');
 
-		public function subscribe($email) {
-			$this->load->view('');
-		}
+			// CONTENT
+			$this->load->model('UserService');
+			$user['user'] = $this->UserService->getUser($id);
 
-		public function login() {
-			$this->load->view('');
+			$this->load->view('user/profile', $user);
+
+			// FOOTER
+			$this->loadFooter();
 		}
 	}
 ?>

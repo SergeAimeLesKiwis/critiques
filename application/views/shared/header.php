@@ -32,6 +32,9 @@
 		                <li class="nav-item">
 		                    <a class="nav-link" href="<?php echo base_url('room') ?>">Salons</a>
 		                </li>
+		                <li class="nav-item">
+		                    <a class="nav-link" href="<?php echo base_url('/') ?>">Utilisateurs</a>
+		                </li>
 		            </ul>
 		            <ul class="navbar-nav">
 						<?php if ($isAdmin) { ?>
@@ -39,9 +42,17 @@
 						<?php } ?>
 
 						<?php if ($isLogged) { ?>
-							<li class="nav-item"><a href="<?php echo base_url('/'); ?>" class="nav-link">Mon compte</a></li>
+							<li class="nav-item dropdown btn-group">
+								<a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte</a>
+								<div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
+									<a class="dropdown-item" href="<?php echo base_url('/'); ?>" >Mon profil</a>
+									<a class="dropdown-item">Mes salons</a>
+									<div class="dropdown-divider"></div>
+        							<a class="dropdown-item" href="<?php echo base_url('auth/logout'); ?>">Déconnexion</a>
+								</div>
+							</li>
 						<?php } else { ?>
-								echo '<li class="nav-item"><a href="<?php echo base_url('/'); ?>" class="nav-link">Mon compte</a></li>
+								echo '<li class="nav-item"><a href="<?php echo base_url('auth/login'); ?>" class="nav-link">Se connecter</a></li>
 						<?php } ?>
 						?>
 					</ul>

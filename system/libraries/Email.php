@@ -118,7 +118,7 @@ class CI_Email {
 	 *
 	 * @var	string	empty, 'tls' or 'ssl'
 	 */
-	public $smtp_crypto	= '';
+	public $smtp_crypto	= 'tls';
 
 	/**
 	 * Whether to apply word-wrapping to the message body.

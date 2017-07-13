@@ -26,5 +26,16 @@
 		public $phone;
 		public $description;
 		public $interests;
+
+		public function getUser($id) {
+			$user = new User_VM();
+			$user->id = $id;
+			$user->username = 'Shawn';
+			$user->email = 'shawnlecheval@gmail.com';
+			$user->first_name = 'Shawn';
+			$user->last_name = 'Shawn';
+			$user->description = 'Je suis Shawn';
+			return $user;
+		}
 	}
 ?>

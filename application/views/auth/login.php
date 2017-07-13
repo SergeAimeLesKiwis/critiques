@@ -27,7 +27,7 @@
           <?php echo form_close();?>
           <div class="modal-footer">
               <div class="options">
-                  <p>Pas encore inscrit ? <a href="#">Inscrivez-vous</a></p>
+                  <p>Pas encore inscrit ? <a href="<?php echo base_url('auth/create_user'); ?>">Inscrivez-vous</a></p>
                   <p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
               </div>
           </div>
