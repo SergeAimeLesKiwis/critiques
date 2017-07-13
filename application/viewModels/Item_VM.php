@@ -1,4 +1,5 @@
 <?php
+	require_once(dirname(__FILE__).'/Category_VM.php');
 
 	class Item_VM {
 		public $id;

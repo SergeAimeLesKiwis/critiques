@@ -4,49 +4,39 @@
 	<form method="post" action="">
 		<input type="hidden" name="search" value="1" />
 		<div class="row">
-			<div class="col-md-12">
-				<div class="md-form">
-					<input type="text" id="searchTitle" list="items" name="searchTitle" class="input-select form-control bg-white-color" value="<?php echo $searchTitle; ?>" />
-					<label for="searchTitle">Titre de l'oeuvre</label>
-					<datalist id="items">
-						<?php foreach ($datalistItems as $item) { ?>
-							<option value="<?php echo $item->title; ?>" data-item="<?php echo $item->id; ?>"><?php echo $item->getClassification(); ?></option>
-						<?php } ?>
-					</datalist>
-				</div>
+			<div class="md-form col-md-12">
+				<input type="text" id="searchTitle" list="items" name="searchTitle" class="input-select form-control bg-white-color" value="<?php echo $searchTitle; ?>" />
+				<label for="searchTitle">Titre de l'oeuvre</label>
+				<datalist id="items">
+					<?php foreach ($datalistItems as $item) { ?>
+						<option value="<?php echo $item->title; ?>" data-item="<?php echo $item->id; ?>"><?php echo $item->getClassification(); ?></option>
+					<?php } ?>
+				</datalist>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
-				<div class="md-form">
-					<input type="text" id="searchAuthor" name="searchAuthor" class="form-control" value="<?php echo $searchAuthor; ?>" />
-					<label for="searchAuthor">Auteur</label>
-				</div>
+			<div class="md-form col-md-3">
+				<input type="text" id="searchAuthor" name="searchAuthor" class="form-control" value="<?php echo $searchAuthor; ?>" />
+				<label for="searchAuthor">Auteur</label>
 			</div>
-			<div class="col-md-3">
-				<div class="md-form">
-					<select id="searchType" class="form-control" name="searchType">
-						<option value="">Choisir un type ...</option>
-						<?php foreach ($types as $type) { ?>
-							<option value="t-<?php echo $type->id; ?>" <?php if ($type->id == $searchType) echo 'selected'; ?>><?php echo $type->name; ?></option>
-						<?php } ?>
-					</select>
-				</div>
+			<div class="md-form col-md-3">
+				<?php
+					$select_type['name'] = 'searchType';
+					$select_type['types'] = $types;
+					$select_type['selected'] = $searchType;
+					$this->load->view('shared/_select_type_values', $select_type);
+				?>
 			</div>
-			<div class="col-md-3">
-				<div class="md-form">
-					<select id="searchCategory" class="form-control" name="searchCategory">
-						<option value="">Choisir une catégorie ...</option>
-						<?php foreach ($categories as $category) { ?>
-							<option value="c-<?php echo $category->id; ?>" data-chained="t-<?php echo $category->type->id; ?>" <?php if ($category->id == $searchCategory) echo 'selected'; ?>><?php echo $category->name; ?></option>
-						<?php } ?>
-					</select>
-				</div>
+			<div class="md-form col-md-3">
+				<?php
+					$select_category['name'] = 'searchCategory';
+					$select_category['categories'] = $categories;
+					$select_category['selected'] = $searchCategory;
+					$this->load->view('shared/_select_category_values', $select_category);
+				?>
 			</div>
-			<div class="col-md-3">
-				<div class="md-form">
-					<button type="submit" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-search"></i> &nbsp;Filtrer</button>
-				</div>
+			<div class="md-form col-md-3">
+				<button type="submit" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-search"></i> &nbsp;Filtrer</button>
 			</div>
 		</div>
 		

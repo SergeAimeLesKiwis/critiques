@@ -1,5 +1,5 @@
 new WOW().init();
 
 $(document).ready(function() {
-	$('#searchCategory').chained('#searchType');
+	$('#select-category').chained('#select-type');
 });

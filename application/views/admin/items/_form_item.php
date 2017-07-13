@@ -32,24 +32,22 @@
 			</div>
 
 			<div class="row">
-				<div class="md-form col-md-5">
-					<select id="item-type" class="form-control bg-white-color" style="margin-left: 35px;">
-						<option value="">Choisir un type ...</option>
-						<?php foreach ($types as $type) { ?>
-							<option value="t-<?php echo $type->id; ?>" <?php if ($type->id == $item->category->type->id) echo 'selected'; ?>><?php echo $type->name; ?></option>
-						<?php } ?>
-					</select>
+				<div class="col-md-1"></div>
+				<div class="md-form col-md-4">
+					<?php
+						$select_type['types'] = $types;
+						$select_type['selected'] = $item->category->type->id;
+						$this->load->view('shared/_select_type_values', $select_type);
+					?>
 				</div>
 
 				<div class="col-md-2"></div>
-
-				<div class="md-form col-md-5">
-					<select id="item-category" class="form-control bg-white-color" style="margin-left: 35px;">
-						<option value="">Choisir une catégorie ...</option>
-						<?php foreach ($categories as $category) { ?>
-							<option value="<?php echo $category->id; ?>" data-chained="t-<?php echo $category->type->id; ?>" <?php if ($category->id == $item->category->id) echo 'selected'; ?>><?php echo $category->name; ?></option>
-						<?php } ?>
-					</select>
+				<div class="md-form col-md-4">
+					<?php
+						$select_category['categories'] = $categories;
+						$select_category['selected'] = $item->category->id;
+						$this->load->view('shared/_select_category_values', $select_category);
+					?>
 				</div>
 			</div>
 
@@ -75,3 +73,8 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+<!-- <a href="URL" class="brown-color" target="_blank">LABEL</a> -->
