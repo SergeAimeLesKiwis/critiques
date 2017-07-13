@@ -53,9 +53,10 @@
 			<div class="tab-pane fade" id="admin-add-item" role="tabpanel">
 				<br />
 				<?php
-					$types_categories['types'] = $types;
-					$types_categories['categories'] = $categories;
-					$this->load->view('admin/items/_form_item', array('item' => new Item_VM())); 
+					$add_item['types'] = $types;
+					$add_item['categories'] = $categories;
+					$add_item['item'] = new Item_VM();
+					$this->load->view('admin/items/_form_item', $add_item); 
 				?>
 			</div>
 			<div class="tab-pane fade" id="admin-update-item" role="tabpanel">

@@ -13,7 +13,7 @@
 			$this->title = '';
 			$this->author = '';
 			$this->publish_date = date('d/m/Y');
-			$this->category = 0;
+			$this->category = new Category_VM();
 			$this->description = '';
 		}
 

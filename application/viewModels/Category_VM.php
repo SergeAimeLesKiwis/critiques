@@ -9,7 +9,7 @@
 		public function __construct() {
 			$this->id = 0;
 			$this->name = '';
-			$this->type = 0;
+			$this->type = new Type_VM();
 			$this->nbItems = 0;
 		}
 

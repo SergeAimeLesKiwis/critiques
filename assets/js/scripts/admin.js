@@ -31,7 +31,7 @@ $(document).ready(function() {
 	initBindEditRemove();
 
 // ITEMS
-	
+	$('#item-category').chained('#item-type');
 });
 
 // HOME

@@ -11,22 +11,62 @@
 				<hr class="mt-2 mb-2">
 			</div>
 
-			<div class="md-form">
-				<i class="fa fa-thermometer-quarter prefix"></i>
-				<input type="text" id="form3" class="form-control">
-				<label for="form3">Nom de la page à créer</label>
+			<div class="row">
+				<div class="md-form col-md-4">
+					<i class="fa fa-thermometer-quarter prefix"></i>
+					<input type="text" id="item-title" class="form-control" />
+					<label for="item-title">Titre</label>
+				</div>
+
+				<div class="md-form col-md-4">
+					<i class="fa fa-user prefix"></i>
+					<input type="text" id="item-author" class="form-control" />
+					<label for="item-author">Auteur</label>
+				</div>
+
+				<div class="md-form col-md-4">
+					<i class="fa fa-thermometer-quarter prefix"></i>
+					<input type="date" id="item-publish-date" class="form-control" />
+					<label for="item-publish-date" class="active">Date de sortie</label>
+				</div>
 			</div>
 
-			<div class="md-form">
-				<i class="fa fa-thermometer-half prefix"></i>
-				<input type="text" id="form2" class="form-control">
-				<label for="form2">Titre de la page à créer</label>
+			<div class="row">
+				<div class="md-form col-md-5">
+					<select id="item-type" class="form-control bg-white-color" style="margin-left: 35px;">
+						<option value="">Choisir un type ...</option>
+						<?php foreach ($types as $type) { ?>
+							<option value="t-<?php echo $type->id; ?>" <?php if ($type->id == $item->category->type->id) echo 'selected'; ?>><?php echo $type->name; ?></option>
+						<?php } ?>
+					</select>
+				</div>
+
+				<div class="col-md-2"></div>
+
+				<div class="md-form col-md-5">
+					<select id="item-category" class="form-control bg-white-color" style="margin-left: 35px;">
+						<option value="">Choisir une catégorie ...</option>
+						<?php foreach ($categories as $category) { ?>
+							<option value="<?php echo $category->id; ?>" data-chained="t-<?php echo $category->type->id; ?>" <?php if ($category->id == $item->category->id) echo 'selected'; ?>><?php echo $category->name; ?></option>
+						<?php } ?>
+					</select>
+				</div>
 			</div>
 
-			<div class="md-form">
-				<i class="fa fa-thermometer-three-quarters prefix"></i>
-				<textarea type="text" id="form8" class="md-textarea"></textarea>
-				<label for="form8">Contenu de la page à créer</label>
+			<div class="row">
+				<div class="md-form col-md-12">
+					<i class="fa fa-file-image-o prefix"></i>
+					<input type="text" id="item-image" class="form-control" />
+					<label for="item-image">Image</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="md-form col-md-12">
+					<i class="fa fa-thermometer-three-quarters prefix"></i>
+					<textarea type="text" id="item-description" class="md-textarea"></textarea>
+					<label for="item-description">Description</label>
+				</div>
 			</div>
 
 			<div class="text-center">

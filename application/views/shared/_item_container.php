@@ -1,4 +1,4 @@
-<div class="card col-md-3 spacer show-infos" data-key="<?php echo $item->id; ?>">
+<div class="card col-md-3 spacer show-infos wow zoomIn" data-key="<?php echo $item->id; ?>">
 	<div class="view overlay hm-zoom">
 		<?php echo $item->getImageTag(); ?>
 		<a><div class="mask waves-effect waves-light"></div></a>

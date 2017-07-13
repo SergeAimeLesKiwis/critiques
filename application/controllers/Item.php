@@ -10,7 +10,7 @@
 
 		public function index() {
 			// HEADER
-			$this->loadHeader('Administration');
+			$this->loadHeader('Contenus');
 
 			// CONTENT
 			$this->load->model('TypeService');
