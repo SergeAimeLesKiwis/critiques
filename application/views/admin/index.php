@@ -2,75 +2,64 @@
 	<div class="col-md-2" id="admin-menu">
 		<ul class="nav nav-tabs md-pills pills-primary flex-column" role="tablist">
 			<li class="nav-item">
-				<a class="nav-link brown-hover active" data-toggle="tab" href="#admin-home" role="tab"><i class="fa fa-home"></i> Page d'accueil</a>
+				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-home" data-action="home" role="tab">
+					<i class="fa fa-home"></i>&nbsp;<span>Page d'accueil</span>
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-static" role="tab"><i class="fa fa-address-card-o"></i> Pages statiques</a>
+				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-static" data-action="static" role="tab">
+					<i class="fa fa-address-card-o"></i>&nbsp;<span>Pages statiques</span>
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-types-categories" role="tab"><i class="fa fa-file-o"></i> Types / Catégories</a>
+				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-types-categories" data-action="types_categories" role="tab">
+					<i class="fa fa-file-o"></i>&nbsp;<span>Types / Catégories</span>
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-add-item" role="tab"><i class="fa fa-bookmark-o"></i> Ajouter une oeuvre</a>
+				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-item" data-action="add_item" role="tab">
+					<i class="fa fa-bookmark-o"></i>&nbsp;<span>Ajouter une oeuvre</span>
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-update-item" role="tab"><i class="fa fa-pencil-square-o"></i> Modifier une oeuvre</a>
+				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-item" data-action="update_item" role="tab">
+					<i class="fa fa-pencil-square-o"></i>&nbsp;<span>Modifier une oeuvre</span>
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-rooms" role="tab"><i class="fa fa-comment-o"></i> Salons</a>
+				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-rooms" data-action="rooms" role="tab">
+					<i class="fa fa-comment-o"></i>&nbsp;<span>Salons</span>
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-users" role="tab"><i class="fa fa-user-o"></i> Utilisateurs</a>
+				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-users" data-action="users" role="tab">
+					<i class="fa fa-user-o"></i>&nbsp;<span>Utilisateurs</span>
+				</a>
 			</li>
 		</ul>
 	</div>
 	<div class="col-md-10 bg-lightblue-color">
 		<div class="tab-content vertical">
-			<div class="tab-pane fade in show active" id="admin-home" role="tabpanel">
+			<div class="tab-pane fade in show active" id="admin-index" role="tabpanel">
 				<br />
-				<?php
-					$home['concept'] = $concept;
-					$home['highlights'] = $highlights;
-					$home['datalistItems'] = $datalistItems;
-					$this->load->view('admin/home/_home', $home); 
-				?>
+				<div class="row">
+					<div class="md-form col-md-10">
+						<div class="card-block">
+							<div class="text-center">
+								<h3 class="blue-color"><i class="fa fa-bullseye"></i> Administration du site</h3>
+								<hr class="mt-2 mb-2">
+								<div class="text-center">Blablabla</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="tab-pane fade" id="admin-static" role="tabpanel">
-				<br />
-				<?php
-					$static['osef'] = null;
-					$this->load->view('admin/_static', $static); 
-				?>
-			</div>
-			<div class="tab-pane fade" id="admin-types-categories" role="tabpanel">
-				<br />
-				<?php
-					$types_categories['types'] = $types;
-					$types_categories['categories'] = $categories;
-					$this->load->view('admin/types_categories/_types_categories', $types_categories); 
-				?>
-			</div>
-			<div class="tab-pane fade" id="admin-add-item" role="tabpanel">
-				<br />
-				<?php
-					$add_item['types'] = $types;
-					$add_item['categories'] = $categories;
-					$add_item['item'] = new Item_VM();
-					$this->load->view('admin/items/_form_item', $add_item); 
-				?>
-			</div>
-			<div class="tab-pane fade" id="admin-update-item" role="tabpanel">
-				<br />
-				<p>UPDATE ITEM</p>
-			</div>
-			<div class="tab-pane fade" id="admin-rooms" role="tabpanel">
-				<br />
-				<p>ROOMS</p>
-			</div>
-			<div class="tab-pane fade" id="admin-users" role="tabpanel">
-				<br />
-				<p>USERS</p>
-			</div>
+			<div class="tab-pane fade" id="admin-home" role="tabpanel"></div>
+			<div class="tab-pane fade" id="admin-static" role="tabpanel"></div>
+			<div class="tab-pane fade" id="admin-types-categories" role="tabpanel"></div>
+			<div class="tab-pane fade" id="admin-item" role="tabpanel"></div>
+			<div class="tab-pane fade" id="admin-rooms" role="tabpanel"></div>
+			<div class="tab-pane fade" id="admin-users" role="tabpanel"></div>
 		</div>
 	</div>
 </div>

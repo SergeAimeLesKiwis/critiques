@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function initHome() {
 	bindRemoveHighlight();
 	bindAddHighlight();
 
@@ -20,13 +20,13 @@ $(document).ready(function() {
 			}
 		});
 	});
-});
+}
 
 function bindRemoveHighlight() {
 	$('.remove-highlight').click(function () {
 		var position = $(this).data('position');
 		$(position).html($('#waiting-div').html());
-		var action = baseUrl + 'admin/refreshHighlight/';
+		var action = baseUrl + 'admin/refresh_highlight/';
 
 		$.ajax({
 			type: 'post',
@@ -51,7 +51,7 @@ function bindAddHighlight() {
 		if (id != null && id > 0) {
 			var position = $(this).data('position');
 			$(position).html($('#waiting-div').html());
-			var action = baseUrl + 'admin/refreshHighlight/';
+			var action = baseUrl + 'admin/refresh_highlight/';
 
 			$.ajax({
 				type: 'post',

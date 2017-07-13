@@ -1,0 +1,30 @@
+.editable {
+	padding-top: .8rem;
+	margin-left: 3rem;
+	width: calc(100% - 3rem);
+	overflow-y: hidden;
+	padding: 1.6rem 0;
+	resize: none;
+	min-height: 3rem;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #ccc;
+	border-radius: 0;
+	outline: 0;
+	height: 2.1rem;
+	font-size: 1rem;
+	box-shadow: none;
+	box-sizing: content-box;
+	transition: all .3s;
+	line-height: inherit;
+	overflow: auto;
+}
+
+.editable:focus+label {
+	color: #D99E7E;
+}
+
+.editable:focus {
+	border-bottom: 1px solid #D99E7E;
+	box-shadow: 0 1px 0 0 #D99E7E;
+}

@@ -65,20 +65,23 @@ function loadModalOnClick(selector, infos, callback) {
 	});
 }
 
-function sendModalInfos(url, infos, target, callback) {
+function sendInfos(url, data, target, callback) {
+	callback = callback || {};
+	if (target != null) $(target).html($('#waiting-div').html());
+
 	$.ajax({
 		type: 'post',
-		data: infos,
 		url: url,
+		data: data,
 		dataType: 'html',
 		success: function (data) {
 			closeCurrentModal();
-			$(target).html(data);
-			callback();
-			toastr['success']('Vos modifications ont été prises en compte', 'Succès');
+			if (target != null) $(target).html(data);
+			if (callback.todo != null) callback.todo();
+			if (callback.show == null) toastr['success']('Vos modifications ont été prises en compte', 'Succès');
 		},
 		error: function(xhr, status, error) {
-			toastr['error'](xhr.responseText, 'Attention');
+			if (callback.show == null) toastr['error'](xhr.responseText, 'Attention');
 		}
 	});
 }

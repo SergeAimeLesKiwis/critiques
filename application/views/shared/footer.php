@@ -46,13 +46,13 @@
 	} ?>
 
 	<?php if ($loadAdmin) { ?>
-		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/admin.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/home.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/static.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/types-categories.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/items.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/rooms.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/users.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/admin.js"></script>
 	<?php } ?>
 	</body>
 </html>

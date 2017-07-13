@@ -5,6 +5,22 @@
 
 	class ItemService extends CI_Model {
 
+		private function exists($title, $category) {
+			return $this->db->where('title', $title)->where('category', $category)->get('items')->num_rows() > 0;
+		}
+
+		public function addItem($title, $author, $publish_date, $category, $description) {
+			return !$this->exists($title, $category)
+		 		&& $this->db->set('title', $title)
+		 					->set('author', $author)
+		 					->set('publish_date', $publish_date)
+		 					->set('category', $category)
+		 					->set('description', $description)
+		 					->set('created_by', /* PUT SESSION USER ID HERE*/ 0)
+		 					->set('created_at', date("Y-m-d H:i:s"))
+		 					->insert('items');
+		}
+
 		public function getItem($id) {
 			$row = $this->db->where('id', $id)->get('items')->row();
 

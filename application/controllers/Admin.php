@@ -10,37 +10,35 @@
 			// if ($this->ion_auth->is_admin() === false) {
 			// 	redirect('home');
 			// }
-		}
 
-		public function index() {
-			// HEADER
-			$this->loadHeader('Administration', array('bootstrap-editable'));
-
-			// CONTENT
 			$this->load->model('ParameterService');
 			$this->load->model('ItemService');
 			$this->load->model('TypeService');
 			$this->load->model('CategoryService');
-
-			$content['concept'] = $this->ParameterService->getHomeConcept();
-			$highlights = $this->ParameterService->getHomeHighlights();
-			$content['highlights'] = $this->ItemService->getItems($highlights);
-			$content['datalistItems'] = $this->ItemService->getDatalistItems();
-
-			$content['static'] = $this->TypeService->getAllTypes();
-
-			$content['types'] = $this->TypeService->getAllTypes();
-			$content['categories'] = $this->CategoryService->getAllCategories();
-
-			$this->load->view('admin/index', $content);
-
-			// FOOTER
-			$this->loadFooter(array('jquery.chained.min'), true);
 		}
 
-// HOME
+		public function index() {
+			// HEADER
+			$this->loadHeader('Administration', array('styles/editable'));
 
-		public function refreshHighlight() {
+			// CONTENT
+			$this->load->view('admin/index');
+
+			// FOOTER
+			$this->loadFooter(array('jquery.chained.min', 'scripts/editable'), true);
+		}
+
+//region Home
+		public function load_admin_home() {
+			$home['concept'] = $this->ParameterService->getHomeConcept();
+			$highlights = $this->ParameterService->getHomeHighlights();
+			$home['highlights'] = $this->ItemService->getItems($highlights);
+			$home['datalistItems'] = $this->ItemService->getDatalistItems();
+
+			$this->load->view('admin/home/_index', $home);
+		}
+
+		public function refresh_highlight() {
 			$id = $this->input->post('id');
 			$position = $this->input->post('position');
 
@@ -58,18 +56,31 @@
 
 			$this->load->model('ParameterService');
 
-			$updatedConcept = $this->ParameterService->setHomeConcept($concept);
-			if (!$updatedConcept) $this->error('Un problème est survenu lors de l\'enregistrement du concept');
+			$updated_concept = $this->ParameterService->setHomeConcept($concept);
+			if (!$updated_concept) $this->error('Un problème est survenu lors de l\'enregistrement du concept');
 
-			$updatedHighlights = $this->ParameterService->setHomeHighlights($highlights);
-			if (!$updatedHighlights) $this->error('Un problème est survenu lors de l\'enregistrement de la une');
+			$updated_highlights = $this->ParameterService->setHomeHighlights($highlights);
+			if (!$updated_highlights) $this->error('Un problème est survenu lors de l\'enregistrement de la une');
 
-			return $updatedConcept && $updatedHighlights;
+			return $updated_concept && $updated_highlights;
 		}
+//endregion
 
-// STATIC
+//region Static
+		public function load_admin_static() {
+			$static = array();
 
-// TYPES CATEGORIES
+			$this->load->view('admin/static/_index', $static);
+		}
+//endregion
+
+//region Types Categories
+		public function load_admin_types_categories() {
+			$types_categories['types'] = $this->TypeService->getAllTypes();
+			$types_categories['categories'] = $this->CategoryService->getAllCategories();
+
+			$this->load->view('admin/types_categories/_index', $types_categories); 
+		}
 
 		public function load_type_modal() {
 			$id = $this->input->post('id');
@@ -78,9 +89,9 @@
 				if ($id > 0) {
 					$this->load->model('TypeService');
 					$type = $this->TypeService->getType($id);
-					$this->load->view('admin/types_categories/_type_modal_edit', array('type' => $type));
+					$this->load->view('admin/types_categories/_type_edit_modal', array('type' => $type));
 				} else {
-					$this->load->view('admin/types_categories/_type_modal_new');
+					$this->load->view('admin/types_categories/_type_new_modal');
 				}
 			}
 		}
@@ -92,9 +103,9 @@
 				$this->error('Le label ne peut être vide');
 			} else {
 				$this->load->model('TypeService');
-				$addedType = $this->TypeService->addType($name);
+				$added_type = $this->TypeService->addType($name);
 
-				if ($addedType) {
+				if ($added_type) {
 					$types = $this->TypeService->getAllTypes();
 					$this->load->view('admin/types_categories/_type_list', array('types' => $types));
 				} else {
@@ -113,9 +124,9 @@
 				$this->error('Le label ne peut être vide');
 			} else {
 				$this->load->model('TypeService');
-				$updatedType = $this->TypeService->updateType($id, $name);
+				$updated_type = $this->TypeService->updateType($id, $name);
 
-				if ($updatedType) {
+				if ($updated_type) {
 					$type = $this->TypeService->getType($id);
 					echo $type->name;
 				} else {
@@ -131,9 +142,9 @@
 				$this->error('Veuillez choisir un type');
 			} else {
 				$this->load->model('TypeService');
-				$deletedType = $this->TypeService->deleteType($id);
+				$deleted_type = $this->TypeService->deleteType($id);
 
-				if ($deletedType) {
+				if ($deleted_type) {
 					$types = $this->TypeService->getAllTypes();
 					$this->load->view('admin/types_categories/_type_list', array('types' => $types));
 				} else {
@@ -152,9 +163,9 @@
 				if ($id > 0) {
 					$this->load->model('CategoryService');
 					$category = $this->CategoryService->getCategory($id);
-					$this->load->view('admin/types_categories/_category_modal_edit', array('category' => $category, 'types' => $types));
+					$this->load->view('admin/types_categories/_category_edit_modal', array('category' => $category, 'types' => $types));
 				} else {
-					$this->load->view('admin/types_categories/_category_modal_new', array('types' => $types));
+					$this->load->view('admin/types_categories/_category_new_modal', array('types' => $types));
 				}
 			}
 		}
@@ -169,9 +180,9 @@
 				$this->error('Le type ne peut être vide');
 			} else {
 				$this->load->model('CategoryService');
-				$addedCategory = $this->CategoryService->addCategory($name, $type);
+				$added_category = $this->CategoryService->addCategory($name, $type);
 
-				if ($addedCategory) {
+				if ($added_category) {
 					$categories = $this->CategoryService->getAllCategories();
 					$this->load->view('admin/types_categories/_category_list', array('categories' => $categories));
 				} else {
@@ -193,9 +204,9 @@
 				$this->error('Le type ne peut être vide');
 			} else {
 				$this->load->model('CategoryService');
-				$updatedCategory = $this->CategoryService->updateCategory($id, $name, $type);
+				$updated_category = $this->CategoryService->updateCategory($id, $name, $type);
 
-				if ($updatedCategory) {
+				if ($updated_category) {
 					$category = $this->CategoryService->getCategory($id);
 					echo $category->name;
 				} else {
@@ -211,9 +222,9 @@
 				$this->error('Veuillez choisir une catagorie');
 			} else {
 				$this->load->model('CategoryService');
-				$deletedCategory = $this->CategoryService->deleteCategory($id);
+				$deleted_category = $this->CategoryService->deleteCategory($id);
 
-				if ($deletedCategory) {
+				if ($deleted_category) {
 					$categories = $this->CategoryService->getAllCategories();
 					$this->load->view('admin/types_categories/_category_list', array('categories' => $categories));
 				} else {
@@ -221,5 +232,73 @@
 				}
 			}
 		}
+//endregion
+
+//region Items
+		public function load_admin_add_item() {
+			$item['types'] = $this->TypeService->getAllTypes();
+			$item['categories'] = $this->CategoryService->getAllCategories();
+			$item['item'] = new Item_VM();
+			$item['url'] = 'add_item';
+
+			$this->load->view('admin/items/_index', $item);
+		}
+
+		public function load_admin_update_item() {
+			$item['types'] = $this->TypeService->getAllTypes();
+			$item['categories'] = $this->CategoryService->getAllCategories();
+			$item['item'] = $this->ItemService->getItem(1);
+			$item['url'] = 'update_item';
+
+			$this->load->view('admin/items/_index', $item);
+		}
+
+		public function load_link_modal() {
+			$this->load->view('admin/items/_add_link');
+		}
+
+		public function add_item() {
+			$title = $this->input->post('title');
+			$author = $this->input->post('author');
+			$publish_date = $this->input->post('publish_date');
+			$category = substr($this->input->post('category'), 2);
+			$description = $this->input->post('description');
+
+			if (empty($title)) {
+				$this->error('Le titre ne peut être vide');
+			} else if (empty($author)) {
+				$this->error('L\'auteur ne peut être vide');
+			} else if (empty($publish_date)) {
+				$this->error('La date de sortie ne peut être vide');
+			} else if (empty($category)) {
+				$this->error('La catégorie ne peut être vide');
+			} else if (empty($description)) {
+				$this->error('La description ne peut être vide');
+			} else {
+				$this->load->model('ItemService');
+				$added_item = $this->ItemService->addItem($title, $author, $publish_date, $category, $description);
+
+				if (!$added_item) {
+					$this->error('Une oeuvre ayant ces informations existe déjà');
+				}
+			}
+		}
+//endregion
+
+//region Rooms
+		public function load_admin_rooms() {
+			$rooms = array();
+
+			$this->load->view('admin/rooms/_index', $rooms);
+		}
+//endregion
+
+//region Users
+		public function load_admin_users() {
+			$users = array();
+
+			$this->load->view('admin/users/_index', $users);
+		}
+//endregion
 	}
 ?>

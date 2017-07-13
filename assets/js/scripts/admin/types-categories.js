@@ -1,9 +1,9 @@
-$(document).ready(function() {
+function initTypesCategories() {
 	var init = function () { initModal(); };
 	loadModalOnClick('#create-type', { target: '#modal-sm', controller: 'admin', action: 'type' }, { todo: init });
 	loadModalOnClick('#create-category', { target: '#modal-sm', controller: 'admin', action: 'category' }, { todo: init });
 	initBindEditRemove();
-});
+}
 
 function initBindEditRemove() {
 	var init = function () { initModal(); };
@@ -38,29 +38,29 @@ function bindDelete(selector, target) {
 
 function initModal() {
 	var url = $('#modal-sm #send-infos-url').val();
-	var callback = function () { initBindEditRemove(); };
+	var todo = function () { initBindEditRemove(); };
 
 	$('#modal-sm #send-type-modal-new').click(function() {
 		var name = $('#modal-sm #type_name').val();
-		sendModalInfos(url, { name: name }, '#type-list', callback);
+		sendInfos(url, { name: name }, '#type-list', { todo: todo });
 	});
 
 	$('#modal-sm #send-type-modal-edit').click(function() {
 		var id = $('#modal-sm #type_id').val();
 		var name = $('#modal-sm #type_name').val();
-		sendModalInfos(url, { id: id, name: name }, '.editable-type-' + id, callback);
+		sendInfos(url, { id: id, name: name }, '.editable-type-' + id, { todo: todo });
 	});
 
 	$('#modal-sm #send-category-modal-new').click(function() {
 		var name = $('#modal-sm #category_name').val();
 		var type = $('#modal-sm #category_type').val();
-		sendModalInfos(url, { name: name, type: type }, '#category-list', callback);
+		sendInfos(url, { name: name, type: type }, '#category-list', { todo: todo });
 	});
 
 	$('#modal-sm #send-category-modal-edit').click(function() {
 		var id = $('#modal-sm #category_id').val();
 		var name = $('#modal-sm #category_name').val();
 		var type = $('#modal-sm #category_type').val();
-		sendModalInfos(url, { id: id, name: name, type: type }, '.editable-category-' + id, callback);
+		sendInfos(url, { id: id, name: name, type: type }, '.editable-category-' + id, { todo: todo });
 	});
 }
