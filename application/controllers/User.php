@@ -14,9 +14,14 @@
 
 			// CONTENT
 			$this->load->model('UserService');
-			$user['user'] = $this->UserService->getUser($id);
 
-			$this->load->view('user/profile', $user);
+			$user = $this->UserService->getUser($id);
+
+			if ($user != null) {
+				$this->load->view('user/profile', array('user' => $user));
+			} else {
+				$this->load->view('user/no_user');
+			}
 
 			// FOOTER
 			$this->loadFooter();
