@@ -236,18 +236,19 @@
 
 //region Items
 		public function load_admin_add_item() {
+			$item['title'] = 'Création d\'une oeuvre';
 			$item['types'] = $this->TypeService->getAllTypes();
 			$item['categories'] = $this->CategoryService->getAllCategories();
-			$item['item'] = new Item_VM();
 			$item['url'] = 'add_item';
 
 			$this->load->view('admin/items/_index', $item);
 		}
 
 		public function load_admin_update_item() {
+			$item['title'] = 'Modification d\'une oeuvre';
+			$item['datalistItems'] = $this->ItemService->getDatalistItems();
 			$item['types'] = $this->TypeService->getAllTypes();
 			$item['categories'] = $this->CategoryService->getAllCategories();
-			$item['item'] = $this->ItemService->getItem(1);
 			$item['url'] = 'update_item';
 
 			$this->load->view('admin/items/_index', $item);

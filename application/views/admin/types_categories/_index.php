@@ -11,8 +11,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="col-md-1"></div>
-	<div class="col-md-5">
+	<div class="offset-md-1 col-md-5">
 		<h3>
 			<span>Catégories</span>
 			<button id="create-category" class="btn btn-sm bg-darkgrey-color"><i class="fa fa-plus"></i></button>

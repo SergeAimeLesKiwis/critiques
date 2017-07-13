@@ -46,6 +46,20 @@ function initItems() {
 		var category = $('#select-category').val();
 		var description = $('#item-description').html();
 
-		sendInfos(url, { title: title, author: author, publish_date: publish_date, category: category, description: description });
+		var reset = function() {
+			if (url == 'admin/add_item') {
+				$('#item-title').val('');
+				$('#item-title').focusout();
+				$('#item-author').val('');
+				$('#item-author').focusout();
+				$('#item-publish-date').val('');
+				$('#select-type').val(null);
+				$('#select-category').val(null);
+				$('#item-description').html('');
+				$('#item-description').focusout();
+			}
+		};
+
+		sendInfos(url, { title: title, author: author, publish_date: publish_date, category: category, description: description }, null, { todo: reset });
 	});
 }
