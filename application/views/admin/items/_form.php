@@ -1,3 +1,4 @@
+<input type="hidden" id="item-id" value="<?php echo $item->id; ?>" />
 <div class="row">
 	<div class="md-form col-md-4">
 		<i class="fa fa-thermometer-quarter prefix"></i>

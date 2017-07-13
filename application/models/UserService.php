@@ -5,37 +5,38 @@
 
 	class UserService extends CI_Model {
 
-		protected $table = "users";
-
-		public $id;
-		public $ip_address;
-		public $username;
-		public $password;
-		public $salt;
-		public $email;
-		public $activation_code;
-		public $forgotten_password_code;
-		public $forgotten_password_time;
-		public $remember_code;
-		public $created_on;
-		public $last_login;
-		public $active;
-		public $first_name;
-		public $last_name;
-		public $company;
-		public $phone;
-		public $description;
-		public $interests;
-
 		public function getUser($id) {
-			$user = new User_VM();
-			$user->id = $id;
-			$user->username = 'Shawn';
-			$user->email = 'shawnlecheval@gmail.com';
-			$user->first_name = 'Shawn';
-			$user->last_name = 'Shawn';
-			$user->description = 'Je suis Shawn';
-			return $user;
+			$row = $this->db->where('id', $id)->get('users')->row();
+
+			if (isset($row)) {
+				$user = new User_VM();
+				$user->id = $row->id;
+				$user->username = $row->username;
+				$user->email = $row->email;
+				$user->first_name = $row->first_name;
+				$user->last_name = $row->last_name;
+				$user->description = $row->description;
+				$user->loans = $this->getLoans($row->id);
+
+				return $user;
+			}
+
+			return null;
+		}
+
+		public function getLoans($id) {
+			$this->load->model('ItemService');
+
+			$result = $this->db->select('item')->where('user', $id)->order_by('RAND()')->limit(4)->get('loans')->result();
+
+			$loans = array();
+
+			foreach ($result as $row)
+			{
+				$loans[] = $this->ItemService->getItem($row->item);
+			}
+
+			return $loans;
 		}
 	}
 ?>

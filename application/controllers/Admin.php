@@ -284,6 +284,36 @@
 				}
 			}
 		}
+
+		public function update_item() {
+			$id = $this->input->post('id');
+			$title = $this->input->post('title');
+			$author = $this->input->post('author');
+			$publish_date = $this->input->post('publish_date');
+			$category = substr($this->input->post('category'), 2);
+			$description = $this->input->post('description');
+
+			if (empty($id)) {
+				$this->error('Veuillez choisir une oeuvre');
+			} else if (empty($title)) {
+				$this->error('Le titre ne peut être vide');
+			} else if (empty($author)) {
+				$this->error('L\'auteur ne peut être vide');
+			} else if (empty($publish_date)) {
+				$this->error('La date de sortie ne peut être vide');
+			} else if (empty($category)) {
+				$this->error('La catégorie ne peut être vide');
+			} else if (empty($description)) {
+				$this->error('La description ne peut être vide');
+			} else {
+				$this->load->model('ItemService');
+				$updated_item = $this->ItemService->updateItem($id, $title, $author, $publish_date, $category, $description);
+
+				if (!$updated_item) {
+					$this->error('Une oeuvre ayant ces informations existe déjà');
+				}
+			}
+		}
 //endregion
 
 //region Rooms

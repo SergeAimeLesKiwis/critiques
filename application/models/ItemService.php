@@ -11,14 +11,26 @@
 
 		public function addItem($title, $author, $publish_date, $category, $description) {
 			return !$this->exists($title, $category)
-		 		&& $this->db->set('title', $title)
-		 					->set('author', $author)
-		 					->set('publish_date', $publish_date)
-		 					->set('category', $category)
-		 					->set('description', $description)
-		 					->set('created_by', /* PUT SESSION USER ID HERE*/ 0)
-		 					->set('created_at', date("Y-m-d H:i:s"))
-		 					->insert('items');
+				&& $this->db->set('title', $title)
+							->set('author', $author)
+							->set('publish_date', $publish_date)
+							->set('category', $category)
+							->set('description', $description)
+							->set('created_by', /* PUT SESSION USER ID HERE*/ 0)
+							->set('created_at', date("Y-m-d H:i:s"))
+							->insert('items');
+		}
+
+		public function updateItem($id, $title, $author, $publish_date, $category, $description) {
+			return $this->db->set('title', $title)
+							->set('author', $author)
+							->set('publish_date', $publish_date)
+							->set('category', $category)
+							->set('description', $description)
+							->set('updated_by', /* PUT SESSION USER ID HERE*/ 0)
+							->set('updated_at', date("Y-m-d H:i:s"))
+							->where('id', $id)
+							->update('items');
 		}
 
 		public function getItem($id) {
@@ -87,27 +99,27 @@
 			return $items;
 		}
 
-		public function getAllItems() {
-			$this->load->model('CategoryService');
+		// public function getAllItems() {
+		// 	$this->load->model('CategoryService');
 
-			$result = $this->db->get('items')->result();
-			$items = array();
+		// 	$result = $this->db->get('items')->result();
+		// 	$items = array();
 
-			foreach ($result as $row)
-			{
-				$item = new Item_VM();
-				$item->id = $row->id;
-				$item->title = $row->title;
-				$item->author = $row->author;
-				$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
-				$item->category = $this->CategoryService->getCategory($row->category);
-				$item->description = $row->description;
+		// 	foreach ($result as $row)
+		// 	{
+		// 		$item = new Item_VM();
+		// 		$item->id = $row->id;
+		// 		$item->title = $row->title;
+		// 		$item->author = $row->author;
+		// 		$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
+		// 		$item->category = $this->CategoryService->getCategory($row->category);
+		// 		$item->description = $row->description;
 
-				$items[] = $item;
-			}
+		// 		$items[] = $item;
+		// 	}
 
-			return $items;
-		}
+		// 	return $items;
+		// }
 
 		public function getFilteredItems($title, $author, $type, $category) {
 			$this->load->model('CategoryService');
