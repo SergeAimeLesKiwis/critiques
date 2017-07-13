@@ -1,7 +1,7 @@
 <?php
 	class AppConfig {
 		public static function getAppAdminEmail() {
-			return 'leo.foltzrahem@gmail.com';
+			return 'noreply.clubdescritiques@gmail.com';
 		}
 
 		public static function getAppAdminName() {

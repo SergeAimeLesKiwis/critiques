@@ -1,5 +1,5 @@
 <?php
-/*	require_once('AppConfig.php');
+	require_once('AppConfig.php');
 	require_once(dirname(__FILE__).'/../helpers/PHPMailer/PHPMailerAutoload.php');
 
 	class Mail {
@@ -25,5 +25,5 @@
 			$this->mail->Body = $message;
 			$this->mail->send();
 		}
-	}*/
+	}
 ?>

@@ -25,14 +25,14 @@
 </div>
 <br />
 <div class="row">
-	<div class="offset-md-1 col-md-3">
-		<span class="badge green loan-status"></span><em>Disponible</em>
+	<div class="offset-md-2 col-md-2">
+		<span class="badge green loan-status">&nbsp;</span><em>Disponible</em>
 	</div>
-	<div class="offset-md-1 col-md-3">
-		<span class="badge red loan-status"></span><em>Prêté</em>
+	<div class="offset-md-1 col-md-2">
+		<span class="badge red loan-status">&nbsp;</span><em>Prêté</em>
 	</div>
-	<div class="offset-md-1 col-md-3">
-		<span class="badge blue loan-status"></span><em>Je le veux</em>
+	<div class="offset-md-1 col-md-2">
+		<span class="badge blue loan-status">&nbsp;</span><em>Je le veux</em>
 	</div>
 </div>
 <br />
@@ -40,6 +40,29 @@
 	<?php $this->load->view('user/_loans', array('loans' => $user->loans)); ?>
 </div>
 
-<hr class="mt-2 mb-2">
+<hr class="mt-2">
 
-CONTACT ICI BOLOSS
+<div class="offset-md-3 col-md-10">
+	<div class="form-display">
+		<div class="card-block">
+			<div>
+				<h3 class="text-center"><i class="fa fa-envelope"></i> Me contacter</h3>
+				<hr class="mt-2 mb-2" />
+			</div>
+			<br />
+			<div class="md-form">
+				<i class="fa fa-tag prefix"></i>
+				<input type="text" id="form32" class="form-control" />
+				<label for="form34">Sujet</label>
+			</div>
+			<div class="md-form">
+				<i class="fa fa-pencil prefix"></i>
+				<textarea type="text" id="form8" class="md-textarea"></textarea>
+				<label for="form8">Votre message</label>
+			</div>
+			<div class="text-center">
+				<button class="btn btn-default bg-green-color">Envoyer</button>
+			</div>
+		</div>
+	</div>
+</div>

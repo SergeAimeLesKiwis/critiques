@@ -200,9 +200,10 @@ h2.darkgrey-color{
 }
 
 /* Pastille de couleur */
-.loan-status{
-	width: 20px;
-    height: 20px;
+.loan-status {
+	width: 15px;
+    height: 15px;
     border-radius: 10px;
-   	/*box-shadow: 2px 5px 20px 0px green;*/
+   	box-shadow: 2px 5px 20px 0px grey;
+   	margin-right: 5px;
 }	
