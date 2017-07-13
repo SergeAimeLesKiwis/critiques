@@ -7,7 +7,7 @@
 		public function __construct() {
 			parent::__construct();
 
-			// if ($this->ion_auth->is_admin () === FALSE) {
+			// if ($this->ion_auth->is_admin() === false) {
 			// 	redirect('home');
 			// }
 		}
@@ -35,7 +35,7 @@
 			$this->load->view('admin/index', $content);
 
 			// FOOTER
-			$this->loadFooter(array('jquery.chained.min', 'scripts/admin'));
+			$this->loadFooter(array('jquery.chained.min'), true);
 		}
 
 // HOME

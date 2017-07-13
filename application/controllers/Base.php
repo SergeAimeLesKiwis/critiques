@@ -18,8 +18,9 @@
 			$this->load->view('shared/header', $header);
 		}
 
-		protected function loadFooter($scripts = array()) {
+		protected function loadFooter($scripts = array(), $loadAdmin = false) {
 			$footer['scripts'] = $scripts;
+			$footer['loadAdmin'] = $loadAdmin;
 			$this->load->view('shared/footer', $footer);
 		}
 

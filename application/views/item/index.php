@@ -5,13 +5,13 @@
 		<input type="hidden" name="search" value="1" />
 		<div class="row">
 			<div class="md-form col-md-12">
-				<input type="text" id="searchTitle" list="items" name="searchTitle" class="input-select form-control bg-white-color" value="<?php echo $searchTitle; ?>" />
-				<label for="searchTitle">Titre de l'oeuvre</label>
-				<datalist id="items">
-					<?php foreach ($datalistItems as $item) { ?>
-						<option value="<?php echo $item->title; ?>" data-item="<?php echo $item->id; ?>"><?php echo $item->getClassification(); ?></option>
-					<?php } ?>
-				</datalist>
+				<?php
+					$datalist_items['items'] = $datalistItems;
+					$datalist_items['title'] = 'Titre de l\'oeuvre';
+					$datalist_items['name'] = 'searchTitle';
+					$datalist_items['value'] = $searchTitle;
+					$this->load->view('shared/_datalist_items', $datalist_items);
+				?>
 			</div>
 		</div>
 		<div class="row">
@@ -21,16 +21,16 @@
 			</div>
 			<div class="md-form col-md-3">
 				<?php
-					$select_type['name'] = 'searchType';
 					$select_type['types'] = $types;
+					$select_type['name'] = 'searchType';
 					$select_type['selected'] = $searchType;
 					$this->load->view('shared/_select_type_values', $select_type);
 				?>
 			</div>
 			<div class="md-form col-md-3">
 				<?php
-					$select_category['name'] = 'searchCategory';
 					$select_category['categories'] = $categories;
+					$select_category['name'] = 'searchCategory';
 					$select_category['selected'] = $searchCategory;
 					$this->load->view('shared/_select_category_values', $select_category);
 				?>

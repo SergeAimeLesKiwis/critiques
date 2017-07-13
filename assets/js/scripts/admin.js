@@ -61,7 +61,7 @@ function bindRemoveHighlight() {
 
 function bindAddHighlight() {
 	$('.add-highlight').click(function () {
-		var id = $('#items').find('option[value="' + $('#select-highlight').val() + '"]').data('item');
+		var id = $('#items').find('option[value="' + $('#datalist-items').val() + '"]').data('item');
 		if (id != null && id > 0) {
 			var position = $(this).data('position');
 			$(position).html($('#waiting-div').html());

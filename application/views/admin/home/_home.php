@@ -26,13 +26,11 @@
 		<input id="highlights" type="hidden" name="highlights" value="<?php echo $value; ?>" />
 
 		<div class="md-form">
-			<input type="text" id="select-highlight" list="items" name="items" class="input-select form-control bg-white-color" />
-			<label for="searchTitle">Choisir une oeuvre</label>
-			<datalist id="items">
-				<?php foreach ($datalistItems as $item) { ?>
-					<option value="<?php echo $item->title; ?>" data-item="<?php echo $item->id; ?>"><?php echo $item->getClassification(); ?></option>
-				<?php } ?>
-			</datalist>
+			<?php
+				$datalist_items['items'] = $datalistItems;
+				$datalist_items['title'] = 'Choisir une oeuvre';
+				$this->load->view('shared/_datalist_items', $datalist_items);
+			?>
 		</div>
 
 		<div id="highlights-container" class="row">
