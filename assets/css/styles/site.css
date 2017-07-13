@@ -198,3 +198,11 @@ h2.darkgrey-color{
 	text-align: center;
 	background-color: #000;
 }
+
+/* Pastille de couleur */
+.loan-status{
+	width: 20px;
+    height: 20px;
+    border-radius: 10px;
+   	/*box-shadow: 2px 5px 20px 0px green;*/
+}	

@@ -1,5 +1,3 @@
-<?php
-?>
 <br/>
 <div class=" col-md-12 text-center">
 	<h1 class="green-color text-center"><b>Profil Utilisateur</b></h1>
@@ -36,37 +34,5 @@
 </div>
 <br />
 <div id="loans" class="card-group">
-	<div class="card">
-		<img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%2813%29.jpg" alt="Card image cap">
-		<div class="card-block">
-			<h4 class="card-title">Card title</h4>
-			<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-		</div>
-	</div>	
-	<div class="card">
-		<img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%2840%29.jpg" alt="Card image cap">
-		<div class="card-block">
-			<h4 class="card-title">Card title</h4>
-			<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-		</div>
-	</div>
-	<div class="card">
-		<img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%2842%29.jpg" alt="Card image cap">
-		<div class="card-block">
-			<h4 class="card-title">Card title</h4>
-			<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-		</div>
-	</div>
-	<div class="card">
-		<img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%2842%29.jpg" alt="Card image cap">
-		<div class="card-block">
-			<h4 class="card-title">Card title</h4>
-			<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-			<a class="btn bg-green-hover waves-effect waves-light">Demander le prêt</a>
-		</div>
-	</div>
+	<?php $this->load->view('user/_loans', array('loans' => $user->loans)); ?>
 </div>
-
-		
-
-		
