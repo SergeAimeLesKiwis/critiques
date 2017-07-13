@@ -31,7 +31,7 @@
 				<?php
 					$home['concept'] = $concept;
 					$home['highlights'] = $highlights;
-					$home['items'] = $items;
+					$home['datalistItems'] = $datalistItems;
 					$this->load->view('admin/home/_home', $home); 
 				?>
 			</div>
@@ -52,7 +52,11 @@
 			</div>
 			<div class="tab-pane fade" id="admin-add-item" role="tabpanel">
 				<br />
-				<p>ADD ITEM</p>
+				<?php
+					$types_categories['types'] = $types;
+					$types_categories['categories'] = $categories;
+					$this->load->view('admin/items/_form_item', array('item' => new Item_VM())); 
+				?>
 			</div>
 			<div class="tab-pane fade" id="admin-update-item" role="tabpanel">
 				<br />

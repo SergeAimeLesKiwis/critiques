@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	initToastr();
+
 	$('.toggle-slide').click(function() {
 		var target = $(this).data('slide');
 		$(target).slideToggle();
@@ -13,26 +15,48 @@ $(document).ready(function() {
 		$(this).addClass('showing');
 	});
 
-	loadModalOnClick('.show-infos', '#modal-lg')
+	loadModalOnClick('.show-infos', { target: '#modal-lg', controller: 'item', action: 'infos' }, { reloadable: true });
 });
 
-function loadModalOnClick(selector, modal, infos, callback) {
+function initToastr() {
+	toastr.options = {
+		'closeButton': false,
+		'debug': false,
+		'newestOnTop': false,
+		'progressBar': true,
+		'positionClass': 'toast-bottom-center',
+		'preventDuplicates': true,
+		'onclick': null,
+		'showDuration': '1000',
+		'hideDuration': '1000',
+		'timeOut': '5000',
+		'extendedTimeOut': '1000',
+		'showEasing': 'swing',
+		'hideEasing': 'linear',
+		'showMethod': 'fadeIn',
+		'hideMethod': 'fadeOut'
+	}
+}
+
+function loadModalOnClick(selector, infos, callback) {
 	$(selector).click(function () {
+		infos.target = infos.target || $(this).data('target');
 		infos.controller = infos.controller || $(this).data('controller');
 		infos.action = infos.action || $(this).data('action');
-		infos.key = infos.key || $(this).data('key');
+		var key = $(this).data('key') || 0;
 
-		$(modal).modal('show');
-		$(modal + ' .modal-content').html($('#waiting-div').html());
+		if (!$(infos.target).is(':visible')) $(infos.target).modal('show');
+		$(infos.target + ' .modal-content').html($('#waiting-div').html());
 
 		$.ajax({
 			type: 'post',
 			url: baseUrl + infos.controller + '/load_' + infos.action + '_modal',
-			data: { id: infos.key },
+			data: { id: key },
 			dataType: 'html',
 			success: function (data) {
-				$(modal + ' .modal-content').html(data);
-				if (callback != null) callback();
+				$(infos.target + ' .modal-content').html(data);
+				if (callback.todo != null) callback.todo();
+				else if (callback.reloadable != null) loadModalOnClick(selector, infos, callback);
 			},
 			error: function(xhr, status, error) {
 				toastr['error'](xhr.responseText, 'Attention');

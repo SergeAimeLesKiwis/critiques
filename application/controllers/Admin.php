@@ -25,7 +25,7 @@
 			$content['concept'] = $this->ParameterService->getHomeConcept();
 			$highlights = $this->ParameterService->getHomeHighlights();
 			$content['highlights'] = $this->ItemService->getItems($highlights);
-			$content['items'] = $this->ItemService->getAllItems();
+			$content['datalistItems'] = $this->ItemService->getDatalistItems();
 
 			$content['static'] = $this->TypeService->getAllTypes();
 

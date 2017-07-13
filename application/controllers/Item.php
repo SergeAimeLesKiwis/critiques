@@ -17,11 +17,13 @@
 			$this->load->model('CategoryService');
 			$this->load->model('ItemService');
 
+			$search = $this->input->post('search');
 			$searchTitle = $this->input->post('searchTitle');
 			$searchAuthor = $this->input->post('searchAuthor');
 			$searchType = substr($this->input->post('searchType'), 2);
 			$searchCategory = substr($this->input->post('searchCategory'), 2);
 
+			$content['search'] =  $search;
 			$content['searchTitle'] =  $searchTitle;
 			$content['searchAuthor'] =  $searchAuthor;
 			$content['searchType'] =  $searchType;
@@ -29,9 +31,13 @@
 
 			$content['types'] = $this->TypeService->getAllTypes();
 			$content['categories'] = $this->CategoryService->getAllCategories();
+			$content['datalistItems'] = $this->ItemService->getDatalistItems();
 
-			$content['allItems'] = $this->ItemService->getAllItems();
-			$content['items'] = $this->ItemService->getFilteredItems($searchTitle, $searchAuthor, $searchType, $searchCategory);
+			if (isset($search)) {
+				$content['items'] = $this->ItemService->getFilteredItems($searchTitle, $searchAuthor, $searchType, $searchCategory);
+			} else {
+				$content['items'] = array();
+			}
 
 			$this->load->view('item/index', $content);
 
@@ -39,13 +45,14 @@
 			$this->loadFooter(array('jquery.chained.min', 'scripts/items'));
 		}
 
-		public function load_infos_modal {
+		public function load_infos_modal() {
 			$id = $this->input->post('id');
 
 			if (!empty($id)) {
 				$this->load->model('ItemService');
 				$item = $this->ItemService->getItem($id);
-				$this->load->view('item/_infos_modal', array('item' => $item));
+				$suggestions = $this->ItemService->getSuggestions($item->id, $item->category->id);
+				$this->load->view('item/_infos_modal', array('item' => $item, 'suggestions' => $suggestions));
 			}
 		}
 	}

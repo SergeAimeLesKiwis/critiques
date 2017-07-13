@@ -2,13 +2,14 @@
 	<h3 class="blue-color text-center"><i class="fa fa-eercast"></i> Contenus</h3>
 
 	<form method="post" action="">
+		<input type="hidden" name="search" value="1" />
 		<div class="row">
 			<div class="col-md-12">
 				<div class="md-form">
 					<input type="text" id="searchTitle" list="items" name="searchTitle" class="input-select form-control bg-white-color" value="<?php echo $searchTitle; ?>" />
 					<label for="searchTitle">Titre de l'oeuvre</label>
 					<datalist id="items">
-						<?php foreach ($allItems as $item) { ?>
+						<?php foreach ($datalistItems as $item) { ?>
 							<option value="<?php echo $item->title; ?>" data-item="<?php echo $item->id; ?>"><?php echo $item->getClassification(); ?></option>
 						<?php } ?>
 					</datalist>
@@ -54,12 +55,16 @@
 	<hr class="mb-2">
 
 	<?php
-		if (!empty($items)) {
-			echo '<div class="row">';
-				foreach ($items as $item) {
-					$this->load->view('shared/_item_container', array('item' => $item)); 
-				}
-			echo '</div>';
+		if (isset($search)) {
+			if (!empty($items)) {
+				echo '<div class="row">';
+					foreach ($items as $item) {
+						$this->load->view('shared/_item_container', array('item' => $item)); 
+					}
+				echo '</div>';
+			} else {
+				echo '<div><em>Aucune oeuvre ne correspond à vos critères ...</em></div>';
+			}
 		} else {
 			echo '<div><em>Veuillez sélectionner des critères ...</em></div>';
 		}

@@ -1,14 +1,12 @@
 $(document).ready(function() {
-	initToastr();
-
 // HOME
 	bindRemoveHighlight();
 	bindAddHighlight();
 
-	$('#admin-home #save-home').click(function () {
+	$('#save-home').click(function () {
 		var action = baseUrl + 'admin/save_home/';
-		var concept = $('#admin-home #concept').val();
-		var highlights = $('#admin-home #highlights').val();
+		var concept = $('#concept').val();
+		var highlights = $('#highlights').val();
 
 		$.ajax({
 			type: 'post',
@@ -27,38 +25,21 @@ $(document).ready(function() {
 // STATIC
 
 // TYPES CATEGORIES
-	var callback = function () { initModal(); };
-	loadModalOnClick('#admin-types-categories #create-type', '#modal-sm', { controller: 'admin', action: 'type', key: '0' }, callback);
-	loadModalOnClick('#admin-types-categories #create-category', '#modal-sm', { controller: 'admin', action: 'category', key: '0' }, callback);
+	var init = function () { initModal(); };
+	loadModalOnClick('#create-type', { target: '#modal-sm', controller: 'admin', action: 'type' }, { todo: init });
+	loadModalOnClick('#create-category', { target: '#modal-sm', controller: 'admin', action: 'category' }, { todo: init });
 	initBindEditRemove();
-});
 
-function initToastr() {
-	toastr.options = {
-		'closeButton': false,
-		'debug': false,
-		'newestOnTop': false,
-		'progressBar': true,
-		'positionClass': 'toast-bottom-center',
-		'preventDuplicates': true,
-		'onclick': null,
-		'showDuration': '1000',
-		'hideDuration': '1000',
-		'timeOut': '5000',
-		'extendedTimeOut': '1000',
-		'showEasing': 'swing',
-		'hideEasing': 'linear',
-		'showMethod': 'fadeIn',
-		'hideMethod': 'fadeOut'
-	}
-}
+// ITEMS
+	
+});
 
 // HOME
 
 function bindRemoveHighlight() {
-	$('#admin-home .remove-highlight').click(function () {
+	$('.remove-highlight').click(function () {
 		var position = $(this).data('position');
-		$('#admin-home #' + position).html($('#waiting-div').html());
+		$(position).html($('#waiting-div').html());
 		var action = baseUrl + 'admin/refreshHighlight/';
 
 		$.ajax({
@@ -67,7 +48,7 @@ function bindRemoveHighlight() {
 			data: { id: 0, position: position },
 			dataType: 'html',
 			success: function (data) {
-				$('#admin-home #' + position).html(data);
+				$(position).html(data);
 				bindAddHighlight();
 				refresh();
 			},
@@ -79,11 +60,11 @@ function bindRemoveHighlight() {
 }
 
 function bindAddHighlight() {
-	$('#admin-home .add-highlight').click(function () {
-		var id = $('#admin-home  #items').find('option[value="' + $('#select-highlight').val() + '"]').data('item');
+	$('.add-highlight').click(function () {
+		var id = $('#items').find('option[value="' + $('#select-highlight').val() + '"]').data('item');
 		if (id != null && id > 0) {
 			var position = $(this).data('position');
-			$('#admin-home #' + position).html($('#waiting-div').html());
+			$(position).html($('#waiting-div').html());
 			var action = baseUrl + 'admin/refreshHighlight/';
 
 			$.ajax({
@@ -92,7 +73,7 @@ function bindAddHighlight() {
 				data: { id: id, position: position },
 				dataType: 'html',
 				success: function (data) {
-					$('#admin-home #' + position).html(data);
+					$(position).html(data);
 					bindRemoveHighlight();
 					refresh();
 				},
@@ -106,13 +87,13 @@ function bindAddHighlight() {
 
 function refresh() {
 	var highlights = '';
-	highlights += $('#admin-home #first .item-id').data('value') + '|';
-	highlights += $('#admin-home #second .item-id').data('value') + '|';
-	highlights += $('#admin-home #third .item-id').data('value') + '|';
-	highlights += $('#admin-home #fourth .item-id').data('value') + '|';
-	highlights += $('#admin-home #fifth .item-id').data('value') + '|';
-	highlights += $('#admin-home #sixth .item-id').data('value');
-	$('#admin-home #highlights').val(highlights);
+	highlights += $('#first .item-id').data('value') + '|';
+	highlights += $('#second .item-id').data('value') + '|';
+	highlights += $('#third .item-id').data('value') + '|';
+	highlights += $('#fourth .item-id').data('value') + '|';
+	highlights += $('#fifth .item-id').data('value') + '|';
+	highlights += $('#sixth .item-id').data('value');
+	$('#highlights').val(highlights);
 }
 
 // STATIC
@@ -120,7 +101,7 @@ function refresh() {
 // TYPES CATEGORIES
 
 function bindDelete(selector, target) {
-	$('#admin-types-categories ' + selector).click(function () {
+	$(selector).click(function () {
 		var action = baseUrl + 'admin/delete_' + $(this).data('action') + '/';
 		var id = $(this).data('key');
 
@@ -142,9 +123,10 @@ function bindDelete(selector, target) {
 }
 
 function initBindEditRemove() {
-	var callback = function () { initModal(); };
-	loadModalOnClick('#admin-types-categories .edit-type', '#modal-sm', { controller: 'admin', action: 'type' }, callback);
-	loadModalOnClick('#admin-types-categories .edit-category', '#modal-sm', { controller: 'admin', action: 'category' }, callback);
+	var init = function () { initModal(); };
+	loadModalOnClick('.edit-type', { target: '#modal-sm', controller: 'admin', action: 'type' }, { todo: init });
+	loadModalOnClick('.edit-category', { target: '#modal-sm', controller: 'admin', action: 'category' }, { todo: init });
+
 	bindDelete('.remove-type', '#type-list');
 	bindDelete('.remove-category', '#category-list');
 }
@@ -155,33 +137,27 @@ function initModal() {
 
 	$('#modal-sm #send-type-modal-new').click(function() {
 		var name = $('#modal-sm #type_name').val();
-		var target = '#admin-types-categories #type-list';
-
-		sendModalInfos(url, { name: name }, target, callback);
+		sendModalInfos(url, { name: name }, '#type-list', callback);
 	});
 
 	$('#modal-sm #send-type-modal-edit').click(function() {
 		var id = $('#modal-sm #type_id').val();
 		var name = $('#modal-sm #type_name').val();
-		var target = '#admin-types-categories .editable-type-' + id;
-
-		sendModalInfos(url, { id: id, name: name }, target, callback);
+		sendModalInfos(url, { id: id, name: name }, '.editable-type-' + id, callback);
 	});
 
 	$('#modal-sm #send-category-modal-new').click(function() {
 		var name = $('#modal-sm #category_name').val();
 		var type = $('#modal-sm #category_type').val();
-		var target = '#admin-types-categories #category-list';
-
-		sendModalInfos(url, { name: name, type: type }, target, callback);
+		sendModalInfos(url, { name: name, type: type }, '#category-list', callback);
 	});
 
 	$('#modal-sm #send-category-modal-edit').click(function() {
 		var id = $('#modal-sm #category_id').val();
 		var name = $('#modal-sm #category_name').val();
 		var type = $('#modal-sm #category_type').val();
-		var target = '#admin-types-categories .editable-category-' + id;
-
-		sendModalInfos(url, { id: id, name: name, type: type }, target, callback);
+		sendModalInfos(url, { id: id, name: name, type: type }, '.editable-category-' + id, callback);
 	});
 }
+
+// ITEMS

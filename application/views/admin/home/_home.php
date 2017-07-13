@@ -29,7 +29,7 @@
 			<input type="text" id="select-highlight" list="items" name="items" class="input-select form-control bg-white-color" />
 			<label for="searchTitle">Choisir une oeuvre</label>
 			<datalist id="items">
-				<?php foreach ($items as $item) { ?>
+				<?php foreach ($datalistItems as $item) { ?>
 					<option value="<?php echo $item->title; ?>" data-item="<?php echo $item->id; ?>"><?php echo $item->getClassification(); ?></option>
 				<?php } ?>
 			</datalist>

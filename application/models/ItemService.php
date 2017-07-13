@@ -36,6 +36,41 @@
 			return $result;
 		}
 
+		public function getDatalistItems() {
+			$this->load->model('CategoryService');
+
+			$result = $this->db->get('items')->result();
+			$items = array();
+
+			foreach ($result as $row)
+			{
+				$item = new Item_VM();
+				$item->id = $row->id;
+				$item->title = $row->title;
+				$item->category = $this->CategoryService->getCategory($row->category);
+
+				$items[] = $item;
+			}
+
+			return $items;
+		}
+
+		public function getSuggestions($id, $category) {
+			$result = $this->db->where('id !=', $id)->where('category', $category)->order_by('RAND()')->limit(3)->get('items')->result();
+			$items = array();
+
+			foreach ($result as $row)
+			{
+				$item = new Item_VM();
+				$item->id = $row->id;
+				$item->title = $row->title;
+
+				$items[] = $item;
+			}
+
+			return $items;
+		}
+
 		public function getAllItems() {
 			$this->load->model('CategoryService');
 
