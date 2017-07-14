@@ -1,5 +1,6 @@
 <?php
 	require_once(dirname(__FILE__).'/Category_VM.php');
+	require_once(dirname(__FILE__).'/LoanStatus_VM.php');
 
 	class Item_VM {
 		public $id;
@@ -8,6 +9,7 @@
 		public $publish_date;
 		public $category;
 		public $description;
+		public $loan_status;
 
 		public function __construct() {
 			$this->id = 0;
@@ -16,6 +18,7 @@
 			$this->publish_date = date('d/m/Y');
 			$this->category = new Category_VM();
 			$this->description = '';
+			$this->loan_status = new LoanStatus_VM();
 		}
 
 		public function getImageTag() {

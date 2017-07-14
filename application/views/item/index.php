@@ -7,7 +7,7 @@
 			<div class="md-form col-md-12">
 				<?php
 					$datalist_items['items'] = $datalistItems;
-					$datalist_items['title'] = 'Titre de l\'oeuvre';
+					$datalist_items['placeholder'] = 'Titre de l\'oeuvre';
 					$datalist_items['name'] = 'searchTitle';
 					$datalist_items['value'] = $searchTitle;
 					$this->load->view('shared/_datalist_items', $datalist_items);

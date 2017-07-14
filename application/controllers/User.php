@@ -14,12 +14,16 @@
 
 			// CONTENT
 			$this->load->model('UserService');
+			$this->load->model('LoanService');
 
 			if ($id == 0) $id = /* SESSION USER ID HERE */ 0;
 			$user = $this->UserService->getUser($id);
 
 			if ($user != null) {
-				$this->load->view('user/profile', array('user' => $user));
+				$content['user'] = $user;
+				$content['loanStatus'] = $this->LoanService->getLoansStatus();
+
+				$this->load->view('user/profile', $content);
 			} else {
 				$this->load->view('user/no_user');
 			}

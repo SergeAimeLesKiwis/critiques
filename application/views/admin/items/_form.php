@@ -20,8 +20,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-1"></div>
-	<div class="md-form col-md-4">
+	<div class="md-form offset-md-1 col-md-4">
 		<?php
 			$select_type['types'] = $types;
 			$select_type['selected'] = $item->category->type->id;
@@ -29,8 +28,7 @@
 		?>
 	</div>
 
-	<div class="col-md-2"></div>
-	<div class="md-form col-md-4">
+	<div class="md-form offset-md-2 col-md-4">
 		<?php
 			$select_category['categories'] = $categories;
 			$select_category['selected'] = $item->category->id;

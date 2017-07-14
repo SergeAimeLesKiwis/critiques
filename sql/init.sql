@@ -120,6 +120,7 @@ CREATE TABLE `grades` (
 CREATE TABLE `loan_status` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(30) NOT NULL,
+	`color` VARCHAR(7) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -221,8 +222,8 @@ INSERT INTO `item_genres` (`genre`, `item`) VALUES
 (1, 6), (4, 6),
 (1, 7), (4, 7);
 
-INSERT INTO `loan_status` (`name`) VALUES 
-('Disponible'), ('Prêté'), ('Je le veux');
+INSERT INTO `loan_status` (`name`, `color`) VALUES 
+('Disponible', '#4CAF50'), ('Prêté', '#F44336'), ('Je le veux', '#2196F3');
 
 INSERT INTO `parameters` (`key`, `value`) VALUES 
 ('home_concept', 'Lorem Ipsum'),

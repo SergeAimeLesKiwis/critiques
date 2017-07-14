@@ -25,19 +25,16 @@
 </div>
 <br />
 <div class="row">
-	<div class="offset-md-2 col-md-2">
-		<span class="badge green loan-status">&nbsp;</span><em>Disponible</em>
-	</div>
-	<div class="offset-md-1 col-md-2">
-		<span class="badge red loan-status">&nbsp;</span><em>Prêté</em>
-	</div>
-	<div class="offset-md-1 col-md-2">
-		<span class="badge blue loan-status">&nbsp;</span><em>Je le veux</em>
-	</div>
+	<div class="col-md-1"></div>
+	<?php foreach ($loanStatus as $status) { ?>
+		<div class="offset-md-1 col-md-2">
+			<?php echo $status->getStatusBadge(); ?><em><?php echo $status->name; ?></em>
+		</div>
+	<?php } ?>
 </div>
 <br />
 <div id="loans" class="card-group">
-	<?php $this->load->view('user/_loans', array('loans' => $user->loans)); ?>
+	<?php $this->load->view('user/_loans', array('items' => $user->loans)); ?>
 </div>
 
 <hr class="mt-2">
