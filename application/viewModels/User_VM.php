@@ -7,6 +7,8 @@
 		public $username;
 		public $description;
 		public $loans;
+		public $reports;
+		public $status;
 
 		public function __construct() {
 			$this->email = '';
@@ -15,6 +17,8 @@
 			$this->username = '';
 			$this->description = '';
 			$this->loans = array();
+			$this->reports = array();
+			$this->status = '';
 		}
 
 		public function getFullName() {

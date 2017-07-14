@@ -63,6 +63,26 @@ CREATE TABLE `login_attempts` (
 	PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `reasons` (
+	`id` INT(8) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NOT NULL,
+	`value` INT(8) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `reports` (
+	`id` INT(8) NOT NULL AUTO_INCREMENT,
+	`user` INT(11) NOT NULL,
+	`reason` INT(8) NOT NULL,
+	`reported_by` INT(11) NOT NULL,
+	`reported_at` DATETIME NOT NULL,	
+	`active` TINYINT(1) NOT NULL,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`user`) REFERENCES `users`(`id`),
+	FOREIGN KEY (`reason`) REFERENCES `reasons`(`id`),
+	FOREIGN KEY (`reported_by`) REFERENCES `users`(`id`)
+);
+
 CREATE TABLE `types` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(50) NOT NULL,
@@ -174,13 +194,25 @@ INSERT INTO `groups` (`name`, `description`) VALUES
 ('banned', 'Banni');
 
 
-INSERT INTO `users` (`ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `description`, `interests`) VALUES
-('127.0.0.1', 'Grand Manitou', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 
-'', 'admin@mail.com', '', NULL, '1268889823', '1268889823', '1', 'Jean-Michel', 'L\'Admin', 'Le Club des Critiques', 
-'0836656565', 'Administrateur du site "Le Club des Critiques"', NULL, NULL);
+INSERT INTO `users` (`ip_address`, `username`, `password`, `email`, `created_on`, `active`, `first_name`, `last_name`, `description`) VALUES
+('127.0.0.1', 'Grand Manitou', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'admin@mail.com', '1268889823', '1', 'Jean-Michel', 'L\'Admin', 'Le Club des Critiques'),
+('127.0.0.1', 'Juanita', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'juanita@mail.com', '1268889823', '1', 'Juanita', 'Banana', 'Fan de Henry Salvador'),
+('127.0.0.1', 'Bogoss', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'shawn@mail.com', '1268889823', '1', 'Shawn', 'Shawn', 'Stripteaser professionnel');
 
 INSERT INTO `users_groups` (`user_id`, `group_id`) VALUES 
 (1, 1);
+
+INSERT INTO `reasons` (`name`, `value`) VALUES 
+('Incitation à la haine raciale', 5),
+('Publication de contenu illicite', 5),
+('Insulte', 3),
+('Spam', 1),
+('Mochitude', 999);
+
+INSERT INTO `reports` (`user`, `reason`, `reported_by`, `reported_at`, `active`) VALUES 
+(3, 3, 2, '2017-07-13', 1),
+(3, 2, 2, '2017-07-13', 1),
+(2, 5, 3, '2017-07-13', 1);
 
 INSERT INTO `types` (`name`) VALUES 
 ('Livre'), ('Film'), ('Musique'), ('Spectacle'), ('Jeu');

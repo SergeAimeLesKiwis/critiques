@@ -11,19 +11,29 @@
 			$this->mail->isSMTP();
 			$this->mail->Host = 'smtp.gmail.com';
 			$this->mail->SMTPAuth = true;
-			$this->mail->Username = appconfig::getAppAdminEmail();
-			$this->mail->Password = appconfig::getAppAdminPassword();
+			$this->mail->Username = AppConfig::getAppAdminEmail();
+			$this->mail->Password = AppConfig::getAppAdminPassword();
 			$this->mail->SMTPSecure = 'tls';
 			$this->mail->Port = 587;
 			$this->mail->isHTML(true);
 		}
 
-		public function sendMail($fromMail, $fromName, $to, $subject, $message) {
+		public function contact_user($fromMail, $fromName, $to, $subject, $message) {
 			$this->mail->setFrom($fromMail, $fromName);
 			$this->mail->addAddress($to);
 			$this->mail->Subject = '[Club-des-Critiques] -'.$subject;
 			$this->mail->Body = $message;
 			$this->mail->send();
+		}
+
+		public function contact_admin($fromMail, $fromName, $subject, $message) {
+			$this->mail->setFrom($fromMail, $fromName);
+			$this->mail->addAddress(AppConfig::getAppAdminEmail());
+			$this->mail->Subject = $subject;
+			$this->mail->Body = $message;
+			$this->mail->send();
+
+			return AppConfig::getAppAdminEmail();
 		}
 	}
 ?>

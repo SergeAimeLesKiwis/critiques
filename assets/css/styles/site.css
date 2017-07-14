@@ -28,166 +28,169 @@
 	to { -moz-transform: rotate(360deg);}
 }
 
- #inscript_email{
- 	margin-bottom: 5px;
- }
-
+#inscript_email {
+	margin-bottom: 5px;
+}
 
 /* images effects */
- .img_resize{
- 	width: 200px
- }
+.img_resize {
+	width: 200px
+}
 
- #img_intro{
- 	background-image:url(../../img/home.png);
- 	max-width: 100%;
- 	height: 400px;
- 	text-align: center;
- }
+#img_intro {
+	background-image:url(../../img/home.png);
+	max-width: 100%;
+	height: 400px;
+	text-align: center;
+}
 
- /* Couleur texte */
+/* Couleur texte */
 
- .blue-color{
- 	color : #70BEB1;
- }
-
- .brown-color{
- 	color : #D99E7E;
- }
-
- .green-color{
+.blue-color {
 	color : #70BEB1;
- }
- 
- .darkgrey-color{
- 	color : #25283C;
- }
+}
 
-  .grey-color{
- 	color : #BDBCBA;
- }
+.brown-color {
+	color : #D99E7E;
+}
 
- /* Couleur background */
+.green-color {
+	color : #70BEB1;
+}
 
- .bg-blue-color{
- 	background-color : #CEE8DF!important;
- }
+.red-color {
+	color : #A44040;
+}
 
- .bg-brown-color{
- 	background-color : #D99E7E!important;
- }
+.darkgrey-color {
+	color : #25283C;
+}
 
- .bg-green-color{
+.grey-color {
+	color : #BDBCBA;
+}
+
+/* Couleur background */
+
+.bg-blue-color {
+	background-color : #CEE8DF!important;
+}
+
+.bg-brown-color {
+	background-color : #D99E7E!important;
+}
+
+.bg-green-color {
 	background-color : #70BEB1!important;
- }
- 
- .bg-darkgrey-color{
- 	background-color : #25283C!important;
- }
+}
 
-  .bg-grey-color{
- 	background-color : #BDBCBA!important;
- }
+.bg-darkgrey-color {
+	background-color : #25283C!important;
+}
 
- .bg-lightblue-color{
- 	background-color : #e9f2ef!important;
- }
+.bg-grey-color {
+	background-color : #BDBCBA!important;
+}
 
- .bg-white-color{
- 	background-color : #ffffff!important;
- }
+.bg-lightblue-color {
+	background-color : #e9f2ef!important;
+}
 
- /* Couleur hover */
+.bg-white-color {
+	background-color : #ffffff!important;
+}
 
- .bg-green-hover{
- 	background-color : #70BEB1!important;
- }
+/* Couleur hover */
 
- .bg-green-hover:hover{
- 	background-color : #389a8a!important;
- }
+.bg-green-hover {
+	background-color : #70BEB1!important;
+}
 
- .bg-grey-hover{
- 	background-color : #BDBCBA!important;
- }
+.bg-green-hover:hover {
+	background-color : #389a8a!important;
+}
 
- .bg-grey-hover:hover{
- 	background-color : #25283C!important;
- }
+.bg-grey-hover {
+	background-color : #BDBCBA!important;
+}
 
- .brown-hover{
- 	color : #b27250;
- }
+.bg-grey-hover:hover {
+	background-color : #25283C!important;
+}
 
-.brown-hover:hover{
- 	color : #D99E7E;
- }
+.brown-hover {
+	color : #b27250;
+}
 
- /* Parralax effect */
+.brown-hover:hover {
+	color : #D99E7E;
+}
 
- .parallax-window {
-    min-height: 400px;
-    background: transparent;
+/* Parralax effect */
+
+.parallax-window {
+	min-height: 400px;
+	background: transparent;
 }
 
 /* Titles effects */
 
-h2.darkgrey-color, p.darkgrey-color{
+h2.darkgrey-color, p.darkgrey-color {
 	padding: 25px!important;
 	max-width: 40%;
 	text-align: left;
 }
 
-h2.blue-color{
+h2.blue-color {
 	margin-left: 3%;
 	margin-top: 2%;
 }
 
-h2.darkgrey-color{
+h2.darkgrey-color {
 	margin-top : 0;
 }
 
-.link-card{
+.link-card {
 	color : #D99E7E!important;
 }
 
-.link-card:hover{
+.link-card:hover {
 	color : #70BEB1!important;
 }
 
-.col-md-10 .label-form{
+.col-md-10 .label-form {
 	margin-left: 10px;
 }
 
 /* text effects */
-.label-form{
+.label-form {
 	font-size: 1.1em!important;
 }
 
 /* container effects */
 
-.spacer{
+.spacer {
 	padding: 10px!important;
 	border : 1px solid #BDBCBA;
-    margin: 1% 4% 1% 4%;
+	margin: 1% 4% 1% 4%;
 }
 
-.form-display{
+.form-display {
 	margin-top : 15px;
 	margin-left : 8%;
 	margin-right: 50%!important;
 }
 
-.input-select{
+.input-select {
 	padding : 2px;
 	margin-bottom : 5px;
 }
 
-#highlights-container{
+#highlights-container {
 	margin-left: 10px;
 }
 
-#admin-menu{
+#admin-menu {
 	padding-right: 0;
 }
 
@@ -202,13 +205,13 @@ h2.darkgrey-color{
 /* Pastille de couleur */
 .loan-status {
 	width: 15px;
-    height: 15px;
-    border-radius: 10px;
-   	box-shadow: 2px 5px 20px 0px grey;
-   	margin-right: 5px;
+	height: 15px;
+	border-radius: 10px;
+		box-shadow: 2px 5px 20px 0px grey;
+		margin-right: 5px;
 }	
 
 /* Aucune marge */
-.no-margin{
+.no-margin {
 	margin : 0!important;
 }

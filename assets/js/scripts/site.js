@@ -81,7 +81,7 @@ function sendInfos(url, data, target, callback) {
 			if (callback.success_message != null) toastr['success'](callback.success_message, 'Succès');
 		},
 		error: function(xhr, status, error) {
-			if (callback.show == null) toastr['error'](xhr.responseText, 'Attention');
+			toastr['error'](xhr.responseText, 'Attention');
 		}
 	});
 }

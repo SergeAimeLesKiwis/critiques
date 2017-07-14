@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('a.nav-link').click(function() {
+	$('#admin-menu a.nav-link').click(function() {
 		var type = $(this).data('action')
 		var url = baseUrl + 'admin/load_admin_' + type;
 		var target = $(this).attr('href');

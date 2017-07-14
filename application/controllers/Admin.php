@@ -7,19 +7,21 @@
 		public function __construct() {
 			parent::__construct();
 
-			// if ($this->ion_auth->is_admin() === false) {
-			// 	redirect('home');
-			// }
+			if ($this->ion_auth->is_admin() === false) {
+				redirect('home');
+			}
 
 			$this->load->model('ParameterService');
 			$this->load->model('ItemService');
 			$this->load->model('TypeService');
 			$this->load->model('CategoryService');
+			$this->load->model('UserService');
+			$this->load->model('ReportService');
 		}
 
 		public function index() {
 			// HEADER
-			$this->loadHeader('Administration', array('styles/editable'));
+			$this->loadHeader('Administration', array('styles/editable', 'styles/admin'));
 
 			// CONTENT
 			$this->load->view('admin/index');
@@ -318,7 +320,7 @@
 
 //region Rooms
 		public function load_admin_rooms() {
-			$data = array();
+			$data['datalistItems'] = $this->ItemService->getDatalistItems();
 
 			$this->load->view('admin/rooms/_index', $data);
 		}
@@ -326,9 +328,21 @@
 
 //region Users
 		public function load_admin_users() {
-			$data = array();
+			$data['users'] = $this->UserService->getUserList();
 
 			$this->load->view('admin/users/_index', $data);
+		}
+
+		public function show_reports() {
+			$id = $this->input->post('id');
+
+			if (!empty($id)) {
+				$data['reports'] = $this->ReportService->getReportsOfUser($id);
+
+				$this->load->view('admin/users/_show_reports', $data);
+			} else {
+				$this->error('Veuillez choisir un utilisateur');
+			}
 		}
 //endregion
 	}

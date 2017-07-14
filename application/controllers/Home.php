@@ -63,11 +63,10 @@
 
 			$fromMail = $email;
 			$fromName = $name;
-			$to = AppConfig::getAppAdminEmail();
 			$subject = $this->input->post('subject');
 			$message = $this->input->post('message');
 
-			$this->mail_sender->sendMail($fromMail, $fromName, $to, $subject, $message);
+			echo $this->mail_sender->contact_admin($fromMail, $fromName, $subject, $message);
 		}
 	}
 ?>
