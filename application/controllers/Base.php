@@ -8,20 +8,21 @@
 		}
 
 		protected function loadHeader($title, $styles = array()) {
-			$header['title'] = $title;
-			$header['styles'] = $styles;
-			$header['isLogged'] = $this->ion_auth->logged_in();
-			$header['isAdmin'] = $this->ion_auth->is_admin();
+			$data['title'] = $title;
+			$data['styles'] = $styles;
+			$data['isLogged'] = $this->ion_auth->logged_in();
+			$data['isAdmin'] = $this->ion_auth->is_admin();
 
 			//TODO: get static pages
 			
-			$this->load->view('shared/header', $header);
+			$this->load->view('shared/header', $data);
 		}
 
 		protected function loadFooter($scripts = array(), $loadAdmin = false) {
-			$footer['scripts'] = $scripts;
-			$footer['loadAdmin'] = $loadAdmin;
-			$this->load->view('shared/footer', $footer);
+			$data['scripts'] = $scripts;
+			$data['loadAdmin'] = $loadAdmin;
+
+			$this->load->view('shared/footer', $data);
 		}
 
 		protected function error($message) {

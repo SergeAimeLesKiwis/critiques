@@ -36,7 +36,7 @@
 				?>
 			</div>
 			<div class="md-form col-md-3">
-				<button type="submit" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-search"></i> &nbsp;Filtrer</button>
+				<button id="load-item" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-search"></i> &nbsp;Filtrer</button>
 			</div>
 		</div>
 		

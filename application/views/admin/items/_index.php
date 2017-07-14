@@ -16,20 +16,24 @@
 					?>
 				</div>
 				<div class="md-form offset-md-1 col-md-2">
-					<button class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-eercast"></i> &nbsp;Charger</button>
+					<button id="load-item" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-eercast"></i>&nbsp;Charger</button>
 				</div>
 			</div>
 			<?php } ?>
 
 			<hr class="mt-2 mb-2">
 
-			<?php
-				$form['item'] = new Item_VM();
-				$form['types'] = $types;
-				$form['categories'] = $categories;
-				$form['url'] = $url;
-				$this->load->view('admin/items/_form', $form);
-			?>
+			<div id="form-content">
+				<?php
+					if (empty($datalistItems)) {
+						$form['item'] = new Item_VM();
+						$form['types'] = $types;
+						$form['categories'] = $categories;
+						$form['url'] = $url;
+						$this->load->view('admin/items/_form', $form);
+					}
+				?>
+			</div>
 		</div>
 	</div>
 </div>

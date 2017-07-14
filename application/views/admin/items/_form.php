@@ -48,7 +48,7 @@
 <div class="row">
 	<div class="md-form col-md-11">
 		<i class="fa fa-thermometer-three-quarters prefix"></i>
-		<div id="item-description" class="md-textarea editable" contenteditable="true"></div>
+		<div id="item-description" class="md-textarea editable" contenteditable="true"><?php echo $item->description; ?></div>
 		<label for="item-description" <?php if ($item->id > 0) echo 'class="active"'; ?>>Description</label>
 	</div>
 	<div class="md-form col-md-1">

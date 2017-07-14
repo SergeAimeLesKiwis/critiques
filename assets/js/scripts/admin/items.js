@@ -39,6 +39,7 @@ function initItems() {
 	loadModalOnClick('#show-add-link', { target: '#modal-sm', controller: 'admin', action: 'link' }, { todo: addLink });
 
 	$('#send-infos').click(function() {
+		var id = $('#item-id').val();
 		var url = 'admin/' + $(this).data('action');
 		var title = $('#item-title').val();
 		var author = $('#item-author').val();
@@ -57,9 +58,23 @@ function initItems() {
 				$('#select-category').val(null);
 				$('#item-description').html('');
 				$('#item-description').focusout();
+			} else if (url == 'admin/update_item') {
+				var newType = $('#select-type option[value="' + $('#select-type').val() + '"]').html();
+				var newCategory = $('#select-category option[value="' + $('#select-category').val() + '"]').html();
+				
+				$('#items').find('option[data-item="' + id + '"]').html(newType + ' - ' + newCategory);
 			}
 		};
 
-		sendInfos(url, { title: title, author: author, publish_date: publish_date, category: category, description: description }, null, { todo: reset });
+		sendInfos(url, { id: id, title: title, author: author, publish_date: publish_date, category: category, description: description }, null, { todo: reset });
+	});
+
+	$('#load-item').click(function() {
+		var init = function() { initItems(); };
+		var id = $('#items').find('option[value="' + $('#datalist-items').val() + '"]').data('item');
+
+		if (id != null && id > 0) {
+			sendInfos('admin/load_item', { id: id }, '#form-content', { todo: init, show: false });
+		}
 	});
 }
