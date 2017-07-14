@@ -24,26 +24,26 @@
 			<br />
 			<div class="md-form">
 				<i class="fa fa-user prefix"></i>
-				<input type="text" id="form3" class="form-control" />
-				<label for="form3">Votre nom</label>
+				<input type="text" id="contact-name" class="form-control" />
+				<label for="contact-name">Votre nom</label>
 			</div>
 			<div class="md-form">
 				<i class="fa fa-envelope prefix"></i>
-				<input type="text" id="form2" class="form-control" />
-				<label for="form2">Votre email</label>
+				<input type="text" id="contact-email" class="form-control" />
+				<label for="contact-email">Votre email</label>
 			</div>
 			<div class="md-form">
 				<i class="fa fa-tag prefix"></i>
-				<input type="text" id="form32" class="form-control" />
-				<label for="form34">Sujet</label>
+				<input type="text" id="contact-subject" class="form-control" />
+				<label for="contact-subject">Sujet</label>
 			</div>
 			<div class="md-form">
 				<i class="fa fa-pencil prefix"></i>
-				<textarea type="text" id="form8" class="md-textarea"></textarea>
-				<label for="form8">Votre message</label>
+				<textarea type="text" id="contact-message" class="md-textarea"></textarea>
+				<label for="contact-message">Votre message</label>
 			</div>
 			<div class="text-center">
-				<button class="btn btn-default bg-green-color">Envoyer</button>
+				<button id="contact-admin" class="btn btn-default bg-green-color">Envoyer</button>
 				<div class="call">
 					<br />
 					<p>

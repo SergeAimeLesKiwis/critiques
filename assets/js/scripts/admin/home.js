@@ -29,7 +29,7 @@ function bindRemoveHighlight() {
 		var url = baseUrl + 'admin/refresh_highlight/';
 		var todo = function() { bindAddHighlight(); refresh(); };
 
-		sendInfos(url, { id: 0, position: position }, position, { todo: todo, show: false });
+		sendInfos(url, { id: 0, position: position }, position, { todo: todo });
 	});
 }
 
@@ -42,7 +42,7 @@ function bindAddHighlight() {
 			var url = baseUrl + 'admin/refresh_highlight/';
 			var todo = function() { bindRemoveHighlight(); refresh(); };
 
-			sendInfos(url, { id: id, position: position }, position, { todo: todo, show: false });
+			sendInfos(url, { id: id, position: position }, position, { todo: todo });
 		}
 	});
 }

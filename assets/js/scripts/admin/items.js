@@ -47,6 +47,12 @@ function initItems() {
 		var category = $('#select-category').val();
 		var description = $('#item-description').html();
 
+		if (url == 'admin/add_item') {
+			var success_message = 'L\'oeuvre a bien été ajoutée';
+		} else if (url == 'admin/update_item') {
+			var success_message = 'Vos modifications ont été prises en compte';
+		}
+
 		var reset = function() {
 			if (url == 'admin/add_item') {
 				$('#item-title').val('');
@@ -66,7 +72,7 @@ function initItems() {
 			}
 		};
 
-		sendInfos(url, { id: id, title: title, author: author, publish_date: publish_date, category: category, description: description }, null, { todo: reset });
+		sendInfos(url, { id: id, title: title, author: author, publish_date: publish_date, category: category, description: description }, null, { todo: reset, success_message: success_message });
 	});
 
 	$('#load-item').click(function() {
@@ -74,7 +80,7 @@ function initItems() {
 		var id = $('#items').find('option[value="' + $('#datalist-items').val() + '"]').data('item');
 
 		if (id != null && id > 0) {
-			sendInfos('admin/load_item', { id: id }, '#form-content', { todo: init, show: false });
+			sendInfos('admin/load_item', { id: id }, '#form-content', { todo: init });
 		}
 	});
 }

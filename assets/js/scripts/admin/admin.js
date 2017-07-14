@@ -2,9 +2,10 @@ $(document).ready(function() {
 	$('a.nav-link').click(function() {
 		var type = $(this).data('action')
 		var url = baseUrl + 'admin/load_admin_' + type;
+		var target = $(this).attr('href');
 		var init = getInit(type);
 
-		sendInfos(url, {}, $(this).attr('href'), { todo: init, show: false });
+		sendInfos(url, {}, target, { todo: init });
 	});
 });
 

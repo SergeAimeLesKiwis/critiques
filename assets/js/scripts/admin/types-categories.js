@@ -39,28 +39,29 @@ function bindDelete(selector, target) {
 function initModal() {
 	var url = $('#modal-sm #send-infos-url').val();
 	var todo = function () { initBindEditRemove(); };
+	var success_message = 'Vos modifications ont été prises en compte';
 
 	$('#modal-sm #send-type-modal-new').click(function() {
 		var name = $('#modal-sm #type_name').val();
-		sendInfos(url, { name: name }, '#type-list', { todo: todo });
+		sendInfos(url, { name: name }, '#type-list', { todo: todo, success_message: success_message });
 	});
 
 	$('#modal-sm #send-type-modal-edit').click(function() {
 		var id = $('#modal-sm #type_id').val();
 		var name = $('#modal-sm #type_name').val();
-		sendInfos(url, { id: id, name: name }, '.editable-type-' + id, { todo: todo });
+		sendInfos(url, { id: id, name: name }, '.editable-type-' + id, { todo: todo, success_message: success_message });
 	});
 
 	$('#modal-sm #send-category-modal-new').click(function() {
 		var name = $('#modal-sm #category_name').val();
 		var type = $('#modal-sm #category_type').val();
-		sendInfos(url, { name: name, type: type }, '#category-list', { todo: todo });
+		sendInfos(url, { name: name, type: type }, '#category-list', { todo: todo, success_message: success_message });
 	});
 
 	$('#modal-sm #send-category-modal-edit').click(function() {
 		var id = $('#modal-sm #category_id').val();
 		var name = $('#modal-sm #category_name').val();
 		var type = $('#modal-sm #category_type').val();
-		sendInfos(url, { id: id, name: name, type: type }, '.editable-category-' + id, { todo: todo });
+		sendInfos(url, { id: id, name: name, type: type }, '.editable-category-' + id, { todo: todo, success_message: success_message });
 	});
 }

@@ -24,7 +24,7 @@
 			$this->load->view('home/index', $content);
 
 			// FOOTER
-			$this->loadFooter();
+			$this->loadFooter(array('scripts/home'));
 		}
 
 		public function statique($page) {
@@ -51,15 +51,23 @@
 		}
 
 		public function contact() {
-			$this->load->library('mail');
+			$this->load->library('mail_sender');
 
-			$fromMail = ""/* GET USER EMAIL */;
-			$fromName = ""/* GET USER NAME */;
+			if (isset($_SESSION['first_name']) && isset($_SESSION['last_name']) && isset($_SESSION['email'])) {
+				$name = $_SESSION['first_name'].' '.$_SESSION['last_name'];
+				$email = $_SESSION['email'];
+			} else {
+				$name = $this->input->post('name');
+				$email = $this->input->post('email');
+			}
+
+			$fromMail = $email;
+			$fromName = $name;
 			$to = AppConfig::getAppAdminEmail();
-			$subject = ""/* GET MSG SUBJECT */;
-			$message = ""/* GET MSG CONTENT */;
+			$subject = $this->input->post('subject');
+			$message = $this->input->post('message');
 
-			$this->maillib->sendMail($fromMail, $fromName, $to, $subject, $message);
+			$this->mail_sender->sendMail($fromMail, $fromName, $to, $subject, $message);
 		}
 	}
 ?>

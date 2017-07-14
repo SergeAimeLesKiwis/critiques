@@ -2,7 +2,7 @@
 	require_once('AppConfig.php');
 	require_once(dirname(__FILE__).'/../helpers/PHPMailer/PHPMailerAutoload.php');
 
-	class Mail {
+	class Mail_sender {
 
 		private $mail;
 
@@ -11,8 +11,8 @@
 			$this->mail->isSMTP();
 			$this->mail->Host = 'smtp.gmail.com';
 			$this->mail->SMTPAuth = true;
-			$this->mail->Username = appconfig::getAdminSenderLogin();
-			$this->mail->Password = appconfig::getAdminSenderPassword();
+			$this->mail->Username = appconfig::getAppAdminEmail();
+			$this->mail->Password = appconfig::getAppAdminPassword();
 			$this->mail->SMTPSecure = 'tls';
 			$this->mail->Port = 587;
 			$this->mail->isHTML(true);
