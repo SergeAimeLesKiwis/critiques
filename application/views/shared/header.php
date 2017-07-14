@@ -45,7 +45,7 @@
 							<li class="nav-item dropdown btn-group">
 								<a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte</a>
 								<div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
-									<a class="dropdown-item" href="<?php echo base_url('/'); ?>" >Mon profil</a>
+									<a class="dropdown-item" href="<?php echo base_url('user/profile'); ?>" >Mon profil</a>
 									<a class="dropdown-item">Mes salons</a>
 									<div class="dropdown-divider"></div>
         							<a class="dropdown-item" href="<?php echo base_url('auth/logout'); ?>">Déconnexion</a>

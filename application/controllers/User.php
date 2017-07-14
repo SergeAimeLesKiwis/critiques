@@ -15,8 +15,7 @@
 			// CONTENT
 			$this->load->model('UserService');
 			$this->load->model('LoanService');
-
-			if ($id == 0) $id = /* SESSION USER ID HERE */ 0;
+			if ($id == 0) $id = $_SESSION['user_id'];
 			$user = $this->UserService->getUser($id);
 
 			if ($user != null) {
