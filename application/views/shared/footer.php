@@ -1,7 +1,5 @@
 	</div>
 	
-	<footer></footer>
-
 	<div id="modal-sm" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-sm cascading-modal" role="document">
 			<div class="modal-content">
@@ -54,5 +52,32 @@
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/users.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/admin.js"></script>
 	<?php } ?>
+
+		<footer class="page-footer bg-darkgrey-color center-on-small-only no-margin">
+		<!-- 
+		    <div class="container-fluid">
+		        <div class="row">
+
+		            <div class="col-md-6">
+		                <h5 class="title"> À propos du Club des Critiques </h5>
+		                <p>Entreprise à petite échelle, nous faisons partager à nos utilisateurs notre passion pour les oeuvres !</p>
+		            </div>
+
+		            <div class="col-md-6">
+		                <h5 class="title">Mentions</h5>
+		                <ul>
+		                    <li><a href="#!">Mentions Légales</a></li>
+		                    <li><a href="#!">À propos du Club des Critiques</a></li>
+		                </ul>
+		            </div>
+		        </div>
+		    </div> -->
+
+		    <div class="footer-copyright">
+		        <div class="container-fluid">
+		            <i class="fa fa-copyright"></i> 2017 Copyright: <a href="https://www.MDBootstrap.com">All rights reserved - Le Club des Critiques </a>
+				</div>
+		    </div>
+		</footer>
 	</body>
 </html>

@@ -39,6 +39,7 @@
 
 <hr class="mt-2">
 
+<?php if ($user->id != $_SESSION['user_id']){ ?>
 <div class="offset-md-3 col-md-10">
 	<div class="form-display">
 		<div class="card-block">
@@ -63,3 +64,4 @@
 		</div>
 	</div>
 </div>
+<?php } ?>

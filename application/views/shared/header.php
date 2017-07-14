@@ -38,7 +38,7 @@
 		            </ul>
 		            <ul class="navbar-nav">
 						<?php if ($isAdmin) { ?>
-							<li class="nav-item"><a href="<?php echo base_url('admin'); ?>" class="nav-link">Adminitration</a></li>
+							<li class="nav-item"><a href="<?php echo base_url('admin'); ?>" class="nav-link">Administration</a></li>
 						<?php } ?>
 
 						<?php if ($isLogged) { ?>

@@ -21,7 +21,7 @@
 		public function sendMail($fromMail, $fromName, $to, $subject, $message) {
 			$this->mail->setFrom($fromMail, $fromName);
 			$this->mail->addAddress($to);
-			$this->mail->Subject = '[Club-des-Critiques] '.$subject;
+			$this->mail->Subject = '[Club-des-Critiques] -'.$subject;
 			$this->mail->Body = $message;
 			$this->mail->send();
 		}
