@@ -31,5 +31,22 @@
 			// FOOTER
 			$this->loadFooter();
 		}
+
+		public function contact() {
+			$this->load->model('UserService');
+			$this->load->model('ItemService');
+
+			$user_id = $this->input->post('user');
+			$item_id = $this->input->post('item');
+
+			$user = $this->UserService->getUser($user_id);
+			$item = $this->ItemService->getItem($item_id);
+
+			if ($user != null && $item != null) {
+				$this->load->library('mail_sender');
+				$from = array('name' => $_SESSION['first_name'].' '.$_SESSION['last_name'], 'email' => $_SESSION['email']);
+				echo $this->mail_sender->contact_user($from, $user->email, $item);
+			}
+		}
 	}
 ?>

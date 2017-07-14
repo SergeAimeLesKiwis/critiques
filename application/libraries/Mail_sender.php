@@ -18,11 +18,13 @@
 			$this->mail->isHTML(true);
 		}
 
-		public function contact_user($fromMail, $fromName, $to, $subject, $message) {
-			$this->mail->setFrom($fromMail, $fromName);
+		public function contact_user($from, $to, $item) {
+			$this->mail->setFrom(AppConfig::getAppAdminEmail(), '[Club des Critiques] - Administrateur');
 			$this->mail->addAddress($to);
-			$this->mail->Subject = '[Club-des-Critiques] -'.$subject;
-			$this->mail->Body = $message;
+			$this->mail->Subject = '[Club des Critiques] - Demande d\'échange';
+			$this->mail->Body = 'L\'utilisateur '.$from['name'].' ('.$from['email'].') souhaiterait discuter avec vous pour échanger l\'oeuvre : <br />';
+			$this->mail->Body .= $item->title.' - '.$item->category->type->name.' - '.$item->category->name.'<br />';
+			$this->mail->Body .= '<a href="'.base_url().'">Le Club des Critiques</a>';
 			$this->mail->send();
 		}
 
@@ -32,8 +34,6 @@
 			$this->mail->Subject = $subject;
 			$this->mail->Body = $message;
 			$this->mail->send();
-
-			return AppConfig::getAppAdminEmail();
 		}
 	}
 ?>
