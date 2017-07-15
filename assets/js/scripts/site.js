@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	initToastr();
+	init_toastr();
 
 	$('.toggle-slide').click(function() {
 		var target = $(this).data('slide');
@@ -15,10 +15,10 @@ $(document).ready(function() {
 		$(this).addClass('showing');
 	});
 
-	loadModalOnClick('.show-infos', { target: '#modal-lg', controller: 'item', action: 'infos' }, { reloadable: true });
+	load_modal_on_click('.show-infos', { target: '#modal-lg', controller: 'item', action: 'infos' }, { reloadable: true });
 });
 
-function initToastr() {
+function init_toastr() {
 	toastr.options = {
 		'closeButton': false,
 		'debug': false,
@@ -38,7 +38,7 @@ function initToastr() {
 	}
 }
 
-function loadModalOnClick(selector, infos, callback) {
+function load_modal_on_click(selector, infos, callback) {
 	$(selector).click(function () {
 		infos.target = infos.target || $(this).data('target');
 		infos.controller = infos.controller || $(this).data('controller');
@@ -65,7 +65,7 @@ function loadModalOnClick(selector, infos, callback) {
 	});
 }
 
-function sendInfos(url, data, target, callback) {
+function send_infos(url, data, target, callback) {
 	callback = callback || {};
 	if (target != null) $(target).html($('#waiting-div').html());
 
@@ -75,7 +75,7 @@ function sendInfos(url, data, target, callback) {
 		data: data,
 		dataType: 'html',
 		success: function (data) {
-			closeCurrentModal();
+			close_current_modal();
 			if (target != null) $(target).html(data);
 			if (callback.todo != null) callback.todo();
 			if (callback.success_message != null) toastr['success'](callback.success_message, 'Succès');
@@ -86,8 +86,22 @@ function sendInfos(url, data, target, callback) {
 	});
 }
 
-function closeCurrentModal() {
+function close_current_modal() {
 	if ($('#modal-sm').is(':visible')) $('#modal-sm').modal('hide');
 	if ($('#modal').is(':visible')) $('#modal').modal('hide');
 	if ($('#modal-lg').is(':visible')) $('#modal-lg').modal('hide');
+}
+
+function datalist_loader() {
+	$('#datalist-loader').click(function () {
+		var id = $('#items').find('option[value="' + $('#datalist-items').val() + '"]').data('item');
+
+		if (id != null && id > 0) {
+			$('#icons-loader i').addClass('invisible').removeClass('rotateIn');
+			$('#icons-loader i[class*="check"]').removeClass('invisible').addClass('rotateIn');
+		} else {
+			$('#icons-loader i').addClass('invisible').removeClass('rotateIn');
+			$('#icons-loader i[class*="times"]').removeClass('invisible').addClass('rotateIn');
+		}
+	});
 }

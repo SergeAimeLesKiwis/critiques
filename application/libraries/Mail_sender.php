@@ -25,7 +25,7 @@
 			$this->mail->Body = 'L\'utilisateur '.$from['name'].' ('.$from['email'].') souhaiterait discuter avec vous pour échanger l\'oeuvre : <br />';
 			$this->mail->Body .= $item->title.' - '.$item->category->type->name.' - '.$item->category->name.'<br />';
 			$this->mail->Body .= '<a href="'.base_url().'">Le Club des Critiques</a>';
-			$this->mail->send();
+			echo $this->mail->send();
 		}
 
 		public function contact_admin($fromMail, $fromName, $subject, $message) {

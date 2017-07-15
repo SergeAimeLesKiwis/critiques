@@ -6,6 +6,9 @@
 
 		public function __construct() {
 			parent::__construct();
+
+			$this->load->model('ItemService');
+			$this->load->model('LoanService');
 		}
 
 		public function profile($id = 0) {
@@ -13,15 +16,13 @@
 			$this->loadHeader('Utilisateur');
 
 			// CONTENT
-			$this->load->model('UserService');
-			$this->load->model('LoanService');
-
 			if ($id == 0) $id = $_SESSION['user_id'];
 			$user = $this->UserService->getUser($id, true);
 
 			if ($user != null) {
 				$content['user'] = $user;
 				$content['loanStatus'] = $this->LoanService->getLoansStatus();
+				$content['datalistItems'] = $this->ItemService->getDatalistLoans($user->id);
 
 				$this->load->view('user/profile', $content);
 			} else {
@@ -29,13 +30,11 @@
 			}
 
 			// FOOTER
-			$this->loadFooter();
+			$this->loadFooter(array('scripts/user'));
 		}
 
 		public function contact() {
-			$this->load->model('UserService');
-			$this->load->model('ItemService');
-
+			
 			$user_id = $this->input->post('user');
 			$item_id = $this->input->post('item');
 

@@ -30,6 +30,7 @@
 
 		public function getUserList() {
 			$this->load->model('ReportService');
+
 			$result = $this->db->get('users')->result();
 			$users = array();
 
@@ -41,11 +42,23 @@
 				$user->first_name = $row->first_name;
 				$user->last_name = $row->last_name;
 				$user->reports = $this->ReportService->getReportsOfUser($row->id);
+				$user->status = $this->getUserStatus($row->id);
 
 				$users[] = $user;
 			}
 
 			return $users;
+		}
+
+		public function getUserStatus($user) {
+			$row = $this->db->select('g.name')
+							->from('groups g')
+							->join('users_groups ug', 'ug.group_id = g.id', 'inner')
+							->where('ug.user_id', $user)
+							->get()
+							->row();
+
+			return isset($row) ? $row->name : null;
 		}
 	}
 ?>

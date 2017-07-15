@@ -1,6 +1,6 @@
-function initHome() {
-	bindRemoveHighlight();
-	bindAddHighlight();
+function init_home() {
+	bind_remove_highlight();
+	bind_add_highlight();
 
 	$('#save-home').click(function () {
 		var action = baseUrl + 'admin/save_home/';
@@ -22,27 +22,27 @@ function initHome() {
 	});
 }
 
-function bindRemoveHighlight() {
+function bind_remove_highlight() {
 	$('.remove-highlight').click(function () {
 		var position = $(this).data('position');
 		$(position).html($('#waiting-div').html());
 		var url = baseUrl + 'admin/refresh_highlight/';
-		var todo = function() { bindAddHighlight(); refresh(); };
+		var todo = function() { bind_add_highlight(); refresh(); };
 
-		sendInfos(url, { id: 0, position: position }, position, { todo: todo });
+		send_infos(url, { id: 0, position: position }, position, { todo: todo });
 	});
 }
 
-function bindAddHighlight() {
+function bind_add_highlight() {
 	$('.add-highlight').click(function () {
 		var id = $('#items').find('option[value="' + $('#datalist-items').val() + '"]').data('item');
 		if (id != null && id > 0) {
 			var position = $(this).data('position');
 			$(position).html($('#waiting-div').html());
 			var url = baseUrl + 'admin/refresh_highlight/';
-			var todo = function() { bindRemoveHighlight(); refresh(); };
+			var todo = function() { bind_remove_highlight(); refresh(); };
 
-			sendInfos(url, { id: id, position: position }, position, { todo: todo });
+			send_infos(url, { id: id, position: position }, position, { todo: todo });
 		}
 	});
 }

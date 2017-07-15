@@ -5,6 +5,19 @@
 
 		public function __construct() {
 			parent::__construct();
+
+			if (!($this instanceof Home) && !($this instanceof Auth) && !($this instanceof Banned)) {
+				if ($this->ion_auth->logged_in() === false) {
+					redirect('home');
+				} else {
+					$this->load->model('UserService');
+					$my_status = $this->UserService->getUserStatus($_SESSION['user_id']);
+
+					if ($my_status === 'banned') {
+						redirect('banned');
+					}
+				}
+			}
 		}
 
 		protected function loadHeader($title, $styles = array()) {

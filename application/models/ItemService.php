@@ -83,6 +83,31 @@
 			return $items;
 		}
 
+		public function getDatalistLoans($user) {
+			$this->load->model('CategoryService');
+
+			$result = $this->db->select('i.id, i.title, i.category')
+								->from('items i')
+								->join('loans l', 'l.item = i.id', 'inner')
+								->where('l.user', $user)
+								->where('l.status', 1)
+								->get()
+								->result();
+			$items = array();
+
+			foreach ($result as $row)
+			{
+				$item = new Item_VM();
+				$item->id = $row->id;
+				$item->title = $row->title;
+				$item->category = $this->CategoryService->getCategory($row->category);
+
+				$items[] = $item;
+			}
+
+			return $items;
+		}
+
 		public function getSuggestions($id, $category) {
 			$result = $this->db->where('id !=', $id)->where('category', $category)->order_by('RAND()')->limit(3)->get('items')->result();
 			$items = array();
@@ -98,28 +123,6 @@
 
 			return $items;
 		}
-
-		// public function getAllItems() {
-		// 	$this->load->model('CategoryService');
-
-		// 	$result = $this->db->get('items')->result();
-		// 	$items = array();
-
-		// 	foreach ($result as $row)
-		// 	{
-		// 		$item = new Item_VM();
-		// 		$item->id = $row->id;
-		// 		$item->title = $row->title;
-		// 		$item->author = $row->author;
-		// 		$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
-		// 		$item->category = $this->CategoryService->getCategory($row->category);
-		// 		$item->description = $row->description;
-
-		// 		$items[] = $item;
-		// 	}
-
-		// 	return $items;
-		// }
 
 		public function getFilteredItems($title, $author, $type, $category) {
 			$this->load->model('CategoryService');

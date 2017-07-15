@@ -40,28 +40,25 @@
 <hr class="mt-2">
 
 <?php if ($user->id != $_SESSION['user_id']){ ?>
-<div class="offset-md-3 col-md-10">
-	<div class="form-display">
-		<div class="card-block">
-			<div>
-				<h3 class="text-center"><i class="fa fa-envelope"></i> Me contacter</h3>
-				<hr class="mt-2 mb-2" />
-			</div>
-			<br />
-			<div class="md-form">
-				<i class="fa fa-tag prefix"></i>
-				<input type="text" id="form32" class="form-control" />
-				<label for="form34">Sujet</label>
-			</div>
-			<div class="md-form">
-				<i class="fa fa-pencil prefix"></i>
-				<textarea type="text" id="form8" class="md-textarea"></textarea>
-				<label for="form8">Votre message</label>
-			</div>
-			<div class="text-center">
-				<button class="btn btn-default bg-green-color">Envoyer</button>
+	<div class="offset-md-3 col-md-10">
+		<div class="form-display">
+			<div class="card-block">
+				<div>
+					<h3 class="text-center"><i class="fa fa-envelope"></i> Demande de prêt</h3>
+					<hr class="mt-2 mb-2" />
+				</div>
+				<br />
+				<div class="md-form">
+					<?php
+						$datalist_items['items'] = $datalistItems;
+						$datalist_items['placeholder'] = 'Choisir une oeuvre';
+						$this->load->view('shared/_datalist_items', $datalist_items);
+					?>
+				</div>
+				<div class="text-center">
+					<button id="contact-user" data-user="<?php $user->id; ?>" class="btn btn-default bg-green-color">Envoyer</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 <?php } ?>

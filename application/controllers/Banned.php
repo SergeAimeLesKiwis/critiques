@@ -2,7 +2,7 @@
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	require_once(dirname(__FILE__).'/Base.php');
 
-	class Room extends Base {
+	class Banned extends Base {
 
 		public function __construct() {
 			parent::__construct();
@@ -10,12 +10,10 @@
 
 		public function index() {
 			// HEADER
-			$this->loadHeader('Salons');
+			$this->loadHeader('Banni !');
 
 			// CONTENT
-			$content = array();
-
-			$this->load->view('room/index', $content);
+			$this->load->view('banned/index');
 
 			// FOOTER
 			$this->loadFooter();

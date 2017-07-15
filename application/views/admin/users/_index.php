@@ -22,15 +22,18 @@
 								$reports = 0;
 								foreach ($user->reports as $report) { $reports += $report->value; }
 
-								$span = '<span class="badge bg-darkgrey-color';
-								if ($reports > 0) $span .= ' show-report';
-								$span .= '" data-key="'.$user->id.'" role="button">'.$reports.'</span>';
+								$span = '<span class="badge';
+								if ($reports > 0) $span .= ' bg-green-hover show-report';
+								else $span .= ' bg-green-color';
+								$span .= '" data-key="'.$user->id.'"';
+								if ($reports > 0) $span .= ' role="button"';
+								$span .= '>'.$reports.'</span>';
 
 								echo $span;
 							?>
 						</td>
 						<td class="text-center">
-							<button class="btn btn-sm btn-warning" data-key="<?php echo $user->id; ?>"><i class="fa fa-warning"></i></button>
+							<?php echo $user->getAction(); ?>
 						</td>
 					</tr>
 				<?php } ?>
@@ -38,7 +41,5 @@
 		</table>
 	</div>
 
-	<div id="show-reports" class="col-md-10">
-		
-	</div>
+	<div id="show-reports" class="col-md-10"></div>
 </div>

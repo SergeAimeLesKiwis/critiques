@@ -155,7 +155,7 @@ CREATE TABLE `loans` (
 	FOREIGN KEY (`status`) REFERENCES `loan_status`(`id`)
 );
 
-CREATE TABLE `Rooms` (
+CREATE TABLE `rooms` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NOT NULL,
 	`admin` INT NOT NULL,
@@ -188,19 +188,17 @@ CREATE TABLE `parameters` (
 
 INSERT INTO `groups` (`name`, `description`) VALUES
 ('admin','Administrateur'),
-('moderator','Modérateur'),
 ('member', 'Utilisateur'),
 ('warned', 'Averti'),
 ('banned', 'Banni');
 
-
 INSERT INTO `users` (`ip_address`, `username`, `password`, `email`, `created_on`, `active`, `first_name`, `last_name`, `description`) VALUES
 ('127.0.0.1', 'Grand Manitou', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'admin@mail.com', '1268889823', '1', 'Jean-Michel', 'L\'Admin', 'Le Club des Critiques'),
-('127.0.0.1', 'Juanita', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'juanita@mail.com', '1268889823', '1', 'Juanita', 'Banana', 'Fan de Henry Salvador'),
-('127.0.0.1', 'Bogoss', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'shawn@mail.com', '1268889823', '1', 'Shawn', 'Shawn', 'Stripteaser professionnel');
+('127.0.0.1', 'Juanita', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'leo.foltzrahem@gmail.com', '1268889823', '1', 'Juanita', 'Banana', 'Fan de Henry Salvador'),
+('127.0.0.1', 'Bogoss', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'yoann.flegeau@yahoo.com', '1268889823', '1', 'Shawn', 'Shawn', 'Stripteaser professionnel');
 
 INSERT INTO `users_groups` (`user_id`, `group_id`) VALUES 
-(1, 1);
+(1, 1), (2, 2), (3, 2);
 
 INSERT INTO `reasons` (`name`, `value`) VALUES 
 ('Incitation à la haine raciale', 5),

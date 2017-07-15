@@ -7,6 +7,9 @@
 
 		public function __construct() {
 			parent::__construct();
+
+			$this->load->model('ItemService');
+			$this->load->model('ParameterService');
 		}
 
 		public function index() {
@@ -14,9 +17,6 @@
 			$this->loadHeader('Le Club des Critiques');
 
 			// CONTENT
-			$this->load->model('ParameterService');
-			$this->load->model('ItemService');
-
 			$content['concept'] = $this->ParameterService->getHomeConcept();
 			$highlights = $this->ParameterService->getHomeHighlights();
 			$content['highlights'] = $this->ItemService->getItems($highlights);
@@ -32,8 +32,6 @@
 			$this->loadHeader('Le Club des Critiques');
 
 			// CONTENT
-			$this->load->model('ParameterService');
-
 			$static = $this->ParameterService->getStaticInfos($page);
 			
 			if (!empty($static['title']) && !empty($static['text'])) {

@@ -11,12 +11,11 @@
 				redirect('home');
 			}
 
-			$this->load->model('ParameterService');
-			$this->load->model('ItemService');
-			$this->load->model('TypeService');
 			$this->load->model('CategoryService');
-			$this->load->model('UserService');
+			$this->load->model('ItemService');
+			$this->load->model('ParameterService');
 			$this->load->model('ReportService');
+			$this->load->model('TypeService');
 		}
 
 		public function index() {

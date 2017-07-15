@@ -1,4 +1,4 @@
-function initItems() {
+function init_items() {
 	$('#select-category').chained('#select-type');
 
 	$('#show-add-link').click(function() {
@@ -26,7 +26,7 @@ function initItems() {
 			} else if (label == '') {
 				toastr['error']('Le label ne peut être vide', 'Attention');
 			} else {
-				closeCurrentModal();
+				close_current_modal();
 				var description = $('#item-description').html();
 				$('#item-description').html(description + '<a href="' + url + '" class="brown-color" target="_blank">' + label + '</a>');
 				toastr['success']('Ajout du lien', 'Succès');
@@ -36,7 +36,7 @@ function initItems() {
 		$('[data-toggle="tooltip"]').tooltip();
 	};
 
-	loadModalOnClick('#show-add-link', { target: '#modal-sm', controller: 'admin', action: 'link' }, { todo: addLink });
+	load_modal_on_click('#show-add-link', { target: '#modal-sm', controller: 'admin', action: 'link' }, { todo: addLink });
 
 	$('#send-infos').click(function() {
 		var id = $('#item-id').val();
@@ -72,15 +72,17 @@ function initItems() {
 			}
 		};
 
-		sendInfos(url, { id: id, title: title, author: author, publish_date: publish_date, category: category, description: description }, null, { todo: reset, success_message: success_message });
+		send_infos(url, { id: id, title: title, author: author, publish_date: publish_date, category: category, description: description }, null, { todo: reset, success_message: success_message });
 	});
 
-	$('#load-item').click(function() {
-		var init = function() { initItems(); };
+	$('#datalist-loader').click(function() {
 		var id = $('#items').find('option[value="' + $('#datalist-items').val() + '"]').data('item');
 
 		if (id != null && id > 0) {
-			sendInfos('admin/load_item', { id: id }, '#form-content', { todo: init });
+			var init = function() { init_items(); };
+			send_infos('admin/load_item', { id: id }, '#form-content', { todo: init });
+		} else {
+			$('#form-content').empty();
 		}
 	});
 }

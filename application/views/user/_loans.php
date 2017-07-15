@@ -9,7 +9,6 @@
 			<p class="card-text"><em><?php echo $item->getLightInfos(); ?></em></p>
 			<span class="text-center"><?php echo $item->getClassification(); ?></span>
 			<?php echo $item->loan_status->getStatusBadge('pull-right'); ?>
-			<span class="badge green loan-status pull-right">&nbsp;</span>
 		</div>
 	</div>
 <?php } ?>

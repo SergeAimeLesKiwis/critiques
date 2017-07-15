@@ -1,5 +1,5 @@
-function initUsers() {
+function init_users() {
 	$('.show-report').click(function() {
-		sendInfos(baseUrl + 'admin/show_reports', { id: $(this).data('key') }, '#show-reports');
+		send_infos(baseUrl + 'admin/show_reports', { id: $(this).data('key') }, '#show-reports');
 	});
 }

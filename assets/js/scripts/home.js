@@ -14,7 +14,7 @@ $(document).ready(function() {
 		} else if (message == '') {
 			toastr['error']('Le message ne peut être vide', 'Attention');
 		} else {
-			sendInfos('home/contact', { name: name, email: email, subject: subject, message: message }, null, { success_message: 'Votre message a bien été envoyé' });
+			send_infos('home/contact', { name: name, email: email, subject: subject, message: message }, null, { success_message: 'Votre message a bien été envoyé' });
 		}
 	});
 });

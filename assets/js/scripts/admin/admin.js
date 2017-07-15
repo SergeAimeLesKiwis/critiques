@@ -3,18 +3,27 @@ $(document).ready(function() {
 		var type = $(this).data('action')
 		var url = baseUrl + 'admin/load_admin_' + type;
 		var target = $(this).attr('href');
-		var init = getInit(type);
 
-		sendInfos(url, {}, target, { todo: init });
+		var init = function() {
+			if (type == 'home') {
+				init_home();
+			} else if (type == 'static') {
+				init_static();
+			} else if (type == 'types_categories') {
+				init_types_categories();
+			} else if (type == 'add_item') {
+				init_items();
+			} else if (type == 'update_item') {
+				datalist_loader();
+				init_items();
+			} else if (type == 'rooms') {
+				datalist_loader();
+				init_rooms();
+			} else if (type == 'users') {
+				init_users();
+			}
+		}
+
+		send_infos(url, {}, target, { todo: init });
 	});
 });
-
-function getInit(type) {
-	if (type == 'home') return function() { initHome(); };
-	if (type == 'static') return function() { initStatic(); };
-	if (type == 'types_categories') return function() { initTypesCategories(); };
-	if (type == 'add_item')	return function() { initItems(); };
-	if (type == 'update_item') return function() { initItems(); };
-	if (type == 'rooms') return function() { initRooms(); };
-	if (type == 'users') return function() { initUsers(); };
-}

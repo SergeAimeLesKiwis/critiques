@@ -1,4 +1,4 @@
-<?php foreach ($users as $users) { ?>
+<?php foreach ($types as $type) { ?>
 	<tr>
 		<td class="editable-type-<?php echo $type->id; ?>"><?php echo $type->name; ?></td>
 		<td>

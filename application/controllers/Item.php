@@ -6,6 +6,10 @@
 
 		public function __construct() {
 			parent::__construct();
+
+			$this->load->model('CategoryService');
+			$this->load->model('ItemService');
+			$this->load->model('TypeService');
 		}
 
 		public function index() {
@@ -13,10 +17,6 @@
 			$this->loadHeader('Contenus');
 
 			// CONTENT
-			$this->load->model('TypeService');
-			$this->load->model('CategoryService');
-			$this->load->model('ItemService');
-
 			$search = $this->input->post('search');
 			$searchTitle = $this->input->post('searchTitle');
 			$searchAuthor = $this->input->post('searchAuthor');
@@ -49,7 +49,6 @@
 			$id = $this->input->post('id');
 
 			if (!empty($id)) {
-				$this->load->model('ItemService');
 				$item = $this->ItemService->getItem($id);
 				$suggestions = $this->ItemService->getSuggestions($item->id, $item->category->id);
 				$this->load->view('item/_infos_modal', array('item' => $item, 'suggestions' => $suggestions));

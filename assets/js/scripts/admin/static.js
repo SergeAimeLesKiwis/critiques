@@ -1,3 +1,3 @@
-function initStatic() {
+function init_static() {
 
 }
