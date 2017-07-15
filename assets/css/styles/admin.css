@@ -5,3 +5,13 @@
 #icons-loader i {
 	font-size: 25px;
 }
+
+.report-warn {
+	color: #FFF;
+	background-color: #F80;
+}
+
+.report-ban {
+	color: #FFF;
+	background-color: #C00;
+}

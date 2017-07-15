@@ -1,7 +1,6 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	require_once(dirname(__FILE__).'/Base.php');
-	require_once(dirname(__FILE__).'/../libraries/AppConfig.php');
 
 	class Home extends Base {
 
@@ -25,27 +24,6 @@
 
 			// FOOTER
 			$this->loadFooter(array('scripts/home'));
-		}
-
-		public function statique($page) {
-			// HEADER
-			$this->loadHeader('Le Club des Critiques');
-
-			// CONTENT
-			$static = $this->ParameterService->getStaticInfos($page);
-			
-			if (!empty($static['title']) && !empty($static['text'])) {
-				$content['title'] = $static['title'];
-				$content['text'] = $static['text'];
-			} else {
-				$content['title'] = 'Erreur';
-				$content['text'] = 'La page que vous avez demandé n\'existe pas !';
-			}
-
-			$this->load->view('home/statique', $content);
-
-			// FOOTER
-			$this->loadFooter();
 		}
 
 		public function contact() {

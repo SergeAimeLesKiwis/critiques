@@ -16,7 +16,7 @@
 							->set('publish_date', $publish_date)
 							->set('category', $category)
 							->set('description', $description)
-							->set('created_by', /* PUT SESSION USER ID HERE*/ 0)
+							->set('created_by', $_SESSION['user_id'])
 							->set('created_at', date("Y-m-d H:i:s"))
 							->insert('items');
 		}
@@ -27,7 +27,7 @@
 							->set('publish_date', $publish_date)
 							->set('category', $category)
 							->set('description', $description)
-							->set('updated_by', /* PUT SESSION USER ID HERE*/ 0)
+							->set('updated_by', $_SESSION['user_id'])
 							->set('updated_at', date("Y-m-d H:i:s"))
 							->where('id', $id)
 							->update('items');

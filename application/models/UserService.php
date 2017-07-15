@@ -5,7 +5,7 @@
 
 	class UserService extends CI_Model {
 
-		public function getUser($id, $withLoans = false) {
+		public function getUser($id, $with = null) {
 			$row = $this->db->where('id', $id)->get('users')->row();
 
 			if (isset($row)) {
@@ -17,9 +17,14 @@
 				$user->last_name = $row->last_name;
 				$user->description = $row->description;
 
-				if ($withLoans) {
-					$this->load->model('LoanService');
-					$user->loans = $this->LoanService->getLoansOfUser($row->id);
+				if ($with != null) {
+					if ($with == 'loans') {
+						$this->load->model('LoanService');
+						$user->loans = $this->LoanService->getLoansOfUser($row->id);
+					} else if ($with == 'status') {
+						$this->load->model('ReportService');
+						$user->status = $this->getUserStatus($row->id);
+					}
 				}
 
 				return $user;
@@ -38,6 +43,7 @@
 			{
 				$user = new User_VM();
 				$user->id = $row->id;
+				$user->username = $row->username;
 				$user->email = $row->email;
 				$user->first_name = $row->first_name;
 				$user->last_name = $row->last_name;

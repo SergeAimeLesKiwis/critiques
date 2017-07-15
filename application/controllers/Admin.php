@@ -343,6 +343,32 @@
 				$this->error('Veuillez choisir un utilisateur');
 			}
 		}
+
+		public function warn() {
+			$id = $this->input->post('id');
+
+			if (!empty($id)) {
+				$this->ReportService->warn_user($id);
+				$data['user'] = $this->UserService->getUser($id, 'status');
+
+				$this->load->view('admin/users/_user', $data);
+			} else {
+				$this->error('Veuillez choisir un utilisateur');
+			}
+		}
+
+		public function ban() {
+			$id = $this->input->post('id');
+
+			if (!empty($id)) {
+				$this->ReportService->ban_user($id);
+				$data['user'] = $this->UserService->getUser($id, 'status');
+
+				$this->load->view('admin/users/_user', $data);
+			} else {
+				$this->error('Veuillez choisir un utilisateur');
+			}
+		}
 //endregion
 	}
 ?>

@@ -12,14 +12,27 @@
 								->from('reports rp')
 								->join('reasons rs', 'rs.id = rp.reason', 'inner')
 								->where('rp.user', $user)
-								->where('rp.active', 1)
+								->order_by('reported_at')
 								->get()
 								->result();
 
 			$reports = array();
 
+			$warned = $this->db->where('user', $user)->where('action', 'warn')->get('actions')->row();
+			$warned_at = isset($warned) ? $warned->action_at : null;
+			$is_warned = false;
+
 			foreach ($result as $row)
 			{
+				if ($warned_at != null && $warned_at < $row->reported_at && !$is_warned) {
+					$line = new Report_VM();
+					$line->id = 'warn';
+					$line->reason = 'Averti';
+					$line->value = date('d/m/Y - H:i:s', strtotime($warned_at));
+					$reports[] = $line;
+					$is_warned = true;
+				}
+
 				$report = new Report_VM();
 				$report->id = $row->reason;
 				$report->reason = $row->name;
@@ -30,7 +43,48 @@
 				$reports[] = $report;
 			}
 
+			if ($warned_at != null && !$is_warned) {
+				$line = new Report_VM();
+				$line->id = 'warn';
+				$line->reason = 'Averti';
+				$line->value = date('d/m/Y - H:i:s', strtotime($warned_at));
+				$reports[] = $line;
+			}
+
+			$banned = $this->db->where('user', $user)->where('action', 'ban')->get('actions')->row();
+			$banned_at = isset($banned) ? $banned->action_at : null;
+			if ($banned_at != null) {
+				$line = new Report_VM();
+				$line->id = 'ban';
+				$line->reason = 'Banni';
+				$line->value = date('d/m/Y - H:i:s', strtotime($warned_at));
+				$reports[] = $line;
+			}
+
 			return $reports;
+		}
+
+		public function report_user($user, $reporter) {
+		}
+
+		public function warn_user($user) {
+			$this->db->set('group_id', 3)->where('user_id', $user)->update('users_groups');
+
+			$this->db->set('user', $user)
+					->set('action', 'Averti')
+					->set('action_by', $_SESSION['user_id'])
+					->set('action_at', date("Y-m-d H:i:s"))
+					->insert('actions');
+		}
+
+		public function ban_user($user) {
+			$this->db->set('group_id', 4)->where('user_id', $user)->update('users_groups');
+
+			$this->db->set('user', $user)
+					->set('action', 'Banni')
+					->set('action_by', $_SESSION['user_id'])
+					->set('action_at', date("Y-m-d H:i:s"))
+					->insert('actions');
 		}
 	}
 ?>

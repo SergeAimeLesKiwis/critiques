@@ -17,7 +17,7 @@
 
 			// CONTENT
 			if ($id == 0) $id = $_SESSION['user_id'];
-			$user = $this->UserService->getUser($id, true);
+			$user = $this->UserService->getUser($id, 'loans');
 
 			if ($user != null) {
 				$content['user'] = $user;

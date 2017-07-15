@@ -30,13 +30,13 @@
 				return '<span class="badge bg-darkgrey-color">ADMIN</span>';
 
 			if ($this->status == 'member')
-				return '<button class="btn btn-sm btn-warning" data-key="'.$this->id.'"><i class="fa fa-warning"></i></button>';
+				return '<button class="btn btn-sm report-warn user-action" data-action="warn" data-key="'.$this->id.'"><i class="fa fa-warning"></i></button>';
 
 			if ($this->status == 'warned')
-				return '<button class="btn btn-sm btn-danger" data-key="'.$this	->id.'"><i class="fa fa-ban"></i></button>';
+				return '<button class="btn btn-sm report-ban user-action" data-action="ban" data-key="'.$this->id.'"><i class="fa fa-ban"></i></button>';
 
 			if ($this->status == 'banned')
-				return '<span class="badge bg-brown-color">BANNI</span>';
+				return '<span class="badge report-ban">BANNI</span>';
 		}
 	}
 

@@ -6,7 +6,7 @@
 		public function __construct() {
 			parent::__construct();
 
-			if (!($this instanceof Home) && !($this instanceof Auth) && !($this instanceof Banned)) {
+			if (!($this instanceof Home) && !($this instanceof Auth) && !($this instanceof Banned) && !($this instanceof Site)) {
 				if ($this->ion_auth->logged_in() === false) {
 					redirect('home');
 				} else {
