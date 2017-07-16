@@ -1,6 +1,4 @@
-<td scope="row">
-	<a class="brown-hover" href="<?php echo base_url().'user/profile/'.$user->id; ?>"><?php echo $user->getFullName(); ?></a>
-</td>
+<td scope="row"><?php echo $user->getProfileTag(); ?></td>
 
 <td><?php echo $user->username; ?></td>
 

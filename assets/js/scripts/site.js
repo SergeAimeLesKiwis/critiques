@@ -48,7 +48,7 @@ function load_modal_on_click(selector, infos, callback) {
 
 		$.ajax({
 			type: 'post',
-			url: baseUrl + infos.controller + '/load_' + infos.action + '_modal',
+			url: base_url + infos.controller + '/load_' + infos.action + '_modal',
 			data: { id: key },
 			dataType: 'html',
 			success: function (data) {
@@ -79,7 +79,7 @@ function send_infos(url, data, target, callback) {
 		data: data,
 		dataType: 'html',
 		success: function (data) {
-			close_current_modal();
+			if (callback.open == null) close_current_modal();
 			if (target != null) $(target).html(data);
 			if (callback.todo != null) callback.todo();
 			if (callback.success_message != null) toastr['success'](callback.success_message, 'Succès');

@@ -10,6 +10,7 @@
 		public $category;
 		public $description;
 		public $loan_status;
+		public $grades;
 
 		public function __construct() {
 			$this->id = 0;
@@ -19,6 +20,7 @@
 			$this->category = new Category_VM();
 			$this->description = '';
 			$this->loan_status = new LoanStatus_VM();
+			$this->grades = 0;
 		}
 
 		public function getImageTag() {

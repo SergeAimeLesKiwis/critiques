@@ -1,6 +1,6 @@
 function bind_delete(selector, target, callback) {
 	$(selector).click(function () {
-		var action = baseUrl + 'admin/delete_' + $(this).data('action') + '/';
+		var action = base_url + 'admin/delete_' + $(this).data('action') + '/';
 		var id = $(this).data('key');
 
 		send_infos(action, { id: id }, target, { todo: callback, success_message: 'Suppression réussie' });

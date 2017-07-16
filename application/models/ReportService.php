@@ -95,6 +95,8 @@
 		}
 
 		public function ban_user($user) {
+			$this->db->where('active', 0)->where('admin', $user)->delete('rooms');
+
 			$this->db->set('group_id', 4)->where('user_id', $user)->update('users_groups');
 
 			$this->db->set('user', $user)

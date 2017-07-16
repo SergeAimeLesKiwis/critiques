@@ -37,7 +37,6 @@
 
 		public function load_link_modal() {
 			$data['pages'] = $this->PageService->getAllPages();
-
 			$this->load->view('admin/_add_link_modal', $data);
 		}
 
@@ -47,7 +46,6 @@
 			$highlights = $this->ParameterService->getHomeHighlights();
 			$data['highlights'] = $this->ItemService->getItems($highlights);
 			$data['datalistItems'] = $this->ItemService->getDatalistItems();
-
 			$this->load->view('admin/home/_index', $data);
 		}
 
@@ -57,7 +55,6 @@
 
 			if (isset($id) && !empty($position)) {
 				$item = $this->ItemService->getItem($id);
-
 				$this->load->view('admin/home/_highlight_container', array('item' => $item, 'position' => $position));
 			}
 		}
@@ -66,13 +63,13 @@
 			$concept = $this->input->post('concept');
 			$highlights = $this->input->post('highlights');
 
-			$updated_concept = $this->ParameterService->setHomeConcept($concept);
-			if (!$updated_concept) $this->error('Un problème est survenu lors de l\'enregistrement du concept');
+			$success_concept = $this->ParameterService->setHomeConcept($concept);
+			if (!$success_concept) $this->error('Un problème est survenu lors de l\'enregistrement du concept');
 
-			$updated_highlights = $this->ParameterService->setHomeHighlights($highlights);
-			if (!$updated_highlights) $this->error('Un problème est survenu lors de l\'enregistrement de la une');
+			$success_highlights = $this->ParameterService->setHomeHighlights($highlights);
+			if (!$success_highlights) $this->error('Un problème est survenu lors de l\'enregistrement de la une');
 
-			return $updated_concept && $updated_highlights;
+			return $success_concept && $success_highlights;
 		}
 //endregion
 
@@ -80,14 +77,12 @@
 		public function load_admin_add_page() {
 			$data['title'] = 'Création d\'une page';
 			$data['url'] = 'add_page';
-
 			$this->load->view('admin/pages/_index', $data);
 		}
 
 		public function load_admin_update_page() {
 			$data['title'] = 'Modification d\'une page';
 			$data['pages'] = $this->PageService->getAllPages();
-
 			$this->load->view('admin/pages/_index', $data);
 		}
 
@@ -100,7 +95,6 @@
 				if ($page != null) {
 					$data['page'] = $page;
 					$data['url'] = 'update_page';
-
 					$this->load->view('admin/pages/_form', $data);
 				}
 			}
@@ -121,9 +115,9 @@
 			} else if (empty($text)) {
 				$this->error('Le texte ne peut être vide');
 			} else {
-				$added_page = $this->PageService->addPage($name, $label, $title, $text);
+				$success = $this->PageService->addPage($name, $label, $title, $text);
 
-				if (!$added_page) {
+				if (!$success) {
 					$this->error('Une page portant ce nom existe déjà');
 				}
 			}
@@ -144,9 +138,9 @@
 			} else if (empty($text)) {
 				$this->error('Le texte ne peut être vide');
 			} else {
-				$updated_page = $this->PageService->updatePage($name, $label, $title, $text);
+				$success = $this->PageService->updatePage($name, $label, $title, $text);
 
-				if (!$updated_page) {
+				if (!$success) {
 					$this->error('Une page portant ce nom existe déjà');
 				}
 			}
@@ -158,9 +152,9 @@
 			if (empty($id)) {
 				$this->error('Veuillez choisir une page');
 			} else {
-				$deleted_page = $this->PageService->deletePage($id);
+				$success = $this->PageService->deletePage($id);
 
-				if (!$deleted_page) {
+				if (!$success) {
 					$this->error('Un problème est survenu lors de la suppression');
 				}
 			}
@@ -171,7 +165,6 @@
 		public function load_admin_types_categories() {
 			$data['types'] = $this->TypeService->getAllTypes();
 			$data['categories'] = $this->CategoryService->getAllCategories();
-
 			$this->load->view('admin/types_categories/_index', $data); 
 		}
 
@@ -194,9 +187,9 @@
 			if (empty($name)) {
 				$this->error('Le label ne peut être vide');
 			} else {
-				$added_type = $this->TypeService->addType($name);
+				$success = $this->TypeService->addType($name);
 
-				if ($added_type) {
+				if ($success) {
 					$types = $this->TypeService->getAllTypes();
 					$this->load->view('admin/types_categories/_type_list', array('types' => $types));
 				} else {
@@ -214,9 +207,9 @@
 			} else if (empty($name)) {
 				$this->error('Le label ne peut être vide');
 			} else {
-				$updated_type = $this->TypeService->updateType($id, $name);
+				$success = $this->TypeService->updateType($id, $name);
 
-				if ($updated_type) {
+				if ($success) {
 					$type = $this->TypeService->getType($id);
 					echo $type->name;
 				} else {
@@ -231,9 +224,9 @@
 			if (empty($id)) {
 				$this->error('Veuillez choisir un type');
 			} else {
-				$deleted_type = $this->TypeService->deleteType($id);
+				$success = $this->TypeService->deleteType($id);
 
-				if ($deleted_type) {
+				if ($success) {
 					$types = $this->TypeService->getAllTypes();
 					$this->load->view('admin/types_categories/_type_list', array('types' => $types));
 				} else {
@@ -266,9 +259,9 @@
 			} else if (empty($type)) {
 				$this->error('Le type ne peut être vide');
 			} else {
-				$added_category = $this->CategoryService->addCategory($name, $type);
+				$success = $this->CategoryService->addCategory($name, $type);
 
-				if ($added_category) {
+				if ($success) {
 					$categories = $this->CategoryService->getAllCategories();
 					$this->load->view('admin/types_categories/_category_list', array('categories' => $categories));
 				} else {
@@ -289,9 +282,9 @@
 			} else if (empty($type)) {
 				$this->error('Le type ne peut être vide');
 			} else {
-				$updated_category = $this->CategoryService->updateCategory($id, $name, $type);
+				$success = $this->CategoryService->updateCategory($id, $name, $type);
 
-				if ($updated_category) {
+				if ($success) {
 					$category = $this->CategoryService->getCategory($id);
 					echo $category->name;
 				} else {
@@ -306,9 +299,9 @@
 			if (empty($id)) {
 				$this->error('Veuillez choisir une catagorie');
 			} else {
-				$deleted_category = $this->CategoryService->deleteCategory($id);
+				$success = $this->CategoryService->deleteCategory($id);
 
-				if ($deleted_category) {
+				if ($success) {
 					$categories = $this->CategoryService->getAllCategories();
 					$this->load->view('admin/types_categories/_category_list', array('categories' => $categories));
 				} else {
@@ -324,14 +317,12 @@
 			$data['types'] = $this->TypeService->getAllTypes();
 			$data['categories'] = $this->CategoryService->getAllCategories();
 			$data['url'] = 'add_item';
-
 			$this->load->view('admin/items/_index', $data);
 		}
 
 		public function load_admin_update_item() {
 			$data['title'] = 'Modification d\'une oeuvre';
 			$data['datalistItems'] = $this->ItemService->getDatalistItems();
-
 			$this->load->view('admin/items/_index', $data);
 		}
 
@@ -346,7 +337,6 @@
 					$data['types'] = $this->TypeService->getAllTypes();
 					$data['categories'] = $this->CategoryService->getAllCategories();
 					$data['url'] = 'update_item';
-
 					$this->load->view('admin/items/_form', $data);
 				}
 			}
@@ -370,9 +360,9 @@
 			} else if (empty($description)) {
 				$this->error('La description ne peut être vide');
 			} else {
-				$added_item = $this->ItemService->addItem($title, $author, $publish_date, $category, $description);
+				$success = $this->ItemService->addItem($title, $author, $publish_date, $category, $description);
 
-				if (!$added_item) {
+				if (!$success) {
 					$this->error('Une oeuvre ayant ces informations existe déjà');
 				}
 			}
@@ -399,9 +389,9 @@
 			} else if (empty($description)) {
 				$this->error('La description ne peut être vide');
 			} else {
-				$updated_item = $this->ItemService->updateItem($id, $title, $author, $publish_date, $category, $description);
+				$success = $this->ItemService->updateItem($id, $title, $author, $publish_date, $category, $description);
 
-				if (!$updated_item) {
+				if (!$success) {
 					$this->error('Une oeuvre ayant ces informations existe déjà');
 				}
 			}
@@ -413,9 +403,9 @@
 			if (empty($id)) {
 				$this->error('Veuillez choisir une oeuvre');
 			} else {
-				$deleted_item = $this->ItemService->deleteItem($id);
+				$success = $this->ItemService->deleteItem($id);
 
-				if (!$deleted_item) {
+				if (!$success) {
 					$this->error('Un problème est survenu lors de la suppression');
 				}
 			}
@@ -423,69 +413,53 @@
 //endregion
 
 //region Rooms
-		public function load_admin_rooms() {
-			$data['datalistItems'] = $this->ItemService->getDatalistItems();
-
-			$this->load->view('admin/rooms/_index', $data);
-		}
-
-
-
-
 		public function load_admin_add_room() {
-			// $data['title'] = 'Création d\'une oeuvre';
-			// $data['types'] = $this->TypeService->getAllTypes();
-			// $data['categories'] = $this->CategoryService->getAllCategories();
-			// $data['url'] = 'add_item';
-
-			// $this->load->view('admin/rooms/_index', $data);
+			$data['datalistItems'] = $this->ItemService->getDatalistItems();
+			$this->load->view('admin/rooms/_add', $data);
 		}
 
 		public function load_admin_manage_rooms() {
 			$data['pending'] = $this->RoomService->getPendingRooms();
-
+			$data['actives'] = $this->RoomService->getActiveRooms();
 			$this->load->view('admin/rooms/_manage', $data);
 		}
 
-		public function load_room() {
-			// $id = $this->input->post('key');
-
-			// if (isset($id) && $id > 0) {
-			// 	$item = $this->ItemService->getItem($id);
-
-			// 	if ($item != null) {
-			// 		$data['item'] = $item;
-			// 		$data['types'] = $this->TypeService->getAllTypes();
-			// 		$data['categories'] = $this->CategoryService->getAllCategories();
-			// 		$data['url'] = 'update_item';
-
-			// 		$this->load->view('admin/items/_form', $data);
-			// 	}
-			// }
-		}
-
 		public function add_room() {
-			$name = $this->input->post('name');
-			$admin = $this->input->post('admin');
 			$item = $this->input->post('item');
+			$name = $this->input->post('name');
 			$start_date = $this->input->post('start_date');
 			$end_date = $this->input->post('end_date');
 
-			if (empty($name)) {
+			if (empty($item)) {
+				$this->error('Veuillez sélectionner une oeuvre valide');
+			} else if (empty($name)) {
 				$this->error('Le nom ne peut être vide');
-			} else if (empty($admin)) {
-				$this->error('Le modérateur ne peut être vide');
-			} else if (empty($item)) {
-				$this->error('L\'oeuvre ne peut être vide');
 			} else if (empty($start_date)) {
 				$this->error('La date de début ne peut être vide');
 			} else if (empty($end_date)) {
 				$this->error('La date de fin ne peut être vide');
 			} else {
-				$added_room = $this->RoomService->addRoom($name, $admin, $item, $start_date, $end_date, 1);
+				$success = $this->RoomService->addRoom($name, $_SESSION['user_id'], $item, $start_date, $end_date, 1);
 
-				if (!$added_room) {
+				if (!$success) {
 					$this->error('Un salon ayant ces informations existe déjà');
+				}
+			}
+		}
+
+		public function activate_room() {
+			$id = $this->input->post('id');
+
+			if (empty($id)) {
+				$this->error('Veuillez choisir un salon');
+			} else {
+				$success = $this->RoomService->activateRoom($id);
+
+				if ($success) {
+					$data['actives'] = $this->RoomService->getActiveRooms();
+					$this->load->view('admin/rooms/_active_list', $data);
+				} else {
+					$this->error('Un problème est survenu lors de l\'activation');
 				}
 			}
 		}
@@ -494,11 +468,11 @@
 			$id = $this->input->post('id');
 
 			if (empty($id)) {
-				$this->error('Veuillez choisir une oeuvre');
+				$this->error('Veuillez choisir un salon');
 			} else {
-				$deleted_room = $this->RoomService->deleteRoom($id);
+				$success = $this->RoomService->deleteRoom($id);
 
-				if (!$deleted_room) {
+				if (!$success) {
 					$this->error('Un problème est survenu lors de la suppression');
 				}
 			}
@@ -508,7 +482,6 @@
 //region Users
 		public function load_admin_users() {
 			$data['users'] = $this->UserService->getUserList();
-
 			$this->load->view('admin/users/_index', $data);
 		}
 
@@ -517,7 +490,6 @@
 
 			if (!empty($id)) {
 				$data['reports'] = $this->ReportService->getReportsOfUser($id);
-
 				$this->load->view('admin/users/_show_reports', $data);
 			} else {
 				$this->error('Veuillez choisir un utilisateur');
@@ -530,7 +502,6 @@
 			if (!empty($id)) {
 				$this->ReportService->warn_user($id);
 				$data['user'] = $this->UserService->getUser($id);
-
 				$this->load->view('admin/users/_user', $data);
 			} else {
 				$this->error('Veuillez choisir un utilisateur');
@@ -543,7 +514,6 @@
 			if (!empty($id)) {
 				$this->ReportService->ban_user($id);
 				$data['user'] = $this->UserService->getUser($id);
-
 				$this->load->view('admin/users/_user', $data);
 			} else {
 				$this->error('Veuillez choisir un utilisateur');

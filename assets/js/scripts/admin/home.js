@@ -6,7 +6,7 @@ function init_home() {
 	add_link_modal('concept');
 
 	$('#save-home').click(function () {
-		var action = baseUrl + 'admin/save_home/';
+		var action = base_url + 'admin/save_home/';
 		var concept = $('#concept').html();
 		var highlights = $('#highlights').val();
 
@@ -29,7 +29,7 @@ function bind_remove_highlight() {
 	$('.remove-highlight').click(function () {
 		var position = $(this).data('position');
 		$(position).html($('#waiting-div').html());
-		var url = baseUrl + 'admin/refresh_highlight/';
+		var url = base_url + 'admin/refresh_highlight/';
 		var todo = function() { bind_add_highlight(); refresh(); };
 
 		send_infos(url, { id: 0, position: position }, position, { todo: todo });
@@ -42,7 +42,7 @@ function bind_add_highlight() {
 		if (id != null && id > 0) {
 			var position = $(this).data('position');
 			$(position).html($('#waiting-div').html());
-			var url = baseUrl + 'admin/refresh_highlight/';
+			var url = base_url + 'admin/refresh_highlight/';
 			var todo = function() { bind_remove_highlight(); refresh(); };
 
 			send_infos(url, { id: id, position: position }, position, { todo: todo });

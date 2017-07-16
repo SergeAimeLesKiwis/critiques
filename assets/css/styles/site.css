@@ -17,6 +17,14 @@
 	vertical-align: middle;
 }
 
+#grades i.grade {
+	color: #D99E7E;
+}
+
+#grades i.grade-hover {
+	color: #70BEB1;
+}
+
 @keyframes spin {
 	from { transform: scale(1) rotate(0deg);}
 	to { transform: scale(1) rotate(360deg);}

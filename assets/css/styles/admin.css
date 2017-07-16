@@ -11,7 +11,12 @@
 	background-color: #F80;
 }
 
-.report-ban {
+.report-ban, .room-delete {
 	color: #FFF;
 	background-color: #C00;
+}
+
+.room-activate {
+	color: #FFF;
+	background-color: #00C851;
 }

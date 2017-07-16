@@ -1,25 +1,23 @@
 $(document).ready(function() {
 	$('#admin-menu a.nav-link').click(function() {
-		var type = $(this).data('action')
-		var url = baseUrl + 'admin/load_admin_' + type;
+		var action = $(this).data('action')
+		var url = base_url + 'admin/load_admin_' + action;
 		var target = $(this).attr('href');
 
 		var init = function() {
-			if (type == 'home') {
+			if (action == 'home') {
 				init_home();
-			} else if (type == 'add_page') {
+			} else if (action == 'add_page' || action == 'update_page') {
 				init_pages();
-			} else if (type == 'update_page') {
-				init_pages();
-			} else if (type == 'types_categories') {
+			} else if (action == 'types_categories') {
 				init_types_categories();
-			} else if (type == 'add_item') {
+			} else if (action == 'add_item' || action == 'update_item') {
 				init_items();
-			} else if (type == 'update_item') {
-				init_items();
-			} else if (type == 'rooms') {
-				init_rooms();
-			} else if (type == 'users') {
+			} else if (action == 'add_room') {
+				init_add_room();
+			} else if (action == 'manage_rooms') {
+				init_manage_rooms();
+			} else if (action == 'users') {
 				init_users();
 			}
 		}

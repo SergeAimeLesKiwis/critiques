@@ -38,7 +38,6 @@ CREATE TABLE `users` (
 	`company` VARCHAR(100) DEFAULT NULL,
 	`phone` VARCHAR(20) DEFAULT NULL,
 	`description` VARCHAR(500) NULL,
-	`interests` VARCHAR(300) NULL,
 	`avatar` VARCHAR(300) NULL,
 	PRIMARY KEY (`id`)
 );
@@ -124,20 +123,6 @@ CREATE TABLE `items` (
 	FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`)
 );
 
-CREATE TABLE `genres` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(50) NOT NULL,
-	PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `item_genres` (
-	`genre` INT NOT NULL,
-	`item` INT NOT NULL,
-	PRIMARY KEY (`genre`,`item`),
-	FOREIGN KEY (`genre`) REFERENCES `genres`(`id`),
-	FOREIGN KEY (`item`) REFERENCES `items`(`id`)
-);
-
 CREATE TABLE `grades` (
 	`user` INT NOT NULL,
 	`item` INT NOT NULL,
@@ -172,7 +157,7 @@ CREATE TABLE `rooms` (
 	`item` INT NOT NULL,
 	`start_date` DATETIME NOT NULL,
 	`end_date` DATETIME NOT NULL,
-	`active` DATETIME NOT NULL,
+	`active` TINYINT(1) NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`admin`) REFERENCES `users`(`id`),
 	FOREIGN KEY (`item`) REFERENCES `items`(`id`)	
@@ -269,17 +254,21 @@ INSERT INTO `items` (`title`, `author`, `publish_date`, `category`, `description
 ('Harry Potter et le Prince de Sang Mêlé', 'J.K. Rowling', '2000-11-29', 1, '6ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
 ('Harry Potter et les Reliques de la Mort', 'J.K. Rowling', '2000-11-29', 5, '7ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17');
 
-INSERT INTO `genres` (`name`) VALUES 
-('Fantastique'), ('Science-fiction'), ('Polar'), ('Action'), ('Comédie'), ('Péplum'), ('Rap'), ('Rock'), ('Classique');
-
-INSERT INTO `item_genres` (`genre`, `item`) VALUES 
-(1, 1), (4, 1),
-(1, 2), (4, 2),
-(1, 3), (4, 3),
-(1, 4), (4, 4),
-(1, 5), (4, 5),
-(1, 6), (4, 6),
-(1, 7), (4, 7);
+INSERT INTO `grades` (`user`, `item`, `value`) VALUES 
+(1, 2, 5),
+(1, 3, 2),
+(1, 5, 0),
+(2, 2, 1),
+(2, 5, 4),
+(2, 7, 5),
+(3, 3, 3),
+(3, 4, 3),
+(4, 3, 3),
+(5, 1, 2),
+(5, 2, 0),
+(6, 1, 0),
+(6, 3, 1),
+(6, 6, 4);
 
 INSERT INTO `loan_status` (`name`, `color`) VALUES 
 ('Disponible', '#4CAF50'), ('Prêté', '#F44336'), ('Je le veux', '#2196F3');

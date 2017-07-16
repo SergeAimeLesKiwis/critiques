@@ -26,7 +26,6 @@
 				$data['user'] = $user;
 				$data['loanStatus'] = $this->LoanService->getLoansStatus();
 				$data['datalistItems'] = $this->ItemService->getDatalistLoans($user->id);
-
 				$this->load->view('user/profile', $data);
 			} else {
 				$this->load->view('user/no_user');
@@ -37,7 +36,6 @@
 		}
 
 		public function contact() {
-			
 			$user_id = $this->input->post('user');
 			$item_id = $this->input->post('item');
 

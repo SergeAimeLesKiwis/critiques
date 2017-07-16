@@ -1,6 +1,7 @@
 <?php
 
 	class User_VM {
+		public $id;
 		public $email;
 		public $first_name;
 		public $last_name;
@@ -11,6 +12,7 @@
 		public $status;
 
 		public function __construct() {
+			$this->id = 0;
 			$this->email = '';
 			$this->first_name = '';
 			$this->last_name = '';
@@ -27,6 +29,10 @@
 
 		public function getImageTag() {
 			return '<img src="'.base_url().'assets/img/user/'.$this->id.'.png" alt="'.$this->getFullName().'" class="img-fluid" />';
+		}
+
+		public function getProfileTag() {
+			return '<a class="brown-hover" href="'.base_url().'user/profile/'.$this->id.'">'.$this->getFullName().'</a>';
 		}
 
 		public function getAction() {

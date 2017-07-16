@@ -50,11 +50,24 @@
 				$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
 				$item->category = $this->CategoryService->getCategory($row->category);
 				$item->description = $row->description;
+				$item->grades = $this->getItemGrades($row->id);
 
 				return $item;
 			}
 
 			return null;
+		}
+
+		public function getItemGrades($item) {
+			$row = $this->db->select('ROUND((ROUND(AVG(value) * 2) / 2), 1) AS nb')->where('item', $item)->get('grades')->row();
+			return isset($row) ? $row->nb : 0;
+		}
+
+		public function grade($item, $value) {
+			$has_graded = $this->db->where('user', $_SESSION['user_id'])->where('item', $item)->get('grades')->num_rows() > 0;
+
+			if ($has_graded) return $this->db->set('value', $value)->where('user', $_SESSION['user_id'])->where('item', $item)->update('grades');
+			else return $this->db->set('user', $_SESSION['user_id'])->set('item', $item)->set('value', $value)->insert('grades');;
 		}
 
 		public function getItems($ids) {

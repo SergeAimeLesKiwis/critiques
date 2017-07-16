@@ -57,8 +57,23 @@
 				$item = $this->ItemService->getItem($id);
 				$data['item'] = $item;
 				$data['suggestions'] = $this->ItemService->getSuggestions($item->id, $item->category->id);
-
 				$this->load->view('item/_infos_modal', $data);
+			}
+		}
+
+		public function grade() {
+			$item = $this->input->post('item');
+			$value = $this->input->post('value');
+
+			if (!empty($id)) {
+				$success = $this->ItemService->grade($item, $value);
+
+				if ($success) {
+					$data['grades'] = $this->ItemService->getItemGrades($item);
+					$this->load->view('item/_grades', $data);
+				} else {
+					$this->error('Un problème est survenu lors de la notation');
+				}
 			}
 		}
 
@@ -68,6 +83,7 @@
 
 			// CONTENT
 			$item = $this->ItemService->getItem($id);
+
 			if ($item != null) {
 				$data['item'] = $item;
 				$data['users'] = $this->LoanService->getUsersWithItemAvailable($item->id);
@@ -85,6 +101,7 @@
 
 			// CONTENT
 			$item = $this->ItemService->getItem($id);
+
 			if ($item != null) {
 				$data['item'] = $item;
 				$data['rooms'] = $this->RoomService->getNotOverRoomsOfItem($item->id);

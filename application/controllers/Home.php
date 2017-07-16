@@ -21,7 +21,6 @@
 			$data['concept'] = $this->ParameterService->getHomeConcept();
 			$highlights = $this->ParameterService->getHomeHighlights();
 			$data['highlights'] = $this->ItemService->getItems($highlights);
-
 			$this->load->view('home/index', $data);
 
 			// FOOTER

@@ -21,11 +21,7 @@
 		</div>
 	</div>
 
-	<div id="waiting-div" style="display:none">
-		<div class="text-center">
-			<i class="fa fa-spinner fa-spin"></i> Chargement en cours ...
-		</div>
-	</div>
+	<div id="waiting-div" style="display:none"><div class="text-center"><i class="fa fa-spinner fa-spin"></i></div></div>
 
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/tether.min.js"></script>
@@ -36,7 +32,7 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/site.js"></script>
 	
 	<script type="text/javascript">
-		var baseUrl = '<?php echo base_url(); ?>';
+		var base_url = '<?php echo base_url(); ?>';
 	</script>
 
 	<?php foreach ($scripts as $script) { 

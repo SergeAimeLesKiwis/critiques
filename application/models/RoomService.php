@@ -8,13 +8,6 @@
 			return false;
 		}
 
-		public $id;
-		public $name;
-		public $admin;
-		public $item;
-		public $start_date;
-		public $end_date;
-
 		public function addRoom($name, $admin, $item, $start_date, $end_date, $active) {
 			return !$this->exists()
 				&& $this->db->set('name', $name)
@@ -28,6 +21,10 @@
 
 		public function activateRoom($id) {
 			return $this->db->set('active', 1)->where('id', $id)->update('rooms');
+		}
+
+		public function deleteRoom($id) {
+			return $this->db->set('active', -1)->where('id', $id)->update('rooms');
 		}
 
 		public function getRoom($id) {
@@ -49,25 +46,6 @@
 			}
 
 			return null;
-		}
-
-		public function getDatalistRooms() {
-			// $this->load->model('CategoryService');
-
-			// $result = $this->db->get('items')->result();
-			// $items = array();
-
-			// foreach ($result as $row)
-			// {
-			// 	$item = new Item_VM();
-			// 	$item->id = $row->id;
-			// 	$item->title = $row->title;
-			// 	$item->category = $this->CategoryService->getCategory($row->category);
-
-			// 	$items[] = $item;
-			// }
-
-			// return $items;
 		}
 
 		public function getNotOverRoomsOfItem($item) {
@@ -94,10 +72,18 @@
 		}
 
 		public function getPendingRooms() {
+			return $this->getRoomsOfState(0);
+		}
+
+		public function getActiveRooms() {
+			return $this->getRoomsOfState(1);
+		}
+
+		private function getRoomsOfState($state) {
 			$this->load->model('ItemService');
 			$this->load->model('UserService');
 
-			$result = $this->db->where('active', 1)->order_by('start_date')->get('rooms')->result();
+			$result = $this->db->where('active', $state)->order_by('start_date')->get('rooms')->result();
 			$rooms = array();
 
 			foreach ($result as $row)
