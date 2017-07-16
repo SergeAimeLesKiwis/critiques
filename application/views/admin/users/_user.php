@@ -7,19 +7,13 @@
 <td><?php echo $user->email; ?></td>
 
 <td class="text-center">
-	<?php
-		$reports = 0;
-		foreach ($user->reports as $report) { $reports += $report->value; }
-
-		$span = '<span class="badge';
-		if ($reports > 0) $span .= ' bg-green-hover show-reports';
-		else $span .= ' bg-green-color';
-		$span .= '" data-key="'.$user->id.'"';
-		if ($reports > 0) $span .= ' role="button"';
-		$span .= '>'.$reports.'</span>';
-
-		echo $span;
-	?>
+	<?php if ($user->reports != null) { ?>
+		<span class="badge bg-green-hover show-reports bg-green-color" data-key="<?php echo $user->id; ?>" role="button">
+			<?php echo $user->reports; ?>
+		</span>
+	<?php } else { ?>
+		<em>Aucun signalement</em>
+	<?php } ?>
 </td>
 
 <td class="text-center">

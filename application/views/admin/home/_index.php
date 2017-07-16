@@ -1,8 +1,13 @@
 <br />
 <div class="row">
 	<div class="md-form col-md-10">
-		<textarea type="text" id="concept" name="concept" class="md-textarea"><?php echo $concept; ?></textarea>
-		<label for="concept" class="label-form active"><strong>Le concept</strong></label>
+		<?php
+			$editable['id'] = 'concept';
+			$editable['content'] = $concept;
+			$editable['is_active'] = $concept != '';
+			$editable['label'] = 'Le concept';
+			$this->load->view('shared/_editable', $editable);
+		?>
 	</div>
 	<hr />
 	<div class="md-form col-md-10">

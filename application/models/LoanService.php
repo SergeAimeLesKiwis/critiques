@@ -32,7 +32,6 @@
 								->limit(4)
 								->get()
 								->result();
-
 			$items = array();
 
 			foreach ($result as $row)

@@ -7,8 +7,13 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-static" data-action="static" role="tab">
-					<i class="fa fa-address-card-o"></i>&nbsp;<span>Pages statiques</span>
+				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-page" data-action="add_page" role="tab">
+					<i class="fa fa-address-card-o"></i>&nbsp;<span>Ajouter une page</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-page" data-action="update_page" role="tab">
+					<i class="fa fa-address-card-o"></i>&nbsp;<span>Modifier une page</span>
 				</a>
 			</li>
 			<li class="nav-item">
@@ -55,7 +60,7 @@
 				</div>
 			</div>
 			<div class="tab-pane fade" id="admin-home" role="tabpanel"></div>
-			<div class="tab-pane fade" id="admin-static" role="tabpanel"></div>
+			<div class="tab-pane fade" id="admin-page" role="tabpanel"></div>
 			<div class="tab-pane fade" id="admin-types-categories" role="tabpanel"></div>
 			<div class="tab-pane fade" id="admin-item" role="tabpanel"></div>
 			<div class="tab-pane fade" id="admin-rooms" role="tabpanel"></div>

@@ -1,10 +1,13 @@
 function init_home() {
+	init_editable()
 	bind_remove_highlight();
 	bind_add_highlight();
 
+	add_link_modal('concept');
+
 	$('#save-home').click(function () {
 		var action = baseUrl + 'admin/save_home/';
-		var concept = $('#concept').val();
+		var concept = $('#concept').html();
 		var highlights = $('#highlights').val();
 
 		$.ajax({
@@ -35,7 +38,7 @@ function bind_remove_highlight() {
 
 function bind_add_highlight() {
 	$('.add-highlight').click(function () {
-		var id = $('#items').find('option[value="' + $('#datalist-items').val() + '"]').data('item');
+		var id = $('#items').find('option[value="' + $('#datalist-items').val() + '"]').data('key');
 		if (id != null && id > 0) {
 			var position = $(this).data('position');
 			$(position).html($('#waiting-div').html());

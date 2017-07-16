@@ -9,6 +9,6 @@
 />
 <datalist id="items">
 	<?php foreach ($items as $item) { ?>
-		<option value="<?php echo $item->title; ?>" data-item="<?php echo $item->id; ?>"><?php echo $item->getClassification(); ?></option>
+		<option value="<?php echo $item->title; ?>" data-key="<?php echo $item->id; ?>"><?php echo $item->getClassification(); ?></option>
 	<?php } ?>
 </datalist>

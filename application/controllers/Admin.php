@@ -13,6 +13,7 @@
 
 			$this->load->model('CategoryService');
 			$this->load->model('ItemService');
+			$this->load->model('PageService');
 			$this->load->model('ParameterService');
 			$this->load->model('ReportService');
 			$this->load->model('TypeService');
@@ -26,7 +27,13 @@
 			$this->load->view('admin/index');
 
 			// FOOTER
-			$this->loadFooter(array('jquery.chained.min', 'scripts/editable'), true);
+			$this->loadFooter(array('jquery.chained.min'), true);
+		}
+
+		public function load_link_modal() {
+			$data['pages'] = $this->PageService->getAllPages();
+
+			$this->load->view('admin/_add_link', $data);
 		}
 
 //region Home
@@ -64,11 +71,80 @@
 		}
 //endregion
 
-//region Static
-		public function load_admin_static() {
-			$static = array();
+//region Pages
+		public function load_admin_add_page() {
+			$data['title'] = 'Création d\'une page';
+			$data['url'] = 'add_page';
 
-			$this->load->view('admin/static/_index', $static);
+			$this->load->view('admin/pages/_index', $data);
+		}
+
+		public function load_admin_update_page() {
+			$data['title'] = 'Modification d\'une page';
+			$data['pages'] = $this->PageService->getAllPages();
+
+			$this->load->view('admin/pages/_index', $data);
+		}
+
+		public function load_page() {
+			$id = $this->input->post('key');
+
+			if (isset($id) && $id > 0) {
+				$page = $this->PageService->getPage($id);
+
+				if ($page != null) {
+					$data['page'] = $page;
+					$data['url'] = 'update_page';
+
+					$this->load->view('admin/pages/_form', $data);
+				}
+			}
+		}
+
+		public function add_page() {
+			$name = $this->input->post('name');
+			$label = $this->input->post('label');
+			$title = $this->input->post('title');
+			$text = $this->input->post('text');
+
+			if (empty($name)) {
+				$this->error('Le nom ne peut être vide');
+			} else if (empty($label)) {
+				$this->error('Le label ne peut être vide');
+			} else if (empty($title)) {
+				$this->error('Le titre ne peut être vide');
+			} else if (empty($text)) {
+				$this->error('Le texte ne peut être vide');
+			} else {
+				$added_page = $this->PageService->addPage($name, $label, $title, $text);
+
+				if (!$added_page) {
+					$this->error('Une page portant ce nom existe déjà');
+				}
+			}
+		}
+
+		public function update_page() {
+			$name = $this->input->post('name');
+			$label = $this->input->post('label');
+			$title = $this->input->post('title');
+			$text = $this->input->post('text');
+
+			if (empty($name)) {
+				$this->error('Le nom ne peut être vide');
+			} else if (empty($label)) {
+				$this->error('Le label ne peut être vide');
+			} else if (empty($title)) {
+				$this->error('Le titre ne peut être vide');
+			} else if (empty($text)) {
+				$this->error('Le texte ne peut être vide');
+			} else {
+				$updated_page = $this->PageService->updatePage($name, $label, $title, $text);
+
+				if (!$updated_page) {
+					$this->error('Une page portant ce nom existe déjà');
+				}
+			}
 		}
 //endregion
 
@@ -240,12 +316,8 @@
 			$this->load->view('admin/items/_index', $data);
 		}
 
-		public function load_link_modal() {
-			$this->load->view('admin/items/_add_link');
-		}
-
 		public function load_item() {
-			$id = $this->input->post('id');
+			$id = $this->input->post('key');
 
 			if (isset($id) && $id > 0) {
 				$item = $this->ItemService->getItem($id);

@@ -1,6 +1,5 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
-
 	require_once(dirname(__FILE__).'/../viewModels/Item_VM.php');
 
 	class ItemService extends CI_Model {
@@ -22,7 +21,8 @@
 		}
 
 		public function updateItem($id, $title, $author, $publish_date, $category, $description) {
-			return $this->db->set('title', $title)
+			return !$this->exists($title, $category)
+				&& $this->db->set('title', $title)
 							->set('author', $author)
 							->set('publish_date', $publish_date)
 							->set('category', $category)

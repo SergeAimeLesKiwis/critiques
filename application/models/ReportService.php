@@ -1,9 +1,22 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
-
 	require_once(dirname(__FILE__).'/../viewModels/Report_VM.php');
 
 	class ReportService extends CI_Model {
+
+		public function getReportsValueOfUser($user) {
+			$this->load->model('UserService');
+
+			$row = $this->db->select('SUM(rs.value) AS reports')
+								->from('reports rp')
+								->join('reasons rs', 'rs.id = rp.reason', 'inner')
+								->where('rp.user', $user)
+								->order_by('reported_at')
+								->get()
+								->row();
+
+			return $row->reports;
+		}
 
 		public function getReportsOfUser($user) {
 			$this->load->model('UserService');
@@ -15,7 +28,6 @@
 								->order_by('reported_at')
 								->get()
 								->result();
-
 			$reports = array();
 
 			$warned = $this->db->where('user', $user)->where('action', 'warn')->get('actions')->row();
@@ -38,7 +50,7 @@
 				$report->reason = $row->name;
 				$report->value = $row->value;
 				$report->reported_by = $this->UserService->getUser($row->reported_by);
-				$report->reported_at = date('d/m/Y', strtotime($row->reported_at));
+				$report->reported_at = date('d/m/Y - H:i:s', strtotime($row->reported_at));
 
 				$reports[] = $report;
 			}
@@ -64,7 +76,12 @@
 			return $reports;
 		}
 
-		public function report_user($user, $reporter) {
+		public function report_user($user, $reason) {
+			return $this->db->set('user', $user)
+							->set('reason', $reason)
+							->set('reported_by', $_SESSION['user_id'])
+							->set('reported_at', date('d/m/Y - H:i:s'))
+							->insert('reports');
 		}
 
 		public function warn_user($user) {

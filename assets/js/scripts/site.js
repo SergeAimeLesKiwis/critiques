@@ -65,6 +65,12 @@ function load_modal_on_click(selector, infos, callback) {
 	});
 }
 
+function close_current_modal() {
+	if ($('#modal-sm').is(':visible')) $('#modal-sm').modal('hide');
+	if ($('#modal').is(':visible')) $('#modal').modal('hide');
+	if ($('#modal-lg').is(':visible')) $('#modal-lg').modal('hide');
+}
+
 function send_infos(url, data, target, callback) {
 	callback = callback || {};
 	if (target != null) $(target).html($('#waiting-div').html());
@@ -82,26 +88,6 @@ function send_infos(url, data, target, callback) {
 		},
 		error: function(xhr, status, error) {
 			toastr['error'](xhr.responseText, 'Attention');
-		}
-	});
-}
-
-function close_current_modal() {
-	if ($('#modal-sm').is(':visible')) $('#modal-sm').modal('hide');
-	if ($('#modal').is(':visible')) $('#modal').modal('hide');
-	if ($('#modal-lg').is(':visible')) $('#modal-lg').modal('hide');
-}
-
-function datalist_loader() {
-	$('#datalist-loader').click(function () {
-		var id = $('#items').find('option[value="' + $('#datalist-items').val() + '"]').data('item');
-
-		if (id != null && id > 0) {
-			$('#icons-loader i').addClass('invisible').removeClass('rotateIn');
-			$('#icons-loader i[class*="check"]').removeClass('invisible').addClass('rotateIn');
-		} else {
-			$('#icons-loader i').addClass('invisible').removeClass('rotateIn');
-			$('#icons-loader i[class*="times"]').removeClass('invisible').addClass('rotateIn');
 		}
 	});
 }

@@ -6,7 +6,7 @@
 		public function __construct() {
 			parent::__construct();
 
-			if (!($this instanceof Home) && !($this instanceof Auth) && !($this instanceof Banned) && !($this instanceof Site)) {
+			if (!($this instanceof Home) && !($this instanceof Auth) && !($this instanceof Banned) && !($this instanceof Page)) {
 				if ($this->ion_auth->logged_in() === false) {
 					redirect('home');
 				} else {
@@ -28,14 +28,14 @@
 
 			//TODO: get static pages
 			
-			$this->load->view('shared/header', $data);
+			$this->load->view('shared/structure/header', $data);
 		}
 
 		protected function loadFooter($scripts = array(), $loadAdmin = false) {
 			$data['scripts'] = $scripts;
 			$data['loadAdmin'] = $loadAdmin;
 
-			$this->load->view('shared/footer', $data);
+			$this->load->view('shared/structure/footer', $data);
 		}
 
 		protected function error($message) {

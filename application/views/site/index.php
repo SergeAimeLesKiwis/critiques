@@ -1,3 +1,3 @@
-<h1><?php echo $title; ?></h1>
+<h1><?php echo $page->title; ?></h1>
 
-<p><?php echo $text; ?></p>
+<p><?php echo $page->text; ?></p>

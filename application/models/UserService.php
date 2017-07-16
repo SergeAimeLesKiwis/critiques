@@ -1,6 +1,5 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
-
 	require_once(dirname(__FILE__).'/../viewModels/User_VM.php');
 
 	class UserService extends CI_Model {
@@ -47,7 +46,7 @@
 				$user->email = $row->email;
 				$user->first_name = $row->first_name;
 				$user->last_name = $row->last_name;
-				$user->reports = $this->ReportService->getReportsOfUser($row->id);
+				$user->reports = $this->ReportService->getReportsValueOfUser($row->id);
 				$user->status = $this->getUserStatus($row->id);
 
 				$users[] = $user;

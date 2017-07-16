@@ -22,15 +22,5 @@
 		public function setHomeHighlights($highlights) {
 			return $this->db->set('value', $highlights)->where('key', 'home_highlights')->update('parameters');
 		}
-
-		public function getStaticInfos($page) {
-			$rowTitle = $this->db->where('key', 'static_'.$page.'_title')->get('parameters')->row();
-			$title = isset($rowTitle) ? $rowTitle->value : null;
-
-			$rowText = $this->db->where('key', 'static_'.$page.'_text')->get('parameters')->row();
-			$text = isset($rowText) ? $rowText->value : null;
-
-			return array('title' => $title, 'text' => $text);
-		}
 	}
 ?>

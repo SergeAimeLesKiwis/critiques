@@ -1,6 +1,5 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
-
 	require_once(dirname(__FILE__).'/../viewModels/Category_VM.php');
 
 	class CategoryService extends CI_Model {

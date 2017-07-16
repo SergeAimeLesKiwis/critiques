@@ -194,6 +194,15 @@ CREATE TABLE `parameters` (
 	PRIMARY KEY (`key`)
 );
 
+CREATE TABLE `pages` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+	`label` VARCHAR(100) NOT NULL,
+	`title` VARCHAR(150) NOT NULL,
+	`text` VARCHAR(2000) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
 -- INSERT
 
 INSERT INTO `groups` (`name`, `description`) VALUES
@@ -277,3 +286,6 @@ INSERT INTO `loan_status` (`name`, `color`) VALUES
 INSERT INTO `parameters` (`key`, `value`) VALUES 
 ('home_concept', 'Lorem Ipsum'),
 ('home_highlights', '1|0|1|0|0|1');
+
+INSERT INTO `pages` (`name`, `label`, `title`, `text`) VALUES 
+('qui-sommes-nous', 'Qui sommes nous ?', 'Le Club des Critiques !', 'Nous s\'appelle Groot');

@@ -1,6 +1,5 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
-
 	require_once(dirname(__FILE__).'/../viewModels/Type_VM.php');
 
 	class TypeService extends CI_Model {

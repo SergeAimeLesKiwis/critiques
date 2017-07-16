@@ -44,8 +44,9 @@
 	} ?>
 
 	<?php if ($loadAdmin) { ?>
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/common.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/home.js"></script>
-		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/static.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/pages.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/types-categories.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/items.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts/admin/rooms.js"></script>
@@ -75,7 +76,7 @@
 
 		    <div class="footer-copyright">
 		        <div class="container-fluid">
-		            <i class="fa fa-copyright"></i> 2017 Copyright: <a href="https://www.MDBootstrap.com">All rights reserved - Le Club des Critiques </a>
+		            <a href="<?php echo base_url(); ?>">Tous droits réservés - Le Club des Critiques&nbsp;<i class="fa fa-copyright"></i> - 2017</a>
 				</div>
 		    </div>
 		</footer>
