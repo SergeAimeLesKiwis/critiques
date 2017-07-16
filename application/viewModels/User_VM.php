@@ -25,6 +25,10 @@
 			return $this->first_name.' '.$this->last_name;
 		}
 
+		public function getImageTag() {
+			return '<img src="'.base_url().'assets/img/user/'.$this->id.'.png" alt="'.$this->getFullName().'" class="img-fluid" />';
+		}
+
 		public function getAction() {
 			if ($this->status == 'admin')
 				return '<span class="badge bg-darkgrey-color">ADMIN</span>';

@@ -3,6 +3,10 @@
 
 	class Base extends CI_Controller {
 
+		protected $page;
+		protected $styles;
+		protected $scripts;
+
 		public function __construct() {
 			parent::__construct();
 
@@ -18,11 +22,15 @@
 					}
 				}
 			}
+
+			$this->page = 'Le Club des Critiques';
+			$this->styles = array();
+			$this->scripts = array();
 		}
 
-		protected function loadHeader($title, $styles = array()) {
-			$data['title'] = $title;
-			$data['styles'] = $styles;
+		protected function loadHeader() {
+			$data['title'] = $this->page;
+			$data['styles'] = $this->styles;
 			$data['isLogged'] = $this->ion_auth->logged_in();
 			$data['isAdmin'] = $this->ion_auth->is_admin();
 
@@ -31,9 +39,9 @@
 			$this->load->view('shared/structure/header', $data);
 		}
 
-		protected function loadFooter($scripts = array(), $loadAdmin = false) {
-			$data['scripts'] = $scripts;
-			$data['loadAdmin'] = $loadAdmin;
+		protected function loadFooter() {
+			$data['scripts'] = $this->scripts;
+			$data['loadAdmin'] = $this->page == 'Administration';
 
 			$this->load->view('shared/structure/footer', $data);
 		}

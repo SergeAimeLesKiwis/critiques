@@ -21,12 +21,13 @@
 			}
 
 			// HEADER
-			$this->loadHeader($page->label);
+			$this->page = $page->label;
+			$this->loadHeader();
 
 			// CONTENT
-			$content['page'] = $page;
+			$data['page'] = $page;
 
-			$this->load->view('site/index', $content);
+			$this->load->view('page/index', $data);
 
 			// FOOTER
 			$this->loadFooter();

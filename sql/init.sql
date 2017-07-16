@@ -172,6 +172,7 @@ CREATE TABLE `rooms` (
 	`item` INT NOT NULL,
 	`start_date` DATETIME NOT NULL,
 	`end_date` DATETIME NOT NULL,
+	`active` DATETIME NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`admin`) REFERENCES `users`(`id`),
 	FOREIGN KEY (`item`) REFERENCES `items`(`id`)	

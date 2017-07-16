@@ -27,8 +27,8 @@
 							->update('pages');
 		}
 
-		public function deletePage($name) {
-			return $this->db->where('name', $name)->delete('pages');
+		public function deletePage($id) {
+			return $this->db->where('id', $id)->delete('pages');
 		}
 
 		public function getPageByName($name) {

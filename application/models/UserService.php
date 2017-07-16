@@ -8,6 +8,8 @@
 			$row = $this->db->where('id', $id)->get('users')->row();
 
 			if (isset($row)) {
+				$this->load->model('ReportService');
+
 				$user = new User_VM();
 				$user->id = $row->id;
 				$user->username = $row->username;
@@ -15,18 +17,16 @@
 				$user->first_name = $row->first_name;
 				$user->last_name = $row->last_name;
 				$user->description = $row->description;
+				$user->status = $this->getUserStatus($row->id);
 
 				if ($with != null) {
 					if ($with == 'loans') {
 						$this->load->model('LoanService');
 						$user->loans = $this->LoanService->getLoansOfUser($row->id);
-					} else if ($with == 'status') {
-						$this->load->model('ReportService');
-						$user->status = $this->getUserStatus($row->id);
 					}
 				}
 
-				return $user;
+				return $user->status != 'banned' ? $user : null;
 			}
 
 			return null;

@@ -7,30 +7,33 @@
 		public function __construct() {
 			parent::__construct();
 
+			$this->page = 'Utilisateur';
+			$this->scripts = array('scripts/user');
+
 			$this->load->model('ItemService');
 			$this->load->model('LoanService');
 		}
 
 		public function profile($id = 0) {
 			// HEADER
-			$this->loadHeader('Utilisateur');
+			$this->loadHeader();
 
 			// CONTENT
 			if ($id == 0) $id = $_SESSION['user_id'];
 			$user = $this->UserService->getUser($id, 'loans');
 
 			if ($user != null) {
-				$content['user'] = $user;
-				$content['loanStatus'] = $this->LoanService->getLoansStatus();
-				$content['datalistItems'] = $this->ItemService->getDatalistLoans($user->id);
+				$data['user'] = $user;
+				$data['loanStatus'] = $this->LoanService->getLoansStatus();
+				$data['datalistItems'] = $this->ItemService->getDatalistLoans($user->id);
 
-				$this->load->view('user/profile', $content);
+				$this->load->view('user/profile', $data);
 			} else {
 				$this->load->view('user/no_user');
 			}
 
 			// FOOTER
-			$this->loadFooter(array('scripts/user'));
+			$this->loadFooter();
 		}
 
 		public function contact() {

@@ -6,11 +6,13 @@
 
 		public function __construct() {
 			parent::__construct();
+
+			$this->page = 'Banni !';
 		}
 
 		public function index() {
 			// HEADER
-			$this->loadHeader('Banni !');
+			$this->loadHeader();
 
 			// CONTENT
 			$this->load->view('banned/index');

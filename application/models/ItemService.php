@@ -33,6 +33,10 @@
 							->update('items');
 		}
 
+		public function deleteItem($id) {
+			return $this->db->where('id', $id)->delete('items');
+		}
+
 		public function getItem($id) {
 			$row = $this->db->where('id', $id)->get('items')->row();
 

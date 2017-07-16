@@ -40,10 +40,32 @@
 				$loan_status->color = $row->color;
 				$item = $this->ItemService->getItem($row->item);
 				$item->loan_status = $loan_status;
+
 				$items[] = $item;
 			}
 
 			return $items;
+		}
+
+		public function getUsersWithItemAvailable($item) {
+			$this->load->model('UserService');
+
+			$result = $this->db->select('u.id')
+								->from('users u')
+								->join('loans l', 'l.user = u.id', 'inner')
+								->where('l.item', $item)
+								->where('l.status', 1)
+								->order_by('RAND()')
+								->get()
+								->result();
+			$users = array();
+
+			foreach ($result as $row)
+			{
+				$users[] = $this->UserService->getUser($row->id);
+			}
+
+			return $users;
 		}
 	}
 ?>

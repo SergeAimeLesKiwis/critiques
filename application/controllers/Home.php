@@ -7,23 +7,25 @@
 		public function __construct() {
 			parent::__construct();
 
+			$this->scripts = array('scripts/home');
+
 			$this->load->model('ItemService');
 			$this->load->model('ParameterService');
 		}
 
 		public function index() {
 			// HEADER
-			$this->loadHeader('Le Club des Critiques');
+			$this->loadHeader();
 
 			// CONTENT
-			$content['concept'] = $this->ParameterService->getHomeConcept();
+			$data['concept'] = $this->ParameterService->getHomeConcept();
 			$highlights = $this->ParameterService->getHomeHighlights();
-			$content['highlights'] = $this->ItemService->getItems($highlights);
+			$data['highlights'] = $this->ItemService->getItems($highlights);
 
-			$this->load->view('home/index', $content);
+			$this->load->view('home/index', $data);
 
 			// FOOTER
-			$this->loadFooter(array('scripts/home'));
+			$this->loadFooter();
 		}
 
 		public function contact() {

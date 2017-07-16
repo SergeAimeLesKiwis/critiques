@@ -1,18 +1,9 @@
-function datalist_loader(list, input, url, target, callback) {
-	$('#datalist-loader').click(function () {
-		var key = $(list).find('option[value="' + $(input).val() + '"]').data('key');
+function bind_delete(selector, target, callback) {
+	$(selector).click(function () {
+		var action = baseUrl + 'admin/delete_' + $(this).data('action') + '/';
+		var id = $(this).data('key');
 
-		if (key != null) {
-			$('#icons-loader i').addClass('invisible').removeClass('rotateIn');
-			$('#icons-loader i[class*="check"]').removeClass('invisible').addClass('rotateIn');
-
-			send_infos(url, { key: key }, target, { todo: callback });
-		} else {
-			$('#icons-loader i').addClass('invisible').removeClass('rotateIn');
-			$('#icons-loader i[class*="times"]').removeClass('invisible').addClass('rotateIn');
-
-			if (target != null) $(target).empty();
-		}
+		send_infos(action, { id: id }, target, { todo: callback, success_message: 'Suppression réussie' });
 	});
 }
 
@@ -25,6 +16,23 @@ function init_editable() {
 	$('.editable').focusout(function() {
 		$(this).siblings('i.prefix').removeClass('active');
 		if ($(this).html().length == 0) $(this).siblings('label[for="' + $(this).attr('id') + '"]').removeClass('active');
+	});
+}
+
+function datalist_loader(list, input, url, target, callback) {
+	$('#datalist-loader').click(function () {
+		$('#icons-loader i').addClass('invisible').removeClass('rotateIn');
+		var key = $(list).find('option[value="' + $(input).val() + '"]').data('key');
+
+		if (key != null) {
+			$('#icons-loader i[class*="check"]').removeClass('invisible').addClass('rotateIn');
+
+			send_infos(url, { key: key }, target, { todo: callback });
+		} else {
+			$('#icons-loader i[class*="times"]').removeClass('invisible').addClass('rotateIn');
+
+			if (target != null) $(target).empty();
+		}
 	});
 }
 

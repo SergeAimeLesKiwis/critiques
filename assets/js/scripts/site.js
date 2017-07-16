@@ -14,8 +14,6 @@ $(document).ready(function() {
 		$('.toggle-singleton' + target).removeClass('showing');
 		$(this).addClass('showing');
 	});
-
-	load_modal_on_click('.show-infos', { target: '#modal-lg', controller: 'item', action: 'infos' }, { reloadable: true });
 });
 
 function init_toastr() {
@@ -56,7 +54,7 @@ function load_modal_on_click(selector, infos, callback) {
 			success: function (data) {
 				$(infos.target + ' .modal-content').html(data);
 				if (callback.todo != null) callback.todo();
-				else if (callback.reloadable != null) loadModalOnClick(selector, infos, callback);
+				if (callback.reloadable != null) load_modal_on_click(selector, infos, callback);
 			},
 			error: function(xhr, status, error) {
 				toastr['error'](xhr.responseText, 'Attention');

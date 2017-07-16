@@ -38,4 +38,16 @@ function init_pages() {
 
 		send_infos(url, { id: id, name: name, label: label, title: title, text: text }, null, { todo: reset, success_message: message });
 	});
+
+	var init_delete = function() {
+		init_bind_edit_remove();
+		$('#datalist-pages').val('');
+		$('#form-content').empty();
+	};
+	var init_delete = function() {
+		$('#pages').find('option[data-key="' + $('#page-id').val() + '"]').remove();
+		$('#datalist-pages').val('');
+		$('#form-content').empty();
+	};
+	bind_delete('#remove-page', null, init_delete);
 }

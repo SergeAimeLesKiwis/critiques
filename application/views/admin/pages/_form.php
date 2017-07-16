@@ -32,4 +32,9 @@
 
 <div class="text-center">
 	<button id="send-infos" class="btn bg-green-hover" data-action="<?php echo $url; ?>"><i class="fa fa-thermometer-full"></i>&nbsp;Valider</button>
+	<?php if ($url == 'update_page') { ?>
+		<button id="remove-page" class="btn btn-danger" data-action="page" data-key="<?php echo $page->id; ?>">
+			<i class="fa fa-trash"></i>&nbsp;Supprimer
+		</button>
+	<?php } ?>
 </div>

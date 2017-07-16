@@ -1,5 +1,5 @@
 <div class="container card-block">
-	<h3 class="blue-color text-center"><i class="fa fa-eercast"></i> Contenus</h3>
+	<h3 class="blue-color text-center"><i class="fa fa-eercast"></i>&nbsp;Contenus</h3>
 
 	<form method="post" action="">
 		<input type="hidden" name="search" value="1" />
@@ -36,7 +36,7 @@
 				?>
 			</div>
 			<div class="md-form col-md-3">
-				<button id="load-item" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-search"></i> &nbsp;Filtrer</button>
+				<button id="load-item" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-search"></i>&nbsp;Filtrer</button>
 			</div>
 		</div>
 		
@@ -53,10 +53,10 @@
 					}
 				echo '</div>';
 			} else {
-				echo '<div><em>Aucune oeuvre ne correspond à vos critères ...</em></div>';
+				echo '<div class="text-center"><em>Aucune oeuvre ne correspond à vos critères ...</em></div>';
 			}
 		} else {
-			echo '<div><em>Veuillez sélectionner des critères ...</em></div>';
+			echo '<div class="text-center"><em>Veuillez sélectionner des critères ...</em></div>';
 		}
 	?>
 </div>

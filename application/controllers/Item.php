@@ -7,14 +7,19 @@
 		public function __construct() {
 			parent::__construct();
 
+			$this->page = 'Contenus';
+			$this->scripts = array('jquery.chained.min', 'scripts/items');
+
 			$this->load->model('CategoryService');
 			$this->load->model('ItemService');
+			$this->load->model('LoanService');
+			$this->load->model('RoomService');
 			$this->load->model('TypeService');
 		}
 
 		public function index() {
 			// HEADER
-			$this->loadHeader('Contenus');
+			$this->loadHeader();
 
 			// CONTENT
 			$search = $this->input->post('search');
@@ -23,26 +28,26 @@
 			$searchType = substr($this->input->post('searchType'), 2);
 			$searchCategory = substr($this->input->post('searchCategory'), 2);
 
-			$content['search'] =  $search;
-			$content['searchTitle'] =  $searchTitle;
-			$content['searchAuthor'] =  $searchAuthor;
-			$content['searchType'] =  $searchType;
-			$content['searchCategory'] =  $searchCategory;
+			$data['search'] =  $search;
+			$data['searchTitle'] =  $searchTitle;
+			$data['searchAuthor'] =  $searchAuthor;
+			$data['searchType'] =  $searchType;
+			$data['searchCategory'] =  $searchCategory;
 
-			$content['types'] = $this->TypeService->getAllTypes();
-			$content['categories'] = $this->CategoryService->getAllCategories();
-			$content['datalistItems'] = $this->ItemService->getDatalistItems();
+			$data['types'] = $this->TypeService->getAllTypes();
+			$data['categories'] = $this->CategoryService->getAllCategories();
+			$data['datalistItems'] = $this->ItemService->getDatalistItems();
 
 			if (isset($search)) {
-				$content['items'] = $this->ItemService->getFilteredItems($searchTitle, $searchAuthor, $searchType, $searchCategory);
+				$data['items'] = $this->ItemService->getFilteredItems($searchTitle, $searchAuthor, $searchType, $searchCategory);
 			} else {
-				$content['items'] = array();
+				$data['items'] = array();
 			}
 
-			$this->load->view('item/index', $content);
+			$this->load->view('item/index', $data);
 
 			// FOOTER
-			$this->loadFooter(array('jquery.chained.min', 'scripts/items'));
+			$this->loadFooter();
 		}
 
 		public function load_infos_modal() {
@@ -50,9 +55,45 @@
 
 			if (!empty($id)) {
 				$item = $this->ItemService->getItem($id);
-				$suggestions = $this->ItemService->getSuggestions($item->id, $item->category->id);
-				$this->load->view('item/_infos_modal', array('item' => $item, 'suggestions' => $suggestions));
+				$data['item'] = $item;
+				$data['suggestions'] = $this->ItemService->getSuggestions($item->id, $item->category->id);
+
+				$this->load->view('item/_infos_modal', $data);
 			}
+		}
+
+		public function users($id) {
+			// HEADER
+			$this->loadHeader();
+
+			// CONTENT
+			$item = $this->ItemService->getItem($id);
+			if ($item != null) {
+				$data['item'] = $item;
+				$data['users'] = $this->LoanService->getUsersWithItemAvailable($item->id);
+			}
+
+			$this->load->view('item/users', $data);
+
+			// FOOTER
+			$this->loadFooter();
+		}
+
+		public function rooms($id) {
+			// HEADER
+			$this->loadHeader();
+
+			// CONTENT
+			$item = $this->ItemService->getItem($id);
+			if ($item != null) {
+				$data['item'] = $item;
+				$data['rooms'] = $this->RoomService->getNotOverRoomsOfItem($item->id);
+			}
+
+			$this->load->view('item/rooms', $data);
+
+			// FOOTER
+			$this->loadFooter();
 		}
 	}
 ?>

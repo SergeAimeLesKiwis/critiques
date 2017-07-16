@@ -51,27 +51,27 @@
 /* Couleur texte */
 
 .blue-color {
-	color : #70BEB1;
+	color : #70BEB1!important;
 }
 
 .brown-color {
-	color : #D99E7E;
+	color : #D99E7E!important;
 }
 
 .green-color {
-	color : #70BEB1;
+	color : #70BEB1!important;
 }
 
 .red-color {
-	color : #A44040;
+	color : #A44040!important;
 }
 
 .darkgrey-color {
-	color : #25283C;
+	color : #25283C!important;
 }
 
 .grey-color {
-	color : #BDBCBA;
+	color : #BDBCBA!important;
 }
 
 /* Couleur background */
@@ -123,11 +123,11 @@
 }
 
 .brown-hover {
-	color : #b27250;
+	color : #b27250!important;
 }
 
 .brown-hover:hover {
-	color : #D99E7E;
+	color : #D99E7E!important;
 }
 
 /* Parralax effect */

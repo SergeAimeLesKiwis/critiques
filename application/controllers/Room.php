@@ -6,16 +6,18 @@
 
 		public function __construct() {
 			parent::__construct();
+
+			$this->page = 'Salons';
 		}
 
 		public function index() {
 			// HEADER
-			$this->loadHeader('Salons');
+			$this->loadHeader();
 
 			// CONTENT
-			$content = array();
+			$data = array();
 
-			$this->load->view('room/index', $content);
+			$this->load->view('room/index', $data);
 
 			// FOOTER
 			$this->loadFooter();

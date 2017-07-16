@@ -56,4 +56,9 @@
 
 <div class="text-center">
 	<button id="send-infos" class="btn bg-green-hover" data-action="<?php echo $url; ?>"><i class="fa fa-thermometer-full"></i>&nbsp;Valider</button>
+	<?php if ($url == 'update_item') { ?>
+		<button id="remove-item" class="btn btn-danger" data-action="item" data-key="<?php echo $item->id; ?>">
+			<i class="fa fa-trash"></i>&nbsp;Supprimer
+		</button>
+	<?php } ?>
 </div>

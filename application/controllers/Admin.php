@@ -11,29 +11,34 @@
 				redirect('home');
 			}
 
+			$this->page = 'Administration';
+			$this->styles = array('styles/editable', 'styles/admin');
+			$this->scripts = array('jquery.chained.min');
+
 			$this->load->model('CategoryService');
 			$this->load->model('ItemService');
 			$this->load->model('PageService');
 			$this->load->model('ParameterService');
 			$this->load->model('ReportService');
+			$this->load->model('RoomService');
 			$this->load->model('TypeService');
 		}
 
 		public function index() {
 			// HEADER
-			$this->loadHeader('Administration', array('styles/editable', 'styles/admin'));
+			$this->loadHeader();
 
 			// CONTENT
 			$this->load->view('admin/index');
 
 			// FOOTER
-			$this->loadFooter(array('jquery.chained.min'), true);
+			$this->loadFooter();
 		}
 
 		public function load_link_modal() {
 			$data['pages'] = $this->PageService->getAllPages();
 
-			$this->load->view('admin/_add_link', $data);
+			$this->load->view('admin/_add_link_modal', $data);
 		}
 
 //region Home
@@ -143,6 +148,20 @@
 
 				if (!$updated_page) {
 					$this->error('Une page portant ce nom existe déjà');
+				}
+			}
+		}
+
+		public function delete_page() {
+			$id = $this->input->post('id');
+
+			if (empty($id)) {
+				$this->error('Veuillez choisir une page');
+			} else {
+				$deleted_page = $this->PageService->deletePage($id);
+
+				if (!$deleted_page) {
+					$this->error('Un problème est survenu lors de la suppression');
 				}
 			}
 		}
@@ -387,6 +406,20 @@
 				}
 			}
 		}
+
+		public function delete_item() {
+			$id = $this->input->post('id');
+
+			if (empty($id)) {
+				$this->error('Veuillez choisir une oeuvre');
+			} else {
+				$deleted_item = $this->ItemService->deleteItem($id);
+
+				if (!$deleted_item) {
+					$this->error('Un problème est survenu lors de la suppression');
+				}
+			}
+		}
 //endregion
 
 //region Rooms
@@ -394,6 +427,81 @@
 			$data['datalistItems'] = $this->ItemService->getDatalistItems();
 
 			$this->load->view('admin/rooms/_index', $data);
+		}
+
+
+
+
+		public function load_admin_add_room() {
+			// $data['title'] = 'Création d\'une oeuvre';
+			// $data['types'] = $this->TypeService->getAllTypes();
+			// $data['categories'] = $this->CategoryService->getAllCategories();
+			// $data['url'] = 'add_item';
+
+			// $this->load->view('admin/rooms/_index', $data);
+		}
+
+		public function load_admin_manage_rooms() {
+			$data['pending'] = $this->RoomService->getPendingRooms();
+
+			$this->load->view('admin/rooms/_manage', $data);
+		}
+
+		public function load_room() {
+			// $id = $this->input->post('key');
+
+			// if (isset($id) && $id > 0) {
+			// 	$item = $this->ItemService->getItem($id);
+
+			// 	if ($item != null) {
+			// 		$data['item'] = $item;
+			// 		$data['types'] = $this->TypeService->getAllTypes();
+			// 		$data['categories'] = $this->CategoryService->getAllCategories();
+			// 		$data['url'] = 'update_item';
+
+			// 		$this->load->view('admin/items/_form', $data);
+			// 	}
+			// }
+		}
+
+		public function add_room() {
+			$name = $this->input->post('name');
+			$admin = $this->input->post('admin');
+			$item = $this->input->post('item');
+			$start_date = $this->input->post('start_date');
+			$end_date = $this->input->post('end_date');
+
+			if (empty($name)) {
+				$this->error('Le nom ne peut être vide');
+			} else if (empty($admin)) {
+				$this->error('Le modérateur ne peut être vide');
+			} else if (empty($item)) {
+				$this->error('L\'oeuvre ne peut être vide');
+			} else if (empty($start_date)) {
+				$this->error('La date de début ne peut être vide');
+			} else if (empty($end_date)) {
+				$this->error('La date de fin ne peut être vide');
+			} else {
+				$added_room = $this->RoomService->addRoom($name, $admin, $item, $start_date, $end_date, 1);
+
+				if (!$added_room) {
+					$this->error('Un salon ayant ces informations existe déjà');
+				}
+			}
+		}
+
+		public function delete_room() {
+			$id = $this->input->post('id');
+
+			if (empty($id)) {
+				$this->error('Veuillez choisir une oeuvre');
+			} else {
+				$deleted_room = $this->RoomService->deleteRoom($id);
+
+				if (!$deleted_room) {
+					$this->error('Un problème est survenu lors de la suppression');
+				}
+			}
 		}
 //endregion
 
@@ -421,7 +529,7 @@
 
 			if (!empty($id)) {
 				$this->ReportService->warn_user($id);
-				$data['user'] = $this->UserService->getUser($id, 'status');
+				$data['user'] = $this->UserService->getUser($id);
 
 				$this->load->view('admin/users/_user', $data);
 			} else {
@@ -434,7 +542,7 @@
 
 			if (!empty($id)) {
 				$this->ReportService->ban_user($id);
-				$data['user'] = $this->UserService->getUser($id, 'status');
+				$data['user'] = $this->UserService->getUser($id);
 
 				$this->load->view('admin/users/_user', $data);
 			} else {

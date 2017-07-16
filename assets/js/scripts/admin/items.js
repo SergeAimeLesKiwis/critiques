@@ -38,10 +38,18 @@ function init_items() {
 				var newType = $('#select-type option[value="' + $('#select-type').val() + '"]').html();
 				var newCategory = $('#select-category option[value="' + $('#select-category').val() + '"]').html();
 
-				$('#items').find('option[data-item="' + id + '"]').html(newType + ' - ' + newCategory);
+				$('#items').find('option[data-key="' + id + '"]').html(newType + ' - ' + newCategory);
 			}
 		};
 
 		send_infos(url, { id: id, title: title, author: author, publish_date: publish_date, category: category, description: description }, null, { todo: reset, success_message: success_message });
 	});
+
+	var init_delete = function() {
+		$('#items').find('option[data-key="' + $('#item-id').val() + '"]').remove();
+		$('#datalist-items').val('');
+		$('#form-content').empty();
+	};
+
+	bind_delete('#remove-item', null, init_delete);
 }
