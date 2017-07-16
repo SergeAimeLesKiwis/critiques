@@ -65,8 +65,8 @@
 			$item = $this->input->post('item');
 			$value = $this->input->post('value');
 
-			if (!empty($id)) {
-				$success = $this->ItemService->grade($item, $value);
+			if (!empty($item) && !empty($value)) {
+				$success = $this->ItemService->gradeItem($item, $value);
 
 				if ($success) {
 					$data['grades'] = $this->ItemService->getItemGrades($item);

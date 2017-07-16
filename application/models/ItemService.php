@@ -63,7 +63,7 @@
 			return isset($row) ? $row->nb : 0;
 		}
 
-		public function grade($item, $value) {
+		public function gradeItem($item, $value) {
 			$has_graded = $this->db->where('user', $_SESSION['user_id'])->where('item', $item)->get('grades')->num_rows() > 0;
 
 			if ($has_graded) return $this->db->set('value', $value)->where('user', $_SESSION['user_id'])->where('item', $item)->update('grades');
