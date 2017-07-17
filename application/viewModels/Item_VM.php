@@ -8,6 +8,7 @@
 		public $author;
 		public $publish_date;
 		public $category;
+		public $image;
 		public $description;
 		public $loan_status;
 		public $grades;
@@ -18,13 +19,14 @@
 			$this->author = '';
 			$this->publish_date = date('d/m/Y');
 			$this->category = new Category_VM();
+			$this->image = '';
 			$this->description = '';
 			$this->loan_status = new LoanStatus_VM();
 			$this->grades = 0;
 		}
 
 		public function getImageTag() {
-			return '<img src="'.base_url().'assets/img/cover/'.$this->id.'.png" alt="'.$this->title.'" class="img-fluid" />';
+			return '<img src="'.$this->image.'" alt="'.$this->title.'" class="img-fluid" />';
 		}
 
 		public function getLightInfos() {

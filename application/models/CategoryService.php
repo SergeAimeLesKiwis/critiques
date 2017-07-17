@@ -4,16 +4,16 @@
 
 	class CategoryService extends CI_Model {
 
-		private function exists($name, $type) {
-			return $this->db->where('name', $name)->where('type', $type)->get('categories')->num_rows() > 0;
+		private function exists($id, $name, $type) {
+			return $this->db->where('id !=', $id)->where('name', $name)->where('type', $type)->get('categories')->num_rows() > 0;
 		}
 
 		public function addCategory($name, $type) {
-			return !$this->exists($name, $type) && $this->db->set('name', $name)->set('type', $type)->insert('categories');
+			return !$this->exists(0, $name, $type) && $this->db->set('name', $name)->set('type', $type)->insert('categories');
 		}
 
 		public function updateCategory($id, $name, $type) {
-			return $this->db->set('name', $name)->set('type', $type)->where('id', $id)->update('categories');
+			return !$this->exists($id, $name, $type) && $this->db->set('name', $name)->set('type', $type)->where('id', $id)->update('categories');
 		}
 
 		public function deleteCategory($id) {

@@ -6,6 +6,7 @@
 					<i class="fa fa-home"></i>&nbsp;<span>Page d'accueil</span>
 				</a>
 			</li>
+			<div class="dropdown-divider"></div>
 			<li class="nav-item">
 				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-panel" data-action="add_page" role="tab">
 					<i class="fa fa-address-card-o"></i>&nbsp;<span>Ajouter une page</span>
@@ -16,11 +17,13 @@
 					<i class="fa fa-address-card-o"></i>&nbsp;<span>Modifier une page</span>
 				</a>
 			</li>
+			<div class="dropdown-divider"></div>
 			<li class="nav-item">
 				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-panel" data-action="types_categories" role="tab">
 					<i class="fa fa-file-o"></i>&nbsp;<span>Types / Catégories</span>
 				</a>
 			</li>
+			<div class="dropdown-divider"></div>
 			<li class="nav-item">
 				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-panel" data-action="add_item" role="tab">
 					<i class="fa fa-bookmark-o"></i>&nbsp;<span>Ajouter une oeuvre</span>
@@ -31,6 +34,7 @@
 					<i class="fa fa-pencil-square-o"></i>&nbsp;<span>Modifier une oeuvre</span>
 				</a>
 			</li>
+			<div class="dropdown-divider"></div>
 			<li class="nav-item">
 				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-panel" data-action="add_room" role="tab">
 					<i class="fa fa-comment-o"></i>&nbsp;<span>Ajouter un salon</span>
@@ -41,6 +45,7 @@
 					<i class="fa fa-comment-o"></i>&nbsp;<span>Gérer les salons</span>
 				</a>
 			</li>
+			<div class="dropdown-divider"></div>
 			<li class="nav-item">
 				<a class="nav-link brown-hover" data-toggle="tab" href="#admin-panel" data-action="users" role="tab">
 					<i class="fa fa-user-o"></i>&nbsp;<span>Utilisateurs</span>

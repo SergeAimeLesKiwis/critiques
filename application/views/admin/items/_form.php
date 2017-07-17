@@ -1,3 +1,33 @@
+<div class="row">
+	<div class="md-form col-md-9">
+		<i class="fa fa-thermometer-quarter prefix"></i>
+		<input type="text" id="item-title" class="form-control" value="<?php echo $item->title; ?>" />
+		<label for="item-title" <?php if ($item->id > 0) echo 'class="active"'; ?>>Titre</label>
+	</div>
+
+	<div class="md-form col-md-3">
+		<button id="api-loader" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-eercast"></i>&nbsp;Charger</button>
+	</div>
+
+	<div class="row">
+		<div class="md-form col-md-9">
+			<?php
+				$datalist_items['items'] = $datalistItems;
+				$datalist_items['placeholder'] = 'Choisir une oeuvre';
+				$this->load->view('shared/_datalist_items', $datalist_items);
+			?>
+		</div>
+
+		<div id="icons-loader" class="md-form col-md-1 text-center">
+			<i class="fa fa-times red-color invisible animated"></i>
+			<i class="fa fa-check green-color invisible animated"></i>
+		</div>
+		<div class="md-form col-md-2">
+			<button id="api-loader" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-search"></i>&nbsp;Rechercher</button>
+		</div>
+	</div>
+</div>
+
 <input type="hidden" id="item-id" value="<?php echo $item->id; ?>" />
 
 <div class="row">
@@ -41,8 +71,8 @@
 <div class="row">
 	<div class="md-form col-md-12">
 		<i class="fa fa-file-image-o prefix"></i>
-		<input type="text" id="item-image" class="form-control" />
-		<label for="item-image">Image</label>
+		<input type="text" id="item-image" class="form-control" value="<?php echo $item->image; ?>" />
+		<label for="item-image" <?php if ($item->id > 0) echo 'class="active"'; ?>>Image</label>
 	</div>
 </div>
 

@@ -124,12 +124,15 @@
 		}
 
 		public function update_page() {
+			$id = $this->input->post('id');
 			$name = $this->input->post('name');
 			$label = $this->input->post('label');
 			$title = $this->input->post('title');
 			$text = $this->input->post('text');
 
-			if (empty($name)) {
+			if (empty($id)) {
+				$this->error('Veuillez choisir une page');
+			} else if (empty($name)) {
 				$this->error('Le nom ne peut être vide');
 			} else if (empty($label)) {
 				$this->error('Le label ne peut être vide');
@@ -138,7 +141,7 @@
 			} else if (empty($text)) {
 				$this->error('Le texte ne peut être vide');
 			} else {
-				$success = $this->PageService->updatePage($name, $label, $title, $text);
+				$success = $this->PageService->updatePage($id, $name, $label, $title, $text);
 
 				if (!$success) {
 					$this->error('Une page portant ce nom existe déjà');
@@ -347,6 +350,7 @@
 			$author = $this->input->post('author');
 			$publish_date = $this->input->post('publish_date');
 			$category = substr($this->input->post('category'), 2);
+			$image = $this->input->post('image');
 			$description = $this->input->post('description');
 
 			if (empty($title)) {
@@ -357,10 +361,12 @@
 				$this->error('La date de sortie ne peut être vide');
 			} else if (empty($category)) {
 				$this->error('La catégorie ne peut être vide');
+			} else if (empty($image)) {
+				$this->error('L\'image ne peut être vide');
 			} else if (empty($description)) {
 				$this->error('La description ne peut être vide');
 			} else {
-				$success = $this->ItemService->addItem($title, $author, $publish_date, $category, $description);
+				$success = $this->ItemService->addItem($title, $author, $publish_date, $category, $image, $description);
 
 				if (!$success) {
 					$this->error('Une oeuvre ayant ces informations existe déjà');
@@ -374,6 +380,7 @@
 			$author = $this->input->post('author');
 			$publish_date = $this->input->post('publish_date');
 			$category = substr($this->input->post('category'), 2);
+			$image = $this->input->post('image');
 			$description = $this->input->post('description');
 
 			if (empty($id)) {
@@ -386,10 +393,12 @@
 				$this->error('La date de sortie ne peut être vide');
 			} else if (empty($category)) {
 				$this->error('La catégorie ne peut être vide');
+			} else if (empty($image)) {
+				$this->error('L\'image ne peut être vide');
 			} else if (empty($description)) {
 				$this->error('La description ne peut être vide');
 			} else {
-				$success = $this->ItemService->updateItem($id, $title, $author, $publish_date, $category, $description);
+				$success = $this->ItemService->updateItem($id, $title, $author, $publish_date, $category, $image, $description);
 
 				if (!$success) {
 					$this->error('Une oeuvre ayant ces informations existe déjà');

@@ -4,12 +4,12 @@
 
 	class PageService extends CI_Model {
 
-		private function exists($name) {
-			return $this->db->where('name', $name)->get('pages')->num_rows() > 0;
+		private function exists($id, $name) {
+			return $this->db->where('id !=', $id)->where('name', $name)->get('pages')->num_rows() > 0;
 		}
 
 		public function addPage($name, $label, $title, $text) {
-			return !$this->exists($name)
+			return !$this->exists(0, $name)
 				&& $this->db->set('name', $name)
 							->set('label', $label)
 							->set('title', $title)
@@ -18,7 +18,7 @@
 		}
 
 		public function updatePage($id, $name, $label, $title, $text) {
-			return !$this->exists($name)
+			return !$this->exists($id, $name)
 				&& $this->db->set('name', $name)
 							->set('label', $label)
 							->set('title', $title)

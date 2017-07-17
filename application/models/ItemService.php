@@ -4,28 +4,30 @@
 
 	class ItemService extends CI_Model {
 
-		private function exists($title, $category) {
-			return $this->db->where('title', $title)->where('category', $category)->get('items')->num_rows() > 0;
+		private function exists($id, $title, $category) {
+			return $this->db->where('id !=', $id)->where('title', $title)->where('category', $category)->get('items')->num_rows() > 0;
 		}
 
-		public function addItem($title, $author, $publish_date, $category, $description) {
-			return !$this->exists($title, $category)
+		public function addItem($title, $author, $publish_date, $category, $image, $description) {
+			return !$this->exists(0, $title, $category)
 				&& $this->db->set('title', $title)
 							->set('author', $author)
 							->set('publish_date', $publish_date)
 							->set('category', $category)
+							->set('image', $image)
 							->set('description', $description)
 							->set('created_by', $_SESSION['user_id'])
 							->set('created_at', date("Y-m-d H:i:s"))
 							->insert('items');
 		}
 
-		public function updateItem($id, $title, $author, $publish_date, $category, $description) {
-			return !$this->exists($title, $category)
+		public function updateItem($id, $title, $author, $publish_date, $category, $image, $description) {
+			return !$this->exists($id, $title, $category)
 				&& $this->db->set('title', $title)
 							->set('author', $author)
 							->set('publish_date', $publish_date)
 							->set('category', $category)
+							->set('image', $image)
 							->set('description', $description)
 							->set('updated_by', $_SESSION['user_id'])
 							->set('updated_at', date("Y-m-d H:i:s"))
@@ -49,6 +51,7 @@
 				$item->author = $row->author;
 				$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
 				$item->category = $this->CategoryService->getCategory($row->category);
+				$item->image = $row->image;
 				$item->description = $row->description;
 				$item->grades = $this->getItemGrades($row->id);
 
@@ -134,6 +137,7 @@
 				$item = new Item_VM();
 				$item->id = $row->id;
 				$item->title = $row->title;
+				$item->image = $row->image;
 
 				$items[] = $item;
 			}
@@ -144,7 +148,7 @@
 		public function getFilteredItems($title, $author, $type, $category) {
 			$this->load->model('CategoryService');
 
-			$result = $this->db->select('i.id, i.title, i.author, i.publish_date, c.id AS itemCategory')
+			$result = $this->db->select('i.id, i.title, i.author, i.publish_date, i.category, i.image')
 								->from('items i')
 								->join('categories c', 'c.id = i.category', 'inner');
 
@@ -163,7 +167,8 @@
 				$item->title = $row->title;
 				$item->author = $row->author;
 				$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
-				$item->category = $this->CategoryService->getCategory($row->itemCategory);
+				$item->category = $this->CategoryService->getCategory($row->category);
+				$item->image = $row->image;
 
 				$items[] = $item;
 			}

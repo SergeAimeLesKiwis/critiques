@@ -14,7 +14,6 @@
 			<?php } ?>
 		</select>
 	</div>
-
 	<div class="md-form form-sm">
 		<i class="fa fa-envelope prefix"></i>
 		<input type="text" id="link_url" class="form-control" />

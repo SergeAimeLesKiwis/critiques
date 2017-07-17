@@ -15,6 +15,7 @@ function init_items() {
 		var author = $('#item-author').val();
 		var publish_date = $('#item-publish-date').val();
 		var category = $('#select-category').val();
+		var image = $('#item-image').val();
 		var description = $('#item-description').html();
 
 		if (action == 'add_item') {
@@ -32,6 +33,8 @@ function init_items() {
 				$('#item-publish-date').val('');
 				$('#select-type').val(null);
 				$('#select-category').val(null);
+				$('#item-image').val('');
+				$('#item-image').focusout();
 				$('#item-description').html('');
 				$('#item-description').focusout();
 			} else if (action == 'update_item') {
@@ -42,7 +45,7 @@ function init_items() {
 			}
 		};
 
-		send_infos(url, { id: id, title: title, author: author, publish_date: publish_date, category: category, description: description }, null, { todo: reset, success_message: success_message });
+		send_infos(url, { id: id, title: title, author: author, publish_date: publish_date, category: category, image: image, description: description }, null, { todo: reset, success_message: success_message });
 	});
 
 	var init_delete = function() {

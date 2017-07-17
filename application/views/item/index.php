@@ -1,7 +1,7 @@
-<div class="container card-block">
+<div class="card-block">
 	<h3 class="blue-color text-center"><i class="fa fa-eercast"></i>&nbsp;Contenus</h3>
 
-	<form method="post" action="">
+	<form method="post" action="" class="container">
 		<input type="hidden" name="search" value="1" />
 		<div class="row">
 			<div class="md-form col-md-12">
@@ -39,7 +39,6 @@
 				<button id="load-item" class="btn btn-sm bg-darkgrey-color form-control"><i class="fa fa-search"></i>&nbsp;Filtrer</button>
 			</div>
 		</div>
-		
 	</form>
 
 	<hr class="mb-2">

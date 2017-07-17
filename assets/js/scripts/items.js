@@ -23,17 +23,19 @@ function init_infos_modal() {
 function init_ratings() {
 	$('.grade').hover(
 		function() {
+			$('.grade').addClass('grade-hover').removeClass('fa-star-half-o');
+
 			var value = $(this).data('value');
-			$(".grade").filter(function() { return parseInt($(this).data('value')) <= value; }).each(function() {
-				$(this).addClass('grade-hover').addClass('fa-star').removeClass('fa-star-half-o').removeClass('fa-star-o');
+			$('.grade').filter(function() { return parseInt($(this).data('value')) <= value; }).each(function() {
+				$(this).addClass('fa-star').removeClass('fa-star-o');
 			});
 
-			$(".grade").filter(function() { return parseInt($(this).data('value')) > value; }).each(function() {
-				$(this).addClass('fa-star-o').removeClass('fa-star').removeClass('fa-star-half-o');
+			$('.grade').filter(function() { return parseInt($(this).data('value')) > value; }).each(function() {
+				$(this).addClass('fa-star-o').removeClass('fa-star');
 			});
 		},
 		function() {
-			$(".grade").each(function() {
+			$('.grade').each(function() {
 				var base_icon = $(this).data('base');
 				$(this).removeClass('grade-hover').removeClass('fa-star').removeClass('fa-star-o').addClass(base_icon);
 			});
