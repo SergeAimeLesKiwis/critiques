@@ -49,20 +49,14 @@ function add_link_modal(target) {
 
 			if (name != null && name != '') {
 				var page = $(this).find('option[value="' + name + '"]');
-
-				$('#link_url').focusin();
-				$('#link_url').val(page.data('url'));
-				$('#link_url').focusout();
-
-				$('#link_label').focusin();
-				$('#link_label').val(page.html());
-				$('#link_label').focusout();
+				set_value('#link-url', page.data('url'));
+				set_value('#link-label', page.html());
 			}
 		});
 
 		$('#add-link').click(function() {
-			var url = $('#link_url').val();
-			var label = $('#link_label').val();
+			var url = $('#link-url').val();
+			var label = $('#link-label').val();
 
 			if (url == '') {
 				toastr['error']('L\'url ne peut être vide', 'Attention');

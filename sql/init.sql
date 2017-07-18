@@ -247,13 +247,13 @@ INSERT INTO `categories` (`name`, `type`) VALUES
 ('Console de salon', 5);
 
 INSERT INTO `items` (`title`, `author`, `publish_date`, `category`, `image`, `description`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES 
-('Harry Potter à l\'École des Sorciers', 'J.K. Rowling', '2000-11-29', 4, 'http://via.placeholder.com/350x150', '1er volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
-('Harry Potter et la Chambre des Secrets', 'J.K. Rowling', '2000-11-29', 1, 'http://via.placeholder.com/350x150', '2ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
-('Harry Potter et le Prisonnier d\'Azkaban', 'J.K. Rowling', '2000-11-29', 1, 'http://via.placeholder.com/350x150', '3ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
-('Harry Potter et la Coupe de Feu', 'J.K. Rowling', '2000-11-29', 3, 'http://via.placeholder.com/350x150', '4ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
-('Harry Potter et l\'Ordre du Phénix', 'J.K. Rowling', '2000-11-29', 1, 'http://via.placeholder.com/350x150', '5ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
-('Harry Potter et le Prince de Sang Mêlé', 'J.K. Rowling', '2000-11-29', 1, 'http://via.placeholder.com/350x150', '6ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
-('Harry Potter et les Reliques de la Mort', 'J.K. Rowling', '2000-11-29', 5, 'http://via.placeholder.com/350x150', '7ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17');
+('Harry Potter à l\'École des Sorciers', 'J.K. Rowling', '2000-11-29', 4, 'http://via.placeholder.com/400x250', '1er volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et la Chambre des Secrets', 'J.K. Rowling', '2000-11-29', 1, 'http://via.placeholder.com/400x250', '2ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et le Prisonnier d\'Azkaban', 'J.K. Rowling', '2000-11-29', 1, 'http://via.placeholder.com/400x250', '3ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et la Coupe de Feu', 'J.K. Rowling', '2000-11-29', 3, 'http://via.placeholder.com/400x250', '4ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et l\'Ordre du Phénix', 'J.K. Rowling', '2000-11-29', 1, 'http://via.placeholder.com/400x250', '5ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et le Prince de Sang Mêlé', 'J.K. Rowling', '2000-11-29', 1, 'http://via.placeholder.com/400x250', '6ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17'),
+('Harry Potter et les Reliques de la Mort', 'J.K. Rowling', '2000-11-29', 5, 'http://via.placeholder.com/400x250', '7ème volet de la saga Harry Potter.', 1, '2017-05-17', 1, '2017-05-17');
 
 INSERT INTO `grades` (`user`, `item`, `value`) VALUES 
 (1, 2, 5),

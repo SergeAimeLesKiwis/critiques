@@ -62,7 +62,7 @@
 						<div class="card-block">
 							<div class="text-center">
 								<h3 class="blue-color"><i class="fa fa-bullseye"></i>&nbsp;Administration du site</h3>
-								<hr class="mt-2 mb-2">
+								<hr class="mt-2 mb-2" />
 								<div class="text-center"><em>Attention, les modifications faites depuis l'espace d'administration ont un impact sur le site !</em></div>
 							</div>
 						</div>

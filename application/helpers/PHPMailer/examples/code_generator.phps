@@ -376,7 +376,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "Submit") {
     echo "<pre class=\"brush: php;\">\n";
     echo $example_code;
     echo "\n</pre>\n";
-    echo "\n<hr style=\"margin: 3em;\">\n";
+    echo "\n<hr style=\"margin: 3em;\" />\n";
 }
 ?>
 <form method="POST" enctype="multipart/form-data">

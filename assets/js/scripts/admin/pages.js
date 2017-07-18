@@ -23,14 +23,10 @@ function init_pages() {
 
 		var reset = function() {
 			if (action == 'add_page') {
-				$('#page-name').val('');
-				$('#page-name').focusout();
-				$('#page-label').val('');
-				$('#page-label').focusout();
-				$('#page-title').val('');
-				$('#page-title').focusout();
-				$('#page-text').html('');
-				$('#page-text').focusout();
+				set_value('#page-name');
+				set_value('#page-label');
+				set_value('#page-title');
+				set_value('#page-text');
 			} else if (action == 'update_page') {
 				$('#pages').find('option[data-key="' + id + '"]').html(name);
 			}
@@ -40,14 +36,10 @@ function init_pages() {
 	});
 
 	var init_delete = function() {
-		init_bind_edit_remove();
-		$('#datalist-pages').val('');
-		$('#form-content').empty();
-	};
-	var init_delete = function() {
 		$('#pages').find('option[data-key="' + $('#page-id').val() + '"]').remove();
 		$('#datalist-pages').val('');
 		$('#form-content').empty();
 	};
+
 	bind_delete('#remove-page', null, init_delete);
 }

@@ -89,3 +89,16 @@ function send_infos(url, data, target, callback) {
 		}
 	});
 }
+
+function set_value(selector, value = '') {
+	$(selector).focusin();
+
+	if ($(selector).is('input')) $(selector).val(value);
+	else if ($(selector).is('div')) $(selector).html(value);
+	
+	$(selector).focusout();
+}
+
+// function format_date(date) {
+// 	return date.split("/").reverse().join("-");
+// }

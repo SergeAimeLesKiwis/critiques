@@ -49,7 +49,7 @@
 				$item->id = $row->id;
 				$item->title = $row->title;
 				$item->author = $row->author;
-				$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
+				$item->publish_date = $row->publish_date;
 				$item->category = $this->CategoryService->getCategory($row->category);
 				$item->image = $row->image;
 				$item->description = $row->description;
@@ -166,7 +166,7 @@
 				$item->id = $row->id;
 				$item->title = $row->title;
 				$item->author = $row->author;
-				$item->publish_date = date('d/m/Y', strtotime($row->publish_date));
+				$item->publish_date = $row->publish_date;
 				$item->category = $this->CategoryService->getCategory($row->category);
 				$item->image = $row->image;
 

@@ -5,6 +5,20 @@ function init_items() {
 	var callback = function() { init_items(); };
 	datalist_loader('#items', '#datalist-items', 'admin/load_item', '#form-content', callback);
 
+	var api = function() {
+		$('#get-query').click(function() {
+			google_api();
+		});
+	};
+
+	load_modal_on_click('#api-google', { target: '#modal-sm', controller: 'admin', action: 'api' }, { todo: api });
+
+	var image = function() {
+		$('#image-preview').attr('src', $('#item-image').val());
+	};
+
+	load_modal_on_click('#show-image', { target: '#modal', controller: 'admin', action: 'image' }, { todo: image });
+
 	add_link_modal('item-description');
 
 	$('#send-infos').click(function() {
@@ -26,17 +40,13 @@ function init_items() {
 
 		var reset = function() {
 			if (action == 'add_item') {
-				$('#item-title').val('');
-				$('#item-title').focusout();
-				$('#item-author').val('');
-				$('#item-author').focusout();
-				$('#item-publish-date').val('');
-				$('#select-type').val(null);
-				$('#select-category').val(null);
-				$('#item-image').val('');
-				$('#item-image').focusout();
-				$('#item-description').html('');
-				$('#item-description').focusout();
+				set_value('#item-title');
+				set_value('#item-author');
+				set_value('#item-publish-date');
+				set_value('#select-type');
+				set_value('#select-category');
+				set_value('#item-image');
+				set_value('#item-description');
 			} else if (action == 'update_item') {
 				var newType = $('#select-type option[value="' + $('#select-type').val() + '"]').html();
 				var newCategory = $('#select-category option[value="' + $('#select-category').val() + '"]').html();
@@ -55,4 +65,39 @@ function init_items() {
 	};
 
 	bind_delete('#remove-item', null, init_delete);
+}
+
+function google_api() {
+	$.ajax({
+		type: 'get',
+		url: "https://www.googleapis.com/books/v1/volumes?q=" + $('#api-query').val(),
+		dataType: "json",
+		success: function(data) {
+			if (data.items.length > 0) {
+				var item = data.items[0].volumeInfo;
+				var title = item.title || '';
+				var author = item.authors || '';
+				var publish_date = item.publishedDate || '';
+				var image = item.imageLinks.smallThumbnail || '';
+				var description = item.description || '';
+				var link = item.infoLink || '';
+				if (link != '') link = '<br /><a href="' + link + '" class="brown-color" target="_blank">Acheter</a>';
+
+				set_value('#item-title', title);
+				set_value('#item-author', author);
+				set_value('#item-publish-date', publish_date);
+				set_value('#item-image', image);
+				set_value('#item-description', description + link);
+
+				close_current_modal();
+
+				toastr['info']('Si l\'oeuvre n\'est pas celle attendue, soyez plus précis dans votre recherche', 'Attention');
+			} else {
+				toastr['error']('Aucune oeuvre ne correspond à votre recherche', 'Attention');
+			}
+		},
+		error: function(xhr, status, error) {
+			toastr['error']('Veuillez rentrer un titre ou un auteur', 'Attention');
+		}
+	});
 }

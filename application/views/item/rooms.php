@@ -3,7 +3,7 @@
 		<i class="fa fa-eercast"></i>&nbsp;<?php echo $item->title; ?> <small>(<?php echo $item->getClassification(); ?>)</small>
 	</h3>
 
-	<hr class="mb-2">
+	<hr class="mb-2" />
 
 	<?php
 		if (!empty($rooms)) {

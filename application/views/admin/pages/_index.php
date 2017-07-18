@@ -26,7 +26,7 @@
 				</div>
 			<?php } ?>
 
-			<hr class="mt-2 mb-2">
+			<hr class="mb-2" />
 
 			<div id="form-content">
 				<?php

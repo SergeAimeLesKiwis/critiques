@@ -41,7 +41,7 @@
 		</div>
 	</form>
 
-	<hr class="mb-2">
+	<hr class="mb-2" />
 
 	<?php
 		if (isset($search)) {

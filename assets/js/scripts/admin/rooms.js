@@ -25,12 +25,11 @@ function init_add_room() {
 
 		var reset = function() {
 			if (action == 'add_room') {
-				$('#datalist-items').val('');
-				$('#room-item').val('');
-				$('#room-name').val('');
-				$('#room-name').focusout();
-				$('#room-start-date').val('');
-				$('#room-end-date').val('');
+				set_value('#datalist-items');
+				set_value('#room-item');
+				set_value('#room-name');
+				set_value('#room-start-date');
+				set_value('#room-end-date');
 			}
 		};
 

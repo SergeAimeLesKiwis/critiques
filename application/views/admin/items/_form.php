@@ -1,8 +1,8 @@
-<div class="row">
-API
-
-
+<div class="text-center">
+	<button id="api-google" class="btn bg-green-hover"><i class="fa fa-thermometer-full"></i>&nbsp;Utiliser l'API Google</button>
 </div>
+
+<hr />
 
 <input type="hidden" id="item-id" value="<?php echo $item->id; ?>" />
 
@@ -21,7 +21,7 @@ API
 
 	<div class="md-form col-md-4">
 		<i class="fa fa-thermometer-quarter prefix"></i>
-		<input type="date" id="item-publish-date" class="form-control" value="<?php echo $item->publish_date; ?>" />
+		<input type="date" id="item-publish-date" class="form-control" value="<?php if ($item->id > 0) echo $item->getDateFormated(); ?>" />
 		<label for="item-publish-date" class="active">Date de sortie</label>
 	</div>
 </div>
@@ -45,10 +45,13 @@ API
 </div>
 
 <div class="row">
-	<div class="md-form col-md-12">
+	<div class="md-form col-md-10">
 		<i class="fa fa-file-image-o prefix"></i>
 		<input type="text" id="item-image" class="form-control" value="<?php echo $item->image; ?>" />
 		<label for="item-image" <?php if ($item->id > 0) echo 'class="active"'; ?>>Image</label>
+	</div>
+	<div class="md-form offset-md-1 col-md-1">
+		<button id="show-image" class="btn btn-sm bg-darkgrey-color"><i class="fa fa-eye"></i></button>
 	</div>
 </div>
 

@@ -16,13 +16,13 @@
 	</div>
 	<div class="md-form form-sm">
 		<i class="fa fa-envelope prefix"></i>
-		<input type="text" id="link_url" class="form-control" />
-		<label for="link_url">Url</label>
+		<input type="text" id="link-url" class="form-control" />
+		<label for="link-url">Url</label>
 	</div>
 	<div class="md-form form-sm">
 		<i class="fa fa-envelope prefix"></i>
-		<input type="text" id="link_label" class="form-control" />
-		<label for="link_label">Label</label>
+		<input type="text" id="link-label" class="form-control" />
+		<label for="link-label">Label</label>
 	</div>
 	<div class="text-center mt-1-half">
 		<button id="add-link" class="btn btn-info mb-2">Valider&nbsp;<i class="fa fa-check ml-1"></i></button>

@@ -18,7 +18,7 @@
 				<?php $this->load->view('shared/_datalist_loader') ?>
 			</div>
 
-			<hr class="mt-2 mb-2">
+			<hr class="mb-2" />
 
 			<div id="form-content">
 				<input type="hidden" id="room-item" value="" />

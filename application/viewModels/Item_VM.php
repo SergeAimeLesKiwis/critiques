@@ -30,11 +30,15 @@
 		}
 
 		public function getLightInfos() {
-			return 'Créé par '.$this->author.' - Sorti le '.$this->publish_date;
+			return 'Créé par '.$this->author.' - Sorti le '.date('d/m/Y', strtotime($this->publish_date));
 		}
 
 		public function getClassification() {
 			return $this->category->type->name.' - '.$this->category->name;
+		}
+
+		public function getDateFormated() {
+			return date('Y-m-d', strtotime($this->publish_date));
 		}
 	}
 

@@ -5,8 +5,6 @@ $(document).ready(function() {
 
 	var init = function() { init_infos_modal(); };
 	load_modal_on_click('.show-infos', { target: '#modal-lg', controller: 'item', action: 'infos' }, { todo: init, reloadable: true });
-
-
 });
 
 function init_infos_modal() {

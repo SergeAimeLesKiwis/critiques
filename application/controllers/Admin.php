@@ -345,6 +345,14 @@
 			}
 		}
 
+		public function load_api_modal() {
+			$this->load->view('admin/items/_api_modal');
+		}
+
+		public function load_image_modal() {
+			$this->load->view('admin/items/_image_modal');
+		}
+
 		public function add_item() {
 			$title = $this->input->post('title');
 			$author = $this->input->post('author');

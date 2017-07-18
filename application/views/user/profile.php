@@ -1,7 +1,7 @@
 <br/>
 <div class=" col-md-12 text-center">
 	<h1 class="green-color text-center"><b>Profil Utilisateur</b></h1>
-	<hr class="mt-2 mb-2">
+	<hr class="mt-2 mb-2" />
 </div>
 
 <div class="row">
@@ -16,7 +16,7 @@
 	</div>
 </div>
 
-<hr class="mt-2 mb-2">
+<hr class="mt-2 mb-2" />
 
 <div class="row">
 	<div class="offset-md-1 col-md-11">
@@ -37,7 +37,7 @@
 	<?php $this->load->view('user/_loans', array('items' => $user->loans)); ?>
 </div>
 
-<hr class="mt-2">
+<hr class="mt-2" />
 
 <?php if ($user->id != $_SESSION['user_id']){ ?>
 	<div class="offset-md-3 col-md-10">
