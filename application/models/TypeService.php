@@ -4,7 +4,7 @@
 
 	class TypeService extends CI_Model {
 
-		private function exists($name) {
+		private function exists($id, $name) {
 			return $this->db->where('id !=', $id)->where('name', $name)->get('types')->num_rows() > 0;
 		}
 

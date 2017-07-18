@@ -7,7 +7,38 @@ function init_items() {
 
 	var api = function() {
 		$('#get-query').click(function() {
-			google_api();
+			$.ajax({
+				type: 'get',
+				url: "https://www.googleapis.com/books/v1/volumes?q=" + $('#api-query').val(),
+				dataType: "json",
+				success: function(data) {
+					if (data.items.length > 0) {
+						var item = data.items[0].volumeInfo;
+						var title = item.title || '';
+						var author = item.authors || '';
+						var publish_date = item.publishedDate || '';
+						var image = item.imageLinks.smallThumbnail || '';
+						var description = item.description || '';
+						var link = item.infoLink || '';
+						if (link != '') link = '<br /><a href="' + link + '" class="brown-color" target="_blank">Acheter</a>';
+
+						set_value('#item-title', title);
+						set_value('#item-author', author);
+						set_value('#item-publish-date', publish_date);
+						set_value('#item-image', image);
+						set_value('#item-description', description + link);
+
+						close_current_modal();
+
+						toastr['info']('Si l\'oeuvre n\'est pas celle attendue, soyez plus précis dans votre recherche', 'Attention');
+					} else {
+						toastr['error']('Aucune oeuvre ne correspond à votre recherche', 'Attention');
+					}
+				},
+				error: function(xhr, status, error) {
+					toastr['error']('Veuillez rentrer un titre ou un auteur', 'Attention');
+				}
+			});
 		});
 	};
 
@@ -65,39 +96,4 @@ function init_items() {
 	};
 
 	bind_delete('#remove-item', null, init_delete);
-}
-
-function google_api() {
-	$.ajax({
-		type: 'get',
-		url: "https://www.googleapis.com/books/v1/volumes?q=" + $('#api-query').val(),
-		dataType: "json",
-		success: function(data) {
-			if (data.items.length > 0) {
-				var item = data.items[0].volumeInfo;
-				var title = item.title || '';
-				var author = item.authors || '';
-				var publish_date = item.publishedDate || '';
-				var image = item.imageLinks.smallThumbnail || '';
-				var description = item.description || '';
-				var link = item.infoLink || '';
-				if (link != '') link = '<br /><a href="' + link + '" class="brown-color" target="_blank">Acheter</a>';
-
-				set_value('#item-title', title);
-				set_value('#item-author', author);
-				set_value('#item-publish-date', publish_date);
-				set_value('#item-image', image);
-				set_value('#item-description', description + link);
-
-				close_current_modal();
-
-				toastr['info']('Si l\'oeuvre n\'est pas celle attendue, soyez plus précis dans votre recherche', 'Attention');
-			} else {
-				toastr['error']('Aucune oeuvre ne correspond à votre recherche', 'Attention');
-			}
-		},
-		error: function(xhr, status, error) {
-			toastr['error']('Veuillez rentrer un titre ou un auteur', 'Attention');
-		}
-	});
 }

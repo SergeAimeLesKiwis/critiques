@@ -4,7 +4,19 @@
 
 	class UserService extends CI_Model {
 
-		public function getUser($id, $with = null) {
+		private function exists($id, $username) {
+			return $this->db->where('id !=', $id)->where('username', $username)->get('users')->num_rows() > 0;
+		}
+
+		public function updateUser($id, $username, $description) {
+			return !$this->exists($id, $title, $category)
+				&& $this->db->set('username', $username)
+							->set('description', $description)
+							->where('id', $id)
+							->update('users');
+		}
+
+		public function getUser($id, $with = null, $only_active = true) {
 			$row = $this->db->where('id', $id)->get('users')->row();
 
 			if (isset($row)) {
@@ -26,7 +38,7 @@
 					}
 				}
 
-				return $user->status != 'banned' ? $user : null;
+				return $only_active ? ($user->status != 'banned' ? $user : null) : $user;
 			}
 
 			return null;

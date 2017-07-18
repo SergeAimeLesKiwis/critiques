@@ -6,32 +6,32 @@
 		<div class="row">
 			<div class="md-form col-md-12">
 				<?php
-					$datalist_items['items'] = $datalistItems;
-					$datalist_items['placeholder'] = 'Titre de l\'oeuvre';
-					$datalist_items['name'] = 'searchTitle';
-					$datalist_items['value'] = $searchTitle;
-					$this->load->view('shared/_datalist_items', $datalist_items);
+					$list['items'] = $all_items;
+					$list['placeholder'] = 'Titre de l\'oeuvre';
+					$list['name'] = 'search_title';
+					$list['value'] = $search_title;
+					$this->load->view('shared/_datalist_items', $list);
 				?>
 			</div>
 		</div>
 		<div class="row">
 			<div class="md-form col-md-3">
-				<input type="text" id="searchAuthor" name="searchAuthor" class="form-control" value="<?php echo $searchAuthor; ?>" />
-				<label for="searchAuthor">Auteur</label>
+				<input type="text" id="search_author" name="search_author" class="form-control" value="<?php echo $search_author; ?>" />
+				<label for="search_author">Auteur</label>
 			</div>
 			<div class="md-form col-md-3">
 				<?php
 					$select_type['types'] = $types;
-					$select_type['name'] = 'searchType';
-					$select_type['selected'] = $searchType;
+					$select_type['name'] = 'search_type';
+					$select_type['selected'] = $search_type;
 					$this->load->view('shared/_select_type_values', $select_type);
 				?>
 			</div>
 			<div class="md-form col-md-3">
 				<?php
 					$select_category['categories'] = $categories;
-					$select_category['name'] = 'searchCategory';
-					$select_category['selected'] = $searchCategory;
+					$select_category['name'] = 'search_category';
+					$select_category['selected'] = $search_category;
 					$this->load->view('shared/_select_category_values', $select_category);
 				?>
 			</div>

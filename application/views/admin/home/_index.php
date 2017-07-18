@@ -33,9 +33,9 @@
 
 		<div class="md-form">
 			<?php
-				$datalist_items['items'] = $datalistItems;
-				$datalist_items['placeholder'] = 'Choisir une oeuvre';
-				$this->load->view('shared/_datalist_items', $datalist_items);
+				$list['items'] = $all_items;
+				$list['placeholder'] = 'Choisir une oeuvre';
+				$this->load->view('shared/_datalist_items', $list);
 			?>
 		</div>
 

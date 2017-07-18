@@ -25,7 +25,7 @@
 			if ($user != null) {
 				$data['user'] = $user;
 				$data['loanStatus'] = $this->LoanService->getLoansStatus();
-				$data['datalistItems'] = $this->ItemService->getDatalistLoans($user->id);
+				$data['all_items'] = $this->ItemService->getDatalistLoans($user->id);
 				$this->load->view('user/profile', $data);
 			} else {
 				$this->load->view('user/no_user');
@@ -33,6 +33,29 @@
 
 			// FOOTER
 			$this->loadFooter();
+		}
+
+		public function load_edit_modal() {
+			$data['user'] = $this->UserService->getUser($_SESSION['user_id'], 'loans');
+			$this->load->view('user/_edit_user_modal', $data);
+		}
+
+		public function update() {
+			$id = $this->input->post('id');
+			$username = $this->input->post('username');
+			$description = $this->input->post('description');
+
+			if (empty($id)) {
+				$this->error('Veuillez choisir un utilisateur');
+			} else if (empty($username)) {
+				$this->error('Le pseudo ne peut être vide');
+			} else {
+				$success = $this->UserService->updateUser($id, $username, $description);
+
+				if (!$success) {
+					$this->error('Ce pseudo est déjà utilisé');
+				}
+			}
 		}
 
 		public function contact() {

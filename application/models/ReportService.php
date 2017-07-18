@@ -49,7 +49,7 @@
 				$report->id = $row->reason;
 				$report->reason = $row->name;
 				$report->value = $row->value;
-				$report->reported_by = $this->UserService->getUser($row->reported_by);
+				$report->reported_by = $this->UserService->getUser($row->reported_by, null, false);
 				$report->reported_at = date('d/m/Y - H:i:s', strtotime($row->reported_at));
 
 				$reports[] = $report;

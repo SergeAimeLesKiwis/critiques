@@ -29,7 +29,7 @@
 								->join('loan_status ls', 'ls.id = l.status', 'inner')
 								->where('l.user', $user)
 								->order_by('RAND()')
-								->limit(4)
+								->limit(3)
 								->get()
 								->result();
 			$items = array();

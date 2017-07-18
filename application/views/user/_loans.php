@@ -1,5 +1,5 @@
 <?php foreach ($items as $item) { ?>
-	<div class="card">
+	<div class="card col-md-3 spacer">
 		<div class="view overlay hm-zoom">
 			<?php echo $item->getImageTag(); ?>
 			<a><div class="mask waves-effect waves-light"></div></a>

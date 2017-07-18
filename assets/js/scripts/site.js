@@ -37,6 +37,8 @@ function init_toastr() {
 }
 
 function load_modal_on_click(selector, infos, callback) {
+	callback = callback || {};
+
 	$(selector).click(function () {
 		infos.target = infos.target || $(this).data('target');
 		infos.controller = infos.controller || $(this).data('controller');

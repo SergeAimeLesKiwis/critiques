@@ -45,7 +45,7 @@
 			$data['concept'] = $this->ParameterService->getHomeConcept();
 			$highlights = $this->ParameterService->getHomeHighlights();
 			$data['highlights'] = $this->ItemService->getItems($highlights);
-			$data['datalistItems'] = $this->ItemService->getDatalistItems();
+			$data['all_items'] = $this->ItemService->getDatalistItems();
 			$this->load->view('admin/home/_index', $data);
 		}
 
@@ -325,7 +325,7 @@
 
 		public function load_admin_update_item() {
 			$data['title'] = 'Modification d\'une oeuvre';
-			$data['datalistItems'] = $this->ItemService->getDatalistItems();
+			$data['all_items'] = $this->ItemService->getDatalistItems();
 			$this->load->view('admin/items/_index', $data);
 		}
 
@@ -431,7 +431,7 @@
 
 //region Rooms
 		public function load_admin_add_room() {
-			$data['datalistItems'] = $this->ItemService->getDatalistItems();
+			$data['all_items'] = $this->ItemService->getDatalistItems();
 			$this->load->view('admin/rooms/_add', $data);
 		}
 

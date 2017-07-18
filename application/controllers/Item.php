@@ -23,23 +23,23 @@
 
 			// CONTENT
 			$search = $this->input->post('search');
-			$searchTitle = $this->input->post('searchTitle');
-			$searchAuthor = $this->input->post('searchAuthor');
-			$searchType = substr($this->input->post('searchType'), 2);
-			$searchCategory = substr($this->input->post('searchCategory'), 2);
+			$search_title = $this->input->post('search_title');
+			$search_author = $this->input->post('search_author');
+			$search_type = substr($this->input->post('search_type'), 2);
+			$search_category = substr($this->input->post('search_category'), 2);
 
 			$data['search'] =  $search;
-			$data['searchTitle'] =  $searchTitle;
-			$data['searchAuthor'] =  $searchAuthor;
-			$data['searchType'] =  $searchType;
-			$data['searchCategory'] =  $searchCategory;
+			$data['search_title'] =  $search_title;
+			$data['search_author'] =  $search_author;
+			$data['search_type'] =  $search_type;
+			$data['search_category'] =  $search_category;
 
 			$data['types'] = $this->TypeService->getAllTypes();
 			$data['categories'] = $this->CategoryService->getAllCategories();
-			$data['datalistItems'] = $this->ItemService->getDatalistItems();
+			$data['all_items'] = $this->ItemService->getDatalistItems();
 
 			if (isset($search)) {
-				$data['items'] = $this->ItemService->getFilteredItems($searchTitle, $searchAuthor, $searchType, $searchCategory);
+				$data['items'] = $this->ItemService->getFilteredItems($search_title, $search_author, $search_type, $search_category);
 			} else {
 				$data['items'] = array();
 			}
