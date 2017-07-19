@@ -6,13 +6,28 @@ var io = require('socket.io').listen(http);
 http.listen(3000);
 
 io.on('connection', function(socket){
-	socket.on('message', function(msg){
-		io.emit('message', msg);
+	socket.on('message', function(message){
+		io.emit('message', message);
 	});
 });
 
-
-
+function send_message() {
+	$.ajax({
+		type: 'post',
+		url: base_url + 'room/send',
+		data: { user: message.user, room: },
+		dataType: 'html',
+		success: function (data) {
+			if (callback.open == null) close_current_modal();
+			if (target != null) $(target).html(data);
+			if (callback.todo != null) callback.todo();
+			if (callback.success_message != null) toastr['success'](callback.success_message, 'Succès');
+		},
+		error: function(xhr, status, error) {
+			toastr['error'](xhr.responseText, 'Attention');
+		}
+	});
+}
 
 
 
