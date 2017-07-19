@@ -24,12 +24,16 @@
 			return $messages;
 		}
 
-		private function can_send($user, $room) {
-			return $this->db->where('user', $user)->where('room', $room)->get('excluded')->num_rows() == 0;
+		public function ban_user($user, $room) {
+			return $this->db->set('user', $user)->set('room', $room)->insert('excluded');
+		}
+
+		public function is_banned($user, $room) {
+			return $this->db->where('user', $user)->where('room', $room)->get('excluded')->num_rows() > 0;
 		}
 
 		public function send_message($user, $room, $content) {
-			return $this->can_send($user, $room)
+			return !$this->is_banned($user, $room)
 				&& $this->db->set('user', $user)
 							->set('room', $room)
 							->set('content', $content)

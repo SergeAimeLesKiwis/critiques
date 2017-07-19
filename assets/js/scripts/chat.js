@@ -13,8 +13,8 @@ $(document).ready(function() {
 		if (message != '') {
 			$.ajax({
 				type: 'post',
-				url: base_url + 'roomsend',
-				data: { user: id, room: $('#chat').data('room'), content: message },
+				url: base_url + 'room/send',
+				data: { user: me.id, room: $('#chat').data('room'), content: message },
 				dataType: 'html',
 				success: function (data) {
 					client.emit('message', { user: me.id, name: me.username, content: message });
@@ -35,17 +35,23 @@ $(document).ready(function() {
 
 		if (message.user == $('#me').data('id')) {
 			element += '<div class="message message-me row bg-green-color white-text animated slideInRight">';
+			element += '<div class="col-md-3">' + format_name(message.user, message.name) + '</div>';
 		} else {
 			element += '<div class="message message-other row bg-brown-color white-text animated slideInLeft">';
+			element += '<div class="col-md-3">' + message.name + '</div>';
 		}
 		
-		element += '<div class="col-md-3">' + message.name + '</div>';
 		element += '<div class="col-md-7">' + escapeHtml(message.content) + '</div>';
 		element += '<div class="col-md-2">' + format_date() + '</div>';
 		element += '</div>';
 
 		$('#chat').append(element);
 		$("#chat").scrollTop($("#chat")[0].scrollHeight);
+
+		$('.ban-user').click(function() {
+			var id = $(this).data('key');
+			send_infos(base_url + 'room/ban', { user: id, room: $('#chat').data('room') }, null, { success_message: 'Utilisateur banni' })
+		});
 	});
 
 	client.on('join', function(user){
@@ -66,8 +72,7 @@ function format_name(user, name) {
 	element += '<br />';
 	element += '<span class="pull-left">';
 	element += '<i class="fa fa-warning report-user" data-key="' + user + '"></i>';
-	element += '<i class="fa fa-ban ban-user" data-key="' + user + '"></i>';
-	element += ('0' + date.getMinutes()).slice(-2);
+	if (user == admin) element += '<i class="fa fa-ban ban-user" data-key="' + user + '"></i>';
 	element += '</span>';
 
 	return element;

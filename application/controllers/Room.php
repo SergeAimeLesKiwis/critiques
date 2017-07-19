@@ -35,12 +35,22 @@
 			$this->loadHeader();
 
 			// CONTENT
-			$data['user'] = $this->UserService->getUser($_SESSION['user_id']);
-			$data['room'] = $this->RoomService->getRoom($id);
-			$data['messages'] = $this->ChatService->getChatMessages($id);
-			//TODO: get current participants
+			$user = $_SESSION['user_id'];
+			$room = $id;
 
-			$this->load->view('room/chat', $data);
+			$restricted = $this->ChatService->is_banned($user, $room);
+
+			if ($restricted) {
+				$data['message'] = 'Ooops, il semblerait que vous ne puissiez pas participer au salon.';
+				$this->load->view('errors/index', $data);
+			} else {
+				$data['user'] = $this->UserService->getUser($user);
+				$data['room'] = $this->RoomService->getRoom($room);
+				$data['messages'] = $this->ChatService->getChatMessages($id);
+				//TODO: get current participants
+
+				$this->load->view('room/chat', $data);
+			}
 
 			// FOOTER
 			$this->loadFooter();
@@ -60,13 +70,26 @@
 
 		public function load_report_modal() {
 			$user = $this->input->post('user');
-			$data['user'] = $this->PageService->getAllPages();
-			$data['reason'] = $this->PageService->getAllPages();
+			$room = $this->input->post('room');
+			$data['user'] = $user;
+			$data['room'] = $room;
+			$data['reasons'] = $this->PageService->getAllPages();
 			$this->load->view('admin/_add_link_modal', $data);
 		}
 
 		public function report() {
 
+		}
+
+		public function ban() {
+			$user = $this->input->post('user');
+			$room = $this->input->post('room');
+
+			$success = $this->ChatService->ban_user($user, $room);
+
+			if (!$success) {
+				$this->error('Vous n\'avez pas les droits nécessaires');
+			}
 		}
 	}
 ?>

@@ -17,7 +17,9 @@ function init_items() {
 						var title = item.title || '';
 						var author = item.authors || '';
 						var publish_date = item.publishedDate || '';
-						var image = item.imageLinks.smallThumbnail || '';
+						var image_link = item.imageLinks || '';
+						var image = '';
+						if (image != '') image = item.imageLinks.smallThumbnail || '';
 						var description = item.description || '';
 						var link = item.infoLink || '';
 						if (link != '') link = '<br /><a href="' + link + '" class="brown-color" target="_blank">Acheter</a>';

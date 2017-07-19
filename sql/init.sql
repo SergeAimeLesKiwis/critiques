@@ -178,7 +178,7 @@ CREATE TABLE `messages` (
 CREATE TABLE `excluded` (
  `user` INT NOT NULL,
  `room` INT NOT NULL,
- PRIMARY KEY (`id`, `room`),
+ PRIMARY KEY (`user`, `room`),
  FOREIGN KEY (`user`) REFERENCES `users`(`id`),
  FOREIGN KEY (`room`) REFERENCES `rooms`(`id`)
 );
