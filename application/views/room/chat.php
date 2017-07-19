@@ -11,7 +11,15 @@
 	</style>
 -->
 
-<div id="messages" class="row"></div>
+<input type="hidden" id="me" data-id="<?php echo $user->id; ?>" data-username="<?php echo $user->username; ?>" />
+
+<div id="chat">
+	<div class="message row">
+		<div class="col-md-3">user</div>
+		<div class="col-md-7">message</div>
+		<div class="col-md-2"><small>date</small></div>
+	</div>
+</div>
 <form id="send-message" action="">
 	<input id="message" autocomplete="off" /><button>Send</button>
 </form>

@@ -39,8 +39,8 @@
 				$room->name = $row->name;
 				$room->admin = $this->UserService->getUser($row->admin);
 				$room->item = $this->ItemService->getItem($row->item);
-				$room->start_date = date('d/m/Y', strtotime($row->start_date));
-				$room->end_date = date('d/m/Y', strtotime($row->end_date));
+				$room->start_date = $row->start_date;
+				$room->end_date = $row->end_date;
 
 				return $room;
 			}
@@ -62,8 +62,8 @@
 				$room = new Room_VM();
 				$room->id = $row->id;
 				$room->name = $row->name;
-				$room->start_date = date('d/m/Y', strtotime($row->start_date));
-				$room->end_date = date('d/m/Y', strtotime($row->end_date));
+				$room->start_date = $row->start_date;
+				$room->end_date = $row->end_date;
 
 				$rooms[] = $room;
 			}
@@ -93,8 +93,8 @@
 				$room->name = $row->name;
 				$room->admin = $this->UserService->getUser($row->admin);
 				$room->item = $this->ItemService->getItem($row->item);
-				$room->start_date = date('d/m/Y', strtotime($row->start_date));
-				$room->end_date = date('d/m/Y', strtotime($row->end_date));
+				$room->start_date = $row->start_date;
+				$room->end_date = $row->end_date;
 
 				$rooms[] = $room;
 			}

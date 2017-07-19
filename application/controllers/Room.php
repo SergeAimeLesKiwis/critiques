@@ -11,20 +11,8 @@
 			$this->styles = array('styles/chat');
 			$this->scripts = array('socket', 'scripts/chat');
 
+			$this->load->model('ChatService');
 			$this->load->model('UserService');
-		}
-
-		public function index() {
-			// HEADER
-			$this->loadHeader();
-
-			// CONTENT
-			$data = array();
-
-			$this->load->view('room/index', $data);
-
-			// FOOTER
-			$this->loadFooter();
 		}
 
 		public function can_join() {
@@ -46,12 +34,26 @@
 			$this->loadHeader();
 
 			// CONTENT
-			$data = array();
+			$data['user'] = $this->UserService->getUser($_SESSION['user_id']);
+			$data['messages'] = $this->ChatService->getChatMessages($id);
+			//TODO: get current participants
 
 			$this->load->view('room/chat', $data);
 
 			// FOOTER
 			$this->loadFooter();
+		}
+
+		public function send() {
+
+		}
+
+		public function join() {
+
+		}
+
+		public function leave() {
+
 		}
 	}
 ?>
