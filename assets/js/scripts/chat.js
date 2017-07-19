@@ -11,12 +11,10 @@ $(document).ready(function() {
 		var message = $('#message').val();
 
 		if (message != '') {
-
-			database('send', { user: id, room: $('#chat').data('room'), content: message });
 			$.ajax({
 				type: 'post',
-				url: base_url + 'room/' + action,
-				data: data,
+				url: base_url + 'roomsend',
+				data: { user: id, room: $('#chat').data('room'), content: message },
 				dataType: 'html',
 				success: function (data) {
 					client.emit('message', { user: me.id, name: me.username, content: message });
@@ -58,13 +56,21 @@ $(document).ready(function() {
 	});
 });
 
-function database(action, data) {
-	$.ajax({
-		type: 'post',
-		url: base_url + 'room/' + action,
-		data: data,
-		dataType: 'html'
-	});
+function format_name(user, name) {
+	var admin = $('#chat').data('admin');
+
+	var element = '';
+	element += '<span class="pull-left">';
+	element += name;
+	element += '</span>';
+	element += '<br />';
+	element += '<span class="pull-left">';
+	element += '<i class="fa fa-warning report-user" data-key="' + user + '"></i>';
+	element += '<i class="fa fa-ban ban-user" data-key="' + user + '"></i>';
+	element += ('0' + date.getMinutes()).slice(-2);
+	element += '</span>';
+
+	return element;
 }
 
 function format_date(date = new Date()) {

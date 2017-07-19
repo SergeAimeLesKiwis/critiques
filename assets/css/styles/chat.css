@@ -1,4 +1,4 @@
-#chat{
+#chat {
 	width : 850px;
 	height : 400px;
 	margin : auto;
@@ -6,23 +6,31 @@
     overflow-x: hidden;
 }
 
-#send-message{
+#send-message {
 	width : 850px;
 	margin : auto;
 }
 
-#message{
+#message {
 	width : 850px;
 }
 
-.message{
+.message {
 	margin-bottom : 10px;
 }
 
-.message-me{	
+.message-me {	
 	border-radius : 8px 8px 0 8px;
 }
 
-.message-other{
+.message-other {
 	border-radius : 0 8px 8px 8px;
+}
+
+.report-user {
+	color: #F80;
+}
+
+.ban-user {
+	color: #C00;
 }
