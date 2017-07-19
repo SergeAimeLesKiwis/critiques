@@ -19,9 +19,9 @@ $(document).ready(function() {
 		var element = '';
 
 		if (message.user == $('#me').data('id')) {
-			element += '<div class="message row bg-darkgrey-color white-text animated slideInRight">';
+			element += '<div class="message message-me row bg-green-color white-text animated slideInRight">';
 		} else {
-			element += '<div class="message row bg-grey-color white-text animated slideInLeft">';
+			element += '<div class="message message-other row bg-brown-color white-text animated slideInLeft">';
 		}
 		
 		element += '<div class="col-md-3">' + message.name + '</div>';
@@ -30,6 +30,7 @@ $(document).ready(function() {
 		element += '</div>';
 
 		$('#chat').append(element);
+		$("#chat").scrollTop($("#chat")[0].scrollHeight);
 	});
 });
 

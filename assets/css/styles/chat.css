@@ -1,0 +1,28 @@
+#chat{
+	width : 850px;
+	height : 400px;
+	margin : auto;
+	overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#send-message{
+	width : 850px;
+	margin : auto;
+}
+
+#message{
+	width : 850px;
+}
+
+.message{
+	margin-bottom : 10px;
+}
+
+.message-me{	
+	border-radius : 8px 8px 0 8px;
+}
+
+.message-other{
+	border-radius : 0 8px 8px 8px;
+}
