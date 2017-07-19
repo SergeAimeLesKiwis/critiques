@@ -8,6 +8,8 @@
 			parent::__construct();
 
 			$this->page = 'Salons';
+			$this->styles = array('styles/chat');
+			$this->scripts = array('socket', 'scripts/chat');
 
 			$this->load->model('UserService');
 		}
