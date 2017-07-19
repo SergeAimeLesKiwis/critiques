@@ -175,6 +175,13 @@ CREATE TABLE `messages` (
 	FOREIGN KEY (`room`) REFERENCES `rooms`(`id`)
 );	
 
+CREATE TABLE `excluded` (
+	`user` INT NOT NULL,
+	`room` INT NOT NULL,
+	FOREIGN KEY (`user`) REFERENCES `users`(`id`),
+	FOREIGN KEY (`room`) REFERENCES `rooms`(`id`)
+);
+
 CREATE TABLE `parameters` (
 	`key` VARCHAR(50) NOT NULL,
 	`value` VARCHAR(2000) NOT NULL,

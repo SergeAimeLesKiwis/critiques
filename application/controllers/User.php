@@ -28,7 +28,8 @@
 				$data['all_items'] = $this->ItemService->getDatalistLoans($user->id);
 				$this->load->view('user/profile', $data);
 			} else {
-				$this->load->view('user/no_user');
+				$data['message'] = 'Ooops, il semblerait que l\'utilisateur que vous recherchez n\'existe pas.';
+				$this->load->view('errors/index', $data);
 			}
 
 			// FOOTER
