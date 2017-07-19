@@ -530,7 +530,7 @@
 
 			if (!empty($id)) {
 				$this->ReportService->ban_user($id);
-				$data['user'] = $this->UserService->getUser($id);
+				$data['user'] = $this->UserService->getUser($id, null, false);
 				$this->load->view('admin/users/_user', $data);
 			} else {
 				$this->error('Veuillez choisir un utilisateur');
