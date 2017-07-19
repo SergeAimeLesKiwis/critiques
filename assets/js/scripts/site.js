@@ -73,6 +73,7 @@ function close_current_modal() {
 
 function send_infos(url, data, target, callback) {
 	callback = callback || {};
+
 	if (target != null) $(target).html($('#waiting-div').html());
 
 	$.ajax({

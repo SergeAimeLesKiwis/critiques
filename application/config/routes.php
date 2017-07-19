@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = false;
 $route['site/(:any)'] = 'page/index/$1';
 $route['item/(:num)/users'] = 'item/users/$1';
 $route['item/(:num)/rooms'] = 'item/rooms/$1';
+$route['chat/(:num)'] = 'room/chat/$1';

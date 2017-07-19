@@ -3,6 +3,15 @@ new WOW().init();
 $(document).ready(function() {
 	$('#select-category').chained('#select-type');
 
+	$('.join').click(function() {
+		var key = $(this).data('key');
+		var todo = function() {
+			window.location.replace(base_url + 'chat/' + key);
+		};
+
+		send_infos(base_url + 'room/can_join', { item: key }, null, { todo: todo });
+	});
+
 	var init = function() { init_infos_modal(); };
 	load_modal_on_click('.show-infos', { target: '#modal-lg', controller: 'item', action: 'infos' }, { todo: init, reloadable: true });
 });

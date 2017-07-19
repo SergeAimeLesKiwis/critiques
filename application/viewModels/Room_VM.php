@@ -17,6 +17,10 @@
 			$this->start_date = date('d/m/Y');
 			$this->end_date = date('d/m/Y');
 		}
+
+		public function getDateRange() {
+			return date('d/m/Y', strtotime($this->start_date)).' - '.date('d/m/Y', strtotime($this->end_date));
+		}
 	}
 
 ?>

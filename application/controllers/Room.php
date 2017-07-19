@@ -8,6 +8,8 @@
 			parent::__construct();
 
 			$this->page = 'Salons';
+
+			$this->load->model('UserService');
 		}
 
 		public function index() {
@@ -18,6 +20,33 @@
 			$data = array();
 
 			$this->load->view('room/index', $data);
+
+			// FOOTER
+			$this->loadFooter();
+		}
+
+		public function can_join() {
+			$item = $this->input->post('item');
+
+			if (!empty($item)) {
+				$success = $this->UserService->hasGraded($item);
+
+				if (!$success) {
+					$this->error('Vous devez d\'abord voter avant de participer au salon');
+				}
+			} else {
+				$this->error('Veuillez choisir une oeuvre');
+			}
+		}
+
+		public function chat($id) {
+			// HEADER
+			$this->loadHeader();
+
+			// CONTENT
+			$data = array();
+
+			$this->load->view('room/chat', $data);
 
 			// FOOTER
 			$this->loadFooter();

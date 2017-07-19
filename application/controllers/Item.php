@@ -74,6 +74,8 @@
 				} else {
 					$this->error('Un problème est survenu lors de la notation');
 				}
+			} else {
+				$this->error('Veuillez choisir une oeuvre et une note');
 			}
 		}
 

@@ -77,5 +77,9 @@
 
 			return isset($row) ? $row->name : null;
 		}
+
+		public function hasGraded($item) {
+			return $this->db->where('user', $_SESSION['user_id'])->where('item', $item)->get('grades')->num_rows() > 0;
+		}
 	}
 ?>
