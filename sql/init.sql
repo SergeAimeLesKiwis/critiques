@@ -176,10 +176,11 @@ CREATE TABLE `messages` (
 );	
 
 CREATE TABLE `excluded` (
-	`user` INT NOT NULL,
-	`room` INT NOT NULL,
-	FOREIGN KEY (`user`) REFERENCES `users`(`id`),
-	FOREIGN KEY (`room`) REFERENCES `rooms`(`id`)
+ `user` INT NOT NULL,
+ `room` INT NOT NULL,
+ PRIMARY KEY (`id`, `room`),
+ FOREIGN KEY (`user`) REFERENCES `users`(`id`),
+ FOREIGN KEY (`room`) REFERENCES `rooms`(`id`)
 );
 
 CREATE TABLE `parameters` (
@@ -206,13 +207,13 @@ INSERT INTO `groups` (`name`, `description`) VALUES
 ('banned', 'Banni');
 
 INSERT INTO `users` (`ip_address`, `username`, `password`, `email`, `created_on`, `active`, `first_name`, `last_name`, `description`) VALUES
-('127.0.0.1', 'Grand Manitou', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'admin@mail.com', '1268889823', '1', 'Jean-Michel', 'L\'Admin', 'Le Club des Critiques'),
-('127.0.0.1', 'Juanita', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'leo.foltzrahem@gmail.com', '1268889823', '1', 'Juanita', 'Banana', 'Fan de Henry Salvador'),
-('127.0.0.1', 'Bogoss', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'yoann.flegeau@yahoo.com', '1268889823', '1', 'Shawn', 'Shawn', 'Stripteaser professionnel'),
+('127.0.0.1', 'Administrateur', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'admin@mail.com', '1268889823', '1', 'Jean-Michel', 'L\'Admin', 'Le Club des Critiques'),
+('127.0.0.1', 'Serge', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'leo.foltzrahem@gmail.com', '1268889823', '1', 'Juanita', 'Banana', 'Fan de Henry Salvador'),
+('127.0.0.1', 'Neo', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'yoann.flegeau@yahoo.com', '1268889823', '1', 'Shawn', 'Shawn', 'Cavalier'),
 ('127.0.0.1', 'Pedro', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'pedro@mail.com', '1268889823', '1', 'Pedro', 'Foot', 'Partie d\'un joueur de foot'),
 ('127.0.0.1', 'Miguel', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'miguel@mail.com', '1268889823', '1', 'Miguel', 'Foot', 'Partie d\'un joueur de foot'),
 ('127.0.0.1', 'Pauleta', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'pauleta@mail.com', '1268889823', '1', 'Pauleta ', 'Foot', 'Partie d\'un joueur de foot'),
-('127.0.0.1', 'Salut', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'salut@mail.com', '1268889823', '1', 'Salut', 'Ca va ?', 'Comment allez vous ?');
+('127.0.0.1', 'Eddie Malou', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', 'edie.malou@mail.com', '1268889823', '1', 'Edie', 'Malou', 'Philosophe');
 
 INSERT INTO `users_groups` (`user_id`, `group_id`) VALUES 
 (1, 1), (2, 3), (3, 4), (4, 2), (5, 2), (6, 2), (7, 2);
@@ -221,13 +222,12 @@ INSERT INTO `reasons` (`name`, `value`) VALUES
 ('Incitation à la haine raciale', 5),
 ('Publication de contenu illicite', 5),
 ('Insulte', 3),
-('Spam', 1),
-('Mochitude', 999);
+('Spam', 1);
 
 INSERT INTO `reports` (`user`, `reason`, `reported_by`, `reported_at`) VALUES 
 (3, 3, 2, '2017-07-13 14:37:56'),
 (3, 2, 2, '2017-07-13 19:22:03'),
-(2, 5, 3, '2017-07-13 23:05:04');
+(2, 4, 3, '2017-07-13 23:05:04');
 
 INSERT INTO `actions` (`user`, `action`, `action_by`, `action_at`) VALUES 
 (3, 'warn', 1, '2017-07-13 14:41:18'),
@@ -281,9 +281,21 @@ INSERT INTO `grades` (`user`, `item`, `value`) VALUES
 INSERT INTO `loan_status` (`name`, `color`) VALUES 
 ('Disponible', '#4CAF50'), ('Prêté', '#F44336'), ('Je le veux', '#2196F3');
 
+INSERT INTO `loans` (`user`, `item`, `status`) VALUES 
+(7, 1, 1),
+(7, 2, 2),
+(7, 3, 3);
+
 INSERT INTO `parameters` (`key`, `value`) VALUES 
 ('home_concept', 'Lorem Ipsum'),
 ('home_highlights', '1|0|1|0|0|1');
 
 INSERT INTO `pages` (`name`, `label`, `title`, `text`) VALUES 
 ('qui-sommes-nous', 'Qui sommes nous ?', 'Le Club des Critiques !', 'Nous s\'appelle Groot');
+
+INSERT INTO `rooms` (`name`, `admin`, `item`, `start_date`, `end_date`, `active`) VALUES 
+('Salon test', 1, 1, '2017-07-10', '2017-07-24', 1),
+('Salon test', 1, 3, '2017-07-10', '2017-07-24', 1),
+('Salon test5', 2, 5, '2017-07-10', '2017-07-24', 0),
+('Salon test6', 6, 4, '2017-07-10', '2017-07-24', 0),
+('Salon test7', 7, 6, '2017-07-10', '2017-07-24', 0);
