@@ -1,14 +1,31 @@
 $(document).ready(function() {
-	var client = io.connect('http://localhost:3000');  
+	$("#chat").scrollTop($("#chat")[0].scrollHeight);
+
+	var me = { id: $('#me').data('id'), username: $('#me').data('username') };
+	var client = io.connect('http://localhost:3000');
+
+	client.emit('join', { user: me.id, name: me.username });
+
 	$('#send-message').submit(function(e) {
 		e.preventDefault();
-		var id = $('#me').data('id');
-		var username = $('#me').data('username');
 		var message = $('#message').val();
 
 		if (message != '') {
-			client.emit('message', { user: id, name: username, content: message });
-			$('#message').val('');
+
+			database('send', { user: id, room: $('#chat').data('room'), content: message });
+			$.ajax({
+				type: 'post',
+				url: base_url + 'room/' + action,
+				data: data,
+				dataType: 'html',
+				success: function (data) {
+					client.emit('message', { user: me.id, name: me.username, content: message });
+					$('#message').val('');
+				},
+				error: function(xhr, status, error) {
+					toastr['error'](xhr.responseText, 'Attention');
+				}
+			});
 		} else {
 			toastr['error']('Le message ne peut être vide', 'Attention');
 		}
@@ -32,7 +49,23 @@ $(document).ready(function() {
 		$('#chat').append(element);
 		$("#chat").scrollTop($("#chat")[0].scrollHeight);
 	});
+
+	client.on('join', function(user){
+		var element = '<div>' + user.name + ' a rejoint le salon ...</div>';
+
+		$('#chat').append(element);
+		$("#chat").scrollTop($("#chat")[0].scrollHeight);
+	});
 });
+
+function database(action, data) {
+	$.ajax({
+		type: 'post',
+		url: base_url + 'room/' + action,
+		data: data,
+		dataType: 'html'
+	});
+}
 
 function format_date(date = new Date()) {
 	var element = '';

@@ -14,14 +14,27 @@
 			foreach ($result as $row)
 			{
 				$message = new Message_VM();
-				$room->user = $this->UserService->getUser($row->user, null, false);
-				$room->date = $row->date;
-				$room->content = $row->content;
+				$message->user = $this->UserService->getUser($row->user, null, false);
+				$message->date = $row->date;
+				$message->content = $row->content;
 
-				$messages[] = $room;
+				$messages[] = $message;
 			}
 
 			return $messages;
+		}
+
+		private function can_send($user, $room) {
+			return $this->db->where('user', $user)->where('room', $room)->get('excluded')->num_rows() == 0;
+		}
+
+		public function send_message($user, $room, $content) {
+			return $this->can_send($user, $room)
+				&& $this->db->set('user', $user)
+							->set('room', $room)
+							->set('content', $content)
+							->set('date', date("Y-m-d H:i:s"))
+							->insert('messages');
 		}
 	}
 ?>

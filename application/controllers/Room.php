@@ -12,6 +12,7 @@
 			$this->scripts = array('socket', 'scripts/chat');
 
 			$this->load->model('ChatService');
+			$this->load->model('RoomService');
 			$this->load->model('UserService');
 		}
 
@@ -35,6 +36,7 @@
 
 			// CONTENT
 			$data['user'] = $this->UserService->getUser($_SESSION['user_id']);
+			$data['room'] = $this->RoomService->getRoom($id);
 			$data['messages'] = $this->ChatService->getChatMessages($id);
 			//TODO: get current participants
 
@@ -45,14 +47,25 @@
 		}
 
 		public function send() {
+			$user = $this->input->post('user');
+			$room = $this->input->post('room');
+			$content = $this->input->post('content');
 
+			$success = $this->ChatService->send_message($user, $room, $content);
+
+			if (!$success) {
+				$this->error('Vous n\'avez pas les droits nécessaires');
+			}
 		}
 
-		public function join() {
-
+		public function load_report_modal() {
+			$user = $this->input->post('user');
+			$data['user'] = $this->PageService->getAllPages();
+			$data['reason'] = $this->PageService->getAllPages();
+			$this->load->view('admin/_add_link_modal', $data);
 		}
 
-		public function leave() {
+		public function report() {
 
 		}
 	}

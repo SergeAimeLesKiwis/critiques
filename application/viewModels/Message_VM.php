@@ -15,6 +15,10 @@
 		public function getDateFormated() {
 			return date('d/m/Y', strtotime($this->date));
 		}
+
+		public function getHourFormated() {
+			return date('H:i', strtotime($this->date));	
+		}
 	}
 
 ?>

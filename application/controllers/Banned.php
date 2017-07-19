@@ -15,7 +15,8 @@
 			$this->loadHeader();
 
 			// CONTENT
-			$this->load->view('banned/index');
+			$data['message'] = 'Ooops, il semblerait que vous n\'ayez pas les droits nécéssaires pour accéder à cette page.';
+			$this->load->view('errors/index', $data);
 
 			// FOOTER
 			$this->loadFooter();
