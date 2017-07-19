@@ -7,9 +7,9 @@
 <div class="modal-body mb-0">
 	<input type="hidden" id="user-id" class="form-control" value="<?php echo $user->id; ?>" />
 	<div class="md-form">
-		<i class="fa fa-thermometer-quarter prefix"></i>
+		<i class="fa fa-user-o prefix"></i>
 		<input type="text" id="user-username" class="form-control" value="<?php echo $user->username; ?>" />
-		<label for="user-username" class="active">Titre</label>
+		<label for="user-username" class="active">Username</label>
 	</div>
 	<div class="md-form">
 		<i class="fa fa-commenting-o prefix"></i>

@@ -15,12 +15,12 @@
 		</select>
 	</div>
 	<div class="md-form form-sm">
-		<i class="fa fa-envelope prefix"></i>
+		<i class="fa fa-link prefix"></i>
 		<input type="text" id="link-url" class="form-control" />
 		<label for="link-url">Url</label>
 	</div>
 	<div class="md-form form-sm">
-		<i class="fa fa-envelope prefix"></i>
+		<i class="fa fa-pencil-square-o prefix"></i>
 		<input type="text" id="link-label" class="form-control" />
 		<label for="link-label">Label</label>
 	</div>

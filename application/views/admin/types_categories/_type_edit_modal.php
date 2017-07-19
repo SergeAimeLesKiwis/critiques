@@ -4,7 +4,7 @@
 <div class="modal-body mb-0">
 	<input id="send-infos-url" type="hidden" value="admin/update_type" />
 	<div class="md-form form-sm">
-		<i class="fa fa-envelope prefix"></i>
+		<i class="fa fa-pencil prefix"></i>
 		<input type="hidden" id="type_id" class="form-control" value="<?php echo $type->id; ?>" />
 		<input type="text" id="type_name" class="form-control" value="<?php echo $type->name; ?>" placeholder="Label" />
 	</div>

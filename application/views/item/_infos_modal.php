@@ -27,12 +27,12 @@
 		<div id="item-relations" class="text-center mb-2 row">
 			<div class="text-center col-md-6">
 				<button class="btn bg-green-hover see-infos" data-action="users" data-key="<?php echo $item->id; ?>">
-					<i class="fa fa-thermometer-full"></i>&nbsp;Voir les utilisateurs
+					<i class="fa fa-user-o"></i>&nbsp;Voir les utilisateurs
 				</button>
 			</div>
 			<div class="text-center col-md-6">
 				<button class="btn bg-green-hover see-infos" data-action="rooms" data-key="<?php echo $item->id; ?>">
-					<i class="fa fa-thermometer-full"></i>&nbsp;Voir les salons
+					<i class="fa fa-comment-o"></i>&nbsp;Voir les salons
 				</button>
 			</div>
 		</div>

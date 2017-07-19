@@ -1,5 +1,5 @@
 <div class="text-center">
-	<button id="api-google" class="btn bg-green-hover"><i class="fa fa-thermometer-full"></i>&nbsp;Utiliser l'API Google</button>
+	<button id="api-google" class="btn bg-green-hover"><i class="fa fa-google"></i>&nbsp;Utiliser l'API Google</button>
 </div>
 
 <hr />
@@ -8,7 +8,7 @@
 
 <div class="row">
 	<div class="md-form col-md-4">
-		<i class="fa fa-thermometer-quarter prefix"></i>
+		<i class="fa fa-bookmark-o prefix"></i>
 		<input type="text" id="item-title" class="form-control" value="<?php echo $item->title; ?>" />
 		<label for="item-title" <?php if ($item->id > 0) echo 'class="active"'; ?>>Titre</label>
 	</div>
@@ -20,7 +20,7 @@
 	</div>
 
 	<div class="md-form col-md-4">
-		<i class="fa fa-thermometer-quarter prefix"></i>
+		<i class="fa fa-calendar prefix"></i>
 		<input type="date" id="item-publish-date" class="form-control" value="<?php if ($item->id > 0) echo $item->getDateFormated(); ?>" />
 		<label for="item-publish-date" class="active">Date de sortie</label>
 	</div>
@@ -64,7 +64,7 @@
 ?>
 
 <div class="text-center">
-	<button id="send-infos" class="btn bg-green-hover" data-action="<?php echo $url; ?>"><i class="fa fa-thermometer-full"></i>&nbsp;Valider</button>
+	<button id="send-infos" class="btn bg-green-hover" data-action="<?php echo $url; ?>"><i class="fa fa-check"></i>&nbsp;Valider</button>
 	<?php if ($url == 'update_item') { ?>
 		<button id="remove-item" class="btn btn-danger" data-action="item" data-key="<?php echo $item->id; ?>">
 			<i class="fa fa-trash"></i>&nbsp;Supprimer

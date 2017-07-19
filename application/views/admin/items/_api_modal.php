@@ -6,7 +6,7 @@
 
 <div class="modal-body mb-0">
 	<div class="md-form form-sm">
-		<i class="fa fa-envelope prefix"></i>
+		<i class="fa fa-pencil-square-o prefix"></i>
 		<input type="text" id="api-query" class="form-control" />
 		<label for="api-query">Titre ou Auteur</label>
 	</div>

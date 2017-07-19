@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="md-form col-md-4">
-		<i class="fa fa-thermometer-quarter prefix"></i>
+		<i class="fa fa-bookmark-o prefix"></i>
 		<input type="text" id="page-name" class="form-control" value="<?php echo $page->name; ?>" />
 		<label for="page-name" <?php if (!empty($page->name)) echo 'class="active"'; ?>>Nom</label>
 	</div>
@@ -16,7 +16,7 @@
 
 <div class="row">
 	<div class="md-form col-md-12">
-		<i class="fa fa-thermometer-quarter prefix"></i>
+		<i class="fa fa-file-text-o prefix"></i>
 		<input type="text" id="page-title" class="form-control" value="<?php echo $page->title; ?>" />
 		<label for="page-title" <?php if (!empty($page->name)) echo 'class="active"'; ?>>Titre</label>
 	</div>

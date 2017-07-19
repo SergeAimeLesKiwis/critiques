@@ -25,26 +25,26 @@
 
 				<div class="row">
 					<div class="md-form col-md-4">
-						<i class="fa fa-thermometer-quarter prefix"></i>
+						<i class="fa fa-pencil-square-o prefix"></i>
 						<input type="text" id="room-name" class="form-control" value="" />
 						<label for="room-name">Nom</label>
 					</div>
 
 					<div class="md-form col-md-4">
-						<i class="fa fa-user prefix"></i>
+						<i class="fa fa-calendar-check-o prefix"></i>
 						<input type="date" id="room-start-date" class="form-control" value="" />
 						<label for="room-start-date" class="active">Début</label>
 					</div>
 
 					<div class="md-form col-md-4">
-						<i class="fa fa-thermometer-quarter prefix"></i>
+						<i class="fa fa-calendar-times-o prefix"></i>
 						<input type="date" id="room-end-date" class="form-control" value="" />
 						<label for="room-end-date" class="active">Date de Fin</label>
 					</div>
 				</div>
 
 				<div class="text-center">
-					<button id="send-infos" class="btn bg-green-hover" data-action="add_room"><i class="fa fa-thermometer-full"></i>&nbsp;Valider</button>
+					<button id="send-infos" class="btn bg-green-hover" data-action="add_room"><i class="fa fa-check"></i>&nbsp;Valider</button>
 				</div>
 			</div>
 		</div>

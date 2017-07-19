@@ -4,7 +4,7 @@
 <div class="modal-body mb-0">
 	<input id="send-infos-url" type="hidden" value="admin/add_category" />
 	<div class="md-form form-sm">
-		<i class="fa fa-envelope prefix"></i>
+		<i class="fa fa-pencil prefix"></i>
 		<input type="text" id="category_name" class="form-control" placeholder="Label" />
 	</div>
 	<div class="md-form form-sm">
