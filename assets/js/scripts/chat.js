@@ -35,10 +35,10 @@ $(document).ready(function() {
 
 		if (message.user == $('#me').data('id')) {
 			element += '<div class="message message-me row bg-green-color white-text animated slideInRight">';
-			element += '<div class="col-md-3">' + format_name(message.user, message.name) + '</div>';
+			element += '<div class="col-md-3">' + message.name + '</div>';
 		} else {
 			element += '<div class="message message-other row bg-brown-color white-text animated slideInLeft">';
-			element += '<div class="col-md-3">' + message.name + '</div>';
+			element += '<div class="col-md-3">' + format_name(message.user, message.name) + '</div>';
 		}
 		
 		element += '<div class="col-md-7">' + escapeHtml(message.content) + '</div>';
